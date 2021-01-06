@@ -39,9 +39,6 @@ public class Game
         //Limit the framerate
         window.setFramerateLimit(60);
 
-        //BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-        //farmerTexture.loadFromFile(path);
-
         try 
         {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
@@ -61,15 +58,9 @@ public class Game
         }
 
         farmerSprite.setTexture(farmerTexture);
-
-        //farmerImage.loadFromFile("Man_Neutral.png");
-        //farmer.loadFromFile(path);
-
-        //System.out.println(farmerSprite.getScale());
         farmerSprite.setPosition(length/2, width/2);
         farmerSprite.setScale(scale);
         farmerSprite.scale(scale);
-        //System.out.println(farmerSprite.getScale()+ "2");
     }
 
     public void playGame()
@@ -83,60 +74,47 @@ public class Game
             {
                 if(farmerSprite.getPosition().x /*+ circle.getRadius()*/ >= 640 - circle.getRadius()*2)
                 {
-                //circle.move(0, 0);
                 farmerSprite.move(0,0);
                 }
                 else
                 {
-                //circle.move(speed, 0);
                 farmerSprite.move(speed,0);
                 }
             }
             else if(Keyboard.isKeyPressed(Keyboard.Key.A))
             {
-                if(farmerSprite.getPosition().x /*- circle.getRadius()*/ <= 0)
+                if(farmerSprite.getPosition().x <= 0)
                 {
-                //circle.move(0, 0);
                 farmerSprite.move(0,0);
                 }
                 else
                 {
-                //circle.move(-speed, 0);
                 farmerSprite.move(-speed,0);
                 }
             }
             else if(Keyboard.isKeyPressed(Keyboard.Key.S))
             {
-                if(farmerSprite.getPosition().y /*+ circle.getRadius()*/ >= 480 - circle.getRadius()*2)
+                if(farmerSprite.getPosition().y >= 480 - circle.getRadius()*2)
                 {
-                //circle.move(0, 0);
                 farmerSprite.move(0,0);
                 }
                 else
                 {
-                //circle.move(0, speed);
                 farmerSprite.move(0,speed);
                 }
-                //circle.move(0, speed);
             }
             else if(Keyboard.isKeyPressed(Keyboard.Key.W))
             {
-                if(farmerSprite.getPosition().y /*- circle.getRadius()*/ <= 0)
+                if(farmerSprite.getPosition().y <= 0)
                 {
-                //circle.move(0, speed - circle.getPosition().y);
-                //circle.move(0, 0);
                 farmerSprite.move(0,0);
                 }
                 else
                 {
-                //circle.move(0, -speed);
                 farmerSprite.move(0,-speed);
                 }
-                //circle.move(0, -speed);
             }
 
-            //window.draw(circle);
-            //farmerSprite.scale(scale);
             window.draw(farmerSprite);
             window.display();
 
