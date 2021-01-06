@@ -17,13 +17,13 @@ class BoringGame
    {
       //Create the window
       RenderWindow window = new RenderWindow();
-      window.create(new VideoMode(640, 480), "Hello JSFML!");
+      window.create(new VideoMode(640, 480), "Escape from CommieLand");
 
       //Limit the framerate
       window.setFramerateLimit(30);
 
       int speed = 15; 
-      int speed2 = 10;
+      int speed2 = 15;
       CircleShape circle = new CircleShape(15);
       Texture farmer = new Texture();
 
