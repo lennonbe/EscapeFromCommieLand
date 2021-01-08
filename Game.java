@@ -19,18 +19,19 @@ public class Game
 
     RenderWindow window = new RenderWindow();
     
-    Texture farmer = new Texture();
     Texture backroundTexture = new Texture();
-
-    Image farmerImage = new Image();
     Texture farmerTexture = new Texture();
 
-    //Path path = FileSystems.getDefault().getPath("BoringGame", "Man_Neutral.png");
-
-    Vector2f scale = new Vector2f((float)1.5, (float)1.5);
+    Texture [] fieldsTextures = new Texture[8];
+    RectangleShape [] fieldsRectangles = new RectangleShape[8];
 
     Sprite farmerSprite = new Sprite();
     RectangleShape backround = new RectangleShape();
+
+    //Path path = FileSystems.getDefault().getPath("BoringGame", "Man_Neutral.png");
+    Vector2f scale = new Vector2f((float)1.5, (float)1.5);
+    Vector2f fieldSize = new Vector2f(75, 75);
+    Vector2f windowSize = new Vector2f(width, heigth);
 
     public Game()
     {
@@ -43,23 +44,29 @@ public class Game
         this.loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
         this.loadPathToRectangle("BoringGame", "Forest.png", backround, backroundTexture);
 
+        for(int i = 0; i < 8; i++)
+        {
+            fieldsRectangles[i] = new RectangleShape();
+            fieldsTextures[i] = new Texture();
+
+            this.loadPathToRectangle("BoringGame", "EmptyField.png", fieldsRectangles[i], fieldsTextures[i]);
+            fieldsRectangles[i].setSize(fieldSize);
+        }
+
+        fieldsRectangles[1].setPosition(width/2 - fieldsRectangles[1].getSize().x/2, heigth/2 - fieldsRectangles[1].getSize().y/2);
+
         //farmerSprite.setTexture(farmerTexture);
-        farmerSprite.setPosition(heigth/2, width/2);
+        farmerSprite.setPosition(width/2, heigth/2);
         farmerSprite.setScale(scale);
         farmerSprite.scale(scale);
 
         backround.setPosition(0, 0);
-        backround.setSize(new Vector2f(width, heigth));
+        backround.setSize(windowSize);
     }
 
-
-    /*
-    Needs fixing in terms of bordering. Maybe combine getPosition() method with the getLocalBOunds() method to get an accurate location/position to allow delimiting to occur correctly.
-    */
     public void playGame()
     {
         //System.out.println(farmerSprite.getScale() + "Hello there!");
-
         while(window.isOpen()) 
         {
             //Fill the window with red
@@ -126,6 +133,7 @@ public class Game
             }
 
             window.draw(backround);
+            window.draw(fieldsRectangles[1]);
             window.draw(farmerSprite);
             window.display();
 
