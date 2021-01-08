@@ -128,6 +128,20 @@ public class Game
         }
     }
 
+    public void drawObjects()
+    {
+        window.draw(backround);
+
+        for(int i = 0; i < 8; i++)
+        {
+            window.draw(fieldsRectangles[i]);
+        }
+
+        window.draw(house);
+        window.draw(farmerSprite);
+        window.display();
+    }
+
     public void playGame()
     {
         //System.out.println(farmerSprite.getScale() + "Hello there!");
@@ -135,56 +149,6 @@ public class Game
         {
             //Fill the window with red
             window.clear(Color.RED);
-
-            /*
-            if(Keyboard.isKeyPressed(Keyboard.Key.D))
-            {
-                if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= width)
-                {
-                //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
-                farmerSprite.move(0,0);
-                }
-                else
-                {
-                farmerSprite.move(speed,0);
-                }
-            }
-            else if(Keyboard.isKeyPressed(Keyboard.Key.A))
-            {
-                if(farmerSprite.getGlobalBounds().left <= 0)
-                {
-                //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
-                farmerSprite.move(0,0);
-                }
-                else
-                {
-                farmerSprite.move(-speed,0);
-                }
-            }
-            else if(Keyboard.isKeyPressed(Keyboard.Key.S))
-            {
-                if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= heigth)
-                {
-                farmerSprite.move(0,0);
-                }
-                else
-                {
-                //System.out.println("I AM HERE " + farmerSprite.getGlobalBounds().top + "&" + farmerSprite.getGlobalBounds().height);
-                farmerSprite.move(0,speed);
-                }
-            }
-            else if(Keyboard.isKeyPressed(Keyboard.Key.W))
-            {
-                if(farmerSprite.getGlobalBounds().top <= 0)
-                {
-                farmerSprite.move(0,0);
-                }
-                else
-                {
-                farmerSprite.move(0,-speed);
-                }
-            }
-            */
 
             this.movement();
 
@@ -200,16 +164,7 @@ public class Game
                 }
             }
 
-            window.draw(backround);
-
-            for(int i = 0; i < 8; i++)
-            {
-                window.draw(fieldsRectangles[i]);
-            }
-
-            window.draw(house);
-            window.draw(farmerSprite);
-            window.display();
+            this.drawObjects();
 
             //Handle events
             for(Event event : window.pollEvents()) 
