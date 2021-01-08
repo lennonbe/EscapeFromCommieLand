@@ -17,21 +17,25 @@ public class Game
     int speed = 10; 
     int speed2 = 10;
 
+    Vector2f scale = new Vector2f((float)1.5, (float)1.5);
+    Vector2f fieldSize = new Vector2f(135, 135);
+    Vector2f windowSize = new Vector2f(width, heigth);
+
+    int fieldSizeInt = (int)fieldSize.x;
+
     RenderWindow window = new RenderWindow();
     
     Texture backroundTexture = new Texture();
     Texture farmerTexture = new Texture();
+    Texture houseTexture = new Texture();
 
     Texture [] fieldsTextures = new Texture[8];
     RectangleShape [] fieldsRectangles = new RectangleShape[8];
 
+    RectangleShape house = new RectangleShape(fieldSize);
+
     Sprite farmerSprite = new Sprite();
     RectangleShape backround = new RectangleShape();
-
-    //Path path = FileSystems.getDefault().getPath("BoringGame", "Man_Neutral.png");
-    Vector2f scale = new Vector2f((float)1.5, (float)1.5);
-    Vector2f fieldSize = new Vector2f(75, 75);
-    Vector2f windowSize = new Vector2f(width, heigth);
 
     public Game()
     {
@@ -43,6 +47,7 @@ public class Game
 
         this.loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
         this.loadPathToRectangle("BoringGame", "Forest.png", backround, backroundTexture);
+        this.loadPathToRectangle("BoringGame", "House.jpg", house, houseTexture);
 
         for(int i = 0; i < 8; i++)
         {
@@ -53,15 +58,74 @@ public class Game
             fieldsRectangles[i].setSize(fieldSize);
         }
 
-        fieldsRectangles[1].setPosition(width/2 - fieldsRectangles[1].getSize().x/2, heigth/2 - fieldsRectangles[1].getSize().y/2);
+        fieldsRectangles[0].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
+        fieldsRectangles[1].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
+        fieldsRectangles[2].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+        fieldsRectangles[3].setPosition(width/2 + fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
+        fieldsRectangles[4].setPosition(width/2 + fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
+        fieldsRectangles[5].setPosition(width/2 + fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+        fieldsRectangles[6].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
+        fieldsRectangles[7].setPosition(width/2 - fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
 
-        //farmerSprite.setTexture(farmerTexture);
         farmerSprite.setPosition(width/2, heigth/2);
         farmerSprite.setScale(scale);
         farmerSprite.scale(scale);
 
+        house.setPosition(width/2 - fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
+        house.setSize(fieldSize);
+    }
+
+    public void movement()
+    {
+        if(Keyboard.isKeyPressed(Keyboard.Key.D))
+        {
+            if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= width)
+            {
+            //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
+            farmerSprite.move(0,0);
+            }
+            else
+            {
+            farmerSprite.move(speed,0);
+            }
+        }
+        else if(Keyboard.isKeyPressed(Keyboard.Key.A))
+        {
+            if(farmerSprite.getGlobalBounds().left <= 0)
+            {
+            //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
+            farmerSprite.move(0,0);
+            }
+            else
+            {
+            farmerSprite.move(-speed,0);
+            }
+        }
+        else if(Keyboard.isKeyPressed(Keyboard.Key.S))
+        {
+            if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= heigth)
+            {
+            farmerSprite.move(0,0);
+            }
+            else
+            {
+            //System.out.println("I AM HERE " + farmerSprite.getGlobalBounds().top + "&" + farmerSprite.getGlobalBounds().height);
+            farmerSprite.move(0,speed);
+            }
+        }
+        else if(Keyboard.isKeyPressed(Keyboard.Key.W))
+        {
+            if(farmerSprite.getGlobalBounds().top <= 0)
+            {
+            farmerSprite.move(0,0);
+            }
+            else
+            {
+            farmerSprite.move(0,-speed);
+            }
+        }
     }
 
     public void playGame()
@@ -72,6 +136,7 @@ public class Game
             //Fill the window with red
             window.clear(Color.RED);
 
+            /*
             if(Keyboard.isKeyPressed(Keyboard.Key.D))
             {
                 if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= width)
@@ -119,6 +184,9 @@ public class Game
                 farmerSprite.move(0,-speed);
                 }
             }
+            */
+
+            this.movement();
 
             /*
             Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
@@ -133,7 +201,13 @@ public class Game
             }
 
             window.draw(backround);
-            window.draw(fieldsRectangles[1]);
+
+            for(int i = 0; i < 8; i++)
+            {
+                window.draw(fieldsRectangles[i]);
+            }
+
+            window.draw(house);
             window.draw(farmerSprite);
             window.display();
 
