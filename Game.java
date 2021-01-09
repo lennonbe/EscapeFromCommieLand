@@ -12,8 +12,8 @@ import java.io.*;
 
 public class Game 
 {
-    int heigth = 600;
-    int width = 800;
+    int heigth = 900;
+    int width = 900;
     int speed = 10; 
     int speed2 = 10;
 
@@ -22,6 +22,16 @@ public class Game
     Vector2f windowSize = new Vector2f(width, heigth);
 
     int fieldSizeInt = (int)fieldSize.x;
+
+    int lowerBound = heigth/2 + 3 * fieldSizeInt/2;
+    int upperBound = heigth/2 - 3 * fieldSizeInt/2;
+    int leftBound = width/2 - 3 * fieldSizeInt/2;
+    int rightBound = width/2 + 3 * fieldSizeInt/2;
+
+    int middleLowerBound = heigth/2 + fieldSizeInt/2;
+    int middleUpperBound = heigth/2 - fieldSizeInt/2;
+    int middleLeftBound = width/2 - fieldSizeInt/2;
+    int middleRightBound = width/2 + fieldSizeInt/2;
 
     RenderWindow window = new RenderWindow();
     
@@ -47,7 +57,7 @@ public class Game
 
         this.loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
         this.loadPathToRectangle("BoringGame", "Forest.png", backround, backroundTexture);
-        this.loadPathToRectangle("BoringGame", "House.jpg", house, houseTexture);
+        this.loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
 
         for(int i = 0; i < 8; i++)
         {
@@ -86,6 +96,10 @@ public class Game
             //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
             farmerSprite.move(0,0);
             }
+            else if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound) || (farmerSprite.getGlobalBounds().top <= middleLowerBound && farmerSprite.getGlobalBounds().top >= middleUpperBound)))
+            {
+            farmerSprite.move(0,0);
+            }
             else
             {
             farmerSprite.move(speed,0);
@@ -98,6 +112,10 @@ public class Game
             //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
             farmerSprite.move(0,0);
             }
+            else if(farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound) || (farmerSprite.getGlobalBounds().top <= middleLowerBound && farmerSprite.getGlobalBounds().top >= middleUpperBound)))
+            {
+            farmerSprite.move(0,0);
+            }
             else
             {
             farmerSprite.move(-speed,0);
@@ -106,6 +124,10 @@ public class Game
         else if(Keyboard.isKeyPressed(Keyboard.Key.S))
         {
             if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= heigth)
+            {
+            farmerSprite.move(0,0);
+            }
+            else if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound) || (farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound)))
             {
             farmerSprite.move(0,0);
             }
@@ -158,7 +180,7 @@ public class Game
             */
             if(Mouse.isButtonPressed(Mouse.Button.LEFT))
             {
-                if(Mouse.getPosition(window).x >= width/3 && Mouse.getPosition(window).x <= 2 * width/3 && Mouse.getPosition().y >= heigth/3 && Mouse.getPosition().y <= 2 * heigth/3)
+                if(Mouse.getPosition(window).x >= house.getPosition().x && Mouse.getPosition(window).x <= house.getPosition().x + house.getSize().x && Mouse.getPosition(window).y >= house.getPosition().y && Mouse.getPosition(window).y <= house.getPosition().y + house.getSize().y)
                 {
                     System.out.println("Test successful!");
                 }
