@@ -58,4 +58,3 @@ public enum SoundEffect {
    static void init() {
       values(); // calls the constructor for all the elements
    }
-}
