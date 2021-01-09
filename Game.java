@@ -77,7 +77,7 @@ public class Game
         fieldsRectangles[6].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
         fieldsRectangles[7].setPosition(width/2 - fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
 
-        farmerSprite.setPosition(width/2, heigth/2);
+        farmerSprite.setPosition(100, 100);
         farmerSprite.setScale(scale);
         farmerSprite.scale(scale);
 
@@ -140,6 +140,10 @@ public class Game
         else if(Keyboard.isKeyPressed(Keyboard.Key.W))
         {
             if(farmerSprite.getGlobalBounds().top <= 0)
+            {
+            farmerSprite.move(0,0);
+            }
+            else if(farmerSprite.getGlobalBounds().top >= middleUpperBound && farmerSprite.getGlobalBounds().top <= middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound) || (farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound)))
             {
             farmerSprite.move(0,0);
             }
