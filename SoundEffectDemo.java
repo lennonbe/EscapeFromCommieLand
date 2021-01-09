@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
    
-// Testing the SoundEffect enum in a Swing application
+// Test Program/ Not official Testing
 public class SoundEffectDemo extends JFrame {
    
    // Constructor
@@ -14,7 +14,7 @@ public class SoundEffectDemo extends JFrame {
       // Set up UI components
       Container cp = this.getContentPane();
       cp.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-      JButton btnSound1 = new JButton("Sound 1");
+      JButton btnSound1 = new JButton("Sound 1 Play");
       btnSound1.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -22,15 +22,15 @@ public class SoundEffectDemo extends JFrame {
          }
       });
       cp.add(btnSound1);
-      JButton btnSound2 = new JButton("Sound 2");
+      JButton btnSound2 = new JButton("Sound 1 Stop");
       btnSound2.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            SoundEffect.CROPHARVEST.play();
+            SoundEffect.BGM.stop();
          }
       });
       cp.add(btnSound2);
-      JButton btnSound3 = new JButton("Sound 3");
+      JButton btnSound3 = new JButton("Sound 2 Gun Shot");
       btnSound3.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {

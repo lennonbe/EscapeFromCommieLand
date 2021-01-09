@@ -1,7 +1,11 @@
 import java.io.*;
 import java.net.URL;
 import javax.sound.sampled.*;
-   
+
+/**
+ * The Options Listed For Playing
+ * Each Option Contains The URL path and the file name for user to choose to play
+ */
 public enum SoundEffect {
    BGM("AudioFile/Bad_Mood.wav"),               // Bad Mood BGM
    BADWEATHER("AudioFile/Heavy_Rain_Bad_Weather.wav"), // Bad Weather
@@ -15,25 +19,21 @@ public enum SoundEffect {
    FAILOTHER("AudioFile/GameFail.wav"),                         // Fail Condition - Other Condition
    WIN("AudioFile/Steam_Boat.wav");                             // Win Condition
 
-   public static enum Volume {
+   public static enum Volume{
       MUTE, LOW, MEDIUM, HIGH
-   }    //Volume Setting
-   
+   } 
    public static Volume volume = Volume.LOW;
-   
-   // Each sound effect has its own clip, loaded with its own sound file.
    private Clip clip;
    
-   // Constructor to construct each element of the enum with its own sound file.
-   SoundEffect(String soundFileName) {
+   /**
+    * The Function Used To Parse In The WAV File By Using Assigned URL
+    * @param soundFileName URL And File Name
+    */
+   SoundEffect(String soundFileName){
       try {
-         
          URL url = this.getClass().getClassLoader().getResource(soundFileName);
-         // Set up an audio input stream piped from the sound file.
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
-         // Get a clip resource.
          clip = AudioSystem.getClip();
-         // Open audio clip and load samples from the audio input stream.
          clip.open(audioInputStream);
       } catch (UnsupportedAudioFileException e) {
          e.printStackTrace();
@@ -44,17 +44,29 @@ public enum SoundEffect {
       }
    }
    
-   // Play or Re-play the sound effect from the beginning, by rewinding.
+   /**
+    * The Function Used To Play And Replay The Selected Sound Option
+    */
    public void play() {
-      if (volume != Volume.MUTE) {
+      if (volume != Volume.MUTE){
          if (clip.isRunning())
-            clip.stop();   // Stop the player if it is still running
-         clip.setFramePosition(0); // rewind to the beginning
-         clip.start();     // Start playing
+            clip.stop();           // Stop the player if it is still running
+         clip.setFramePosition(0); // Back to beginning and replay
+         clip.start();             // Start playing
       }
    }
+
+   /**
+    *  The Function Used To Stop The Selected Sound Option
+    */
+    public void stop(){
+       clip.stop();
+    }
    
    // Optional static method to pre-load all the sound files.
-   static void init() {
-      values(); // calls the constructor for all the elements
+   static void init(){
+      values();   // calls the constructor for all the elements
    }
+}
+
+
