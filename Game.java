@@ -68,28 +68,45 @@ public class Game
             fieldsRectangles[i].setSize(fieldSize);
         }
 
+        //Inner left top, middle and bottom (respectivelly)
         fieldsRectangles[0].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
         fieldsRectangles[1].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
         fieldsRectangles[2].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+
+        //Inner right top, middle and bottom (respectivelly) 
         fieldsRectangles[3].setPosition(width/2 + fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
         fieldsRectangles[4].setPosition(width/2 + fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
         fieldsRectangles[5].setPosition(width/2 + fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+
+        //Middle top and bottom (respectivelly)
         fieldsRectangles[6].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
         fieldsRectangles[7].setPosition(width/2 - fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+
+        //Right top, middle and bottom (respectivelly)
         fieldsRectangles[8].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
         fieldsRectangles[9].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
         fieldsRectangles[10].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+
+        //Left top, middle and bottom (respectivelly)
         fieldsRectangles[11].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
         fieldsRectangles[12].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
         fieldsRectangles[13].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+
+        //Top mid left, middle and right (respectivelly)
         fieldsRectangles[14].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
         fieldsRectangles[15].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
         fieldsRectangles[16].setPosition(width/2 + fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
+
+        //Bottom mid left, middle and right (respectivelly)
         fieldsRectangles[17].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
         fieldsRectangles[18].setPosition(width/2 - fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
         fieldsRectangles[19].setPosition(width/2 + fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
+
+        //Top left and right corners (respectivelly)
         fieldsRectangles[20].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
         fieldsRectangles[21].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
+
+        //Bottom left and right corners (respectivelly)
         fieldsRectangles[22].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
         fieldsRectangles[23].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
 
@@ -98,9 +115,10 @@ public class Game
         farmerSprite.scale(scale);
 
         house.setPosition(width/2 - fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
+        house.setSize(fieldSize);
+        
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
-        house.setSize(fieldSize);
     }
 
     public void movement()
