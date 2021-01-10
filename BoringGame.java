@@ -15,58 +15,36 @@ class BoringGame
 {
    public static void main(String[] args)
    {
+      //Bounds of the window
+      final int width = 640;
+      final int height = 480;
+
       //Create the window
       RenderWindow window = new RenderWindow();
-      window.create(new VideoMode(640, 480), "Escape from CommieLand");
+      window.create(new VideoMode(width, height), "Escape From CommieLand!");
 
       //Limit the framerate
       window.setFramerateLimit(30);
 
+      //Speed at which the player moves
       int speed = 15; 
-      int speed2 = 15;
-      CircleShape circle = new CircleShape(15);
-      Texture farmer = new Texture();
 
-      Image farmerImage = new Image();
+      //Loading the farmer sprite
       Texture farmerTexture = new Texture();
-
       Path path = FileSystems.getDefault().getPath("BoringGame", "Man_Neutral.png");
-      
-      try 
-      {
-         BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
 
-      } catch (Exception e) {
-         //TODO: handle exception
-      }
-      //BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-
-      //farmerTexture.loadFromFile(path);
-
-      try 
-      {
+      try {
          farmerTexture.loadFromFile(path);
-      } 
-      catch (Exception e) 
-      {
-         //TODO: handle exception
-      }
-
-      //farmerImage.loadFromFile("Man_Neutral.png");
-      //farmer.loadFromFile(path);
-
-      Vector2f scale = new Vector2f((float)1.5, (float)1.5);
+      } catch (Exception e) {}
 
       Sprite farmerSprite = new Sprite(farmerTexture);
-      System.out.println(farmerSprite.getScale());
-      farmerSprite.setPosition(320,240);
-      //farmerSprite.setScale(farmerSprite.getScale().x + 100, farmerSprite.getScale().y + 100);
-      farmerSprite.setScale(scale);
-      //farmerSprite.scale(farmerSprite.getScale().x + 100, farmerSprite.getScale().y + 100);
-      farmerSprite.scale(scale);
-      System.out.println(farmerSprite.getScale()+ "2");
 
-      //window.draw(farmerSprite);
+      //Formatting the sprite into the desired size
+      Vector2f scale = new Vector2f((float)2.5, (float)2.5);
+      farmerSprite.setScale(scale);
+
+      //Set the initial position of the character
+      farmerSprite.setPosition(320,240);
 
       //Main loop
       while(window.isOpen()) 
@@ -74,64 +52,21 @@ class BoringGame
          //Fill the window with red
          window.clear(Color.RED);
 
-         if(Keyboard.isKeyPressed(Keyboard.Key.D))
-         {
-            if(farmerSprite.getPosition().x /*+ circle.getRadius()*/ >= 640 - circle.getRadius()*2)
-            {
-               //circle.move(0, 0);
-               farmerSprite.move(0,0);
-            }
-            else
-            {
-               //circle.move(speed, 0);
-               farmerSprite.move(speed,0);
-            }
-         }
-         else if(Keyboard.isKeyPressed(Keyboard.Key.A))
-         {
-            if(farmerSprite.getPosition().x /*- circle.getRadius()*/ <= 0)
-            {
-               //circle.move(0, 0);
-               farmerSprite.move(0,0);
-            }
-            else
-            {
-               //circle.move(-speed, 0);
-               farmerSprite.move(-speed,0);
-            }
-         }
-         else if(Keyboard.isKeyPressed(Keyboard.Key.S))
-         {
-            if(farmerSprite.getPosition().y /*+ circle.getRadius()*/ >= 480 - circle.getRadius()*2)
-            {
-               //circle.move(0, 0);
-               farmerSprite.move(0,0);
-            }
-            else
-            {
-               //circle.move(0, speed);
-               farmerSprite.move(0,speed);
-            }
-            //circle.move(0, speed);
-         }
-         else if(Keyboard.isKeyPressed(Keyboard.Key.W))
-         {
-            if(farmerSprite.getPosition().y /*- circle.getRadius()*/ <= 0)
-            {
-               //circle.move(0, speed - circle.getPosition().y);
-               //circle.move(0, 0);
-               farmerSprite.move(0,0);
-            }
-            else
-            {
-               //circle.move(0, -speed);
-               farmerSprite.move(0,-speed);
-            }
-            //circle.move(0, -speed);
+         /**
+          * Works out the logic for the movement - W is up, A is left, etc...
+          * Also enforced the bounds of the window, so that the character cannot move outside
+          */
+         if(Keyboard.isKeyPressed(Keyboard.Key.D ) && (farmerSprite.getPosition().x + farmerSprite.getGlobalBounds().width) < width ) {
+            farmerSprite.move(speed, 0);
+         } else if(Keyboard.isKeyPressed(Keyboard.Key.A) && farmerSprite.getPosition().x > 0) {
+            farmerSprite.move(-speed, 0);
+         } else if(Keyboard.isKeyPressed(Keyboard.Key.S) && (farmerSprite.getPosition().y + farmerSprite.getGlobalBounds().height) < height) {
+            farmerSprite.move(0, speed);
+         } else if(Keyboard.isKeyPressed(Keyboard.Key.W) && farmerSprite.getPosition().y > 0) {
+            farmerSprite.move(0, -speed);
          }
 
-         //window.draw(circle);
-         //farmerSprite.scale(scale);
+         //Updates the window with the charactes new position
          window.draw(farmerSprite);
          window.display();
 
