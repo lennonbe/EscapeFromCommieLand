@@ -39,8 +39,8 @@ public class Game
     Texture farmerTexture = new Texture();
     Texture houseTexture = new Texture();
 
-    Texture [] fieldsTextures = new Texture[8];
-    RectangleShape [] fieldsRectangles = new RectangleShape[8];
+    Texture [] fieldsTextures = new Texture[24];
+    RectangleShape [] fieldsRectangles = new RectangleShape[24];
 
     RectangleShape house = new RectangleShape(fieldSize);
 
@@ -59,7 +59,7 @@ public class Game
         this.loadPathToRectangle("BoringGame", "Forest.png", backround, backroundTexture);
         this.loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
 
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 24; i++)
         {
             fieldsRectangles[i] = new RectangleShape();
             fieldsTextures[i] = new Texture();
@@ -76,6 +76,22 @@ public class Game
         fieldsRectangles[5].setPosition(width/2 + fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
         fieldsRectangles[6].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
         fieldsRectangles[7].setPosition(width/2 - fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+        fieldsRectangles[8].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
+        fieldsRectangles[9].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
+        fieldsRectangles[10].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+        fieldsRectangles[11].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
+        fieldsRectangles[12].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
+        fieldsRectangles[13].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
+        fieldsRectangles[14].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
+        fieldsRectangles[15].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
+        fieldsRectangles[16].setPosition(width/2 + fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
+        fieldsRectangles[17].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
+        fieldsRectangles[18].setPosition(width/2 - fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
+        fieldsRectangles[19].setPosition(width/2 + fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
+        fieldsRectangles[20].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
+        fieldsRectangles[21].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
+        fieldsRectangles[22].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
+        fieldsRectangles[23].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
 
         farmerSprite.setPosition(100, 100);
         farmerSprite.setScale(scale);
@@ -186,7 +202,7 @@ public class Game
     {
         window.draw(backround);
 
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 24; i++)
         {
             window.draw(fieldsRectangles[i]);
         }
