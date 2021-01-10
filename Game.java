@@ -93,63 +93,91 @@ public class Game
         {
             if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= width)
             {
-            //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound) || (farmerSprite.getGlobalBounds().top <= middleLowerBound && farmerSprite.getGlobalBounds().top >= middleUpperBound)))
+            else if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
             {
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
             else
             {
-            farmerSprite.move(speed,0);
+                if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed > middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed < middleRightBound &&((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
+                {
+                    farmerSprite.move((Math.abs(middleLeftBound - (farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width))), 0);
+                }
+                else
+                {
+                    farmerSprite.move(speed,0);
+                }
+                
             }
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.A))
         {
             if(farmerSprite.getGlobalBounds().left <= 0)
             {
-            //System.out.println("I AM HERE " + farmerSprite.getPosition().x);
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound) || (farmerSprite.getGlobalBounds().top <= middleLowerBound && farmerSprite.getGlobalBounds().top >= middleUpperBound)))
+            else if(farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
             {
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
             else
             {
-            farmerSprite.move(-speed,0);
+                
+                if(farmerSprite.getGlobalBounds().left - speed < middleRightBound && farmerSprite.getGlobalBounds().left - speed > middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
+                {
+                    farmerSprite.move(-(Math.abs(middleRightBound - farmerSprite.getGlobalBounds().left)), 0);
+                }
+                else
+                {
+                    farmerSprite.move(-speed,0);
+                }
+                
             }
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.S))
         {
             if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= heigth)
             {
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound) || (farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound)))
+            else if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
             {
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
             else
             {
-            //System.out.println("I AM HERE " + farmerSprite.getGlobalBounds().top + "&" + farmerSprite.getGlobalBounds().height);
-            farmerSprite.move(0,speed);
+                if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed > middleUpperBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed < middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
+                {
+                    farmerSprite.move(0,(Math.abs(middleUpperBound - (farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height))));
+                }
+                else
+                {
+                    farmerSprite.move(0,speed);
+                }
             }
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.W))
         {
             if(farmerSprite.getGlobalBounds().top <= 0)
             {
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().top >= middleUpperBound && farmerSprite.getGlobalBounds().top <= middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound) || (farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound)))
+            else if(farmerSprite.getGlobalBounds().top >= middleUpperBound && farmerSprite.getGlobalBounds().top <= middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
             {
-            farmerSprite.move(0,0);
+                farmerSprite.move(0,0);
             }
             else
             {
-            farmerSprite.move(0,-speed);
+                if(farmerSprite.getGlobalBounds().top - speed < middleLowerBound && farmerSprite.getGlobalBounds().top - speed > middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
+                {
+                    farmerSprite.move(0,-Math.abs(middleLowerBound - farmerSprite.getGlobalBounds().top));
+                }
+                else
+                {
+                    farmerSprite.move(0,-speed);
+                }
             }
         }
     }
@@ -170,7 +198,6 @@ public class Game
 
     public void playGame()
     {
-        //System.out.println(farmerSprite.getScale() + "Hello there!");
         while(window.isOpen()) 
         {
             //Fill the window with red
