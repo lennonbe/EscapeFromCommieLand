@@ -1,5 +1,7 @@
 package BoringGame;
 
+import java.util.Observable;
+import java.util.Observer;
 import org.jsfml.window.*;
 import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
@@ -15,10 +17,12 @@ import java.io.*;
  * This class is what will be called in the Driver class, and should hold all methods needed to 
  * load, spawn and play the game.
  */
-public class Game 
-{
+public class Game implements Observer {
+
+    private final Clock gameTimer = Clock.getInstance(1000*1);
+
     //Setting the environment variables
-    private final int heigth = 900;
+    private final int height = 900;
     private final int width = 900;
     private final int speed = 10;
 
@@ -60,8 +64,13 @@ public class Game
     private RectangleShape house = new RectangleShape(fieldSize);
 
     //The texture and RectangleShape objects arrays needed to draw all the fields around the shop
-    private Texture [] fieldsTextures = new Texture[24];
-    private RectangleShape [] fieldsRectangles = new RectangleShape[24];
+    private Texture [] fieldsTextures = new Texture[25];
+    private RectangleShape [] fieldsRectangles = new RectangleShape[25];
+
+    //FOR ANIMATIONS -- DELETE LATER
+    private Texture[] tomatosTexture = new Texture[7];
+    private Sprite[] tomatosSprite = new Sprite[7];
+    private int carrotProgress = 0;
 
     /**
      * Constructor for the game. Loads the window, adds all needed 
@@ -71,6 +80,22 @@ public class Game
     {
         //Create the window
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
+
+        //Adds this as an observer
+        gameTimer.addObserver(this);
+
+        //ANIMATION TESTING ---- THIS WILL BE DELETED LATER -------        
+
+        for(int n = 0; n < tomatosTexture.length; n++) {
+            tomatosTexture[n] = new Texture();
+            tomatosSprite[n] = new Sprite();
+
+            loadPathToSprite("BoringGame/Sprites/FruitVeg/Tomatos", "Tomatos" + (n+1) + ".png", tomatosSprite[n], tomatosTexture[n]);
+            tomatosSprite[n].setScale(new Vector2f((float) 4, (float) 4));
+            tomatosSprite[n].setPosition(width/2 + fieldSizeInt/2, height/2 + fieldSizeInt/2);
+        }
+
+        //---------------------------------------------------------
 
         //Limit the framerate
         window.setFramerateLimit(60);
@@ -95,7 +120,7 @@ public class Game
             
             //Sets the position of each field
             fieldsRectangles[i].setPosition(width/2 + (((fieldSizeInt)*(x-2))) - fieldSizeInt/2,
-                                            heigth/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
+                                            height/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
 
             //Calculates the x and y position on a 2 dimentional matrix
             if(x == 4) {
@@ -183,13 +208,14 @@ public class Game
     {
         window.draw(backround);
 
-        for(int i = 0; i < 24; i++)
+        for(int i = 0; i < 25; i++)
         {
             window.draw(fieldsRectangles[i]);
         }
 
         window.draw(house);
         window.draw(farmerSprite);
+        window.draw(tomatosSprite[carrotProgress]);
         window.display();
     }
 
@@ -242,17 +268,17 @@ public class Game
     {
         Path path = FileSystems.getDefault().getPath(directory, file);
         
-        try 
-        {
+        try {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
 
         } catch (Exception e) {}
 
-        try 
-        {
+        try {
             texture.loadFromFile(path);
         } 
-        catch (Exception e) {}
+        catch (Exception e) {
+            System.out.println("Error occured while loading image");
+        }
 
         sprite.setTexture(texture);
     }
@@ -268,18 +294,24 @@ public class Game
     {
         Path path = FileSystems.getDefault().getPath(directory, file);
         
-        try 
-        {
+        try {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
 
         } catch (Exception e) {}
 
-        try 
-        {
+        try {
             texture.loadFromFile(path);
         } 
         catch (Exception e) {}
 
         rectangle.setTexture(texture);
+    }
+
+    public void update(Observable o, Object obj) {
+        if(carrotProgress == 6) {
+            carrotProgress = 0;
+        } else {
+            carrotProgress++;
+        }
     }
 }
