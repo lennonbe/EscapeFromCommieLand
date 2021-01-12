@@ -69,5 +69,3 @@ public enum SoundEffect {
    }
 }
 
-
->>>>>>> Movement

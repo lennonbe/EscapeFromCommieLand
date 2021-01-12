@@ -47,5 +47,4 @@ public class SoundEffectDemo extends JFrame {
    public static void main(String[] args) {
       new SoundEffectDemo();
    }
->>>>>>> Movement
 }
