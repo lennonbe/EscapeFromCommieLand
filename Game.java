@@ -1,5 +1,7 @@
 package BoringGame;
 
+import java.util.Observable;
+import java.util.Observer;
 import org.jsfml.window.*;
 import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
@@ -10,226 +12,216 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
 
-public class Game 
-{
-    int heigth = 900;
-    int width = 900;
-    int speed = 10; 
-    int speed2 = 10;
+/**
+ * Class which represents the Game.
+ * This class is what will be called in the Driver class, and should hold all methods needed to 
+ * load, spawn and play the game.
+ */
+public class Game implements Observer {
 
-    Vector2f scale = new Vector2f((float)1.5, (float)1.5);
-    Vector2f fieldSize = new Vector2f(135, 135);
-    Vector2f windowSize = new Vector2f(width, heigth);
+    private final Clock gameTimer = Clock.getInstance(1000*1);
 
-    int fieldSizeInt = (int)fieldSize.x;
+    //Setting the environment variables
+    private final int height = 900;
+    private final int width = 900;
+    private final int speed = 10;
 
-    int lowerBound = heigth/2 + 3 * fieldSizeInt/2;
-    int upperBound = heigth/2 - 3 * fieldSizeInt/2;
-    int leftBound = width/2 - 3 * fieldSizeInt/2;
-    int rightBound = width/2 + 3 * fieldSizeInt/2;
+    private Vector2f scale = new Vector2f((float)1.5, (float)1.5);
+    private Vector2f fieldSize = new Vector2f(135, 135);
+    private Vector2f windowSize = new Vector2f(width, height);
 
-    int middleLowerBound = heigth/2 + fieldSizeInt/2;
-    int middleUpperBound = heigth/2 - fieldSizeInt/2;
-    int middleLeftBound = width/2 - fieldSizeInt/2;
-    int middleRightBound = width/2 + fieldSizeInt/2;
+    private int fieldSizeInt = (int)fieldSize.x;
 
-    RenderWindow window = new RenderWindow();
+    private int lowerBound = height/2 + 3 * fieldSizeInt/2;
+    private int upperBound = height/2 - 3 * fieldSizeInt/2;
+    private int leftBound = width/2 - 3 * fieldSizeInt/2;
+    private int rightBound = width/2 + 3 * fieldSizeInt/2;
+
+    private int middleLowerBound = height/2 + fieldSizeInt/2;
+    private int middleUpperBound = height/2 - fieldSizeInt/2;
+    private int middleLeftBound = width/2 - fieldSizeInt/2;
+    private int middleRightBound = width/2 + fieldSizeInt/2;
+
+    //The border coordinates of the totalitty of the fields drawn.
+    private int topBorder = height/2 - 5 * fieldSizeInt/2;
+    private int bottomBorder = height/2 + 5 * fieldSizeInt/2;
+    private int leftBorder = width/2 - 5 * fieldSizeInt/2;
+    private int rightBorder = width/2 + 5 * fieldSizeInt/2;
+
+    //The window which will display the game
+    private RenderWindow window = new RenderWindow();
     
-    Texture backroundTexture = new Texture();
-    Texture farmerTexture = new Texture();
-    Texture houseTexture = new Texture();
+    //The texture and RectangleShape objects needed to draw a field on a rectangle
+    private Texture backroundTexture = new Texture();
+    private RectangleShape backround = new RectangleShape();
 
-    Texture [] fieldsTextures = new Texture[24];
-    RectangleShape [] fieldsRectangles = new RectangleShape[24];
+    //The texture and Sprite objects needed to draw a field on a rectangle
+    private Texture farmerTexture = new Texture();
+    private Sprite farmerSprite = new Sprite();
 
-    RectangleShape house = new RectangleShape(fieldSize);
+    //The texture and RectangleShape objects needed to draw a house/shop on a rectangle
+    private Texture houseTexture = new Texture();
+    private RectangleShape house = new RectangleShape(fieldSize);
 
-    Sprite farmerSprite = new Sprite();
-    RectangleShape backround = new RectangleShape();
+    //The texture and RectangleShape objects arrays needed to draw all the fields around the shop
+    private Texture [] fieldsTextures = new Texture[25];
+    private RectangleShape [] fieldsRectangles = new RectangleShape[25];
 
+    //FOR ANIMATIONS -- DELETE LATER
+    private Texture[] tomatosTexture = new Texture[7];
+    private Sprite[] tomatosSprite = new Sprite[7];
+    private int carrotProgress = 0;
+
+    /**
+     * Constructor for the game. Loads the window, adds all needed 
+     * objects such as sprites and rectangles and sets their initial positions.
+     */
     public Game()
     {
         //Create the window
-        window.create(new VideoMode(width, heigth), "Escape from CommieLand!");
+        window.create(new VideoMode(width, height), "Escape from CommieLand!");
+
+        //Adds this as an observer
+        gameTimer.addObserver(this);
+
+        //ANIMATION TESTING ---- THIS WILL BE DELETED LATER -------        
+
+        for(int n = 0; n < tomatosTexture.length; n++) {
+            tomatosTexture[n] = new Texture();
+            tomatosSprite[n] = new Sprite();
+
+            loadPathToSprite("BoringGame/Sprites/FruitVeg/Tomatos", "Tomatos" + (n+1) + ".png", tomatosSprite[n], tomatosTexture[n]);
+            tomatosSprite[n].setScale(new Vector2f((float) 4, (float) 4));
+            tomatosSprite[n].setPosition(width/2 + fieldSizeInt/2, height/2 + fieldSizeInt/2);
+        }
+
+        //---------------------------------------------------------
 
         //Limit the framerate
         window.setFramerateLimit(60);
 
-        this.loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
-        this.loadPathToRectangle("BoringGame", "Forest.png", backround, backroundTexture);
-        this.loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
+        loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
+        loadPathToRectangle("BoringGame", "Forest.png", backround, backroundTexture);
+        loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
 
-        for(int i = 0; i < 24; i++)
-        {
+        int x = 0;
+        int y = 0;
+        for(int i = 0; i < 25; i++) {
+            
+            //Initiates all the fields
             fieldsRectangles[i] = new RectangleShape();
             fieldsTextures[i] = new Texture();
+            
+            //Loads the textures
+            loadPathToRectangle("BoringGame", "EmptyField.png", fieldsRectangles[i], fieldsTextures[i]);
 
-            this.loadPathToRectangle("BoringGame", "EmptyField.png", fieldsRectangles[i], fieldsTextures[i]);
+            //Sets the size of each field
             fieldsRectangles[i].setSize(fieldSize);
+            
+            //Sets the position of each field
+            fieldsRectangles[i].setPosition(width/2 + (((fieldSizeInt)*(x-2))) - fieldSizeInt/2,
+                                            height/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
+
+            //Calculates the x and y position on a 2 dimentional matrix
+            if(x == 4) {
+                x = 0;
+                y++;
+            } else {
+                x++;
+            }
         }
-
-        //Inner left top, middle and bottom (respectivelly)
-        fieldsRectangles[0].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
-        fieldsRectangles[1].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
-        fieldsRectangles[2].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
-
-        //Inner right top, middle and bottom (respectivelly) 
-        fieldsRectangles[3].setPosition(width/2 + fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
-        fieldsRectangles[4].setPosition(width/2 + fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
-        fieldsRectangles[5].setPosition(width/2 + fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
-
-        //Middle top and bottom (respectivelly)
-        fieldsRectangles[6].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
-        fieldsRectangles[7].setPosition(width/2 - fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
-
-        //Right top, middle and bottom (respectivelly)
-        fieldsRectangles[8].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
-        fieldsRectangles[9].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
-        fieldsRectangles[10].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
-
-        //Left top, middle and bottom (respectivelly)
-        fieldsRectangles[11].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - 3*fieldSizeInt/2);
-        fieldsRectangles[12].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
-        fieldsRectangles[13].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 + fieldSizeInt/2);
-
-        //Top mid left, middle and right (respectivelly)
-        fieldsRectangles[14].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
-        fieldsRectangles[15].setPosition(width/2 - fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
-        fieldsRectangles[16].setPosition(width/2 + fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
-
-        //Bottom mid left, middle and right (respectivelly)
-        fieldsRectangles[17].setPosition(width/2 - 3*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
-        fieldsRectangles[18].setPosition(width/2 - fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
-        fieldsRectangles[19].setPosition(width/2 + fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
-
-        //Top left and right corners (respectivelly)
-        fieldsRectangles[20].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
-        fieldsRectangles[21].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 - 5*fieldSizeInt/2);
-
-        //Bottom left and right corners (respectivelly)
-        fieldsRectangles[22].setPosition(width/2 - 5*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
-        fieldsRectangles[23].setPosition(width/2 + 3*fieldSizeInt/2, heigth/2 + 3*fieldSizeInt/2);
 
         farmerSprite.setPosition(100, 100);
         farmerSprite.setScale(scale);
         farmerSprite.scale(scale);
 
-        house.setPosition(width/2 - fieldSizeInt/2, heigth/2 - fieldSizeInt/2);
+        house.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
         house.setSize(fieldSize);
-        
+
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
     }
 
+    /**
+     * Calculates the movement of the character.
+     * Ensures the farner doesn't collide with the shop,
+     * and doesn't walk out of the window.
+     */
     public void movement()
     {
-        if(Keyboard.isKeyPressed(Keyboard.Key.D))
-        {
-            if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= width)
+        if(Keyboard.isKeyPressed(Keyboard.Key.D)) {
+            if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed > middleLeftBound && 
+                farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed < middleRightBound && ((
+                farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && 
+                farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (
+                farmerSprite.getGlobalBounds().top < middleLowerBound && 
+                farmerSprite.getGlobalBounds().top > middleUpperBound)))
             {
-                farmerSprite.move(0,0);
+                farmerSprite.move((Math.abs(middleLeftBound - (farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width))), 0);
+            } else {
+                farmerSprite.move(speed,0);
             }
-            else if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
+        } else if(Keyboard.isKeyPressed(Keyboard.Key.A)) {
+            if(farmerSprite.getGlobalBounds().left - speed < middleRightBound && 
+                farmerSprite.getGlobalBounds().left - speed > middleLeftBound && ((
+                farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && 
+                farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (
+                farmerSprite.getGlobalBounds().top < middleLowerBound && 
+                farmerSprite.getGlobalBounds().top > middleUpperBound)))
             {
-                farmerSprite.move(0,0);
+                farmerSprite.move(-(Math.abs(middleRightBound - farmerSprite.getGlobalBounds().left)), 0);
+            } else {
+                farmerSprite.move(-speed,0);
             }
-            else
+        } else if(Keyboard.isKeyPressed(Keyboard.Key.S)) {
+            if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed > middleUpperBound && 
+                farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed < middleLowerBound && ((
+                farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && 
+                farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (
+                farmerSprite.getGlobalBounds().left < middleRightBound && 
+                farmerSprite.getGlobalBounds().left > middleLeftBound)))
             {
-                if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed > middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed < middleRightBound &&((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
-                {
-                    farmerSprite.move((Math.abs(middleLeftBound - (farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width))), 0);
-                }
-                else
-                {
-                    farmerSprite.move(speed,0);
-                }
-                
+                farmerSprite.move(0,(Math.abs(middleUpperBound - (farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height))));
+            } else {
+                farmerSprite.move(0,speed);
             }
-        }
-        else if(Keyboard.isKeyPressed(Keyboard.Key.A))
-        {
-            if(farmerSprite.getGlobalBounds().left <= 0)
+        } else if(Keyboard.isKeyPressed(Keyboard.Key.W)) {
+            if(farmerSprite.getGlobalBounds().top - speed < middleLowerBound && 
+                farmerSprite.getGlobalBounds().top - speed > middleUpperBound && ((
+                farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && 
+                farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (
+                farmerSprite.getGlobalBounds().left < middleRightBound && 
+                farmerSprite.getGlobalBounds().left > middleLeftBound)))
             {
-                farmerSprite.move(0,0);
-            }
-            else if(farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
-            {
-                farmerSprite.move(0,0);
-            }
-            else
-            {
-                
-                if(farmerSprite.getGlobalBounds().left - speed < middleRightBound && farmerSprite.getGlobalBounds().left - speed > middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
-                {
-                    farmerSprite.move(-(Math.abs(middleRightBound - farmerSprite.getGlobalBounds().left)), 0);
-                }
-                else
-                {
-                    farmerSprite.move(-speed,0);
-                }
-                
-            }
-        }
-        else if(Keyboard.isKeyPressed(Keyboard.Key.S))
-        {
-            if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= heigth)
-            {
-                farmerSprite.move(0,0);
-            }
-            else if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
-            {
-                farmerSprite.move(0,0);
-            }
-            else
-            {
-                if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed > middleUpperBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed < middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
-                {
-                    farmerSprite.move(0,(Math.abs(middleUpperBound - (farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height))));
-                }
-                else
-                {
-                    farmerSprite.move(0,speed);
-                }
-            }
-        }
-        else if(Keyboard.isKeyPressed(Keyboard.Key.W))
-        {
-            if(farmerSprite.getGlobalBounds().top <= 0)
-            {
-                farmerSprite.move(0,0);
-            }
-            else if(farmerSprite.getGlobalBounds().top >= middleUpperBound && farmerSprite.getGlobalBounds().top <= middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
-            {
-                farmerSprite.move(0,0);
-            }
-            else
-            {
-                if(farmerSprite.getGlobalBounds().top - speed < middleLowerBound && farmerSprite.getGlobalBounds().top - speed > middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
-                {
-                    farmerSprite.move(0,-Math.abs(middleLowerBound - farmerSprite.getGlobalBounds().top));
-                }
-                else
-                {
-                    farmerSprite.move(0,-speed);
-                }
+                farmerSprite.move(0,-Math.abs(middleLowerBound - farmerSprite.getGlobalBounds().top));
+            } else {
+                farmerSprite.move(0,-speed);
             }
         }
     }
 
+    /**
+     * drawObjects method which is responsible for drawing all the objects,
+     * this includes sprites, rectangles and the backround.
+     */
     public void drawObjects()
     {
         window.draw(backround);
 
-        for(int i = 0; i < 24; i++)
+        for(int i = 0; i < 25; i++)
         {
             window.draw(fieldsRectangles[i]);
         }
 
         window.draw(house);
         window.draw(farmerSprite);
+        window.draw(tomatosSprite[carrotProgress]);
         window.display();
     }
 
+    /**
+     * Method which contains the while loop and calls all the other methods responsible for running the game (i.e movement, drawObjects, etc...)
+     */
     public void playGame()
     {
         while(window.isOpen()) 
@@ -265,51 +257,61 @@ public class Game
         }
     }
 
+    /**
+     * Method which allows to loadn in .PNG files into sprites
+     * @param directory the directory of the file you wish to load
+     * @param file the file you wish to load
+     * @param sprite the sprite you wish to have this file drawn on
+     * @param texture a needed texture for the sprite, making it drawable
+     */
     public void loadPathToSprite(String directory, String file, Sprite sprite, Texture texture)
     {
         Path path = FileSystems.getDefault().getPath(directory, file);
         
-        try 
-        {
+        try {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
 
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
+        } catch (Exception e) {}
 
-        try 
-        {
+        try {
             texture.loadFromFile(path);
         } 
-        catch (Exception e) 
-        {
-            //TODO: handle exception
+        catch (Exception e) {
+            System.out.println("Error occured while loading image");
         }
 
         sprite.setTexture(texture);
     }
 
+    /**
+     * Method which allows to loadn in .PNG files into sprites
+     * @param directory the directory of the file you wish to load
+     * @param file the file you wish to load
+     * @param rectangle the rectangle you wish to have this file drawn on
+     * @param texture a needed texture for the rectangle, making it drawable
+     */
     public void loadPathToRectangle(String directory, String file, RectangleShape rectangle, Texture texture)
     {
         Path path = FileSystems.getDefault().getPath(directory, file);
         
-        try 
-        {
+        try {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
 
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
+        } catch (Exception e) {}
 
-        try 
-        {
+        try {
             texture.loadFromFile(path);
         } 
-        catch (Exception e) 
-        {
-            //TODO: handle exception
-        }
+        catch (Exception e) {}
 
         rectangle.setTexture(texture);
+    }
+
+    public void update(Observable o, Object obj) {
+        if(carrotProgress == 6) {
+            carrotProgress = 0;
+        } else {
+            carrotProgress++;
+        }
     }
 }
