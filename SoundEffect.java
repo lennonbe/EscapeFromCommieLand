@@ -68,5 +68,3 @@ public enum SoundEffect {
       values();   // calls the constructor for all the elements
    }
 }
-
-
