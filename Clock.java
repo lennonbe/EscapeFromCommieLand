@@ -1,3 +1,5 @@
+package BoringGame;
+
 import java.util.Observable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,16 +16,16 @@ public class Clock extends Observable implements ActionListener {
     private Timer time;
 
     //This implements a Singleton design pattern
-    public static Clock getInstance() {
+    public static Clock getInstance(int milliseconds) {
         if(instance == null) 
-            instance = new Clock();
+            instance = new Clock(milliseconds);
 
         return instance;        
     }
 
     //Private constructor on purpose, DO NOT CHANGE!
-    private Clock() {
-        time = new Timer(1000, this);
+    private Clock(int milliseconds) {
+        time = new Timer(milliseconds, this);
         time.start();
     }
 

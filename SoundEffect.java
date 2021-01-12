@@ -1,41 +1,39 @@
 import java.io.*;
 import java.net.URL;
 import javax.sound.sampled.*;
-   
+
 /**
- * This enum encapsulates all the sound effects of a game, so as to separate the sound playing
- * codes from the game codes.
- * 1. Define all your sound effect names and the associated wave file.
- * 2. To play a specific sound, simply invoke SoundEffect.SOUND_NAME.play().
- * 3. You might optionally invoke the static method SoundEffect.init() to pre-load all the
- *    sound files, so that the play is not paused while loading the file for the first time.
- * 4. You can use the static variable SoundEffect.volume to mute the sound.
+ * The Options Listed For Playing
+ * Each Option Contains The URL path and the file name for user to choose to play
  */
 public enum SoundEffect {
-   EXPLODE("test.wav"),   // explosion
-   GONG("test.wav"),         // gong
-   SHOOT("test.wav");       // bullet
-   
+   BGM("AudioFile/Bad_Mood.wav"),               // Bad Mood BGM
+   BADWEATHER("AudioFile/Heavy_Rain_Bad_Weather.wav"), // Bad Weather
+   CROPHARVEST("AudioFile/Crop_Harvest.wav"),          // Harvest The Crop
+   CROPPLANT("AudioFile/Crop_Plant.wav"),              // Plant The Crop
+   OPENINVENTORY("AudioFile/Open_Inventory.wav"),      // Open/Close The Inventory/Store
+   PURCHASEITEM("AudioFile/Open_Store.wav"),           // Purchase The Item
+   UNLOCKITEM("AudioFile/Unlock_New_Land_Option_1.wav"),        // Unlock New Item
+   FAILGUNSHOT("AudioFile/Gun_Shot_Fail.wav"),                  // Fail Condition - Gun Shot
+   FAILPRISON("AudioFile/GameFail2.wav"),                       // Fail Condition - Sent To Prison
+   FAILOTHER("AudioFile/GameFail.wav"),                         // Fail Condition - Other Condition
+   WIN("AudioFile/Steam_Boat.wav");                             // Win Condition
 
-   public static enum Volume {
+   public static enum Volume{
       MUTE, LOW, MEDIUM, HIGH
-   }    //Volume Setting
-   
+   } 
    public static Volume volume = Volume.LOW;
-   
-   // Each sound effect has its own clip, loaded with its own sound file.
    private Clip clip;
    
-   // Constructor to construct each element of the enum with its own sound file.
-   SoundEffect(String soundFileName) {
+   /**
+    * The Function Used To Parse In The WAV File By Using Assigned URL
+    * @param soundFileName URL And File Name
+    */
+   SoundEffect(String soundFileName){
       try {
-         
          URL url = this.getClass().getClassLoader().getResource(soundFileName);
-         // Set up an audio input stream piped from the sound file.
          AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
-         // Get a clip resource.
          clip = AudioSystem.getClip();
-         // Open audio clip and load samples from the audio input stream.
          clip.open(audioInputStream);
       } catch (UnsupportedAudioFileException e) {
          e.printStackTrace();
@@ -46,18 +44,30 @@ public enum SoundEffect {
       }
    }
    
-   // Play or Re-play the sound effect from the beginning, by rewinding.
+   /**
+    * The Function Used To Play And Replay The Selected Sound Option
+    */
    public void play() {
-      if (volume != Volume.MUTE) {
+      if (volume != Volume.MUTE){
          if (clip.isRunning())
-            clip.stop();   // Stop the player if it is still running
-         clip.setFramePosition(0); // rewind to the beginning
-         clip.start();     // Start playing
+            clip.stop();           // Stop the player if it is still running
+         clip.setFramePosition(0); // Back to beginning and replay
+         clip.start();             // Start playing
       }
    }
+
+   /**
+    *  The Function Used To Stop The Selected Sound Option
+    */
+    public void stop(){
+       clip.stop();
+    }
    
    // Optional static method to pre-load all the sound files.
-   static void init() {
-      values(); // calls the constructor for all the elements
+   static void init(){
+      values();   // calls the constructor for all the elements
    }
 }
+
+
+>>>>>>> Movement
