@@ -252,6 +252,17 @@ public class Game implements Observer {
         }
     }
 
+    public void detectClicks()
+    {
+        for(int i = 0; i < fieldsRectangles.length; i++)
+        {
+            if(isRectangleClicked(fieldsRectangles[i]))
+            {
+                System.out.println("Field " + i + "is clicked");
+            }
+        }
+    }
+
     /**
      * drawObjects method which is responsible for drawing all the objects,
      * this includes sprites, rectangles and the backround.
@@ -310,6 +321,7 @@ public class Game implements Observer {
             window.clear(Color.RED);
 
             this.movement();
+            this.detectClicks();
             this.drawObjects();
 
             //Handle events
@@ -382,6 +394,11 @@ public class Game implements Observer {
         }
     }
 
+    /**
+     * Checks if a square/rectangle has been clicked.
+     * @param rectangle the rectangle in question
+     * @return a boolean which is true if its clicked and false otherwise
+     */
     public boolean isRectangleClicked(RectangleShape rectangle)
     {
         boolean flag = false;
