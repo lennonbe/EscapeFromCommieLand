@@ -6,6 +6,7 @@ import org.jsfml.window.*;
 import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
 import java.nio.file.Path;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -72,6 +73,9 @@ public class Game implements Observer {
     private RectangleShape[] tomatosRectangle = new RectangleShape[7];
     private int carrotProgress = 0;
 
+    private boolean menuOpen = false;
+    BuyMenu menu;// = new BuyMenu(new Vector2f(300,120), window);
+
     /**
      * Constructor for the game. Loads the window, adds all needed 
      * objects such as sprites and rectangles and sets their initial positions.
@@ -80,6 +84,10 @@ public class Game implements Observer {
     {
         //Create the window
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
+        window.setSize(new Vector2i(width, height));
+
+        //Creates the BuyMenu based on window size.
+        menu = new BuyMenu(new Vector2f(300,120), window);
 
         //Adds this as an observer
         gameTimer.addObserver(this);
@@ -210,6 +218,10 @@ public class Game implements Observer {
                 {
                     farmerSprite.move(0,(Math.abs(middleUpperBound - (farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height))));
                 }
+                else if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed > bottomBorder)
+                {
+                    farmerSprite.move(0,(Math.abs(bottomBorder - (farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height))));
+                }
                 else
                 {
                     farmerSprite.move(0,speed);
@@ -257,6 +269,12 @@ public class Game implements Observer {
         window.draw(tomatosRectangle[carrotProgress]);
         window.draw(farmerSprite);
         window.draw(backround);
+
+        if(menuOpen == true)
+        {
+            window.draw(menu);
+        }
+
         window.display();
     }
 
@@ -280,7 +298,9 @@ public class Game implements Observer {
             {
                 if(Mouse.getPosition(window).x >= house.getPosition().x && Mouse.getPosition(window).x <= house.getPosition().x + house.getSize().x && Mouse.getPosition(window).y >= house.getPosition().y && Mouse.getPosition(window).y <= house.getPosition().y + house.getSize().y)
                 {
-                    System.out.println("Test successful!");
+                    System.out.println("Test successful!!!");
+                    menuOpen = true;
+                    //window.draw(menu);
                 }
             }
 
