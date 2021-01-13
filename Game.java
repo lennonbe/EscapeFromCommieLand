@@ -270,9 +270,30 @@ public class Game implements Observer {
         window.draw(farmerSprite);
         window.draw(backround);
 
+        /*
+        Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
+        Right now doesnt do much but still a good starting point. 
+        */
+        if(isRectangleClicked(menu) == true)
+        {
+            menuOpen = true;
+        }
+
         if(menuOpen == true)
         {
             window.draw(menu);
+
+            for(int i = 0; i < 4; i++)
+            {
+                window.draw(menu.getRectangleArray()[i]);
+            }
+
+            window.draw(menu.getExitButton());
+
+            if(isRectangleClicked(menu.getExitButton()) == true)
+            {
+                menuOpen = false;
+            }
         }
 
         window.display();
@@ -289,21 +310,6 @@ public class Game implements Observer {
             window.clear(Color.RED);
 
             this.movement();
-
-            /*
-            Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
-            Right now doesnt do much but still a good starting point. 
-            */
-            if(Mouse.isButtonPressed(Mouse.Button.LEFT))
-            {
-                if(Mouse.getPosition(window).x >= house.getPosition().x && Mouse.getPosition(window).x <= house.getPosition().x + house.getSize().x && Mouse.getPosition(window).y >= house.getPosition().y && Mouse.getPosition(window).y <= house.getPosition().y + house.getSize().y)
-                {
-                    System.out.println("Test successful!!!");
-                    menuOpen = true;
-                    //window.draw(menu);
-                }
-            }
-
             this.drawObjects();
 
             //Handle events
@@ -374,5 +380,28 @@ public class Game implements Observer {
         } else {
             carrotProgress++;
         }
+    }
+
+    public boolean isRectangleClicked(RectangleShape rectangle)
+    {
+        boolean flag = false;
+
+        if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+        {
+            if(Mouse.getPosition(window).x >= rectangle.getPosition().x && Mouse.getPosition(window).x <= rectangle.getPosition().x + rectangle.getSize().x && Mouse.getPosition(window).y >= rectangle.getPosition().y && Mouse.getPosition(window).y <= rectangle.getPosition().y + rectangle.getSize().y)
+            {
+                flag = true;
+            }
+            else
+            {
+                flag = false;
+            }
+        }
+        else
+        {
+            flag = false;
+        }
+
+        return flag;
     }
 }
