@@ -23,13 +23,13 @@ public class Game implements Observer {
     private final Clock gameTimer = Clock.getInstance(1000*1);
 
     //Setting the environment variables
-    private final int height = 900;
-    private final int width = 900;
+    private final int height = 864;//900; this is multiplied by 3
+    private final int width = 768;//900; this is multiplied by 3
     private final int speed = 10;
 
-    private Vector2f scale = new Vector2f((float)1.5, (float)1.5);
-    private Vector2f fieldSize = new Vector2f(100, 100); // prev value was 135
-    private Vector2f windowSize = new Vector2f(width, height);
+    private final Vector2f scale = new Vector2f((float)1.5, (float)1.5);
+    private final Vector2f fieldSize = new Vector2f((float)97, (float)97); // prev value was 135
+    private final Vector2f windowSize = new Vector2f(width, height);
 
     private int fieldSizeInt = (int)fieldSize.x;
 
@@ -109,7 +109,7 @@ public class Game implements Observer {
         window.setFramerateLimit(60);
 
         loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
-        loadPathToRectangle("BoringGame", "PlayArea.png", backround, backroundTexture);
+        loadPathToRectangle("BoringGame", "PlayAreaSquare.png", backround, backroundTexture);
         loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
 
         int x = 0;
@@ -276,6 +276,9 @@ public class Game implements Observer {
             window.draw(fieldsRectangles[i]);
         }
 
+        //window.draw(farmerSprite);
+        //window.draw(backround);
+
         window.draw(house);
         window.draw(tomatosRectangle[carrotProgress]);
         window.draw(farmerSprite);
@@ -285,7 +288,7 @@ public class Game implements Observer {
         Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
         Right now doesnt do much but still a good starting point. 
         */
-        if(isRectangleClicked(menu) == true)
+        if(isRectangleClicked(house) == true)
         {
             menuOpen = true;
         }
