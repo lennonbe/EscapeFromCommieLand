@@ -18,7 +18,8 @@ import java.io.*;
  * This class is what will be called in the Driver class, and should hold all methods needed to 
  * load, spawn and play the game.
  */
-public class Game implements Observer {
+public class Game implements Observer 
+{
 
     private final Clock gameTimer = Clock.getInstance(1000*1);
 
@@ -28,7 +29,7 @@ public class Game implements Observer {
     private final int speed = 10;
 
     private final Vector2f scale = new Vector2f((float)1.5, (float)1.5);
-    private final Vector2f fieldSize = new Vector2f((float)97, (float)97); // prev value was 135
+    private final Vector2f fieldSize = new Vector2f(96, 96); // prev value was 135
     private final Vector2f windowSize = new Vector2f(width, height);
 
     private int fieldSizeInt = (int)fieldSize.x;
@@ -109,7 +110,7 @@ public class Game implements Observer {
         window.setFramerateLimit(60);
 
         loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
-        loadPathToRectangle("BoringGame", "PlayAreaSquare.png", backround, backroundTexture);
+        loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
         loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
 
         int x = 0;
@@ -121,7 +122,7 @@ public class Game implements Observer {
             fieldsTextures[i] = new Texture();
             
             //Loads the textures
-            loadPathToRectangle("BoringGame", "EmptyField.png", fieldsRectangles[i], fieldsTextures[i]);
+            loadPathToRectangle("BoringGame", "DirtWet.png", fieldsRectangles[i], fieldsTextures[i]);
 
             //Sets the size of each field
             fieldsRectangles[i].setSize(fieldSize);
@@ -321,7 +322,7 @@ public class Game implements Observer {
         while(window.isOpen()) 
         {
             //Fill the window with red
-            window.clear(Color.RED);
+            window.clear(new Color(50,20,20));
 
             this.movement();
             this.detectClicks();
