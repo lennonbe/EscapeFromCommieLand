@@ -45,12 +45,34 @@ public class BuyMenu extends RectangleShape
             vegIcons[i] = new RectangleShape(vegIconsSize);
             vegTextures[i] = new Texture();
 
-            ///vegIcons[i].setPosition(new Vector2f(temp, this.getPosition().y + 20));
             vegIcons[i].setPosition(new Vector2f(temp, yPosition));
             loadPathToRectangle("BoringGame", "Shop.png", vegIcons[i], vegTextures[i]);
 
             temp += (vegIconsSize.x + gap);
         }
+    }
+
+    public boolean isExitClicked(Window window)
+    {
+        boolean flag = false;
+
+        if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+        {
+            if(Mouse.getPosition(window).x >= exitButton.getPosition().x && Mouse.getPosition(window).x <= exitButton.getPosition().x + exitButton.getSize().x && Mouse.getPosition(window).y >= exitButton.getPosition().y && Mouse.getPosition(window).y <= exitButton.getPosition().y + exitButton.getSize().y)
+            {
+                flag = true;
+            }
+            else
+            {
+                flag = false;
+            }
+        }
+        else
+        {
+            flag = false;
+        }
+
+        return flag;
     }
 
     public RectangleShape[] getRectangleArray()

@@ -61,7 +61,7 @@ public class Game implements Observer
     private Farmer farmer = new Farmer();
 
     //The texture and RectangleShape objects needed to draw a house/shop on a rectangle
-    private Shop Shop = new Shop(fieldSize);
+    private Shop shop = new Shop(fieldSize);
 
     //The Fields object array needed to draw all the fields around the shop
     private Fields [] farmFields = new Fields[25];
@@ -97,7 +97,7 @@ public class Game implements Observer
             tomatosRectangle[n] = new RectangleShape();
 
             loadPathToRectangle("BoringGame/Sprites/FruitVeg/Tomatos", "Tomatos" + (n+1) + ".png", tomatosRectangle[n], tomatosTexture[n]);
-            tomatosRectangle[n].setSize(/*new Vector2f((float) 4, (float) 4)*/fieldSize);
+            tomatosRectangle[n].setSize(fieldSize);
             tomatosRectangle[n].setPosition(width/2 + fieldSizeInt/2, height/2 + fieldSizeInt/2);
         }
 
@@ -107,7 +107,6 @@ public class Game implements Observer
         window.setFramerateLimit(60);
 
         loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
-        //loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
 
         int x = 0;
         int y = 0;
@@ -128,8 +127,7 @@ public class Game implements Observer
             }
         }
 
-        Shop.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
-        //house.setSize(fieldSize);
+        shop.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
 
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
@@ -261,7 +259,7 @@ public class Game implements Observer
             window.draw(farmFields[i]);
         }
 
-        window.draw(Shop);
+        window.draw(shop);
         window.draw(tomatosRectangle[carrotProgress]);
         window.draw(farmer);
         window.draw(backround);
@@ -270,7 +268,7 @@ public class Game implements Observer
         Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
         Right now doesnt do much but still a good starting point. 
         */
-        if(isRectangleClicked(Shop) == true)
+        if(shop.isClicked(window) == true)
         {
             menuOpen = true;
         }
@@ -286,7 +284,7 @@ public class Game implements Observer
 
             window.draw(menu.getExitButton());
 
-            if(isRectangleClicked(menu.getExitButton()) == true)
+            if(menu.isExitClicked(window) == true)
             {
                 menuOpen = false;
             }
