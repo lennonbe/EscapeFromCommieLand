@@ -59,6 +59,10 @@ public class Farmer extends Sprite
         this.setTexture(farmerTexture);
     }
 
+    /**
+     * Allows to get the current Sprite image being used. This value is returned as a string.
+     * @return current Sprite image being used
+     */
     public String getCurrentSprite()
     {
         return currentSprite;
