@@ -291,9 +291,10 @@ public class Game implements Observer
     {
         for(int i = 0; i < farmFields.length; i++)
         {
-            if(isRectangleClicked(farmFields[i]))
+            if(farmFields[i].isClicked(window))
             {
                 System.out.println("Field " + i + "is clicked");
+                //System.out.println("Current field selected is " + selectedField.toString() + " and the clickFlag is " + clickFlag);
             }
         }
     }

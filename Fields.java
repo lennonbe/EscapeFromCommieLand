@@ -16,6 +16,8 @@ import java.io.*;
 public class Fields extends RectangleShape
 {
     public final int[] growthPhases = new int[]{0,1,2,3,4,5,6};
+    private static boolean clickFlag = false;
+    private static Fields selectedField = null;
 
     public enum VegType 
     {
@@ -99,6 +101,19 @@ public class Fields extends RectangleShape
         {
             if(Mouse.getPosition(window).x >= this.getPosition().x && Mouse.getPosition(window).x <= this.getPosition().x + this.getSize().x && Mouse.getPosition(window).y >= this.getPosition().y && Mouse.getPosition(window).y <= this.getPosition().y + this.getSize().y)
             {
+                if(selectedField == this && clickFlag == true)
+                {
+                    selectedField = null;
+                    clickFlag = false;
+                }
+                else
+                {
+                    selectedField = this;
+                    clickFlag = true;
+                }
+
+                System.out.println("Current field selected is " + selectedField + " and the clickFlag is " + clickFlag);
+
                 flag = true;
             }
             else
