@@ -57,17 +57,14 @@ public class Game implements Observer
     private Texture backroundTexture = new Texture();
     private RectangleShape backround = new RectangleShape();
 
-    //The texture and Sprite objects needed to draw a field on a rectangle
-    private Texture farmerTexture = new Texture();
-    private Sprite farmerSprite = new Sprite();
+    //The Farmer objects needed to draw a Farmer on a the Window
+    private Farmer farmer = new Farmer();
 
     //The texture and RectangleShape objects needed to draw a house/shop on a rectangle
-    private Texture houseTexture = new Texture();
-    private RectangleShape house = new RectangleShape(fieldSize);
+    private Shop Shop = new Shop(fieldSize);
 
-    //The texture and RectangleShape objects arrays needed to draw all the fields around the shop
-    private Texture [] fieldsTextures = new Texture[25];
-    private RectangleShape [] fieldsRectangles = new RectangleShape[25];
+    //The Fields object array needed to draw all the fields around the shop
+    private Fields [] farmFields = new Fields[25];
 
     //FOR ANIMATIONS -- DELETE LATER
     private Texture[] tomatosTexture = new Texture[7];
@@ -75,7 +72,7 @@ public class Game implements Observer
     private int carrotProgress = 0;
 
     private boolean menuOpen = false;
-    BuyMenu menu;// = new BuyMenu(new Vector2f(300,120), window);
+    private BuyMenu menu;
 
     /**
      * Constructor for the game. Loads the window, adds all needed 
@@ -109,43 +106,30 @@ public class Game implements Observer
         //Limit the framerate
         window.setFramerateLimit(60);
 
-        loadPathToSprite("BoringGame", "Man_Neutral.png", farmerSprite, farmerTexture);
         loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
-        loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
+        //loadPathToRectangle("BoringGame", "Shop.png", house, houseTexture);
 
         int x = 0;
         int y = 0;
-        for(int i = 0; i < 25; i++) {
-            
-            //Initiates all the fields
-            fieldsRectangles[i] = new RectangleShape();
-            fieldsTextures[i] = new Texture();
-            
-            //Loads the textures
-            loadPathToRectangle("BoringGame", "DirtWet.png", fieldsRectangles[i], fieldsTextures[i]);
-
-            //Sets the size of each field
-            fieldsRectangles[i].setSize(fieldSize);
-            
-            //Sets the position of each field
-            fieldsRectangles[i].setPosition(width/2 + (((fieldSizeInt)*(x-2))) - fieldSizeInt/2,
-                                            height/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
+        for(int i = 0; i < farmFields.length; i++) 
+        {
+            farmFields[i] = new Fields(fieldSize);
+            farmFields[i].setPosition(width/2 + (((fieldSizeInt)*(x-2))) - fieldSizeInt/2, height/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
 
             //Calculates the x and y position on a 2 dimentional matrix
-            if(x == 4) {
+            if(x == 4) 
+            {
                 x = 0;
                 y++;
-            } else {
+            } 
+            else 
+            {
                 x++;
             }
         }
 
-        farmerSprite.setPosition(200, 200);
-        farmerSprite.setScale(scale);
-        farmerSprite.scale(scale);
-
-        house.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
-        house.setSize(fieldSize);
+        Shop.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
+        //house.setSize(fieldSize);
 
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
@@ -153,101 +137,101 @@ public class Game implements Observer
 
     /**
      * Calculates the movement of the character.
-     * Ensures the farner doesn't collide with the shop,
+     * Ensures the farmer doesn't collide with the shop,
      * and doesn't walk out of the window.
      */
     public void movement()
     {
         if(Keyboard.isKeyPressed(Keyboard.Key.D))
         {
-            if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= rightBorder)
+            if(farmer.getGlobalBounds().left + farmer.getGlobalBounds().width >= rightBorder)
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width >= middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width <= middleRightBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
+            else if(farmer.getGlobalBounds().left + farmer.getGlobalBounds().width >= middleLeftBound && farmer.getGlobalBounds().left + farmer.getGlobalBounds().width <= middleRightBound && ((farmer.getGlobalBounds().top + farmer.getGlobalBounds().height < middleLowerBound && farmer.getGlobalBounds().top + farmer.getGlobalBounds().height > middleUpperBound) || (farmer.getGlobalBounds().top < middleLowerBound && farmer.getGlobalBounds().top > middleUpperBound)))
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
             else
             {
-                if(farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed > middleLeftBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width + speed < middleRightBound &&((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
+                if(farmer.getGlobalBounds().left + farmer.getGlobalBounds().width + speed > middleLeftBound && farmer.getGlobalBounds().left + farmer.getGlobalBounds().width + speed < middleRightBound &&((farmer.getGlobalBounds().top + farmer.getGlobalBounds().height < middleLowerBound && farmer.getGlobalBounds().top + farmer.getGlobalBounds().height > middleUpperBound) || (farmer.getGlobalBounds().top < middleLowerBound && farmer.getGlobalBounds().top > middleUpperBound)))
                 {
-                    farmerSprite.move((Math.abs(middleLeftBound - (farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width))), 0);
+                    farmer.move((Math.abs(middleLeftBound - (farmer.getGlobalBounds().left + farmer.getGlobalBounds().width))), 0);
                 }
                 else
                 {
-                    farmerSprite.move(speed,0);
+                    farmer.move(speed,0);
                 }  
             }
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.A))
         {
-            if(farmerSprite.getGlobalBounds().left <= leftBorder)
+            if(farmer.getGlobalBounds().left <= leftBorder)
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().left <= middleRightBound && farmerSprite.getGlobalBounds().left >= middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
+            else if(farmer.getGlobalBounds().left <= middleRightBound && farmer.getGlobalBounds().left >= middleLeftBound && ((farmer.getGlobalBounds().top + farmer.getGlobalBounds().height < middleLowerBound && farmer.getGlobalBounds().top + farmer.getGlobalBounds().height > middleUpperBound) || (farmer.getGlobalBounds().top < middleLowerBound && farmer.getGlobalBounds().top > middleUpperBound)))
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
             else
             {
                 
-                if(farmerSprite.getGlobalBounds().left - speed < middleRightBound && farmerSprite.getGlobalBounds().left - speed > middleLeftBound && ((farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height < middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height > middleUpperBound) || (farmerSprite.getGlobalBounds().top < middleLowerBound && farmerSprite.getGlobalBounds().top > middleUpperBound)))
+                if(farmer.getGlobalBounds().left - speed < middleRightBound && farmer.getGlobalBounds().left - speed > middleLeftBound && ((farmer.getGlobalBounds().top + farmer.getGlobalBounds().height < middleLowerBound && farmer.getGlobalBounds().top + farmer.getGlobalBounds().height > middleUpperBound) || (farmer.getGlobalBounds().top < middleLowerBound && farmer.getGlobalBounds().top > middleUpperBound)))
                 {
-                    farmerSprite.move(-(Math.abs(middleRightBound - farmerSprite.getGlobalBounds().left)), 0);
+                    farmer.move(-(Math.abs(middleRightBound - farmer.getGlobalBounds().left)), 0);
                 }
                 else
                 {
-                    farmerSprite.move(-speed,0);
+                    farmer.move(-speed,0);
                 }
             }
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.S))
         {
-            if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= bottomBorder)
+            if(farmer.getGlobalBounds().top + farmer.getGlobalBounds().height >= bottomBorder)
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height <= middleLowerBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height >= middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
+            else if(farmer.getGlobalBounds().top + farmer.getGlobalBounds().height <= middleLowerBound && farmer.getGlobalBounds().top + farmer.getGlobalBounds().height >= middleUpperBound && ((farmer.getGlobalBounds().left + farmer.getGlobalBounds().width < middleRightBound && farmer.getGlobalBounds().left + farmer.getGlobalBounds().width > middleLeftBound) || (farmer.getGlobalBounds().left < middleRightBound && farmer.getGlobalBounds().left > middleLeftBound)))
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
             else
             {
-                if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed > middleUpperBound && farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed < middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
+                if(farmer.getGlobalBounds().top + farmer.getGlobalBounds().height + speed > middleUpperBound && farmer.getGlobalBounds().top + farmer.getGlobalBounds().height + speed < middleLowerBound && ((farmer.getGlobalBounds().left + farmer.getGlobalBounds().width < middleRightBound && farmer.getGlobalBounds().left + farmer.getGlobalBounds().width > middleLeftBound) || (farmer.getGlobalBounds().left < middleRightBound && farmer.getGlobalBounds().left > middleLeftBound)))
                 {
-                    farmerSprite.move(0,(Math.abs(middleUpperBound - (farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height))));
+                    farmer.move(0,(Math.abs(middleUpperBound - (farmer.getGlobalBounds().top + farmer.getGlobalBounds().height))));
                 }
-                else if(farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height + speed > bottomBorder)
+                else if(farmer.getGlobalBounds().top + farmer.getGlobalBounds().height + speed > bottomBorder)
                 {
-                    farmerSprite.move(0,(Math.abs(bottomBorder - (farmerSprite.getGlobalBounds().top + farmerSprite.getGlobalBounds().height))));
+                    farmer.move(0,(Math.abs(bottomBorder - (farmer.getGlobalBounds().top + farmer.getGlobalBounds().height))));
                 }
                 else
                 {
-                    farmerSprite.move(0,speed);
+                    farmer.move(0,speed);
                 }
             }
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.W))
         {
-            if(farmerSprite.getGlobalBounds().top <= topBorder)
+            if(farmer.getGlobalBounds().top <= topBorder)
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
-            else if(farmerSprite.getGlobalBounds().top >= middleUpperBound && farmerSprite.getGlobalBounds().top <= middleLowerBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
+            else if(farmer.getGlobalBounds().top >= middleUpperBound && farmer.getGlobalBounds().top <= middleLowerBound && ((farmer.getGlobalBounds().left + farmer.getGlobalBounds().width < middleRightBound && farmer.getGlobalBounds().left + farmer.getGlobalBounds().width > middleLeftBound) || (farmer.getGlobalBounds().left < middleRightBound && farmer.getGlobalBounds().left > middleLeftBound)))
             {
-                farmerSprite.move(0,0);
+                farmer.move(0,0);
             }
             else
             {
-                if(farmerSprite.getGlobalBounds().top - speed < middleLowerBound && farmerSprite.getGlobalBounds().top - speed > middleUpperBound && ((farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width < middleRightBound && farmerSprite.getGlobalBounds().left + farmerSprite.getGlobalBounds().width > middleLeftBound) || (farmerSprite.getGlobalBounds().left < middleRightBound && farmerSprite.getGlobalBounds().left > middleLeftBound)))
+                if(farmer.getGlobalBounds().top - speed < middleLowerBound && farmer.getGlobalBounds().top - speed > middleUpperBound && ((farmer.getGlobalBounds().left + farmer.getGlobalBounds().width < middleRightBound && farmer.getGlobalBounds().left + farmer.getGlobalBounds().width > middleLeftBound) || (farmer.getGlobalBounds().left < middleRightBound && farmer.getGlobalBounds().left > middleLeftBound)))
                 {
-                    farmerSprite.move(0,-Math.abs(middleLowerBound - farmerSprite.getGlobalBounds().top));
+                    farmer.move(0,-Math.abs(middleLowerBound - farmer.getGlobalBounds().top));
                 }
                 else
                 {
-                    farmerSprite.move(0,-speed);
+                    farmer.move(0,-speed);
                 }
             }
         }
@@ -255,9 +239,9 @@ public class Game implements Observer
 
     public void detectClicks()
     {
-        for(int i = 0; i < fieldsRectangles.length; i++)
+        for(int i = 0; i < farmFields.length; i++)
         {
-            if(isRectangleClicked(fieldsRectangles[i]))
+            if(isRectangleClicked(farmFields[i]))
             {
                 System.out.println("Field " + i + "is clicked");
             }
@@ -272,24 +256,21 @@ public class Game implements Observer
     {
         //window.draw(backround);
 
-        for(int i = 0; i < 25; i++)
+        for(int i = 0; i < farmFields.length; i++)
         {
-            window.draw(fieldsRectangles[i]);
+            window.draw(farmFields[i]);
         }
 
-        //window.draw(farmerSprite);
-        //window.draw(backround);
-
-        window.draw(house);
+        window.draw(Shop);
         window.draw(tomatosRectangle[carrotProgress]);
-        window.draw(farmerSprite);
+        window.draw(farmer);
         window.draw(backround);
 
         /*
         Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
         Right now doesnt do much but still a good starting point. 
         */
-        if(isRectangleClicked(house) == true)
+        if(isRectangleClicked(Shop) == true)
         {
             menuOpen = true;
         }
