@@ -17,6 +17,7 @@ public class Farmer extends Sprite
 {
     private Texture farmerTexture = new Texture();
     private Vector2f scale = new Vector2f((float)1.5, (float)1.5);
+    private String currentSprite;
 
     /**
      * Constructor for the Farmer object.
@@ -28,7 +29,7 @@ public class Farmer extends Sprite
         this.setPosition(200, 200);
         this.setScale(scale);
         this.scale(scale);
-        this.loadPathToSprite("BoringGame", "Man_Neutral.png");
+        this.setSprite("BoringGame", "Man_Neutral.png");
     }
 
     /**
@@ -38,9 +39,10 @@ public class Farmer extends Sprite
      * @param sprite the sprite you wish to have this file drawn on
      * @param texture a needed texture for the sprite, making it drawable
      */
-    public void loadPathToSprite(String directory, String file)
+    public void setSprite(String directory, String file)
     {
         Path path = FileSystems.getDefault().getPath(directory, file);
+        currentSprite = file;
         
         try {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
@@ -55,6 +57,11 @@ public class Farmer extends Sprite
         }
 
         this.setTexture(farmerTexture);
+    }
+
+    public String getCurrentSprite()
+    {
+        return currentSprite;
     }
 }
 

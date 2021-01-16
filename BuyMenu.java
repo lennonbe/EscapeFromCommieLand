@@ -52,6 +52,33 @@ public class BuyMenu extends RectangleShape
         }
     }
 
+    public int buyVeg(Window window)
+    {
+        int returnValue = 0;
+
+        if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+        {
+            if(Mouse.getPosition(window).x >= vegIcons[1].getPosition().x && Mouse.getPosition(window).x <= vegIcons[1].getPosition().x + vegIcons[1].getSize().x && Mouse.getPosition(window).y >= vegIcons[1].getPosition().y && Mouse.getPosition(window).y <= vegIcons[1].getPosition().y + vegIcons[1].getSize().y)
+            {
+                returnValue = 1;
+            }
+            else if(Mouse.getPosition(window).x >= vegIcons[2].getPosition().x && Mouse.getPosition(window).x <= vegIcons[2].getPosition().x + vegIcons[2].getSize().x && Mouse.getPosition(window).y >= vegIcons[2].getPosition().y && Mouse.getPosition(window).y <= vegIcons[2].getPosition().y + vegIcons[2].getSize().y)
+            {
+                returnValue = 2;
+            }
+            else if(Mouse.getPosition(window).x >= vegIcons[3].getPosition().x && Mouse.getPosition(window).x <= vegIcons[3].getPosition().x + vegIcons[3].getSize().x && Mouse.getPosition(window).y >= vegIcons[3].getPosition().y && Mouse.getPosition(window).y <= vegIcons[3].getPosition().y + vegIcons[3].getSize().y)
+            {
+                returnValue = 3;
+            }
+            else if(Mouse.getPosition(window).x >= vegIcons[4].getPosition().x && Mouse.getPosition(window).x <= vegIcons[4].getPosition().x + vegIcons[4].getSize().x && Mouse.getPosition(window).y >= vegIcons[4].getPosition().y && Mouse.getPosition(window).y <= vegIcons[4].getPosition().y + vegIcons[4].getSize().y)
+            {
+                returnValue = 4;
+            }
+        }
+
+        return returnValue;
+    }
+
     public boolean isExitClicked(Window window)
     {
         boolean flag = false;
@@ -102,18 +129,3 @@ public class BuyMenu extends RectangleShape
         rectangle.setTexture(texture);
     }
 }
-
-/*
-RectangleShape(Vector2f size)
-
-public MyPlanet(double distance, double angle, double diameter, String col, MySun sun, double speed, int moons)
-{
-    super(distance, angle, diameter, col);
-    sunDistance = sun.distance;
-    sunAngle = sun.angle;
-    rotationSpeed = speed;
-
-    moonsArr = new MyMoon[moons];
-    
-}
-*/

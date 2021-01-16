@@ -142,6 +142,19 @@ public class Game implements Observer
     {
         if(Keyboard.isKeyPressed(Keyboard.Key.D))
         {
+            if(farmer.getCurrentSprite() == "Right-L.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Right-R.png");
+            }
+            else if(farmer.getCurrentSprite() == "Right-R.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Right-L.png");
+            }
+            else
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Right-R.png");
+            }
+            
             if(farmer.getGlobalBounds().left + farmer.getGlobalBounds().width >= rightBorder)
             {
                 farmer.move(0,0);
@@ -164,6 +177,19 @@ public class Game implements Observer
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.A))
         {
+            if(farmer.getCurrentSprite() == "Left-L.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Left-R.png");
+            }
+            else if(farmer.getCurrentSprite() == "Left-R.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Left-L.png");
+            }
+            else
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Left-R.png");
+            }
+
             if(farmer.getGlobalBounds().left <= leftBorder)
             {
                 farmer.move(0,0);
@@ -187,6 +213,19 @@ public class Game implements Observer
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.S))
         {
+            if(farmer.getCurrentSprite() == "Forward-L.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Forward-R.png");
+            }
+            else if(farmer.getCurrentSprite() == "Forward-R.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Forward-L.png");
+            }
+            else
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Forward-R.png");
+            }
+
             if(farmer.getGlobalBounds().top + farmer.getGlobalBounds().height >= bottomBorder)
             {
                 farmer.move(0,0);
@@ -213,6 +252,19 @@ public class Game implements Observer
         }
         else if(Keyboard.isKeyPressed(Keyboard.Key.W))
         {
+            if(farmer.getCurrentSprite() == "Back-L.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Back-R.png");
+            }
+            else if(farmer.getCurrentSprite() == "Back-R.png")
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Back-L.png");
+            }
+            else
+            {
+                farmer.setSprite("BoringGame/Sprites/Man/Animations", "Back-R.png");
+            }
+
             if(farmer.getGlobalBounds().top <= topBorder)
             {
                 farmer.move(0,0);
