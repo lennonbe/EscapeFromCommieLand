@@ -2,10 +2,10 @@
 
 Welcome to the game readme file, here you can find the following information:
 
- * [How to run](#how-to-run)
- * [Gameplay](#gameplay)
- * [Controls](#controls)
- * [About](#about) 
+ * [How to run](#how-to-run-)
+ * [Gameplay](#gameplay-)
+ * [Controls](#controls-)
+ * [About](#about-) 
  
 ## How to run: <a name = "how-to-run"></a>
 
