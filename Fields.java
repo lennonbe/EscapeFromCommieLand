@@ -12,12 +12,14 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
+
 
 public class Fields extends RectangleShape
 {
     public final int[] growthPhases = new int[]{0,1,2,3,4,5,6};
-    private static boolean clickFlag = false;
-    private static Fields selectedField = null;
+    protected static boolean clickFlag = false;
+    protected static Fields selectedField = null;
 
     public enum VegType 
     {
@@ -112,7 +114,7 @@ public class Fields extends RectangleShape
                     clickFlag = true;
                 }
 
-                System.out.println("Current field selected is " + selectedField + " and the clickFlag is " + clickFlag);
+                //System.out.println("Current field selected is " + selectedField + " and the clickFlag is " + clickFlag);
 
                 flag = true;
             }

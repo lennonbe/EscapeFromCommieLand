@@ -300,13 +300,16 @@ public class Game implements Observer
 
     public void detectClicks()
     {
-        for(int i = 0; i < farmFields.length; i++)
+        if(menuOpen == false)
         {
-            if(farmFields[i].isClicked(window))
+            for(int i = 0; i < farmFields.length; i++)
             {
-                System.out.println("Field " + i + "is clicked");
-                pause();
-                //System.out.println("Current field selected is " + selectedField.toString() + " and the clickFlag is " + clickFlag);
+                if(farmFields[i].isClicked(window) && i != 12) // cause field 12 is behind the shop TODO: Remove field12 safely
+                {
+                    System.out.println("Field " + i + "is clicked");
+                    System.out.println("Current field selected is " + farmFields[i].selectedField + " and the clickFlag is " + farmFields[i].clickFlag);
+                    pause();
+                }
             }
         }
     }
@@ -336,6 +339,7 @@ public class Game implements Observer
         if(shop.isClicked(window) == true)
         {
             menuOpen = true;
+            pause();
         }
 
         if(menuOpen == true)
@@ -352,6 +356,7 @@ public class Game implements Observer
             if(menu.isExitClicked(window) == true)
             {
                 menuOpen = false;
+                pause();
             }
         }
 
@@ -382,7 +387,7 @@ public class Game implements Observer
                 }
             }
 
-            if(menu.buyVeg(window) != -1)
+            if(menu.buyVeg(window) != -1 && menuOpen == true)
             {
                 int temp = menu.buyVeg(window);
 
