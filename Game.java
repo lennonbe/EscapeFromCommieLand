@@ -12,6 +12,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class which represents the Game.
@@ -287,6 +288,14 @@ public class Game implements Observer
                 }
             }
         }
+
+        /*try {
+                
+            TimeUnit.MILLISECONDS.sleep(50);
+            
+        } catch (Exception e) {
+            //TODO: handle exception
+        }*/
     }
 
     public void detectClicks()
@@ -296,6 +305,7 @@ public class Game implements Observer
             if(farmFields[i].isClicked(window))
             {
                 System.out.println("Field " + i + "is clicked");
+                pause();
                 //System.out.println("Current field selected is " + selectedField.toString() + " and the clickFlag is " + clickFlag);
             }
         }
@@ -379,36 +389,30 @@ public class Game implements Observer
                 if(temp != -1)
                 {
                     numSeeds[temp]++;
+
+                    pause();
+
                     System.out.println("incrementing numSeeds " + temp + " value is " + numSeeds[temp]);
                 }
             }
+
+            
         }
     }
 
     /**
-     * Method which allows to loadn in .PNG files into sprites
-     * @param directory the directory of the file you wish to load
-     * @param file the file you wish to load
-     * @param sprite the sprite you wish to have this file drawn on
-     * @param texture a needed texture for the sprite, making it drawable
+     * Slows down the game by sleeping for 1/4 of a second
      */
-    public void loadPathToSprite(String directory, String file, Sprite sprite, Texture texture)
+    public void pause()
     {
-        Path path = FileSystems.getDefault().getPath(directory, file);
-        
-        try {
-            BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-
-        } catch (Exception e) {}
-
-        try {
-            texture.loadFromFile(path);
+        try 
+        {
+            TimeUnit.MILLISECONDS.sleep(250); 
         } 
-        catch (Exception e) {
-            System.out.println("Error occured while loading image");
+        catch (Exception e) 
+        {
+            //TODO: handle exception
         }
-
-        sprite.setTexture(texture);
     }
 
     /**
@@ -441,33 +445,5 @@ public class Game implements Observer
         } else {
             carrotProgress++;
         }
-    }
-
-    /**
-     * Checks if a square/rectangle has been clicked.
-     * @param rectangle the rectangle in question
-     * @return a boolean which is true if its clicked and false otherwise
-     */
-    public boolean isRectangleClicked(RectangleShape rectangle)
-    {
-        boolean flag = false;
-
-        if(Mouse.isButtonPressed(Mouse.Button.LEFT))
-        {
-            if(Mouse.getPosition(window).x >= rectangle.getPosition().x && Mouse.getPosition(window).x <= rectangle.getPosition().x + rectangle.getSize().x && Mouse.getPosition(window).y >= rectangle.getPosition().y && Mouse.getPosition(window).y <= rectangle.getPosition().y + rectangle.getSize().y)
-            {
-                flag = true;
-            }
-            else
-            {
-                flag = false;
-            }
-        }
-        else
-        {
-            flag = false;
-        }
-
-        return flag;
     }
 }
