@@ -40,7 +40,7 @@ Field interaction | Right mouse button
 
 This game is a team project by Lancaster University students, you can check us out here:
 
-Contributor | <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Github" width="50" height="50"> 
+Contributor | <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png" alt="Github" width="200" height="50"> 
 :------:  | :-----------------------: 
 Daniel    | Github page               
 Milosz    | Github page               
