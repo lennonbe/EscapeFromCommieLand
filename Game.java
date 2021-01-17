@@ -74,6 +74,8 @@ public class Game implements Observer
     private boolean menuOpen = false;
     private BuyMenu menu;
 
+    private int [] numSeeds = new int []{0, 0, 0, 0}; 
+
     /**
      * Constructor for the game. Loads the window, adds all needed 
      * objects such as sprites and rectangles and sets their initial positions.
@@ -291,9 +293,10 @@ public class Game implements Observer
     {
         for(int i = 0; i < farmFields.length; i++)
         {
-            if(isRectangleClicked(farmFields[i]))
+            if(farmFields[i].isClicked(window))
             {
                 System.out.println("Field " + i + "is clicked");
+                //System.out.println("Current field selected is " + selectedField.toString() + " and the clickFlag is " + clickFlag);
             }
         }
     }
@@ -366,6 +369,17 @@ public class Game implements Observer
                 {
                 //The user pressed the close button
                 window.close();
+                }
+            }
+
+            if(menu.buyVeg(window) != -1)
+            {
+                int temp = menu.buyVeg(window);
+
+                if(temp != -1)
+                {
+                    numSeeds[temp]++;
+                    System.out.println("incrementing numSeeds " + temp + " value is " + numSeeds[temp]);
                 }
             }
         }

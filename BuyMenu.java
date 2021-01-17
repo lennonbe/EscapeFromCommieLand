@@ -54,11 +54,15 @@ public class BuyMenu extends RectangleShape
 
     public int buyVeg(Window window)
     {
-        int returnValue = 0;
+        int returnValue = -1;
 
         if(Mouse.isButtonPressed(Mouse.Button.LEFT))
         {
-            if(Mouse.getPosition(window).x >= vegIcons[1].getPosition().x && Mouse.getPosition(window).x <= vegIcons[1].getPosition().x + vegIcons[1].getSize().x && Mouse.getPosition(window).y >= vegIcons[1].getPosition().y && Mouse.getPosition(window).y <= vegIcons[1].getPosition().y + vegIcons[1].getSize().y)
+            if(Mouse.getPosition(window).x >= vegIcons[0].getPosition().x && Mouse.getPosition(window).x <= vegIcons[0].getPosition().x + vegIcons[0].getSize().x && Mouse.getPosition(window).y >= vegIcons[0].getPosition().y && Mouse.getPosition(window).y <= vegIcons[0].getPosition().y + vegIcons[0].getSize().y)
+            {
+                returnValue = 0;
+            }
+            else if(Mouse.getPosition(window).x >= vegIcons[1].getPosition().x && Mouse.getPosition(window).x <= vegIcons[1].getPosition().x + vegIcons[1].getSize().x && Mouse.getPosition(window).y >= vegIcons[1].getPosition().y && Mouse.getPosition(window).y <= vegIcons[1].getPosition().y + vegIcons[1].getSize().y)
             {
                 returnValue = 1;
             }
@@ -69,10 +73,6 @@ public class BuyMenu extends RectangleShape
             else if(Mouse.getPosition(window).x >= vegIcons[3].getPosition().x && Mouse.getPosition(window).x <= vegIcons[3].getPosition().x + vegIcons[3].getSize().x && Mouse.getPosition(window).y >= vegIcons[3].getPosition().y && Mouse.getPosition(window).y <= vegIcons[3].getPosition().y + vegIcons[3].getSize().y)
             {
                 returnValue = 3;
-            }
-            else if(Mouse.getPosition(window).x >= vegIcons[4].getPosition().x && Mouse.getPosition(window).x <= vegIcons[4].getPosition().x + vegIcons[4].getSize().x && Mouse.getPosition(window).y >= vegIcons[4].getPosition().y && Mouse.getPosition(window).y <= vegIcons[4].getPosition().y + vegIcons[4].getSize().y)
-            {
-                returnValue = 4;
             }
         }
 
