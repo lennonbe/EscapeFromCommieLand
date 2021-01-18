@@ -33,6 +33,10 @@ public class Fields extends RectangleShape
     private int growthStatus = -1;
     private Texture fieldTexture = new Texture();
 
+    /**
+     * Constructor for Fields.
+     * @param size the size of the field
+     */
     public Fields(Vector2f size)
     {
         super(size);
@@ -40,6 +44,10 @@ public class Fields extends RectangleShape
         this.loadPathToRectangle("BoringGame", "DirtWet.png");
     }
 
+    /**
+     * Set the vegType based on the files.
+     * @param type type of veg
+     */
     public void setVegType(VegType type)
     {
         currentVegType = type;
@@ -51,6 +59,10 @@ public class Fields extends RectangleShape
         } 
     }
 
+    /**
+     * 
+     * @param newStatus
+     */
     public void setStatus(int newStatus)
     {
         if(newStatus > 6 || newStatus < 0)
