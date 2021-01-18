@@ -72,9 +72,11 @@ public class Game implements Observer
     private RectangleShape[] tomatosRectangle = new RectangleShape[7];
     private int carrotProgress = 0;
 
+    //Variables for keeping track of the menu status
     private boolean menuOpen = false;
     private BuyMenu menu;
 
+    //Variables to keep track of quantity of seeds of each type
     private int [] numSeeds = new int []{0, 0, 0, 0}; 
 
     /**
@@ -288,14 +290,6 @@ public class Game implements Observer
                 }
             }
         }
-
-        /*try {
-                
-            TimeUnit.MILLISECONDS.sleep(50);
-            
-        } catch (Exception e) {
-            //TODO: handle exception
-        }*/
     }
 
     public void detectClicks()

@@ -53,6 +53,11 @@ public class BuyMenu extends RectangleShape
         }
     }
 
+    /**
+     * Chooses what vegetable to buy.
+     * @param window the current game window for prespective
+     * @return the array index of the vegetables
+     */
     public int buyVeg(Window window)
     {
         int returnValue = -1;
@@ -80,6 +85,11 @@ public class BuyMenu extends RectangleShape
         return returnValue;
     }
 
+    /**
+     * Detects if the exitButton is clicked
+     * @param window current window the menu is in
+     * @return returns boolean value if the exit is clicked
+     */
     public boolean isExitClicked(Window window)
     {
         boolean flag = false;
@@ -103,16 +113,31 @@ public class BuyMenu extends RectangleShape
         return flag;
     }
 
+    /**
+     * returns the array of rectangles which serve as buttons
+     * @return array of rectangles which serve as buttons
+     */
     public RectangleShape[] getRectangleArray()
     {
         return vegIcons;
     }
 
+    /**
+     * returns the exit button
+     * @return the exitButton object
+     */
     public RectangleShape getExitButton()
     {
         return exitButton;
     }
 
+    /**
+     * Loads path in to the recatangles.
+     * @param directory
+     * @param file
+     * @param rectangle
+     * @param texture
+     */
     public void loadPathToRectangle(String directory, String file, RectangleShape rectangle, Texture texture)
     {
         Path path = FileSystems.getDefault().getPath(directory, file);

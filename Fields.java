@@ -114,8 +114,6 @@ public class Fields extends RectangleShape
                     clickFlag = true;
                 }
 
-                //System.out.println("Current field selected is " + selectedField + " and the clickFlag is " + clickFlag);
-
                 flag = true;
             }
             else
