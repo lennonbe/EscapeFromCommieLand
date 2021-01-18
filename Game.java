@@ -292,6 +292,9 @@ public class Game implements Observer
         }
     }
 
+    /**
+     * Detects the clicks on the specific fields.
+     */
     public void detectClicks()
     {
         if(menuOpen == false)
