@@ -8,12 +8,14 @@ import javax.sound.sampled.*;
  */
 public enum SoundEffect {
    BGM("AudioFile/Bad_Mood.wav"),               // Bad Mood BGM
+   BGM2("AudioFile/BGM_option2.wav"),              // Option 2 BGM
    BADWEATHER("AudioFile/Heavy_Rain_Bad_Weather.wav"), // Bad Weather
    CROPHARVEST("AudioFile/Crop_Harvest.wav"),          // Harvest The Crop
    CROPPLANT("AudioFile/Crop_Plant.wav"),              // Plant The Crop
    OPENINVENTORY("AudioFile/Open_Inventory.wav"),      // Open/Close The Inventory/Store
    PURCHASEITEM("AudioFile/Open_Store.wav"),           // Purchase The Item
    UNLOCKITEM("AudioFile/Unlock_New_Land_Option_1.wav"),        // Unlock New Item
+   UPGRADEITEM("AudioFile/Item_Upgrade.wav"),        // Unlock New Item
    FAILGUNSHOT("AudioFile/Gun_Shot_Fail.wav"),                  // Fail Condition - Gun Shot
    FAILPRISON("AudioFile/GameFail2.wav"),                       // Fail Condition - Sent To Prison
    FAILOTHER("AudioFile/GameFail.wav"),                         // Fail Condition - Other Condition
