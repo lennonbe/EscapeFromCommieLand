@@ -25,9 +25,13 @@ public class BuyMenu extends RectangleShape
     private Texture [] vegTextures = new Texture[4];
     private RectangleShape exitButton  = new RectangleShape();
     private Texture menuTexture;
+    private float yPosition;
 
-    private float yPosition;// = this.getPosition().y + this.getSize().y/2 - vegIconsSize.x;
-
+    /**
+     * Constructor for BuyMenu class.
+     * @param size the size of the menu
+     * @param window the window to insert the BuyMenu in
+     */
     public BuyMenu(Vector2f size, RenderWindow window)
     {
         super(size);
