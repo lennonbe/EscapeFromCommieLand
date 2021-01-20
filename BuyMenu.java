@@ -34,6 +34,7 @@ public class BuyMenu extends RectangleShape
      */
     public BuyMenu(Vector2f size, RenderWindow window)
     {
+        
         super(size);
         exitButton.setSize(new Vector2f(exitButtonSize,exitButtonSize)); 
 
