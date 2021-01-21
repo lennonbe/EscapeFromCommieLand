@@ -45,16 +45,21 @@ public class BuyMenu extends RectangleShape
 
         yPosition = this.getPosition().y + this.getSize().y/2 - vegIconsSize.x/2;
         int temp = (int)this.getPosition().x + 20;
-        for(int i = 0; i < 4; i++)
-        {
+
+        for(int i = 0; i < 4; i++) {
             vegIcons[i] = new RectangleShape(vegIconsSize);
             vegTextures[i] = new Texture();
 
             vegIcons[i].setPosition(new Vector2f(temp, yPosition));
-            loadPathToRectangle("BoringGame", "Shop.png", vegIcons[i], vegTextures[i]);
-
+            
             temp += (vegIconsSize.x + gap);
         }
+
+        //Temporary solution ---- It'll be changes once we have the seed icons made
+        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "coffee.png", vegIcons[0], vegTextures[0]);
+        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "seeds.png", vegIcons[1], vegTextures[1]);
+        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "sesame.png", vegIcons[2], vegTextures[2]);
+        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "soy.png", vegIcons[3], vegTextures[3]);
     }
 
     /**

@@ -19,10 +19,7 @@ import java.util.concurrent.TimeUnit;
  * This class is what will be called in the Driver class, and should hold all methods needed to 
  * load, spawn and play the game.
  */
-public class Game implements Observer 
-{
-
-    private final Clock gameTimer = Clock.getInstance(1000*1);
+public class Game {
 
     //Setting the environment variables
     private final int height = 864;//900; this is multiplied by 3
@@ -67,14 +64,12 @@ public class Game implements Observer
     //The Fields object array needed to draw all the fields around the shop
     private Fields [] farmFields = new Fields[25];
 
-    //FOR ANIMATIONS -- DELETE LATER
-    private Texture[] tomatosTexture = new Texture[7];
-    private RectangleShape[] tomatosRectangle = new RectangleShape[7];
-    private int carrotProgress = 0;
-
     //Variables for keeping track of the menu status
     private boolean menuOpen = false;
     private BuyMenu menu;
+
+    //ResourceMenu testing::::
+    private ResourceMenu resourceMenu;
 
     //Variables to keep track of quantity of seeds of each type
     private int [] numSeeds = new int []{0, 0, 0, 0}; 
@@ -92,21 +87,7 @@ public class Game implements Observer
         //Creates the BuyMenu based on window size.
         menu = new BuyMenu(new Vector2f(300,120), window);
 
-        //Adds this as an observer
-        gameTimer.addObserver(this);
-
-        //ANIMATION TESTING ---- THIS WILL BE DELETED LATER -------        
-
-        for(int n = 0; n < tomatosTexture.length; n++) {
-            tomatosTexture[n] = new Texture();
-            tomatosRectangle[n] = new RectangleShape();
-
-            loadPathToRectangle("BoringGame/Sprites/FruitVeg/Tomatos", "Tomatos" + (n+1) + ".png", tomatosRectangle[n], tomatosTexture[n]);
-            tomatosRectangle[n].setSize(fieldSize);
-            tomatosRectangle[n].setPosition(width/2 + fieldSizeInt/2, height/2 + fieldSizeInt/2);
-        }
-
-        //---------------------------------------------------------
+        resourceMenu = new ResourceMenu();
 
         //Limit the framerate
         window.setFramerateLimit(60);
@@ -325,9 +306,23 @@ public class Game implements Observer
         }
 
         window.draw(shop);
-        window.draw(tomatosRectangle[carrotProgress]);
         window.draw(farmer);
         window.draw(backround);
+        window.draw(resourceMenu);
+
+        //Draws the resource icons
+        RectangleShape[] arrayOfRectangles = resourceMenu.getRectangleArray();
+
+        for(RectangleShape i : arrayOfRectangles) {
+            window.draw(i);
+        }
+
+        //Draws the counters for each resource
+        Text[] arrayOfText = resourceMenu.getCounter();
+
+        for(Text t : arrayOfText) {
+            window.draw(t);
+        }
 
         /*
         Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
@@ -395,10 +390,9 @@ public class Game implements Observer
                     pause();
 
                     System.out.println("incrementing numSeeds " + temp + " value is " + numSeeds[temp]);
+                    resourceMenu.increment(temp);
                 }
             }
-
-            
         }
     }
 
@@ -439,13 +433,5 @@ public class Game implements Observer
         catch (Exception e) {}
 
         rectangle.setTexture(texture);
-    }
-
-    public void update(Observable o, Object obj) {
-        if(carrotProgress == 6) {
-            carrotProgress = 0;
-        } else {
-            carrotProgress++;
-        }
     }
 }
