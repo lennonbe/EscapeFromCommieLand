@@ -1,6 +1,15 @@
+package BoringGame;
+
 import java.io.*;
 import java.net.URL;
 import javax.sound.sampled.*;
+import java.util.Observable;
+import java.util.Observer;
+import org.jsfml.window.*;
+import org.jsfml.window.event.*;
+import org.jsfml.graphics.*;
+import org.jsfml.system.Vector2f;
+import org.jsfml.system.Vector2i;
 
 /**
  * The Options Listed For Playing

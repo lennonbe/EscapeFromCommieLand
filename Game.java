@@ -83,6 +83,7 @@ public class Game {
         //Create the window
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
         window.setSize(new Vector2i(width, height));
+       
 
         //Creates the BuyMenu based on window size.
         menu = new BuyMenu(new Vector2f(300,120), window);
@@ -117,6 +118,9 @@ public class Game {
 
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
+        SoundEffect.init();
+        SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
+        SoundEffect.BGM.play();  //testing the audio play for 1 time
     }
 
     /**
