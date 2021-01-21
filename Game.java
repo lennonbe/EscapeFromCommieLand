@@ -137,9 +137,10 @@ public class Game implements Observer
 
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
+        
         SoundEffect.init();
         SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
-        SoundEffect.BGM.play();  //testing the audio play for 1 time
+        SoundEffect.BGM2.play();  //testing the audio play for 1 time
     }
 
     /**
@@ -307,6 +308,7 @@ public class Game implements Observer
             {
                 if(farmFields[i].isClicked(window) && i != 12) // cause field 12 is behind the shop TODO: Remove field12 safely
                 {
+                    SoundEffect.CROPPLANT.play();  //testing the audio play for 1 time            ADDED 1
                     System.out.println("Field " + i + "is clicked");
                     System.out.println("Current field selected is " + farmFields[i].selectedField + " and the clickFlag is " + farmFields[i].clickFlag);
                     pause();
@@ -340,6 +342,7 @@ public class Game implements Observer
         if(shop.isClicked(window) == true)
         {
             menuOpen = true;
+            SoundEffect.OPENINVENTORY.play();  //testing the audio play for 1 time
             pause();
         }
 
@@ -357,6 +360,7 @@ public class Game implements Observer
             if(menu.isExitClicked(window) == true)
             {
                 menuOpen = false;
+                SoundEffect.OPENINVENTORY.play();  //testing the audio play for 1 time
                 pause();
             }
         }

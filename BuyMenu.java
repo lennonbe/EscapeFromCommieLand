@@ -72,18 +72,22 @@ public class BuyMenu extends RectangleShape
             if(Mouse.getPosition(window).x >= vegIcons[0].getPosition().x && Mouse.getPosition(window).x <= vegIcons[0].getPosition().x + vegIcons[0].getSize().x && Mouse.getPosition(window).y >= vegIcons[0].getPosition().y && Mouse.getPosition(window).y <= vegIcons[0].getPosition().y + vegIcons[0].getSize().y)
             {
                 returnValue = 0;
+                SoundEffect.PURCHASEITEM.play();  //testing the audio play for 1 time
             }
             else if(Mouse.getPosition(window).x >= vegIcons[1].getPosition().x && Mouse.getPosition(window).x <= vegIcons[1].getPosition().x + vegIcons[1].getSize().x && Mouse.getPosition(window).y >= vegIcons[1].getPosition().y && Mouse.getPosition(window).y <= vegIcons[1].getPosition().y + vegIcons[1].getSize().y)
             {
                 returnValue = 1;
+                SoundEffect.PURCHASEITEM.play();  //testing the audio play for 1 time
             }
             else if(Mouse.getPosition(window).x >= vegIcons[2].getPosition().x && Mouse.getPosition(window).x <= vegIcons[2].getPosition().x + vegIcons[2].getSize().x && Mouse.getPosition(window).y >= vegIcons[2].getPosition().y && Mouse.getPosition(window).y <= vegIcons[2].getPosition().y + vegIcons[2].getSize().y)
             {
                 returnValue = 2;
+                SoundEffect.PURCHASEITEM.play();  //testing the audio play for 1 time
             }
             else if(Mouse.getPosition(window).x >= vegIcons[3].getPosition().x && Mouse.getPosition(window).x <= vegIcons[3].getPosition().x + vegIcons[3].getSize().x && Mouse.getPosition(window).y >= vegIcons[3].getPosition().y && Mouse.getPosition(window).y <= vegIcons[3].getPosition().y + vegIcons[3].getSize().y)
             {
                 returnValue = 3;
+                SoundEffect.PURCHASEITEM.play();  //testing the audio play for 1 time
             }
         }
 
