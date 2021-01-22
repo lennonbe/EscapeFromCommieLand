@@ -27,31 +27,7 @@ public class Shop extends RectangleShape
     {
         super(size);
 
-        this.loadPathToRectangle("BoringGame", "Shop.png");
-    }
-
-    /**
-     * Method which allows to loadn in .PNG files into sprites
-     * @param directory the directory of the file you wish to load
-     * @param file the file you wish to load
-     * @param rectangle the rectangle you wish to have this file drawn on
-     * @param texture a needed texture for the rectangle, making it drawable
-     */
-    public void loadPathToRectangle(String directory, String file)
-    {
-        Path path = FileSystems.getDefault().getPath(directory, file);
-        
-        try {
-            BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-
-        } catch (Exception e) {}
-
-        try {
-            fieldTexture.loadFromFile(path);
-        } 
-        catch (Exception e) {}
-
-        this.setTexture(fieldTexture);
+        Loader.loadPathToRectangle("BoringGame", "Shop.png", this, fieldTexture);
     }
 
     /**

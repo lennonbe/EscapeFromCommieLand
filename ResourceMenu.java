@@ -1,28 +1,26 @@
 package BoringGame;
 
-import org.jsfml.window.*;
-import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Vector;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.charset.StandardCharsets;
-import java.io.*;
 
+/**
+ * Class representing the resource menu in the top left of the screen.
+ * This class implements the functionality for selecting resources,
+ * and shows changes in the resources when new ones are aquired or lost.
+ */
 public class ResourceMenu extends RectangleShape {
     
     //Inherit attributes of the ResoureMenu are final
     private final static int width = 550;
     private final static int height = 90;
-    private final Font font = new Font();
     private final int numberOfIcons = 5;
     private final int iconWidth = 50;
     private final int iconHeight = 50;
     private final int gap = 20;
-
+    
+    //More attributes about the resource menu
+    private Font font;
+    private int selectedIndex;
     private Vector2f seedIconSize;
     private RectangleShape resuourceMenuRectange;
     private Texture resuourceMenuTexture;
@@ -32,7 +30,9 @@ public class ResourceMenu extends RectangleShape {
     private int[] resourceCounter;
     private Text[] counterText;
 
-    //Initializes the resource menu rectangle 
+    /**
+     * Initializes the resource menu attributes
+     */
     public ResourceMenu() {
         //Sets up this rectangle, so that it can be drawn with the right parameter
         super(new Vector2f(width, height));
@@ -40,13 +40,15 @@ public class ResourceMenu extends RectangleShape {
         this.setPosition(0, 0);
         this.setFillColor(new Color(128,128,128));
 
-        //Loads the font used for the counter
-        try {
-            font.loadFromFile(Paths.get("BoringGame/AmericanCaptain.ttf"));
-        } catch(Exception e) { System.out.println("Error loading font"); }
+        //Loads in the font
+        font = new Font();
+        Loader.loadPathToFont(font, "BoringGame/AmericanCaptain.ttf");
 
         //Sets the size of each icon
         seedIconSize = new Vector2f(50, 50);
+
+        //Initially no resource is selected, therefore index set to an invalid value
+        selectedIndex = -1;
 
         //Initializes the arrays for the menu 
         seedIcons = new RectangleShape[numberOfIcons];
@@ -54,7 +56,11 @@ public class ResourceMenu extends RectangleShape {
         numberDisplayBackground = new RectangleShape[numberOfIcons];
         counterText = new Text[numberOfIcons];
         
-        //Sets up all images and the texts
+        /**
+         * This for loop positions the icons equidistant from eachother,
+         * with the 'display' (black rectangles) inbetween.
+         * Then loads in the icons and sets their attributes.
+         */
         for(int i = 0; i < numberOfIcons; i++) {
             int iconXPosition = gap + (iconWidth*2) * i; 
 
@@ -70,18 +76,17 @@ public class ResourceMenu extends RectangleShape {
 
             counterText[i] = new Text("0", font, 50);
             counterText[i].setPosition(iconXPosition + iconWidth, 20);
-            
-        }
-            
 
-        //Temporary solution ---- It'll be changes once we have the seed icons made
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "coffee.png", seedIcons[0], seedIconsTexture[0]);
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "seeds.png", seedIcons[1], seedIconsTexture[1]);
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "sesame.png", seedIcons[2], seedIconsTexture[2]);
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "soy.png", seedIcons[3], seedIconsTexture[3]);
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "dollar.png", seedIcons[4], seedIconsTexture[4]);
+            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
+        }
     }
 
+    /**
+     * This function adds all the JSFML Rectangles used to draw the resource menu into one array and returns it.
+     * This is useful in the class that implements this menu, so that the rectangles can be drawn onto the screen
+     * 
+     * @return The array of rectangles that make up the menu
+     */
     public RectangleShape[] getRectangleArray() {
         RectangleShape[] result = new RectangleShape[numberOfIcons*2];
 
@@ -91,31 +96,64 @@ public class ResourceMenu extends RectangleShape {
         return result;
     }
 
+    /**
+     * This function returns the array of JSFML Text, these are used to display the number of resources in the menu.
+     * @return Array of Text
+     */
     public Text[] getCounter() {
         return counterText;
     }
-
-    //THIS WILL BE USED ONCE THE RESOURCE SPRITE IS DONE
-    public void loadPathToRectangle(String directory, String file, RectangleShape rectangle, Texture texture)
-    {
-        Path path = FileSystems.getDefault().getPath(directory, file);
-        
-        try {
-            BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-
-        } catch (Exception e) {}
-
-        try {
-            texture.loadFromFile(path);
-        } 
-        catch (Exception e) {}
-
-        rectangle.setTexture(texture);
-    }
-
-    //Increments the resource of the given index 
+    
+    
+    /**
+     * Function called everytime a resource was bought in the shop.
+     * Used to increment the text counter.
+     * @param index The index of the item bought
+     */
     public void increment(int index) {
         int currentVal = Integer.parseInt(counterText[index].getString());
         counterText[index].setString(String.valueOf(currentVal + 1));
+    }
+    
+    /**
+     * Called everytime a mouse click occurs.
+     * Checks if any of the Icon in the resource menu have been clicked,
+     * if yes, then the corresponding one is marked as selected and it's icon is changed.
+     * If there already was one selected, it is marked as unselected and it's icon is changed.
+     */
+    public void selectIcon(float mouseX, float mouseY) {
+        int index = -1;
+        
+        for(int i = 0; i < seedIcons.length; i++) {
+            int iconXPosition = gap + (iconWidth*2) * i; 
+            int iconYPosition = gap;
+            
+            if(mouseX > iconXPosition && mouseX < iconXPosition + iconWidth &&
+            mouseY > iconYPosition && mouseY < iconYPosition + iconHeight) 
+            {
+                index = i;
+                System.out.println("Index = " + i);
+                System.out.println("Selected = " + selectedIndex);
+            }
+        }
+        
+        //If the user click on a valid resource in the menu, this selects it and changes the icon to selected
+        if(index != -1) {
+            //If there aren't any already selected icons
+            if(selectedIndex != -1) {
+                Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
+            }
+
+            selectedIndex = index;
+            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
+        }
+    }
+
+    /**
+     * Returns the index of the resource that is currently selected
+     * @return index of the resource that is currently selected
+     */
+    public int getSelectedIndex() {
+        return selectedIndex;
     }
 }

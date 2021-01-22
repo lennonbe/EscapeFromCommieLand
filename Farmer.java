@@ -1,7 +1,5 @@
 package BoringGame;
 
-import java.util.Observable;
-import java.util.Observer;
 import org.jsfml.window.*;
 import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;

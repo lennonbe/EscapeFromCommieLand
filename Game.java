@@ -1,7 +1,5 @@
 package BoringGame;
 
-import java.util.Observable;
-import java.util.Observer;
 import org.jsfml.window.*;
 import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
@@ -93,7 +91,7 @@ public class Game {
         //Limit the framerate
         window.setFramerateLimit(60);
 
-        loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
+        Loader.loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
 
         int x = 0;
         int y = 0;
@@ -349,7 +347,7 @@ public class Game {
 
             window.draw(menu.getExitButton());
 
-            if(menu.isExitClicked(window) == true)
+            if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
             {
                 menuOpen = false;
                 pause();
@@ -378,25 +376,27 @@ public class Game {
             {
                 if(event.type == Event.Type.CLOSED) 
                 {
-                //The user pressed the close button
-                window.close();
+                    //The user pressed the close button
+                    window.close();
+                }
+
+                //Checks if the mouse button was pressed
+                if(Mouse.isButtonPressed(Mouse.Button.LEFT)) {
+
+                    int indexOfClickedSeed = menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+    
+                    if(indexOfClickedSeed != -1 && menuOpen == true)
+                    {
+                        numSeeds[indexOfClickedSeed]++;
+    
+                        System.out.println("incrementing numSeeds " + indexOfClickedSeed + " value is " + numSeeds[indexOfClickedSeed]);
+                        resourceMenu.increment(indexOfClickedSeed);
+                    }
+
+                    resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                 }
             }
-
-            if(menu.buyVeg(window) != -1 && menuOpen == true)
-            {
-                int temp = menu.buyVeg(window);
-
-                if(temp != -1)
-                {
-                    numSeeds[temp]++;
-
-                    pause();
-
-                    System.out.println("incrementing numSeeds " + temp + " value is " + numSeeds[temp]);
-                    resourceMenu.increment(temp);
-                }
-            }
+            
         }
     }
 
@@ -405,37 +405,8 @@ public class Game {
      */
     public void pause()
     {
-        try 
-        {
+        try {
             TimeUnit.MILLISECONDS.sleep(250); 
-        } 
-        catch (Exception e) 
-        {
-            //TODO: handle exception
-        }
-    }
-
-    /**
-     * Method which allows to loadn in .PNG files into sprites
-     * @param directory the directory of the file you wish to load
-     * @param file the file you wish to load
-     * @param rectangle the rectangle you wish to have this file drawn on
-     * @param texture a needed texture for the rectangle, making it drawable
-     */
-    public void loadPathToRectangle(String directory, String file, RectangleShape rectangle, Texture texture)
-    {
-        Path path = FileSystems.getDefault().getPath(directory, file);
-        
-        try {
-            BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-
         } catch (Exception e) {}
-
-        try {
-            texture.loadFromFile(path);
-        } 
-        catch (Exception e) {}
-
-        rectangle.setTexture(texture);
     }
 }

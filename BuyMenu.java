@@ -1,18 +1,8 @@
 package BoringGame;
 
-import java.util.Observable;
-import java.util.Observer;
 import org.jsfml.window.*;
-import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
-import org.jsfml.system.Vector2i;
-import java.nio.file.Path;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.charset.StandardCharsets;
-import java.io.*;
-import java.util.concurrent.TimeUnit;
 
 public class BuyMenu extends RectangleShape
 {
@@ -54,13 +44,10 @@ public class BuyMenu extends RectangleShape
             vegIcons[i].setPosition(new Vector2f(temp, yPosition));
             
             temp += (vegIconsSize.x + gap);
+
+            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
         }
 
-        //Temporary solution ---- It'll be changes once we have the seed icons made
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "coffee.png", vegIcons[0], vegTextures[0]);
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "seeds.png", vegIcons[1], vegTextures[1]);
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "sesame.png", vegIcons[2], vegTextures[2]);
-        loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "soy.png", vegIcons[3], vegTextures[3]);
     }
 
     /**
@@ -68,29 +55,27 @@ public class BuyMenu extends RectangleShape
      * @param window the current game window for prespective
      * @return the array index of the vegetables
      */
-    public int buyVeg(Window window)
+    public int buyVeg(float mouseX, float mouseY)
     {
         int returnValue = -1;
 
-        if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+        if(mouseX >= vegIcons[0].getPosition().x && mouseX <= vegIcons[0].getPosition().x + vegIcons[0].getSize().x && mouseY >= vegIcons[0].getPosition().y && mouseY <= vegIcons[0].getPosition().y + vegIcons[0].getSize().y)
         {
-            if(Mouse.getPosition(window).x >= vegIcons[0].getPosition().x && Mouse.getPosition(window).x <= vegIcons[0].getPosition().x + vegIcons[0].getSize().x && Mouse.getPosition(window).y >= vegIcons[0].getPosition().y && Mouse.getPosition(window).y <= vegIcons[0].getPosition().y + vegIcons[0].getSize().y)
-            {
-                returnValue = 0;
-            }
-            else if(Mouse.getPosition(window).x >= vegIcons[1].getPosition().x && Mouse.getPosition(window).x <= vegIcons[1].getPosition().x + vegIcons[1].getSize().x && Mouse.getPosition(window).y >= vegIcons[1].getPosition().y && Mouse.getPosition(window).y <= vegIcons[1].getPosition().y + vegIcons[1].getSize().y)
-            {
-                returnValue = 1;
-            }
-            else if(Mouse.getPosition(window).x >= vegIcons[2].getPosition().x && Mouse.getPosition(window).x <= vegIcons[2].getPosition().x + vegIcons[2].getSize().x && Mouse.getPosition(window).y >= vegIcons[2].getPosition().y && Mouse.getPosition(window).y <= vegIcons[2].getPosition().y + vegIcons[2].getSize().y)
-            {
-                returnValue = 2;
-            }
-            else if(Mouse.getPosition(window).x >= vegIcons[3].getPosition().x && Mouse.getPosition(window).x <= vegIcons[3].getPosition().x + vegIcons[3].getSize().x && Mouse.getPosition(window).y >= vegIcons[3].getPosition().y && Mouse.getPosition(window).y <= vegIcons[3].getPosition().y + vegIcons[3].getSize().y)
-            {
-                returnValue = 3;
-            }
+            returnValue = 0;
         }
+        else if(mouseX >= vegIcons[1].getPosition().x && mouseX <= vegIcons[1].getPosition().x + vegIcons[1].getSize().x && mouseY >= vegIcons[1].getPosition().y && mouseY <= vegIcons[1].getPosition().y + vegIcons[1].getSize().y)
+        {
+            returnValue = 1;
+        }
+        else if(mouseX >= vegIcons[2].getPosition().x && mouseX <= vegIcons[2].getPosition().x + vegIcons[2].getSize().x && mouseY >= vegIcons[2].getPosition().y && mouseY <= vegIcons[2].getPosition().y + vegIcons[2].getSize().y)
+        {
+            returnValue = 2;
+        }
+        else if(mouseX >= vegIcons[3].getPosition().x && mouseX <= vegIcons[3].getPosition().x + vegIcons[3].getSize().x && mouseY >= vegIcons[3].getPosition().y && mouseY <= vegIcons[3].getPosition().y + vegIcons[3].getSize().y)
+        {
+            returnValue = 3;
+        }
+        
 
         return returnValue;
     }
@@ -100,13 +85,13 @@ public class BuyMenu extends RectangleShape
      * @param window current window the menu is in
      * @return returns boolean value if the exit is clicked
      */
-    public boolean isExitClicked(Window window)
+    public boolean isExitClicked(float mouseX, float mouseY)
     {
         boolean flag = false;
 
         if(Mouse.isButtonPressed(Mouse.Button.LEFT))
         {
-            if(Mouse.getPosition(window).x >= exitButton.getPosition().x && Mouse.getPosition(window).x <= exitButton.getPosition().x + exitButton.getSize().x && Mouse.getPosition(window).y >= exitButton.getPosition().y && Mouse.getPosition(window).y <= exitButton.getPosition().y + exitButton.getSize().y)
+            if(mouseX >= exitButton.getPosition().x && mouseX <= exitButton.getPosition().x + exitButton.getSize().x && mouseY >= exitButton.getPosition().y && mouseY <= exitButton.getPosition().y + exitButton.getSize().y)
             {
                 flag = true;
             }
@@ -139,29 +124,5 @@ public class BuyMenu extends RectangleShape
     public RectangleShape getExitButton()
     {
         return exitButton;
-    }
-
-    /**
-     * Loads path in to the recatangles.
-     * @param directory
-     * @param file
-     * @param rectangle
-     * @param texture
-     */
-    public void loadPathToRectangle(String directory, String file, RectangleShape rectangle, Texture texture)
-    {
-        Path path = FileSystems.getDefault().getPath(directory, file);
-        
-        try {
-            BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-
-        } catch (Exception e) {}
-
-        try {
-            texture.loadFromFile(path);
-        } 
-        catch (Exception e) {}
-
-        rectangle.setTexture(texture);
     }
 }
