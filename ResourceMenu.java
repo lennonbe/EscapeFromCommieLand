@@ -42,7 +42,7 @@ public class ResourceMenu extends RectangleShape {
 
         //Loads in the font
         font = new Font();
-        Loader.loadPathToFont(font, "BoringGame/AmericanCaptain.ttf");
+        Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
 
         //Sets the size of each icon
         seedIconSize = new Vector2f(50, 50);
