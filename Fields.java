@@ -30,6 +30,7 @@ public class Fields extends RectangleShape implements Observer
     //Will now call the update method every 5000 seconds
     private Clock clock = Clock.getInstance(2000);
     protected boolean growing = false;
+    protected boolean readyToCollect = false;
     private String vegType = "";
     private int growthStatus = -1;
 
@@ -165,6 +166,7 @@ public class Fields extends RectangleShape implements Observer
             {
                 //growthStatus = 1;
                 this.growing = false;
+                this.readyToCollect = true;
             }
 
         }

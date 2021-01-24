@@ -286,9 +286,18 @@ public class Game {
             {
                 if(farmFields[i].isClicked(window) && i != 12) // cause field 12 is behind the shop TODO: Remove field12 safely
                 {
-                    System.out.println("Field " + i + "is clicked");
-                    System.out.println("Current field selected is " + farmFields[i].selectedField + " and the clickFlag is " + farmFields[i].clickFlag);
-                    pause();
+                    if(farmFields[i].readyToCollect == false)
+                    {
+                        System.out.println("Field " + i + "is clicked");
+                        System.out.println("Current field selected is " + farmFields[i].selectedField + " and the clickFlag is " + farmFields[i].clickFlag);
+                        pause();
+                    }
+                    else
+                    {
+                        resourceMenu.increment(4);
+                        farmFields[i].loadPathToRectangle("BoringGame", "DirtWet.png");
+                        pause();
+                    }
                 }
             }
         }
@@ -375,7 +384,7 @@ public class Game {
             this.selectSeedType();
             this.drawObjects();
 
-            System.out.println("Selected field is" + farmFields[1].getSelectedField());
+            //System.out.println("Selected field is" + farmFields[1].getSelectedField());
             
             //Handle events
             for(Event event : window.pollEvents()) 
