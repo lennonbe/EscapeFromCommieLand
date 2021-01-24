@@ -416,9 +416,14 @@ public class Game {
      */
     public void pause()
     {
-        try {
+        try 
+        {
             TimeUnit.MILLISECONDS.sleep(250); 
-        } catch (Exception e) {}
+        } 
+        catch (Exception e) 
+        {
+            
+        }
     }
 
     public void selectSeedType()

@@ -37,7 +37,8 @@ public class BuyMenu extends RectangleShape
         yPosition = this.getPosition().y + this.getSize().y/2 - vegIconsSize.x/2;
         int temp = (int)this.getPosition().x + 20;
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 4; i++) 
+        {
             vegIcons[i] = new RectangleShape(vegIconsSize);
             vegTextures[i] = new Texture();
 

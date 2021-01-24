@@ -21,7 +21,7 @@ public class ResourceMenu extends RectangleShape
     
     //More attributes about the resource menu
     private Font font;
-    private int selectedIndex = -1;
+    private static int selectedIndex = -1;
     private Vector2f seedIconSize;
     private RectangleShape resuourceMenuRectange;
     private Texture resuourceMenuTexture;
@@ -147,15 +147,34 @@ public class ResourceMenu extends RectangleShape
         //If the user click on a valid resource in the menu, this selects it and changes the icon to selected
         if(index != -1) 
         {
-            //If there aren't any already selected icons
+            //If there is an already selected icon
             if(selectedIndex != -1) 
             {
-                Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
+                if(selectedIndex == index)
+                {
+                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);   
+                    selectedIndex = -1;  
+                    System.out.println("Selected = " + selectedIndex);           
+                }
+                else
+                {
+                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
+                    System.out.println("hello general kenobi");
+                    selectedIndex = index;
+                    System.out.println("Selected = " + selectedIndex);
+                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
+                }
+            }
+            else //i.e there are no selected icon
+            {
+                selectedIndex = index;
+                System.out.println("Selected = " + selectedIndex);
+                Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
             }
             
-            selectedIndex = index;
+            /*selectedIndex = index;
             System.out.println("Selected = " + selectedIndex);
-            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
+            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);*/
         }
 
     }
