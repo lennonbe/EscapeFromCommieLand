@@ -294,6 +294,7 @@ public class Game {
         }
     }
 
+    
     /**
      * drawObjects method which is responsible for drawing all the objects,
      * this includes sprites, rectangles and the backround.
@@ -301,62 +302,64 @@ public class Game {
     public void drawObjects()
     {
         //window.draw(backround);
-
+        
         for(int i = 0; i < farmFields.length; i++)
         {
             window.draw(farmFields[i]);
         }
-
+        
         window.draw(shop);
         window.draw(farmer);
         window.draw(backround);
         window.draw(resourceMenu);
-
+        
         //Draws the resource icons
         RectangleShape[] arrayOfRectangles = resourceMenu.getRectangleArray();
-
-        for(RectangleShape i : arrayOfRectangles) {
+        
+        for(RectangleShape i : arrayOfRectangles) 
+        {
             window.draw(i);
         }
-
+        
         //Draws the counters for each resource
         Text[] arrayOfText = resourceMenu.getCounter();
-
-        for(Text t : arrayOfText) {
+        
+        for(Text t : arrayOfText) 
+        {
             window.draw(t);
         }
-
+        
         /*
         Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
         Right now doesnt do much but still a good starting point. 
         */
-        if(shop.isClicked(window) == true)
+        if(shop.isClicked(window) == true && menuOpen == false)
         {
             menuOpen = true;
             pause();
         }
-
+        
         if(menuOpen == true)
         {
             window.draw(menu);
-
+            
             for(int i = 0; i < 4; i++)
             {
                 window.draw(menu.getRectangleArray()[i]);
             }
-
+            
             window.draw(menu.getExitButton());
-
+            
             if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
             {
                 menuOpen = false;
                 pause();
             }
         }
-
+        
         window.display();
     }
-
+    
     /**
      * Method which contains the while loop and calls all the other methods responsible for running the game (i.e movement, drawObjects, etc...)
      */
@@ -366,11 +369,12 @@ public class Game {
         {
             //Fill the window with red
             window.clear(new Color(50,20,20));
-
+            
             this.movement();
             this.detectClicks();
+            this.selectSeedType();
             this.drawObjects();
-
+            
             //Handle events
             for(Event event : window.pollEvents()) 
             {
@@ -379,27 +383,34 @@ public class Game {
                     //The user pressed the close button
                     window.close();
                 }
-
+                
                 //Checks if the mouse button was pressed
-                if(Mouse.isButtonPressed(Mouse.Button.LEFT)) {
-
+                if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+                {
+                    resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     int indexOfClickedSeed = menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-    
+                    
                     if(indexOfClickedSeed != -1 && menuOpen == true)
                     {
                         numSeeds[indexOfClickedSeed]++;
-    
+                        
                         System.out.println("incrementing numSeeds " + indexOfClickedSeed + " value is " + numSeeds[indexOfClickedSeed]);
                         resourceMenu.increment(indexOfClickedSeed);
+                        pause();
                     }
+                    
+                    //resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                }
 
-                    resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                if(resourceMenu.getSelectedIndex() != -1 && farmFields[1].getSelectedField() != null)
+                {
+                    farmFields[1].getSelectedField().setGrowing(true);
                 }
             }
             
         }
     }
-
+    
     /**
      * Slows down the game by sleeping for 1/4 of a second
      */
@@ -408,5 +419,30 @@ public class Game {
         try {
             TimeUnit.MILLISECONDS.sleep(250); 
         } catch (Exception e) {}
+    }
+
+    public void selectSeedType()
+    {
+        Fields temp = farmFields[1].getSelectedField();
+        if(temp != null)
+        {
+            if(resourceMenu.getSelectedIndex() == 0)
+            {
+                temp.setVegType(0);
+            }
+            else if(resourceMenu.getSelectedIndex() == 1)
+            {
+                temp.setVegType(1);
+            }
+            else if(resourceMenu.getSelectedIndex() == 2)
+            {
+                temp.setVegType(2);
+            }
+            else if(resourceMenu.getSelectedIndex() == 3)
+            {
+                temp.setVegType(3);
+            }
+
+        }
     }
 }

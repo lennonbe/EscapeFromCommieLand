@@ -4,6 +4,9 @@ import java.util.Observable;
 import java.util.Observer;
 import org.jsfml.window.*;
 import org.jsfml.window.event.*;
+
+import BoringGame.Clock;
+
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
@@ -13,25 +16,22 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class Fields extends RectangleShape
+
+public class Fields extends RectangleShape implements Observer
 {
-    public final int[] growthPhases = new int[]{0,1,2,3,4,5,6};
+    private Texture fieldTexture = new Texture();
     protected static boolean clickFlag = false;
     protected static Fields selectedField = null;
-
-    public enum VegType 
-    {
-        Carrots,
-        Cauliflower,
-        Tomatos,
-        Sweetcorn
-    }
-
-    private VegType currentVegType = null;
+    
+    //Will now call the update method every 5000 seconds
+    private Clock clock = Clock.getInstance(2000);
+    private boolean growing = false;
+    private String vegType = "";
     private int growthStatus = -1;
-    private Texture fieldTexture = new Texture();
 
     /**
      * Constructor for Fields.
@@ -42,40 +42,44 @@ public class Fields extends RectangleShape
         super(size);
 
         this.loadPathToRectangle("BoringGame", "DirtWet.png");
+
+        clock.addObserver(this);
+    }
+
+    public Fields getSelectedField()
+    {
+        return selectedField;
     }
 
     /**
      * Set the vegType based on the files.
      * @param type type of veg
      */
-    public void setVegType(VegType type)
+    public void setVegType(int i)
     {
-        currentVegType = type;
-        growthStatus = 0;
-
-        if(currentVegType != null)
+        if(i == 0)
         {
-            this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + currentVegType.name(), currentVegType.name() + "1");
+            vegType = "Hemp";
+        }
+        else if(i == 1)
+        {
+            vegType = "Carrot";
+        }
+        else if(i == 2)
+        {
+            vegType = "Cauliflower";
+        }
+        else if(i == 3)
+        {
+            vegType = "Chilli";
+        }
+
+        if(vegType != "" && growing == false)
+        {
+            this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + vegType, vegType + "1.png");
+            this.growthStatus = 1;
+            this.growing = true;
         } 
-    }
-
-    /**
-     * 
-     * @param newStatus
-     */
-    public void setStatus(int newStatus)
-    {
-        if(newStatus > 6 || newStatus < 0)
-        {
-            System.out.println("ERROR - INVALID newStatus variable");
-        }
-        else
-        {
-            if(currentVegType != null && growthStatus != -1)
-            {
-                this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + currentVegType.name(), currentVegType.name() + growthStatus);
-            }            
-        }
     }
 
     /**
@@ -139,5 +143,34 @@ public class Fields extends RectangleShape
         }
 
         return flag;
+    }
+
+    public void update(Observable clock, Object o)
+    {
+        if(this.growing == true)
+        {
+            System.out.println("hi, im happening" + growthStatus + this.selectedField);
+            this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + this.vegType, this.vegType + growthStatus + ".png");
+    
+            if(growthStatus < 8)
+            {
+                growthStatus++;
+            }
+            else
+            {
+                //growthStatus = 1;
+                this.growing = false;
+            }
+
+        }
+    }
+
+    /**
+     * Sets the growing variable, which decided if the plant is animated to grow every x seconds.
+     * @param bool
+     */
+    public void setGrowing(boolean bool)
+    {
+        growing = bool;
     }
 }

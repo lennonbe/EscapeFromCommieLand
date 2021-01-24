@@ -8,7 +8,8 @@ import org.jsfml.system.Vector2f;
  * This class implements the functionality for selecting resources,
  * and shows changes in the resources when new ones are aquired or lost.
  */
-public class ResourceMenu extends RectangleShape {
+public class ResourceMenu extends RectangleShape 
+{
     
     //Inherit attributes of the ResoureMenu are final
     private final static int width = 550;
@@ -20,7 +21,7 @@ public class ResourceMenu extends RectangleShape {
     
     //More attributes about the resource menu
     private Font font;
-    private int selectedIndex;
+    private int selectedIndex = -1;
     private Vector2f seedIconSize;
     private RectangleShape resuourceMenuRectange;
     private Texture resuourceMenuTexture;
@@ -29,11 +30,13 @@ public class ResourceMenu extends RectangleShape {
     private RectangleShape[] numberDisplayBackground;
     private int[] resourceCounter;
     private Text[] counterText;
+    private boolean isSelected = false;
 
     /**
      * Initializes the resource menu attributes
      */
-    public ResourceMenu() {
+    public ResourceMenu() 
+    {
         //Sets up this rectangle, so that it can be drawn with the right parameter
         super(new Vector2f(width, height));
 
@@ -61,7 +64,8 @@ public class ResourceMenu extends RectangleShape {
          * with the 'display' (black rectangles) inbetween.
          * Then loads in the icons and sets their attributes.
          */
-        for(int i = 0; i < numberOfIcons; i++) {
+        for(int i = 0; i < numberOfIcons; i++) 
+        {
             int iconXPosition = gap + (iconWidth*2) * i; 
 
             numberDisplayBackground[i] = new RectangleShape(new Vector2f(iconWidth, iconHeight));
@@ -87,7 +91,8 @@ public class ResourceMenu extends RectangleShape {
      * 
      * @return The array of rectangles that make up the menu
      */
-    public RectangleShape[] getRectangleArray() {
+    public RectangleShape[] getRectangleArray() 
+    {
         RectangleShape[] result = new RectangleShape[numberOfIcons*2];
 
         System.arraycopy(seedIcons, 0, result, 0, numberOfIcons);
@@ -100,7 +105,8 @@ public class ResourceMenu extends RectangleShape {
      * This function returns the array of JSFML Text, these are used to display the number of resources in the menu.
      * @return Array of Text
      */
-    public Text[] getCounter() {
+    public Text[] getCounter() 
+    {
         return counterText;
     }
     
@@ -110,7 +116,8 @@ public class ResourceMenu extends RectangleShape {
      * Used to increment the text counter.
      * @param index The index of the item bought
      */
-    public void increment(int index) {
+    public void increment(int index) 
+    {
         int currentVal = Integer.parseInt(counterText[index].getString());
         counterText[index].setString(String.valueOf(currentVal + 1));
     }
@@ -121,39 +128,44 @@ public class ResourceMenu extends RectangleShape {
      * if yes, then the corresponding one is marked as selected and it's icon is changed.
      * If there already was one selected, it is marked as unselected and it's icon is changed.
      */
-    public void selectIcon(float mouseX, float mouseY) {
+    public void selectIcon(float mouseX, float mouseY) 
+    {
         int index = -1;
         
-        for(int i = 0; i < seedIcons.length; i++) {
+        for(int i = 0; i < seedIcons.length; i++) 
+        {
             int iconXPosition = gap + (iconWidth*2) * i; 
             int iconYPosition = gap;
             
-            if(mouseX > iconXPosition && mouseX < iconXPosition + iconWidth &&
-            mouseY > iconYPosition && mouseY < iconYPosition + iconHeight) 
+            if(mouseX > iconXPosition && mouseX < iconXPosition + iconWidth && mouseY > iconYPosition && mouseY < iconYPosition + iconHeight) 
             {
                 index = i;
                 System.out.println("Index = " + i);
-                System.out.println("Selected = " + selectedIndex);
             }
         }
         
         //If the user click on a valid resource in the menu, this selects it and changes the icon to selected
-        if(index != -1) {
+        if(index != -1) 
+        {
             //If there aren't any already selected icons
-            if(selectedIndex != -1) {
+            if(selectedIndex != -1) 
+            {
                 Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
             }
-
+            
             selectedIndex = index;
+            System.out.println("Selected = " + selectedIndex);
             Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
         }
+
     }
 
     /**
      * Returns the index of the resource that is currently selected
      * @return index of the resource that is currently selected
      */
-    public int getSelectedIndex() {
+    public int getSelectedIndex() 
+    {
         return selectedIndex;
     }
 }
