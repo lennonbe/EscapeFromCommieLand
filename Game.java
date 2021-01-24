@@ -374,6 +374,8 @@ public class Game {
             this.detectClicks();
             this.selectSeedType();
             this.drawObjects();
+
+            System.out.println("Selected field is" + farmFields[1].getSelectedField());
             
             //Handle events
             for(Event event : window.pollEvents()) 
@@ -383,24 +385,8 @@ public class Game {
                     //The user pressed the close button
                     window.close();
                 }
-                
-                //Checks if the mouse button was pressed
-                if(Mouse.isButtonPressed(Mouse.Button.LEFT))
-                {
-                    resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                    int indexOfClickedSeed = menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                    
-                    if(indexOfClickedSeed != -1 && menuOpen == true)
-                    {
-                        numSeeds[indexOfClickedSeed]++;
-                        
-                        System.out.println("incrementing numSeeds " + indexOfClickedSeed + " value is " + numSeeds[indexOfClickedSeed]);
-                        resourceMenu.increment(indexOfClickedSeed);
-                        pause();
-                    }
-                    
-                    //resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                }
+
+                buySeeds();
 
                 if(resourceMenu.getSelectedIndex() != -1 && farmFields[1].getSelectedField() != null)
                 {
@@ -408,6 +394,28 @@ public class Game {
                 }
             }
             
+            System.out.println("Selected field is" + farmFields[1].getSelectedField());
+        }
+    }
+
+    public void buySeeds()
+    {
+        //Checks if the mouse button was pressed
+        if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+        {
+            resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+            int indexOfClickedSeed = menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+            
+            if(indexOfClickedSeed != -1 && menuOpen == true)
+            {
+                numSeeds[indexOfClickedSeed]++;
+                
+                System.out.println("incrementing numSeeds " + indexOfClickedSeed + " value is " + numSeeds[indexOfClickedSeed]);
+                resourceMenu.increment(indexOfClickedSeed);
+                pause();
+            }
+            
+            //resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
         }
     }
     
@@ -422,7 +430,7 @@ public class Game {
         } 
         catch (Exception e) 
         {
-            
+
         }
     }
 
@@ -448,6 +456,13 @@ public class Game {
                 temp.setVegType(3);
             }
 
+            Fields tempNull = null;
+            //farmFields[1].setSelectedField(tempNull);
+
+            if(farmFields[1].getSelectedField().growing)
+            {
+                farmFields[1].selectedField = null;
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ public class Fields extends RectangleShape implements Observer
     
     //Will now call the update method every 5000 seconds
     private Clock clock = Clock.getInstance(2000);
-    private boolean growing = false;
+    protected boolean growing = false;
     private String vegType = "";
     private int growthStatus = -1;
 
@@ -49,6 +49,11 @@ public class Fields extends RectangleShape implements Observer
     public Fields getSelectedField()
     {
         return selectedField;
+    }
+
+    public void setSelectedField(Fields input)
+    {
+        selectedField = input;
     }
 
     /**
