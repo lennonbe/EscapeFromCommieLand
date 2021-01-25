@@ -140,7 +140,7 @@ public class Game implements Observer
         
         SoundEffect.init();
         SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
-        SoundEffect.BGM2.play();  //testing the audio play for 1 time
+        SoundEffect.BGM2.loopPlay();  //testing the audio play for 1 time
     }
 
     /**

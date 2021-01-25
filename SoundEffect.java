@@ -78,4 +78,19 @@ public enum SoundEffect {
    static void init(){
       values();   // calls the constructor for all the elements
    }
+
+   public void loopPlay() {
+      try{
+         if(volume != Volume.MUTE){
+            clip.setFramePosition(0); // Back to beginning and replay
+            clip.start();             // Start playing
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+         }
+         else{}
+      }
+
+      catch(Exception e){
+         e.printStackTrace();
+      }
+   }
 }
