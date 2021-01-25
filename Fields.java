@@ -27,8 +27,9 @@ public class Fields extends RectangleShape implements Observer
     protected static boolean clickFlag = false;
     protected static Fields selectedField = null;
     
-    //Will now call the update method every 5000 seconds
-    private Clock clock = Clock.getInstance(2000);
+    //Will now call the update method every 2000 seconds allowing us to grow the plants
+    protected int growthTime = 0; //in this case growth time is 10000 which means the update method will get called every 2000 seconds
+    private Clock clock = null;
     protected boolean growing = false;
     protected boolean readyToCollect = false;
     private String vegType = "";
@@ -41,22 +42,19 @@ public class Fields extends RectangleShape implements Observer
     public Fields(Vector2f size)
     {
         super(size);
-
         this.loadPathToRectangle("BoringGame", "DirtWet.png");
-
-        clock.addObserver(this);
     }
-
+    
     public Fields getSelectedField()
     {
         return selectedField;
     }
-
+    
     public void setSelectedField(Fields input)
     {
         selectedField = input;
     }
-
+    
     /**
      * Set the vegType based on the files.
      * @param type type of veg
@@ -65,24 +63,45 @@ public class Fields extends RectangleShape implements Observer
     {
         if(i == 0)
         {
-            vegType = "Hemp";
+            vegType = "Chilli";
+            if(clock == null)
+            {
+                System.out.println("here4");
+                this.clock = Clock.getInstance(2000);
+            }
         }
         else if(i == 1)
         {
             vegType = "Carrot";
+            if(clock == null)
+            {
+                System.out.println("here2");
+                this.clock = Clock.getInstance(5000);
+            }
         }
         else if(i == 2)
         {
-            vegType = "Cauliflower";
+            vegType = "Hemp";
+            if(clock == null)
+            {
+                System.out.println("here3");
+                this.clock = Clock.getInstance(10000);
+            }
         }
         else if(i == 3)
         {
-            vegType = "Chilli";
+            vegType = "Cauliflower";
+            if(clock == null)
+            {
+                System.out.println("here4");
+                this.clock = Clock.getInstance(100);
+            }
         }
+
+        clock.addObserver(this);
 
         if(vegType != "" && growing == false)
         {
-            this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + vegType, vegType + "1.png");
             this.growthStatus = 1;
             this.growing = true;
         } 
@@ -151,6 +170,11 @@ public class Fields extends RectangleShape implements Observer
         return flag;
     }
 
+    /**
+     * This is the method which will be called to update the field every growth cycle
+     * @param clock
+     * @param o
+     */
     public void update(Observable clock, Object o)
     {
         if(this.growing == true)
@@ -158,7 +182,7 @@ public class Fields extends RectangleShape implements Observer
             System.out.println("hi, im happening" + growthStatus + this.selectedField);
             this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + this.vegType, this.vegType + growthStatus + ".png");
     
-            if(growthStatus < 8)
+            if(growthStatus < 7)
             {
                 growthStatus++;
             }
@@ -167,6 +191,7 @@ public class Fields extends RectangleShape implements Observer
                 //growthStatus = 1;
                 this.growing = false;
                 this.readyToCollect = true;
+                this.clock = null;
             }
 
         }

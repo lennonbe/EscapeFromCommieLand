@@ -376,15 +376,13 @@ public class Game {
     {
         while(window.isOpen()) 
         {
-            //Fill the window with red
+            //Fill the window
             window.clear(new Color(50,20,20));
             
             this.movement();
             this.detectClicks();
-            this.selectSeedType();
+            this.selectVegToGrowOnField();
             this.drawObjects();
-
-            //System.out.println("Selected field is" + farmFields[1].getSelectedField());
             
             //Handle events
             for(Event event : window.pollEvents()) 
@@ -402,11 +400,12 @@ public class Game {
                     farmFields[1].getSelectedField().setGrowing(true);
                 }
             }
-            
-            System.out.println("Selected field is" + farmFields[1].getSelectedField());
         }
     }
 
+    /**
+     * Increment the number of seeds of a certain vegetable type
+     */
     public void buySeeds()
     {
         //Checks if the mouse button was pressed
@@ -423,8 +422,6 @@ public class Game {
                 resourceMenu.increment(indexOfClickedSeed);
                 pause();
             }
-            
-            //resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
         }
     }
     
@@ -443,7 +440,10 @@ public class Game {
         }
     }
 
-    public void selectSeedType()
+    /**
+     * Sets the field that is currently selected to grow if a seed type is also currently selected.
+     */
+    public void selectVegToGrowOnField()
     {
         Fields temp = farmFields[1].getSelectedField();
         if(temp != null)
@@ -465,9 +465,7 @@ public class Game {
                 temp.setVegType(3);
             }
 
-            Fields tempNull = null;
-            //farmFields[1].setSelectedField(tempNull);
-
+            //Unselects the curretnly selected to grow field
             if(farmFields[1].getSelectedField().growing)
             {
                 farmFields[1].selectedField = null;

@@ -81,7 +81,7 @@ public class ResourceMenu extends RectangleShape
             counterText[i] = new Text("0", font, 50);
             counterText[i].setPosition(iconXPosition + iconWidth, 20);
 
-            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
+            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
         }
     }
 
@@ -152,7 +152,7 @@ public class ResourceMenu extends RectangleShape
             {
                 if(selectedIndex == index)
                 {
-                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);   
+                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);   
                     selectedIndex = -1;  
                     System.out.println("Selected = " + selectedIndex);           
                 }
@@ -171,10 +171,6 @@ public class ResourceMenu extends RectangleShape
                 System.out.println("Selected = " + selectedIndex);
                 Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
             }
-            
-            /*selectedIndex = index;
-            System.out.println("Selected = " + selectedIndex);
-            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);*/
         }
 
     }
