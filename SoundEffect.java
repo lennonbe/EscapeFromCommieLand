@@ -74,11 +74,17 @@ public enum SoundEffect {
        clip.stop();
     }
    
-   // Optional static method to pre-load all the sound files.
+   /**
+    *  Optional static method to pre-load all the sound files.
+    */
    static void init(){
       values();   // calls the constructor for all the elements
    }
-
+   
+   /**
+    *  Play the music looply
+    *  Usually used for BGM playing
+    */
    public void loopPlay() {
       try{
          if(volume != Volume.MUTE){
