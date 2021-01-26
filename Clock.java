@@ -12,29 +12,11 @@ import javax.swing.Timer;
  */
 public class Clock extends Observable implements ActionListener 
 {
-    
-    private static Clock instance = null;
     private Timer time;
 
-    //This implements a Singleton design pattern
-    public static Clock getInstance(int milliseconds) 
-    {
-        if(instance == null) 
-            instance = new Clock(milliseconds);
-
-        return instance;        
-    }
-
-    //Private constructor on purpose, DO NOT CHANGE!
-    private Clock(int milliseconds) 
+    public Clock(int milliseconds) 
     {
         time = new Timer(milliseconds, this);
-        time.start();
-    }
-
-    public void setClockDelay(int milliseconds)
-    {
-        time.setDelay(milliseconds);
         time.start();
     }
 
