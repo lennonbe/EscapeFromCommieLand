@@ -97,25 +97,25 @@ public class Fields extends RectangleShape implements Observer
         if(i == 0 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Chilli";
-            this.clockArr[0].addObserver(this);
+            this.clockArr[i].addObserver(this);
             resourceMenu.decrement(i);
         }
         else if(i == 1 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Carrot";
-            this.clockArr[1].addObserver(this);
+            this.clockArr[i].addObserver(this);
             resourceMenu.decrement(i);
         }
         else if(i == 2 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Hemp";
-            this.clockArr[2].addObserver(this);
+            this.clockArr[i].addObserver(this);
             resourceMenu.decrement(i);
         }
         else if(i == 3 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Cauliflower";
-            this.clockArr[3].addObserver(this);
+            this.clockArr[i].addObserver(this);
             resourceMenu.decrement(i);    
         }
 
@@ -213,6 +213,7 @@ public class Fields extends RectangleShape implements Observer
                 this.growing = false;
                 this.readyToCollect = true;
                 this.growthStatus = -1;
+                clock.deleteObservers();
             }
 
         }

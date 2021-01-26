@@ -69,9 +69,6 @@ public class Game {
     //ResourceMenu testing::::
     private ResourceMenu resourceMenu;
 
-    //Variables to keep track of quantity of seeds of each type
-    private int [] numSeeds = new int []{0, 0, 0, 0}; 
-
     /**
      * Constructor for the game. Loads the window, adds all needed 
      * objects such as sprites and rectangles and sets their initial positions.
@@ -437,16 +434,7 @@ public class Game {
         if(Mouse.isButtonPressed(Mouse.Button.LEFT))
         {
             resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-            int indexOfClickedSeed = menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-            
-            if(indexOfClickedSeed != -1 && menu.menuOpen == true)
-            {
-                numSeeds[indexOfClickedSeed]++;
-                
-                System.out.println("incrementing numSeeds " + indexOfClickedSeed + " value is " + numSeeds[indexOfClickedSeed]);
-                resourceMenu.increment(indexOfClickedSeed);
-                pause();
-            }
+            menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
         }
     }
     
