@@ -121,6 +121,18 @@ public class ResourceMenu extends RectangleShape
         int currentVal = Integer.parseInt(counterText[index].getString());
         counterText[index].setString(String.valueOf(currentVal + 1));
     }
+
+    /**
+     * Function called everytime a resource was bought in the shop.
+     * Used to increment the text counter.
+     * @param index The index of the item bought
+     * @param value The value to increment by
+     */
+    public void increment(int index, int value) 
+    {
+        int currentVal = Integer.parseInt(counterText[index].getString());
+        counterText[index].setString(String.valueOf(currentVal + value));
+    }
     
     /**
      * Called everytime a mouse click occurs.

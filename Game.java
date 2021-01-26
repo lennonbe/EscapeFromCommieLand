@@ -294,7 +294,29 @@ public class Game {
                     }
                     else
                     {
-                        resourceMenu.increment(4);
+                        if(farmFields[i].getVegType() != "")
+                        {
+                            if(farmFields[i].getVegType() == "Hemp")
+                            {
+                                resourceMenu.increment(4, 15);
+                            }
+                            else if(farmFields[i].getVegType() == "Chilli")
+                            {
+                                resourceMenu.increment(4, 10);
+                            }
+                            else if(farmFields[i].getVegType() == "Cauliflower")
+                            {
+                                resourceMenu.increment(4, 5);
+                            }
+                            else if(farmFields[i].getVegType() == "Carrot")
+                            {
+                                resourceMenu.increment(4, 1);
+                            }
+
+                            farmFields[i].setVegType("");
+                        }
+
+                        //resourceMenu.increment(4);
                         farmFields[i].loadPathToRectangle("BoringGame", "DirtWet.png");
                         pause();
                     }

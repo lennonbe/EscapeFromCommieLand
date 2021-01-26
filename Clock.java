@@ -32,6 +32,12 @@ public class Clock extends Observable implements ActionListener
         time.start();
     }
 
+    public void setClockDelay(int milliseconds)
+    {
+        time.setDelay(milliseconds);
+        time.start();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) 
     {

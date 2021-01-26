@@ -29,7 +29,7 @@ public class Fields extends RectangleShape implements Observer
     
     //Will now call the update method every 2000 seconds allowing us to grow the plants
     protected int growthTime = 0; //in this case growth time is 10000 which means the update method will get called every 2000 seconds
-    private Clock clock = null;
+    private Clock clock = Clock.getInstance(2000);;
     protected boolean growing = false;
     protected boolean readyToCollect = false;
     private String vegType = "";
@@ -43,6 +43,16 @@ public class Fields extends RectangleShape implements Observer
     {
         super(size);
         this.loadPathToRectangle("BoringGame", "DirtWet.png");
+    }
+
+    public String getVegType()
+    {
+        return vegType;
+    }
+
+    public void setVegType(String input)
+    {
+        vegType = input;
     }
     
     public Fields getSelectedField()
@@ -64,37 +74,41 @@ public class Fields extends RectangleShape implements Observer
         if(i == 0)
         {
             vegType = "Chilli";
-            if(clock == null)
+            if(clock != null)
             {
                 System.out.println("here4");
-                this.clock = Clock.getInstance(2000);
+                //this.clock = Clock.getInstance(2000);
+                this.clock.setClockDelay(2000);
             }
         }
         else if(i == 1)
         {
             vegType = "Carrot";
-            if(clock == null)
+            if(clock != null)
             {
                 System.out.println("here2");
-                this.clock = Clock.getInstance(5000);
+                //this.clock = Clock.getInstance(5000);
+                this.clock.setClockDelay(5000);
             }
         }
         else if(i == 2)
         {
             vegType = "Hemp";
-            if(clock == null)
+            if(clock != null)
             {
                 System.out.println("here3");
-                this.clock = Clock.getInstance(10000);
+                //this.clock = Clock.getInstance(10000);
+                this.clock.setClockDelay(10000);
             }
         }
         else if(i == 3)
         {
             vegType = "Cauliflower";
-            if(clock == null)
+            if(clock != null)
             {
                 System.out.println("here4");
-                this.clock = Clock.getInstance(100);
+                //this.clock = Clock.getInstance(100);
+                this.clock.setClockDelay(100);
             }
         }
 
