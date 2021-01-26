@@ -35,7 +35,7 @@ public class ResourceMenu extends RectangleShape
     /**
      * Initializes the resource menu attributes
      */
-    public ResourceMenu() 
+    public ResourceMenu(BuyMenu buyMenu) 
     {
         //Sets up this rectangle, so that it can be drawn with the right parameter
         super(new Vector2f(width, height));
@@ -77,8 +77,16 @@ public class ResourceMenu extends RectangleShape
             
             seedIcons[i].setPosition(new Vector2f(iconXPosition, 20));
             seedIcons[i].setSize(seedIconSize);
+            
+            if(i == 4)
+            {
+                counterText[i] = new Text("5", font, 50);
+            }
+            else
+            {
+                counterText[i] = new Text("0", font, 50);
+            }
 
-            counterText[i] = new Text("0", font, 50);
             counterText[i].setPosition(iconXPosition + iconWidth, 20);
 
             Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
@@ -122,12 +130,22 @@ public class ResourceMenu extends RectangleShape
         counterText[index].setString(String.valueOf(currentVal + 1));
     }
 
+    /**
+     * Function called everytime a resource is used to plant.
+     * Used to decrement the text counter.
+     * @param index The index of the item used
+     */
     public void decrement(int index)
     {
         int currentVal = Integer.parseInt(counterText[index].getString());
         counterText[index].setString(String.valueOf(currentVal - 1));
     }
 
+    /**
+     * Gets the text value of an item in a certain index in the reource menu.
+     * @param index index of the item
+     * @return value of the text counter at this index
+     */
     public int getIndexVal(int index)
     {
         return Integer.parseInt(counterText[index].getString());

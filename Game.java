@@ -63,7 +63,7 @@ public class Game {
     private Fields [] farmFields = new Fields[25];
 
     //Variables for keeping track of the menu status
-    private boolean menuOpen = false;
+    //private boolean menuOpen = false;
     private BuyMenu menu;
 
     //ResourceMenu testing::::
@@ -86,7 +86,9 @@ public class Game {
         //Creates the BuyMenu based on window size.
         menu = new BuyMenu(new Vector2f(300,120), window);
 
-        resourceMenu = new ResourceMenu();
+        resourceMenu = new ResourceMenu(menu);
+
+        menu.setResourceMenu(resourceMenu);
 
         //Limit the framerate
         window.setFramerateLimit(60);
@@ -276,11 +278,11 @@ public class Game {
     }
 
     /**
-     * Detects the clicks on the specific fields.
+     * Detects the clicks on the specific fields for collection.
      */
-    public void detectClicks()
+    public void collectVeg()
     {
-        if(menuOpen == false)
+        if(menu.menuOpen == false)
         {
             for(int i = 0; i < farmFields.length; i++)
             {
@@ -288,12 +290,11 @@ public class Game {
                 {
                     if(farmFields[i].readyToCollect == false)
                     {
-                        System.out.println("Field " + i + "is clicked");
-                        System.out.println("Current field selected is " + farmFields[i].selectedField + " and the clickFlag is " + farmFields[i].clickFlag);
                         pause();
                     }
                     else
                     {
+                        //Algorithm for collecting veg from a specific field
                         if(farmFields[i].getVegType() != "")
                         {
                             if(farmFields[i].getVegType() == "Hemp")
@@ -315,9 +316,9 @@ public class Game {
 
                             farmFields[i].setVegType("");
                             farmFields[i].selectedField = null;
+                            farmFields[i].readyToCollect = false;
                         }
 
-                        //resourceMenu.increment(4);
                         farmFields[i].loadPathToRectangle("BoringGame", "DirtWet.png");
                         pause();
                     }
@@ -333,8 +334,7 @@ public class Game {
      */
     public void drawObjects()
     {
-        //window.draw(backround);
-        
+        //Draws the fields
         for(int i = 0; i < farmFields.length; i++)
         {
             window.draw(farmFields[i]);
@@ -365,13 +365,13 @@ public class Game {
         Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
         Right now doesnt do much but still a good starting point. 
         */
-        if(shop.isClicked(window) == true && menuOpen == false)
+        if(shop.isClicked(window) == true && menu.menuOpen == false)
         {
-            menuOpen = true;
+            menu.menuOpen = true;
             pause();
         }
         
-        if(menuOpen == true)
+        if(menu.menuOpen == true)
         {
             window.draw(menu);
             
@@ -384,7 +384,7 @@ public class Game {
             
             if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
             {
-                menuOpen = false;
+                menu.menuOpen = false;
                 pause();
             }
         }
@@ -403,7 +403,7 @@ public class Game {
             window.clear(new Color(50,20,20));
             
             this.movement();
-            this.detectClicks();
+            this.collectVeg();
             this.selectVegToGrowOnField();
             this.drawObjects();
             
@@ -439,7 +439,7 @@ public class Game {
             resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
             int indexOfClickedSeed = menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
             
-            if(indexOfClickedSeed != -1 && menuOpen == true)
+            if(indexOfClickedSeed != -1 && menu.menuOpen == true)
             {
                 numSeeds[indexOfClickedSeed]++;
                 

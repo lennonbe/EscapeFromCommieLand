@@ -16,6 +16,8 @@ public class BuyMenu extends RectangleShape
     private RectangleShape exitButton  = new RectangleShape();
     private Texture menuTexture;
     private float yPosition;
+    private ResourceMenu resourceMenu;
+    protected boolean menuOpen = false;
 
     /**
      * Constructor for BuyMenu class.
@@ -52,6 +54,15 @@ public class BuyMenu extends RectangleShape
     }
 
     /**
+     * Sets the resourceMenu variable so that these 2 objects can interact
+     * @param input ResourceMenu object we sish to use
+     */
+    public void setResourceMenu(ResourceMenu input)
+    {
+        resourceMenu = input;
+    }
+
+    /**
      * Chooses what vegetable to buy.
      * @param window the current game window for prespective
      * @return the array index of the vegetables
@@ -75,6 +86,12 @@ public class BuyMenu extends RectangleShape
         else if(mouseX >= vegIcons[3].getPosition().x && mouseX <= vegIcons[3].getPosition().x + vegIcons[3].getSize().x && mouseY >= vegIcons[3].getPosition().y && mouseY <= vegIcons[3].getPosition().y + vegIcons[3].getSize().y)
         {
             returnValue = 3;
+        }
+
+        if(returnValue != -1 && menuOpen == true)
+        {
+            resourceMenu.increment(returnValue);
+            resourceMenu.decrement(4);
         }
         
 
