@@ -314,6 +314,7 @@ public class Game {
                             }
 
                             farmFields[i].setVegType("");
+                            farmFields[i].selectedField = null;
                         }
 
                         //resourceMenu.increment(4);
@@ -422,6 +423,8 @@ public class Game {
                     farmFields[1].getSelectedField().setGrowing(true);
                 }
             }
+
+            System.out.println("Selected field is" + farmFields[0].selectedField);
         }
     }
 
@@ -468,7 +471,7 @@ public class Game {
     public void selectVegToGrowOnField()
     {
         Fields temp = farmFields[1].getSelectedField();
-        if(temp != null)
+        if(temp != null && resourceMenu.getSelectedIndex() != -1)
         {
             if(resourceMenu.getSelectedIndex() == 0)
             {

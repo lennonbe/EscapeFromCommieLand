@@ -77,7 +77,6 @@ public class Fields extends RectangleShape implements Observer
             if(clock != null)
             {
                 System.out.println("here4");
-                //this.clock = Clock.getInstance(2000);
                 this.clock.setClockDelay(2000);
             }
         }
@@ -87,7 +86,6 @@ public class Fields extends RectangleShape implements Observer
             if(clock != null)
             {
                 System.out.println("here2");
-                //this.clock = Clock.getInstance(5000);
                 this.clock.setClockDelay(5000);
             }
         }
@@ -97,7 +95,6 @@ public class Fields extends RectangleShape implements Observer
             if(clock != null)
             {
                 System.out.println("here3");
-                //this.clock = Clock.getInstance(10000);
                 this.clock.setClockDelay(10000);
             }
         }
@@ -107,12 +104,13 @@ public class Fields extends RectangleShape implements Observer
             if(clock != null)
             {
                 System.out.println("here4");
-                //this.clock = Clock.getInstance(100);
                 this.clock.setClockDelay(100);
             }
         }
 
+        System.out.println(clock);
         clock.addObserver(this);
+        //this.selectedField = null;
 
         if(vegType != "" && growing == false)
         {
@@ -205,7 +203,7 @@ public class Fields extends RectangleShape implements Observer
                 //growthStatus = 1;
                 this.growing = false;
                 this.readyToCollect = true;
-                this.clock = null;
+                //this.clock = null;
             }
 
         }
