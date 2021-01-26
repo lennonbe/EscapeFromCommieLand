@@ -122,6 +122,17 @@ public class ResourceMenu extends RectangleShape
         counterText[index].setString(String.valueOf(currentVal + 1));
     }
 
+    public void decrement(int index)
+    {
+        int currentVal = Integer.parseInt(counterText[index].getString());
+        counterText[index].setString(String.valueOf(currentVal - 1));
+    }
+
+    public int getIndexVal(int index)
+    {
+        return Integer.parseInt(counterText[index].getString());
+    }
+
     /**
      * Function called everytime a resource was bought in the shop.
      * Used to increment the text counter.

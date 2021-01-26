@@ -97,7 +97,7 @@ public class Game {
         int y = 0;
         for(int i = 0; i < farmFields.length; i++) 
         {
-            farmFields[i] = new Fields(fieldSize);
+            farmFields[i] = new Fields(fieldSize, resourceMenu);
             farmFields[i].setPosition(width/2 + (((fieldSizeInt)*(x-2))) - fieldSizeInt/2, height/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
 
             //Calculates the x and y position on a 2 dimentional matrix

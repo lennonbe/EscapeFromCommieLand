@@ -35,33 +35,35 @@ public class Fields extends RectangleShape implements Observer
     protected boolean readyToCollect = false;
     private String vegType = "";
     private int growthStatus = -1;
+    private ResourceMenu resourceMenu;
 
     /**
      * Constructor for Fields.
      * @param size the size of the field
      */
-    public Fields(Vector2f size)
+    public Fields(Vector2f size, ResourceMenu input)
     {
         super(size);
+        resourceMenu = input;
         this.loadPathToRectangle("BoringGame", "DirtWet.png");
 
         for(int i = 0; i < 4; i++)
         {
             if(i == 0)
             {
-                clockArr[i] = new Clock(500);
+                clockArr[i] = new Clock(250);
             }
             else if(i == 1)
             {
-                clockArr[i] = new Clock(2000);
+                clockArr[i] = new Clock(1000);
             }
             else if(i == 2)
             {
-                clockArr[i] = new Clock(4000);
+                clockArr[i] = new Clock(2500);
             }
             else if(i == 3)
             {
-                clockArr[i] = new Clock(8000);
+                clockArr[i] = new Clock(5000);
             }
         }
     }
@@ -92,28 +94,29 @@ public class Fields extends RectangleShape implements Observer
      */
     public void setVegType(int i)
     {
-        if(i == 0)
+        if(i == 0 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Chilli";
             this.clockArr[0].addObserver(this);
-           
+            resourceMenu.decrement(i);
         }
-        else if(i == 1)
+        else if(i == 1 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Carrot";
             this.clockArr[1].addObserver(this);
-            
+            resourceMenu.decrement(i);
         }
-        else if(i == 2)
+        else if(i == 2 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Hemp";
             this.clockArr[2].addObserver(this);
-            
+            resourceMenu.decrement(i);
         }
-        else if(i == 3)
+        else if(i == 3 && resourceMenu.getIndexVal(i) > 0)
         {
             vegType = "Cauliflower";
-            this.clockArr[3].addObserver(this);    
+            this.clockArr[3].addObserver(this);
+            resourceMenu.decrement(i);    
         }
 
         //System.out.println(clock);
