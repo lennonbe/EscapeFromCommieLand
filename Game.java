@@ -415,23 +415,29 @@ public class Game implements Observer
     {
         if(farmFields[1].isWinter == true)
         {
-            for(int i = 0; i < farmFields[1].clockArr.length; i++)
+            for(int j = 0; j < farmFields.length; j++)
             {
-                int temp = farmFields[1].clockArr[i].time.getInitialDelay();
-                farmFields[1].clockArr[i].time.setDelay((int)(temp * 0.5));
+                for(int i = 0; i < farmFields[j].clockArr.length; i++)
+                {
+                    int temp = farmFields[j].clockArr[i].time.getInitialDelay();
+                    farmFields[j].clockArr[i].time.setDelay((int)(temp * 0.5));
+                }
+    
+                farmFields[j].isWinter = false;
             }
-
-            farmFields[1].isWinter = false;
         }
         else
         {
-            for(int i = 0; i < farmFields[1].clockArr.length; i++)
+            for(int j = 0; j < farmFields.length; j++)
             {
-                int temp = farmFields[1].clockArr[i].time.getInitialDelay();
-                farmFields[1].clockArr[i].time.setDelay((int)(temp * 2));
+                for(int i = 0; i < farmFields[j].clockArr.length; i++)
+                {
+                    int temp = farmFields[j].clockArr[i].time.getInitialDelay();
+                    farmFields[j].clockArr[i].time.setDelay((int)(temp * 2));
+                }
+    
+                farmFields[j].isWinter = true;
             }
-
-            farmFields[1].isWinter = true;
         }
 
         System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[1].isWinter);

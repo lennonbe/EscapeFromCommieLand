@@ -31,7 +31,7 @@ public class Fields extends RectangleShape implements Observer
     //Will now call the update method every 2000 seconds allowing us to grow the plants
     protected int growthTime = 0; //in this case growth time is 10000 which means the update method will get called every 2000 seconds
     protected static Clock seasonsSwitchClock;
-    protected static FieldClock [] clockArr = new FieldClock[4];
+    protected Clock [] clockArr = new Clock[4];
     protected boolean growing = false;
     protected boolean readyToCollect = false;
     protected String vegType = "";
@@ -52,19 +52,19 @@ public class Fields extends RectangleShape implements Observer
         {
             if(i == 0)
             {
-                clockArr[i] = new FieldClock(250);
+                clockArr[i] = new Clock(250);
             }
             else if(i == 1)
             {
-                clockArr[i] = new FieldClock(1000);
+                clockArr[i] = new Clock(1000);
             }
             else if(i == 2)
             {
-                clockArr[i] = new FieldClock(2500);
+                clockArr[i] = new Clock(2500);
             }
             else if(i == 3)
             {
-                clockArr[i] = new FieldClock(5000);
+                clockArr[i] = new Clock(5000);
             }
         }
     }
