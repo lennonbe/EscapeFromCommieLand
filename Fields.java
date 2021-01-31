@@ -26,16 +26,17 @@ public class Fields extends RectangleShape implements Observer
     private Texture fieldTexture = new Texture();
     protected static boolean clickFlag = false;
     protected static Fields selectedField = null;
+    protected static boolean isWinter = false;
     
     //Will now call the update method every 2000 seconds allowing us to grow the plants
     protected int growthTime = 0; //in this case growth time is 10000 which means the update method will get called every 2000 seconds
-    //private Clock clock = Clock.getInstance(2000);
-    private Clock [] clockArr = new Clock[4];
+    protected static Clock seasonsSwitchClock;
+    protected static FieldClock [] clockArr = new FieldClock[4];
     protected boolean growing = false;
     protected boolean readyToCollect = false;
-    private String vegType = "";
-    private int growthStatus = -1;
-    private ResourceMenu resourceMenu;
+    protected String vegType = "";
+    protected int growthStatus = -1;
+    protected ResourceMenu resourceMenu;
 
     /**
      * Constructor for Fields.
@@ -51,19 +52,19 @@ public class Fields extends RectangleShape implements Observer
         {
             if(i == 0)
             {
-                clockArr[i] = new Clock(250);
+                clockArr[i] = new FieldClock(250);
             }
             else if(i == 1)
             {
-                clockArr[i] = new Clock(1000);
+                clockArr[i] = new FieldClock(1000);
             }
             else if(i == 2)
             {
-                clockArr[i] = new Clock(2500);
+                clockArr[i] = new FieldClock(2500);
             }
             else if(i == 3)
             {
-                clockArr[i] = new Clock(5000);
+                clockArr[i] = new FieldClock(5000);
             }
         }
     }
@@ -71,11 +72,6 @@ public class Fields extends RectangleShape implements Observer
     public String getVegType()
     {
         return vegType;
-    }
-
-    public void setVegType(String input)
-    {
-        vegType = input;
     }
     
     public Fields getSelectedField()
@@ -119,15 +115,42 @@ public class Fields extends RectangleShape implements Observer
             resourceMenu.decrement(i);    
         }
 
-        //System.out.println(clock);
-        //this.clock.addObserver(this);
-        //this.selectedField = null;
-
         if(vegType != "" && growing == false)
         {
             this.growthStatus = 1;
             this.growing = true;
         } 
+    }
+
+    public void setVegType(String str)
+    {
+        vegType = str;
+    }
+    
+    /**
+     * This is the method which will be called to update the field every growth cycle
+     * @param clock
+     * @param o
+     */
+    public void update(Observable clock, Object o)
+    {
+        if(this.growing == true)
+        {
+            this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + this.vegType, this.vegType + growthStatus + ".png");
+    
+            if(growthStatus < 7)
+            {
+                this.growthStatus++;
+            }
+            else
+            {
+                this.growing = false;
+                this.readyToCollect = true;
+                this.growthStatus = -1;
+                clock.deleteObservers();
+            }
+
+        }
     }
 
     /**
@@ -193,31 +216,6 @@ public class Fields extends RectangleShape implements Observer
         return flag;
     }
 
-    /**
-     * This is the method which will be called to update the field every growth cycle
-     * @param clock
-     * @param o
-     */
-    public void update(Observable clock, Object o)
-    {
-        if(this.growing == true)
-        {
-            this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + this.vegType, this.vegType + growthStatus + ".png");
-    
-            if(growthStatus < 7)
-            {
-                this.growthStatus++;
-            }
-            else
-            {
-                this.growing = false;
-                this.readyToCollect = true;
-                this.growthStatus = -1;
-                clock.deleteObservers();
-            }
-
-        }
-    }
 
     /**
      * Sets the growing variable, which decided if the plant is animated to grow every x seconds.

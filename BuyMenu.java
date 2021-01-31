@@ -11,12 +11,11 @@ public class BuyMenu extends RectangleShape
     private float gap = 20;
     private float xLocation, yLocation;
     private float xCauliflower, xTomato, xSweetCorn, xCarrot, yCauliflower, yTomato, ySweetCorn, yCarrot;
-    private RectangleShape [] vegIcons = new RectangleShape[4];
+    protected RectangleShape [] vegIcons = new RectangleShape[4];
     private Texture [] vegTextures = new Texture[4];
     private RectangleShape exitButton  = new RectangleShape();
     private Texture menuTexture;
     private float yPosition;
-    private ResourceMenu resourceMenu;
     protected boolean menuOpen = false;
 
     /**
@@ -51,51 +50,6 @@ public class BuyMenu extends RectangleShape
             Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
         }
 
-    }
-
-    /**
-     * Sets the resourceMenu variable so that these 2 objects can interact
-     * @param input ResourceMenu object we sish to use
-     */
-    public void setResourceMenu(ResourceMenu input)
-    {
-        resourceMenu = input;
-    }
-
-    /**
-     * Chooses what vegetable to buy.
-     * @param window the current game window for prespective
-     * @return the array index of the vegetables
-     */
-    public int buyVeg(float mouseX, float mouseY)
-    {
-        int returnValue = -1;
-
-        if(mouseX >= vegIcons[0].getPosition().x && mouseX <= vegIcons[0].getPosition().x + vegIcons[0].getSize().x && mouseY >= vegIcons[0].getPosition().y && mouseY <= vegIcons[0].getPosition().y + vegIcons[0].getSize().y)
-        {
-            returnValue = 0;
-        }
-        else if(mouseX >= vegIcons[1].getPosition().x && mouseX <= vegIcons[1].getPosition().x + vegIcons[1].getSize().x && mouseY >= vegIcons[1].getPosition().y && mouseY <= vegIcons[1].getPosition().y + vegIcons[1].getSize().y)
-        {
-            returnValue = 1;
-        }
-        else if(mouseX >= vegIcons[2].getPosition().x && mouseX <= vegIcons[2].getPosition().x + vegIcons[2].getSize().x && mouseY >= vegIcons[2].getPosition().y && mouseY <= vegIcons[2].getPosition().y + vegIcons[2].getSize().y)
-        {
-            returnValue = 2;
-        }
-        else if(mouseX >= vegIcons[3].getPosition().x && mouseX <= vegIcons[3].getPosition().x + vegIcons[3].getSize().x && mouseY >= vegIcons[3].getPosition().y && mouseY <= vegIcons[3].getPosition().y + vegIcons[3].getSize().y)
-        {
-            returnValue = 3;
-        }
-
-        if(returnValue != -1 && menuOpen == true)
-        {
-            resourceMenu.increment(returnValue);
-            resourceMenu.decrement(4);
-        }
-        
-
-        return returnValue;
     }
 
     /**

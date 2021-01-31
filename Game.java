@@ -11,13 +11,19 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
+import java.util.Observable;
+import java.util.Observer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  * Class which represents the Game.
  * This class is what will be called in the Driver class, and should hold all methods needed to 
  * load, spawn and play the game.
  */
-public class Game {
+public class Game implements Observer
+{
 
     //Setting the environment variables
     private final int height = 864;//900; this is multiplied by 3
@@ -60,7 +66,7 @@ public class Game {
     private Shop shop = new Shop(fieldSize);
 
     //The Fields object array needed to draw all the fields around the shop
-    private Fields [] farmFields = new Fields[25];
+    protected Fields [] farmFields = new Fields[25];
 
     //Variables for keeping track of the menu status
     //private boolean menuOpen = false;
@@ -68,6 +74,12 @@ public class Game {
 
     //ResourceMenu testing::::
     private ResourceMenu resourceMenu;
+
+    //BuyCycle class testing:
+    private BuyCycle buyCycle;
+
+    //Clock formswitching seasons every x seconds
+    private Clock seasonClock = new Clock(15000);
 
     /**
      * Constructor for the game. Loads the window, adds all needed 
@@ -79,13 +91,12 @@ public class Game {
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
         window.setSize(new Vector2i(width, height));
        
+        seasonClock.addObserver(this);
 
         //Creates the BuyMenu based on window size.
         menu = new BuyMenu(new Vector2f(300,120), window);
 
         resourceMenu = new ResourceMenu(menu);
-
-        menu.setResourceMenu(resourceMenu);
 
         //Limit the framerate
         window.setFramerateLimit(60);
@@ -110,6 +121,8 @@ public class Game {
                 x++;
             }
         }
+
+        buyCycle = new BuyCycle(farmFields, resourceMenu, menu, window, this);
 
         shop.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
 
@@ -273,57 +286,6 @@ public class Game {
             }
         }
     }
-
-    /**
-     * Detects the clicks on the specific fields for collection.
-     */
-    public void collectVeg()
-    {
-        if(menu.menuOpen == false)
-        {
-            for(int i = 0; i < farmFields.length; i++)
-            {
-                if(farmFields[i].isClicked(window) && i != 12) // cause field 12 is behind the shop TODO: Remove field12 safely
-                {
-                    if(farmFields[i].readyToCollect == false)
-                    {
-                        pause();
-                    }
-                    else
-                    {
-                        //Algorithm for collecting veg from a specific field
-                        if(farmFields[i].getVegType() != "")
-                        {
-                            if(farmFields[i].getVegType() == "Hemp")
-                            {
-                                resourceMenu.increment(4, 15);
-                            }
-                            else if(farmFields[i].getVegType() == "Chilli")
-                            {
-                                resourceMenu.increment(4, 10);
-                            }
-                            else if(farmFields[i].getVegType() == "Cauliflower")
-                            {
-                                resourceMenu.increment(4, 5);
-                            }
-                            else if(farmFields[i].getVegType() == "Carrot")
-                            {
-                                resourceMenu.increment(4, 1);
-                            }
-
-                            farmFields[i].setVegType("");
-                            farmFields[i].selectedField = null;
-                            farmFields[i].readyToCollect = false;
-                        }
-
-                        farmFields[i].loadPathToRectangle("BoringGame", "DirtWet.png");
-                        pause();
-                    }
-                }
-            }
-        }
-    }
-
     
     /**
      * drawObjects method which is responsible for drawing all the objects,
@@ -400,9 +362,14 @@ public class Game {
             window.clear(new Color(50,20,20));
             
             this.movement();
-            this.collectVeg();
-            this.selectVegToGrowOnField();
+            buyCycle.collectVeg();
+            buyCycle.selectVegToGrowOnField();
             this.drawObjects();
+
+            if(farmFields[0].selectedField == farmFields[12]) // TODO: Handle issue regarding field 12, ideally remove it from the class totally
+            {
+                farmFields[0].selectedField = null;
+            }
             
             //Handle events
             for(Event event : window.pollEvents()) 
@@ -413,7 +380,11 @@ public class Game {
                     window.close();
                 }
 
-                buySeeds();
+                if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+                {
+                    resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                    buyCycle.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                }
 
                 if(resourceMenu.getSelectedIndex() != -1 && farmFields[1].getSelectedField() != null)
                 {
@@ -421,20 +392,7 @@ public class Game {
                 }
             }
 
-            System.out.println("Selected field is" + farmFields[0].selectedField);
-        }
-    }
-
-    /**
-     * Increment the number of seeds of a certain vegetable type
-     */
-    public void buySeeds()
-    {
-        //Checks if the mouse button was pressed
-        if(Mouse.isButtonPressed(Mouse.Button.LEFT))
-        {
-            resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-            menu.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+            //System.out.println("Selected field is" + farmFields[0].selectedField);
         }
     }
     
@@ -453,36 +411,29 @@ public class Game {
         }
     }
 
-    /**
-     * Sets the field that is currently selected to grow if a seed type is also currently selected.
-     */
-    public void selectVegToGrowOnField()
+    public void update(Observable clock, Object o)
     {
-        Fields temp = farmFields[1].getSelectedField();
-        if(temp != null && resourceMenu.getSelectedIndex() != -1)
+        if(farmFields[1].isWinter == true)
         {
-            if(resourceMenu.getSelectedIndex() == 0)
+            for(int i = 0; i < farmFields[1].clockArr.length; i++)
             {
-                temp.setVegType(0);
-            }
-            else if(resourceMenu.getSelectedIndex() == 1)
-            {
-                temp.setVegType(1);
-            }
-            else if(resourceMenu.getSelectedIndex() == 2)
-            {
-                temp.setVegType(2);
-            }
-            else if(resourceMenu.getSelectedIndex() == 3)
-            {
-                temp.setVegType(3);
+                int temp = farmFields[1].clockArr[i].time.getInitialDelay();
+                farmFields[1].clockArr[i].time.setDelay((int)(temp * 0.5));
             }
 
-            //Unselects the curretnly selected to grow field
-            if(farmFields[1].getSelectedField().growing)
-            {
-                farmFields[1].selectedField = null;
-            }
+            farmFields[1].isWinter = false;
         }
+        else
+        {
+            for(int i = 0; i < farmFields[1].clockArr.length; i++)
+            {
+                int temp = farmFields[1].clockArr[i].time.getInitialDelay();
+                farmFields[1].clockArr[i].time.setDelay((int)(temp * 2));
+            }
+
+            farmFields[1].isWinter = true;
+        }
+
+        System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[1].isWinter);
     }
 }

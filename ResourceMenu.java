@@ -142,6 +142,18 @@ public class ResourceMenu extends RectangleShape
     }
 
     /**
+     * Function called everytime a resource is used to plant.
+     * Used to decrement the text counter, this time by a certain value.
+     * @param index The index of the item used
+     * @param value value to decrement by
+     */
+    public void decrement(int index, int value)
+    {
+        int currentVal = Integer.parseInt(counterText[index].getString());
+        counterText[index].setString(String.valueOf(currentVal - value));
+    }
+
+    /**
      * Gets the text value of an item in a certain index in the reource menu.
      * @param index index of the item
      * @return value of the text counter at this index

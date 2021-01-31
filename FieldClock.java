@@ -1,6 +1,7 @@
 package BoringGame;
 
 import java.util.Observable;
+import java.util.Observer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -10,20 +11,25 @@ import javax.swing.Timer;
  * To instantiate this clock class you MUST use the 'getInstance()' mothod.
  * Observable is deprecated, however, it's useful for this application.
  */
-public class Clock extends Observable implements ActionListener
+public class FieldClock extends Clock
 {
-    protected Timer time;
+    private boolean isWinter = false;
 
-    public Clock(int milliseconds) 
+
+    public FieldClock(int milliseconds) 
     {
-        time = new Timer(milliseconds, this);
-        time.start();
+        super(milliseconds);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) 
+    public void setWinter()
     {
-        this.setChanged();
-        this.notifyObservers();
+        if(isWinter == false)
+        {
+            time.setDelay(time.getInitialDelay());
+        }
+        else
+        {
+            time.setDelay(time.getInitialDelay() * 2);
+        }
     }
 }
