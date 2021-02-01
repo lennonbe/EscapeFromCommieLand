@@ -417,7 +417,6 @@ public class Game implements Observer
     {
         if(farmFields[1].isWinter == true)
         {
-            
             for(int j = 0; j < farmFields.length; j++)
             {
                 for(int i = 0; i < farmFields[j].clockArr.length; i++)
@@ -431,7 +430,6 @@ public class Game implements Observer
         }
         else
         {
-            SoundEffect.FAILPRISON.play();
             for(int j = 0; j < farmFields.length; j++)
             {
                 for(int i = 0; i < farmFields[j].clockArr.length; i++)
@@ -439,11 +437,12 @@ public class Game implements Observer
                     int temp = farmFields[j].clockArr[i].time.getInitialDelay();
                     farmFields[j].clockArr[i].time.setDelay((int)(temp * 2));
                 }
-    
+                
                 farmFields[j].isWinter = true;
             }
         }
-
+        
+        SoundEffect.FAILPRISON.play();
         System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[1].isWinter);
     }
 }
