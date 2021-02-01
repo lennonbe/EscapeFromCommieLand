@@ -130,7 +130,7 @@ public class Game implements Observer
         backround.setSize(windowSize);
         SoundEffect.init();
         SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
-        SoundEffect.BGM.play();  //testing the audio play for 1 time
+        SoundEffect.BGM2.loopPlay();  //testing the audio play for 1 time
     }
 
     /**
@@ -326,6 +326,7 @@ public class Game implements Observer
         */
         if(shop.isClicked(window) == true && menu.menuOpen == false)
         {
+            SoundEffect.OPENINVENTORY.play();
             menu.menuOpen = true;
             pause();
         }
@@ -343,6 +344,7 @@ public class Game implements Observer
             
             if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
             {
+                SoundEffect.OPENINVENTORY.play();
                 menu.menuOpen = false;
                 pause();
             }
@@ -415,6 +417,7 @@ public class Game implements Observer
     {
         if(farmFields[1].isWinter == true)
         {
+            
             for(int j = 0; j < farmFields.length; j++)
             {
                 for(int i = 0; i < farmFields[j].clockArr.length; i++)
@@ -428,6 +431,7 @@ public class Game implements Observer
         }
         else
         {
+            SoundEffect.FAILPRISON.play();
             for(int j = 0; j < farmFields.length; j++)
             {
                 for(int i = 0; i < farmFields[j].clockArr.length; i++)

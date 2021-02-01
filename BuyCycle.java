@@ -35,21 +35,25 @@ public class BuyCycle
 
         if(mouseX >= buyMenu.vegIcons[0].getPosition().x && mouseX <= buyMenu.vegIcons[0].getPosition().x + buyMenu.vegIcons[0].getSize().x && mouseY >= buyMenu.vegIcons[0].getPosition().y && mouseY <= buyMenu.vegIcons[0].getPosition().y + buyMenu.vegIcons[0].getSize().y)
         {
+            SoundEffect.PURCHASEITEM.play();
             returnValue = 0;
             decrementValue = 1;
         }
         else if(mouseX >= buyMenu.vegIcons[1].getPosition().x && mouseX <= buyMenu.vegIcons[1].getPosition().x + buyMenu.vegIcons[1].getSize().x && mouseY >= buyMenu.vegIcons[1].getPosition().y && mouseY <= buyMenu.vegIcons[1].getPosition().y + buyMenu.vegIcons[1].getSize().y)
         {
+            SoundEffect.PURCHASEITEM.play();
             returnValue = 1;
             decrementValue = 2;
         }
         else if(mouseX >= buyMenu.vegIcons[2].getPosition().x && mouseX <= buyMenu.vegIcons[2].getPosition().x + buyMenu.vegIcons[2].getSize().x && mouseY >= buyMenu.vegIcons[2].getPosition().y && mouseY <= buyMenu.vegIcons[2].getPosition().y + buyMenu.vegIcons[2].getSize().y)
         {
+            SoundEffect.PURCHASEITEM.play();
             returnValue = 2;
             decrementValue = 5;
         }
         else if(mouseX >= buyMenu.vegIcons[3].getPosition().x && mouseX <= buyMenu.vegIcons[3].getPosition().x + buyMenu.vegIcons[3].getSize().x && mouseY >= buyMenu.vegIcons[3].getPosition().y && mouseY <= buyMenu.vegIcons[3].getPosition().y + buyMenu.vegIcons[3].getSize().y)
         {
+            SoundEffect.PURCHASEITEM.play();
             returnValue = 3;
             decrementValue = 7;
         }
@@ -76,18 +80,22 @@ public class BuyCycle
         {
             if(resourceMenu.getSelectedIndex() == 0)
             {
+                SoundEffect.CROPPLANT.play();
                 temp.setVegType(0);
             }
             else if(resourceMenu.getSelectedIndex() == 1)
             {
+                SoundEffect.CROPPLANT.play();
                 temp.setVegType(1);
             }
             else if(resourceMenu.getSelectedIndex() == 2)
             {
+                SoundEffect.CROPPLANT.play();
                 temp.setVegType(2);
             }
             else if(resourceMenu.getSelectedIndex() == 3)
             {
+                SoundEffect.CROPPLANT.play();
                 temp.setVegType(3);
             }
 
@@ -121,18 +129,22 @@ public class BuyCycle
                         {
                             if(fieldArray[i].getVegType() == "Hemp")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 15);
                             }
                             else if(fieldArray[i].getVegType() == "Chilli")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 10);
                             }
                             else if(fieldArray[i].getVegType() == "Cauliflower")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 5);
                             }
                             else if(fieldArray[i].getVegType() == "Carrot")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 1);
                             }
 

@@ -16,15 +16,16 @@ import org.jsfml.system.Vector2i;
  * Each Option Contains The URL path and the file name for user to choose to play
  */
 public enum SoundEffect {
-   BGM("AudioFile/Bad_Mood.wav"),               // Bad Mood BGM
-   BGM2("AudioFile/BGM_option2.wav"),              // Option 2 BGM
+   BGM("AudioFile/Bad_Mood.wav"),                      // Bad Mood BGM
+   BGM2("AudioFile/BGM_option2.wav"),                  // Option 2 BGM
+   //BGM3("AudioFile/BGM3.wav"),                         // Option 3 BGM
    BADWEATHER("AudioFile/Heavy_Rain_Bad_Weather.wav"), // Bad Weather
    CROPHARVEST("AudioFile/Crop_Harvest.wav"),          // Harvest The Crop
    CROPPLANT("AudioFile/Crop_Plant.wav"),              // Plant The Crop
    OPENINVENTORY("AudioFile/Open_Inventory.wav"),      // Open/Close The Inventory/Store
    PURCHASEITEM("AudioFile/Open_Store.wav"),           // Purchase The Item
    UNLOCKITEM("AudioFile/Unlock_New_Land_Option_1.wav"),        // Unlock New Item
-   UPGRADEITEM("AudioFile/Item_Upgrade.wav"),        // Unlock New Item
+   UPGRADEITEM("AudioFile/Item_Upgrade.wav"),                   // Unlock New Item
    FAILGUNSHOT("AudioFile/Gun_Shot_Fail.wav"),                  // Fail Condition - Gun Shot
    FAILPRISON("AudioFile/GameFail2.wav"),                       // Fail Condition - Sent To Prison
    FAILOTHER("AudioFile/GameFail.wav"),                         // Fail Condition - Other Condition
@@ -74,8 +75,29 @@ public enum SoundEffect {
        clip.stop();
     }
    
-   // Optional static method to pre-load all the sound files.
+   /**
+    *  Optional static method to pre-load all the sound files.
+    */
    static void init(){
       values();   // calls the constructor for all the elements
+   }
+   
+   /**
+    *  Play the music looply
+    *  Usually used for BGM playing
+    */
+   public void loopPlay() {
+      try{
+         if(volume != Volume.MUTE){
+            clip.setFramePosition(0); // Back to beginning and replay
+            clip.start();             // Start playing
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+         }
+         else{}
+      }
+
+      catch(Exception e){
+         e.printStackTrace();
+      }
    }
 }
