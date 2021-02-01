@@ -111,6 +111,15 @@ public class BuyCycle
                 System.out.println("test2");
 
                 //TODO: Increase speed of growth with this upgrade
+                for(int i = 0; i < fieldArray.length; i++)
+                {
+                    for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                    {
+                        int temp = fieldArray[i].clockArr[j].time.getDelay();
+                        fieldArray[i].clockArr[j].time.setDelay((int)(temp * 0.10));
+                    }
+                }
+
             }
             else if(upgrade3Bought == false && mouseX >= buyMenu.upgradeIcons[2].getPosition().x && mouseX <= buyMenu.upgradeIcons[2].getPosition().x + buyMenu.upgradeIcons[2].getSize().x && mouseY >= buyMenu.upgradeIcons[2].getPosition().y && mouseY <= buyMenu.upgradeIcons[2].getPosition().y + buyMenu.upgradeIcons[2].getSize().y)
             {
@@ -122,6 +131,19 @@ public class BuyCycle
                 System.out.println("test3");
 
                 //TODO: Increase both speed and profit with this upgrade
+                for(int i = 0; i < fieldArray.length; i++)
+                {
+                    for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                    {
+                        int temp = fieldArray[i].clockArr[j].time.getDelay();
+                        fieldArray[i].clockArr[j].time.setDelay((int)(temp * 0.25));
+                    }
+                }
+
+                carrotIncrementVal += 2;
+                chilliIncrementVal += 2;
+                hempIncrementVal += 2;
+                cauliflowerIncrementVal += 2;
             }
     
             if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
