@@ -117,7 +117,7 @@ public class Game {
         backround.setSize(windowSize);
         SoundEffect.init();
         SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
-        SoundEffect.BGM.play();  //testing the audio play for 1 time
+        SoundEffect.BGM2.loopPlay();  //testing the audio play for 1 time
     }
 
     /**
@@ -296,18 +296,22 @@ public class Game {
                         {
                             if(farmFields[i].getVegType() == "Hemp")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 15);
                             }
                             else if(farmFields[i].getVegType() == "Chilli")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 10);
                             }
                             else if(farmFields[i].getVegType() == "Cauliflower")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 5);
                             }
                             else if(farmFields[i].getVegType() == "Carrot")
                             {
+                                SoundEffect.CROPHARVEST.play();
                                 resourceMenu.increment(4, 1);
                             }
 
@@ -365,6 +369,7 @@ public class Game {
         if(shop.isClicked(window) == true && menu.menuOpen == false)
         {
             menu.menuOpen = true;
+            SoundEffect.OPENINVENTORY.play();
             pause();
         }
         
@@ -382,6 +387,7 @@ public class Game {
             if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
             {
                 menu.menuOpen = false;
+                SoundEffect.OPENINVENTORY.play();
                 pause();
             }
         }
@@ -464,18 +470,22 @@ public class Game {
             if(resourceMenu.getSelectedIndex() == 0)
             {
                 temp.setVegType(0);
+                SoundEffect.CROPPLANT.play();
             }
             else if(resourceMenu.getSelectedIndex() == 1)
             {
                 temp.setVegType(1);
+                SoundEffect.CROPPLANT.play();
             }
             else if(resourceMenu.getSelectedIndex() == 2)
             {
                 temp.setVegType(2);
+                SoundEffect.CROPPLANT.play();
             }
             else if(resourceMenu.getSelectedIndex() == 3)
             {
                 temp.setVegType(3);
+                SoundEffect.CROPPLANT.play();
             }
 
             //Unselects the curretnly selected to grow field
