@@ -364,16 +364,8 @@ public class Game implements Observer
             window.clear(new Color(50,20,20));
             
             this.movement();
-
-            for(int i = 0; i < farmFields.length; i++)
-            {
-                if(checkProximityToField(farmFields[i], farmer))
-                {
-                    buyCycle.collectVeg();
-                    buyCycle.selectVegToGrowOnField();
-                }
-            }
-
+            buyCycle.collectVeg();
+            buyCycle.selectVegToGrowOnField();
             this.drawObjects();
 
             if(farmFields[0].selectedField == farmFields[12]) // TODO: Handle issue regarding field 12, ideally remove it from the class totally
@@ -453,31 +445,5 @@ public class Game implements Observer
         }
 
         System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[1].isWinter);
-    }
-
-    /**
-     * Checks if the farmer is close enough to the field to be capable of collecting what is growing on said field.
-     * @param field the field we want to collect from
-     * @param farmer the farmer object
-     * @return boolean giving or not authorazation to collect
-     */
-    public boolean checkProximityToField(Fields field, Farmer farmer)
-    {
-        boolean returnVal = false;
-
-        Vector2f fieldSize = field.getSize();
-        Vector2f fieldPos = field.getPosition();
-
-        //Vector2f farmerSize = farmer.getSize();
-        Vector2f farmerPos = farmer.getPosition();
-
-        double distBetweenFarmerAndField = Math.sqrt((farmerPos.x - fieldPos.x) * (farmerPos.x - fieldPos.x) + (farmerPos.y - fieldPos.y) * (farmerPos.y - fieldPos.y));
-
-        if(distBetweenFarmerAndField <= fieldSizeInt)
-        {
-            returnVal = true;
-        }
-
-        return returnVal;
     }
 }
