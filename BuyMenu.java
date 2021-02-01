@@ -8,14 +8,17 @@ public class BuyMenu extends RectangleShape
 {
     private float exitButtonSize = 15;
     private Vector2f vegIconsSize = new Vector2f(50, 50);
+    private Vector2f upgradeIconsSize = new Vector2f(50, 50);
     private float gap = 20;
     private float xLocation, yLocation;
     private float xCauliflower, xTomato, xSweetCorn, xCarrot, yCauliflower, yTomato, ySweetCorn, yCarrot;
     protected RectangleShape [] vegIcons = new RectangleShape[4];
     private Texture [] vegTextures = new Texture[4];
+    protected RectangleShape [] upgradeIcons = new RectangleShape[3];
+    private Texture [] upgradeTextures = new Texture[3];
     private RectangleShape exitButton  = new RectangleShape();
     private Texture menuTexture;
-    private float yPosition;
+    private float yPositionVeg, yPositionUpgrades;
     protected boolean menuOpen = false;
 
     /**
@@ -35,19 +38,34 @@ public class BuyMenu extends RectangleShape
         this.setFillColor(new Color(128,128,128));
         exitButton.setFillColor(new Color(255,0,0));
 
-        yPosition = this.getPosition().y + this.getSize().y/2 - vegIconsSize.x/2;
+        yPositionVeg = this.getPosition().y + this.getSize().y/4 - vegIconsSize.x/2;
+        yPositionUpgrades = this.getPosition().y + this.getSize().y - this.getSize().y/4 - vegIconsSize.x/2;
         int temp = (int)this.getPosition().x + 20;
 
-        for(int i = 0; i < 4; i++) 
+        for(int i = 0; i < vegIcons.length; i++) 
         {
             vegIcons[i] = new RectangleShape(vegIconsSize);
             vegTextures[i] = new Texture();
 
-            vegIcons[i].setPosition(new Vector2f(temp, yPosition));
+            vegIcons[i].setPosition(new Vector2f(temp, yPositionVeg));
             
             temp += (vegIconsSize.x + gap);
 
             Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
+        }
+
+        temp = (int)this.getPosition().x + 20;
+        
+        for(int i = 0; i < upgradeIcons.length; i++) 
+        {
+            upgradeIcons[i] = new RectangleShape(upgradeIconsSize);
+            upgradeTextures[i] = new Texture();
+
+            upgradeIcons[i].setPosition(new Vector2f(temp, yPositionUpgrades));
+            
+            temp += (upgradeIconsSize.x + gap);
+
+            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", upgradeIcons[i], upgradeTextures[i]);
         }
 
     }
@@ -84,9 +102,18 @@ public class BuyMenu extends RectangleShape
      * returns the array of rectangles which serve as buttons
      * @return array of rectangles which serve as buttons
      */
-    public RectangleShape[] getRectangleArray()
+    public RectangleShape[] getVegArray()
     {
         return vegIcons;
+    }
+
+    /**
+     * returns the array of rectangles which serve as buttons
+     * @return array of rectangles which serve as buttons
+     */
+    public RectangleShape[] getUpgradeArray()
+    {
+        return upgradeIcons;
     }
 
     /**

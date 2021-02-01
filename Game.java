@@ -94,7 +94,7 @@ public class Game implements Observer
         seasonClock.addObserver(this);
 
         //Creates the BuyMenu based on window size.
-        menu = new BuyMenu(new Vector2f(300,120), window);
+        menu = new BuyMenu(new Vector2f(300,240), window);
 
         resourceMenu = new ResourceMenu(menu);
 
@@ -337,7 +337,12 @@ public class Game implements Observer
             
             for(int i = 0; i < 4; i++)
             {
-                window.draw(menu.getRectangleArray()[i]);
+                window.draw(menu.getVegArray()[i]);
+            }
+
+            for(int i = 0; i < 3; i++)
+            {
+                window.draw(menu.getUpgradeArray()[i]);
             }
             
             window.draw(menu.getExitButton());
@@ -386,6 +391,7 @@ public class Game implements Observer
                 {
                     resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                    buyCycle.buyUpgrade(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                 }
 
                 if(resourceMenu.getSelectedIndex() != -1 && farmFields[1].getSelectedField() != null)
@@ -413,6 +419,10 @@ public class Game implements Observer
         }
     }
 
+    /**
+     * Update method called every x seconds of the clock instance.
+     * This changes the season, which speeds up or slows down the growth speed.
+     */
     public void update(Observable clock, Object o)
     {
         if(farmFields[1].isWinter == true)
