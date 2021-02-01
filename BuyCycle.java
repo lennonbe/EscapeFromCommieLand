@@ -33,37 +33,40 @@ public class BuyCycle
         int returnValue = -1;
         int decrementValue = 0;
 
-        if(mouseX >= buyMenu.vegIcons[0].getPosition().x && mouseX <= buyMenu.vegIcons[0].getPosition().x + buyMenu.vegIcons[0].getSize().x && mouseY >= buyMenu.vegIcons[0].getPosition().y && mouseY <= buyMenu.vegIcons[0].getPosition().y + buyMenu.vegIcons[0].getSize().y)
+        if(buyMenu.menuOpen == true)
         {
-            SoundEffect.PURCHASEITEM.play();
-            returnValue = 0;
-            decrementValue = 1;
-        }
-        else if(mouseX >= buyMenu.vegIcons[1].getPosition().x && mouseX <= buyMenu.vegIcons[1].getPosition().x + buyMenu.vegIcons[1].getSize().x && mouseY >= buyMenu.vegIcons[1].getPosition().y && mouseY <= buyMenu.vegIcons[1].getPosition().y + buyMenu.vegIcons[1].getSize().y)
-        {
-            SoundEffect.PURCHASEITEM.play();
-            returnValue = 1;
-            decrementValue = 2;
-        }
-        else if(mouseX >= buyMenu.vegIcons[2].getPosition().x && mouseX <= buyMenu.vegIcons[2].getPosition().x + buyMenu.vegIcons[2].getSize().x && mouseY >= buyMenu.vegIcons[2].getPosition().y && mouseY <= buyMenu.vegIcons[2].getPosition().y + buyMenu.vegIcons[2].getSize().y)
-        {
-            SoundEffect.PURCHASEITEM.play();
-            returnValue = 2;
-            decrementValue = 5;
-        }
-        else if(mouseX >= buyMenu.vegIcons[3].getPosition().x && mouseX <= buyMenu.vegIcons[3].getPosition().x + buyMenu.vegIcons[3].getSize().x && mouseY >= buyMenu.vegIcons[3].getPosition().y && mouseY <= buyMenu.vegIcons[3].getPosition().y + buyMenu.vegIcons[3].getSize().y)
-        {
-            SoundEffect.PURCHASEITEM.play();
-            returnValue = 3;
-            decrementValue = 7;
-        }
-
-        if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
-        {
-            if(resourceMenu.getIndexVal(4) >= decrementValue)
+            if(mouseX >= buyMenu.vegIcons[0].getPosition().x && mouseX <= buyMenu.vegIcons[0].getPosition().x + buyMenu.vegIcons[0].getSize().x && mouseY >= buyMenu.vegIcons[0].getPosition().y && mouseY <= buyMenu.vegIcons[0].getPosition().y + buyMenu.vegIcons[0].getSize().y)
             {
-                resourceMenu.increment(returnValue);
-                resourceMenu.decrement(4, decrementValue);
+                SoundEffect.PURCHASEITEM.play();
+                returnValue = 0;
+                decrementValue = 1;
+            }
+            else if(mouseX >= buyMenu.vegIcons[1].getPosition().x && mouseX <= buyMenu.vegIcons[1].getPosition().x + buyMenu.vegIcons[1].getSize().x && mouseY >= buyMenu.vegIcons[1].getPosition().y && mouseY <= buyMenu.vegIcons[1].getPosition().y + buyMenu.vegIcons[1].getSize().y)
+            {
+                SoundEffect.PURCHASEITEM.play();
+                returnValue = 1;
+                decrementValue = 2;
+            }
+            else if(mouseX >= buyMenu.vegIcons[2].getPosition().x && mouseX <= buyMenu.vegIcons[2].getPosition().x + buyMenu.vegIcons[2].getSize().x && mouseY >= buyMenu.vegIcons[2].getPosition().y && mouseY <= buyMenu.vegIcons[2].getPosition().y + buyMenu.vegIcons[2].getSize().y)
+            {
+                SoundEffect.PURCHASEITEM.play();
+                returnValue = 2;
+                decrementValue = 5;
+            }
+            else if(mouseX >= buyMenu.vegIcons[3].getPosition().x && mouseX <= buyMenu.vegIcons[3].getPosition().x + buyMenu.vegIcons[3].getSize().x && mouseY >= buyMenu.vegIcons[3].getPosition().y && mouseY <= buyMenu.vegIcons[3].getPosition().y + buyMenu.vegIcons[3].getSize().y)
+            {
+                SoundEffect.PURCHASEITEM.play();
+                returnValue = 3;
+                decrementValue = 7;
+            }
+    
+            if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
+            {
+                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                {
+                    resourceMenu.increment(returnValue);
+                    resourceMenu.decrement(4, decrementValue);
+                }
             }
         }
 
@@ -125,7 +128,7 @@ public class BuyCycle
                     else
                     {
                         //Algorithm for collecting veg from a specific field
-                        if(fieldArray[i].getVegType() != "")
+                        if(fieldArray[i].getVegType() != "" && checkProximityToField(fieldArray[i]))//TODO: ADD IN LINE REGARDING CHECKING FOR PROXIMITY TO FIELD
                         {
                             if(fieldArray[i].getVegType() == "Hemp")
                             {
@@ -151,10 +154,11 @@ public class BuyCycle
                             fieldArray[i].setVegType("");
                             fieldArray[i].selectedField = null;
                             fieldArray[i].readyToCollect = false;
+                            
+                            fieldArray[i].loadPathToRectangle("BoringGame", "DirtWet.png");
+                            pause();
                         }
 
-                        fieldArray[i].loadPathToRectangle("BoringGame", "DirtWet.png");
-                        pause();
                     }
                 }
             }
@@ -174,5 +178,31 @@ public class BuyCycle
         {
 
         }
+    }
+
+    /**
+     * Checks if the farmer is close enough to the field to be capable of collecting what is growing on said field.
+     * @param field the field we want to collect from
+     * @param farmer the farmer object
+     * @return boolean giving or not authorazation to collect
+     */
+    public boolean checkProximityToField(Fields field)
+    {
+        boolean returnVal = false;
+
+        Vector2f fieldSize = field.getSize();
+        Vector2f fieldPos = field.getPosition();
+
+        //Vector2f farmerSize = farmer.getSize();
+        Vector2f farmerPos = game.farmer.getPosition();
+
+        double distBetweenFarmerAndField = Math.sqrt((farmerPos.x - fieldPos.x) * (farmerPos.x - fieldPos.x) + (farmerPos.y - fieldPos.y) * (farmerPos.y - fieldPos.y));
+
+        if(distBetweenFarmerAndField <= game.fieldSizeInt)
+        {
+            returnVal = true;
+        }
+
+        return returnVal;
     }
 }
