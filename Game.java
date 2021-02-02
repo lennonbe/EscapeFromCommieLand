@@ -66,15 +66,15 @@ public class Game {
     //private boolean menuOpen = false;
     private BuyMenu menu;
 
-    //ResourceMenu testing::::
+    //Initializing resource and family menu
     private ResourceMenu resourceMenu;
+    private FamilyMenu familyMenu;
 
     /**
      * Constructor for the game. Loads the window, adds all needed 
      * objects such as sprites and rectangles and sets their initial positions.
      */
-    public Game()
-    {
+    public Game() {
         //Create the window
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
         window.setSize(new Vector2i(width, height));
@@ -83,7 +83,8 @@ public class Game {
         //Creates the BuyMenu based on window size.
         menu = new BuyMenu(new Vector2f(300,120), window);
 
-        resourceMenu = new ResourceMenu(menu);
+        resourceMenu = new ResourceMenu();
+        familyMenu = new FamilyMenu();
 
         menu.setResourceMenu(resourceMenu);
 
@@ -92,21 +93,15 @@ public class Game {
 
         Loader.loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
 
-        int x = 0;
-        int y = 0;
-        for(int i = 0; i < farmFields.length; i++) 
-        {
+        for(int i = 0, x = 0, y = 0; i < farmFields.length; i++) {
             farmFields[i] = new Fields(fieldSize, resourceMenu);
             farmFields[i].setPosition(width/2 + (((fieldSizeInt)*(x-2))) - fieldSizeInt/2, height/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
 
             //Calculates the x and y position on a 2 dimentional matrix
-            if(x == 4) 
-            {
+            if(x == 4) {
                 x = 0;
                 y++;
-            } 
-            else 
-            {
+            } else {
                 x++;
             }
         }
@@ -115,9 +110,9 @@ public class Game {
 
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
-        SoundEffect.init();
-        SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
-        SoundEffect.BGM.play();  //testing the audio play for 1 time
+        // SoundEffect.init();
+        // SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
+        // SoundEffect.BGM.play();  //testing the audio play for 1 time
     }
 
     /**
@@ -341,22 +336,38 @@ public class Game {
         window.draw(farmer);
         window.draw(backround);
         window.draw(resourceMenu);
+        window.draw(familyMenu);
         
         //Draws the resource icons
         RectangleShape[] arrayOfRectangles = resourceMenu.getRectangleArray();
         
-        for(RectangleShape i : arrayOfRectangles) 
-        {
+        for(RectangleShape i : arrayOfRectangles) {
+            window.draw(i);
+        }
+
+        arrayOfRectangles = familyMenu.getRectangleArray();
+
+        for(RectangleShape i : arrayOfRectangles) {
             window.draw(i);
         }
         
         //Draws the counters for each resource
         Text[] arrayOfText = resourceMenu.getCounter();
         
-        for(Text t : arrayOfText) 
-        {
+        for(Text t : arrayOfText) {
             window.draw(t);
         }
+
+        //Draws all the circles for the Family events
+        CircleShape[] arrayOfCircles = familyMenu.getCircleShapeArray();
+        for(CircleShape c : arrayOfCircles) {
+            window.draw(c);
+        }
+
+        try {
+            window.draw(familyMenu.getPopup());
+            window.draw(familyMenu.getText());
+        } catch(Exception e) {}
         
         /*
         Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
@@ -419,9 +430,12 @@ public class Game {
                 {
                     farmFields[1].getSelectedField().setGrowing(true);
                 }
+
+                if(Mouse.isButtonPressed(Mouse.Button.LEFT)) {
+                    familyMenu.eventClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                }
             }
 
-            System.out.println("Selected field is" + farmFields[0].selectedField);
         }
     }
 
@@ -443,14 +457,9 @@ public class Game {
      */
     public void pause()
     {
-        try 
-        {
+        try {
             TimeUnit.MILLISECONDS.sleep(250); 
-        } 
-        catch (Exception e) 
-        {
-
-        }
+        } catch (Exception e) {}
     }
 
     /**

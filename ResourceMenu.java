@@ -35,8 +35,7 @@ public class ResourceMenu extends RectangleShape
     /**
      * Initializes the resource menu attributes
      */
-    public ResourceMenu(BuyMenu buyMenu) 
-    {
+    public ResourceMenu() {
         //Sets up this rectangle, so that it can be drawn with the right parameter
         super(new Vector2f(width, height));
 
@@ -64,8 +63,7 @@ public class ResourceMenu extends RectangleShape
          * with the 'display' (black rectangles) inbetween.
          * Then loads in the icons and sets their attributes.
          */
-        for(int i = 0; i < numberOfIcons; i++) 
-        {
+        for(int i = 0; i < numberOfIcons; i++) {
             int iconXPosition = gap + (iconWidth*2) * i; 
 
             numberDisplayBackground[i] = new RectangleShape(new Vector2f(iconWidth, iconHeight));
@@ -78,19 +76,13 @@ public class ResourceMenu extends RectangleShape
             seedIcons[i].setPosition(new Vector2f(iconXPosition, 20));
             seedIcons[i].setSize(seedIconSize);
             
-            if(i == 4)
-            {
-                counterText[i] = new Text("5", font, 50);
-            }
-            else
-            {
-                counterText[i] = new Text("0", font, 50);
-            }
+            counterText[i] = new Text("0", font, 50);
 
             counterText[i].setPosition(iconXPosition + iconWidth, 20);
-
+            
             Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
         }
+        counterText[4].setString("5");
     }
 
     /**
@@ -99,8 +91,7 @@ public class ResourceMenu extends RectangleShape
      * 
      * @return The array of rectangles that make up the menu
      */
-    public RectangleShape[] getRectangleArray() 
-    {
+    public RectangleShape[] getRectangleArray() {
         RectangleShape[] result = new RectangleShape[numberOfIcons*2];
 
         System.arraycopy(seedIcons, 0, result, 0, numberOfIcons);
@@ -113,8 +104,7 @@ public class ResourceMenu extends RectangleShape
      * This function returns the array of JSFML Text, these are used to display the number of resources in the menu.
      * @return Array of Text
      */
-    public Text[] getCounter() 
-    {
+    public Text[] getCounter() {
         return counterText;
     }
     
