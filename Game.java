@@ -74,6 +74,7 @@ public class Game implements Observer
 
     //ResourceMenu testing::::
     private ResourceMenu resourceMenu;
+    private FamilyMenu familyMenu;
 
     //BuyCycle class testing:
     private BuyCycle buyCycle;
@@ -97,6 +98,7 @@ public class Game implements Observer
         menu = new BuyMenu(new Vector2f(300,240), window);
 
         resourceMenu = new ResourceMenu(menu);
+        familyMenu = new FamilyMenu();
 
         //Limit the framerate
         window.setFramerateLimit(60);
@@ -303,21 +305,29 @@ public class Game implements Observer
         window.draw(farmer);
         window.draw(backround);
         window.draw(resourceMenu);
+        window.draw(familyMenu);
+        
+        try {
+            window.draw(familyMenu.getPopup());
+        } catch (Exception e) {}
+        window.draw(familyMenu.getText());
         
         //Draws the resource icons
-        RectangleShape[] arrayOfRectangles = resourceMenu.getRectangleArray();
-        
-        for(RectangleShape i : arrayOfRectangles) 
-        {
+        for(RectangleShape i : resourceMenu.getRectangleArray()) {
             window.draw(i);
         }
         
         //Draws the counters for each resource
-        Text[] arrayOfText = resourceMenu.getCounter();
-        
-        for(Text t : arrayOfText) 
-        {
+        for(Text t : resourceMenu.getCounter()) {
             window.draw(t);
+        }
+        
+        for(RectangleShape r : familyMenu.getRectangleArray()) {
+            window.draw(r);
+        }
+        
+        for(CircleShape c : familyMenu.getCircleShapeArray()) {
+            window.draw(c);
         }
         
         /*

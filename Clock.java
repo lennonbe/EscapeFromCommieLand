@@ -20,6 +20,10 @@ public class Clock extends Observable implements ActionListener
         time.start();
     }
 
+    public void stopClock() {
+        time.stop();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) 
     {
