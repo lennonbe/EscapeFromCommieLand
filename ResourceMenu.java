@@ -21,7 +21,7 @@ public class ResourceMenu extends RectangleShape
     
     //More attributes about the resource menu
     private Font font;
-    private static int selectedIndex = -1;
+    protected static int selectedIndex = -1;
     private Vector2f seedIconSize;
     private RectangleShape resuourceMenuRectange;
     private Texture resuourceMenuTexture;

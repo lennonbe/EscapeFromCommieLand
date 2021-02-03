@@ -16,6 +16,10 @@ public class BuyCycle
     protected boolean upgrade1Bought = false, upgrade2Bought = false, upgrade3Bought = false;
     protected int hempIncrementVal = 15, chilliIncrementVal = 10, cauliflowerIncrementVal = 5, carrotIncrementVal = 2;
 
+    //Time increasing values for upgrades
+    private double upgrade2 = 0.75;
+    private double upgrade3 = 0.65;
+
     public BuyCycle(Fields[] array, ResourceMenu resMenu, BuyMenu buyMenuInput, RenderWindow windowInput, Game gameInput)
     {
         fieldArray = array;
@@ -39,25 +43,25 @@ public class BuyCycle
         {
             if(mouseX >= buyMenu.vegIcons[0].getPosition().x && mouseX <= buyMenu.vegIcons[0].getPosition().x + buyMenu.vegIcons[0].getSize().x && mouseY >= buyMenu.vegIcons[0].getPosition().y && mouseY <= buyMenu.vegIcons[0].getPosition().y + buyMenu.vegIcons[0].getSize().y)
             {
-                SoundEffect.PURCHASEITEM.play();
+                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 0;
                 decrementValue = 1;
             }
             else if(mouseX >= buyMenu.vegIcons[1].getPosition().x && mouseX <= buyMenu.vegIcons[1].getPosition().x + buyMenu.vegIcons[1].getSize().x && mouseY >= buyMenu.vegIcons[1].getPosition().y && mouseY <= buyMenu.vegIcons[1].getPosition().y + buyMenu.vegIcons[1].getSize().y)
             {
-                SoundEffect.PURCHASEITEM.play();
+                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 1;
                 decrementValue = 2;
             }
             else if(mouseX >= buyMenu.vegIcons[2].getPosition().x && mouseX <= buyMenu.vegIcons[2].getPosition().x + buyMenu.vegIcons[2].getSize().x && mouseY >= buyMenu.vegIcons[2].getPosition().y && mouseY <= buyMenu.vegIcons[2].getPosition().y + buyMenu.vegIcons[2].getSize().y)
             {
-                SoundEffect.PURCHASEITEM.play();
+                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 2;
                 decrementValue = 5;
             }
             else if(mouseX >= buyMenu.vegIcons[3].getPosition().x && mouseX <= buyMenu.vegIcons[3].getPosition().x + buyMenu.vegIcons[3].getSize().x && mouseY >= buyMenu.vegIcons[3].getPosition().y && mouseY <= buyMenu.vegIcons[3].getPosition().y + buyMenu.vegIcons[3].getSize().y)
             {
-                SoundEffect.PURCHASEITEM.play();
+                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 3;
                 decrementValue = 7;
             }
@@ -68,6 +72,7 @@ public class BuyCycle
                 {
                     resourceMenu.increment(returnValue);
                     resourceMenu.decrement(4, decrementValue);
+                    SoundEffect.PURCHASEITEM.play();
                 }
             }
         }
@@ -90,60 +95,75 @@ public class BuyCycle
             if(upgrade1Bought == false && mouseX >= buyMenu.upgradeIcons[0].getPosition().x && mouseX <= buyMenu.upgradeIcons[0].getPosition().x + buyMenu.upgradeIcons[0].getSize().x && mouseY >= buyMenu.upgradeIcons[0].getPosition().y && mouseY <= buyMenu.upgradeIcons[0].getPosition().y + buyMenu.upgradeIcons[0].getSize().y)
             {
                 //Scarecrow upgrade
-                SoundEffect.PURCHASEITEM.play();
+                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 0;
-                upgrade1Bought = true;
                 decrementValue = 5;
-                System.out.println("test1");
                 
-                carrotIncrementVal++;
-                chilliIncrementVal++;
-                hempIncrementVal++;
-                cauliflowerIncrementVal++;
+                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                {
+                    System.out.println("test1");
+                    upgrade1Bought = true;
+
+                    carrotIncrementVal++;
+                    chilliIncrementVal++;
+                    hempIncrementVal++;
+                    cauliflowerIncrementVal++;
+                }
+
             }
-            else if(upgrade2Bought == false && mouseX >= buyMenu.upgradeIcons[1].getPosition().x && mouseX <= buyMenu.upgradeIcons[1].getPosition().x + buyMenu.upgradeIcons[1].getSize().x && mouseY >= buyMenu.upgradeIcons[1].getPosition().y && mouseY <= buyMenu.upgradeIcons[1].getPosition().y + buyMenu.upgradeIcons[1].getSize().y)
+            else if(upgrade1Bought == true && upgrade2Bought == false && mouseX >= buyMenu.upgradeIcons[1].getPosition().x && mouseX <= buyMenu.upgradeIcons[1].getPosition().x + buyMenu.upgradeIcons[1].getSize().x && mouseY >= buyMenu.upgradeIcons[1].getPosition().y && mouseY <= buyMenu.upgradeIcons[1].getPosition().y + buyMenu.upgradeIcons[1].getSize().y)
             {
                 //Watering system upgrade
-                SoundEffect.PURCHASEITEM.play();
+                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 1;
-                upgrade2Bought = true;
                 decrementValue = 10;
-                System.out.println("test2");
-
-                //TODO: Increase speed of growth with this upgrade
-                for(int i = 0; i < fieldArray.length; i++)
+                
+                if(resourceMenu.getIndexVal(4) >= decrementValue)
                 {
-                    for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                    System.out.println("test2");
+                    upgrade2Bought = true;
+
+                    //TODO: Increase speed of growth with this upgrade
+                    for(int i = 0; i < fieldArray.length; i++)
                     {
-                        int temp = fieldArray[i].clockArr[j].time.getDelay();
-                        fieldArray[i].clockArr[j].time.setDelay((int)(temp * 0.10));
+                        for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                        {
+                            int temp = fieldArray[i].clockArr[j].time.getInitialDelay();
+                            fieldArray[i].clockArr[j].time.setDelay((int)(temp * upgrade2));
+                        }
                     }
                 }
+
 
             }
-            else if(upgrade3Bought == false && mouseX >= buyMenu.upgradeIcons[2].getPosition().x && mouseX <= buyMenu.upgradeIcons[2].getPosition().x + buyMenu.upgradeIcons[2].getSize().x && mouseY >= buyMenu.upgradeIcons[2].getPosition().y && mouseY <= buyMenu.upgradeIcons[2].getPosition().y + buyMenu.upgradeIcons[2].getSize().y)
+            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == false && mouseX >= buyMenu.upgradeIcons[2].getPosition().x && mouseX <= buyMenu.upgradeIcons[2].getPosition().x + buyMenu.upgradeIcons[2].getSize().x && mouseY >= buyMenu.upgradeIcons[2].getPosition().y && mouseY <= buyMenu.upgradeIcons[2].getPosition().y + buyMenu.upgradeIcons[2].getSize().y)
             {
                 //Tractor upgrade
-                SoundEffect.PURCHASEITEM.play();
+                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 2;
-                upgrade3Bought = true;
                 decrementValue = 15;
-                System.out.println("test3");
-
-                //TODO: Increase both speed and profit with this upgrade
-                for(int i = 0; i < fieldArray.length; i++)
+                
+                if(resourceMenu.getIndexVal(4) >= decrementValue)
                 {
-                    for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                    System.out.println("test3");
+                    upgrade3Bought = true;
+
+                    //TODO: Increase both speed and profit with this upgrade
+                    for(int i = 0; i < fieldArray.length; i++)
                     {
-                        int temp = fieldArray[i].clockArr[j].time.getDelay();
-                        fieldArray[i].clockArr[j].time.setDelay((int)(temp * 0.25));
+                        for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                        {
+                            int temp = fieldArray[i].clockArr[j].time.getInitialDelay();
+                            fieldArray[i].clockArr[j].time.setDelay((int)(temp * upgrade3));
+                        }
                     }
+    
+                    carrotIncrementVal += 2;
+                    chilliIncrementVal += 2;
+                    hempIncrementVal += 2;
+                    cauliflowerIncrementVal += 2;
                 }
 
-                carrotIncrementVal += 2;
-                chilliIncrementVal += 2;
-                hempIncrementVal += 2;
-                cauliflowerIncrementVal += 2;
             }
     
             if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
@@ -152,6 +172,7 @@ public class BuyCycle
                 {
                     //resourceMenu.increment(returnValue);
                     resourceMenu.decrement(4, decrementValue);
+                    SoundEffect.PURCHASEITEM.play();
                 }
             }
         }
@@ -165,7 +186,7 @@ public class BuyCycle
     public void selectVegToGrowOnField()
     {
         Fields temp = fieldArray[1].selectedField;
-        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[12])
+        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[12] && resourceMenu.getIndexVal(resourceMenu.selectedIndex) > 0)
         {
             if(resourceMenu.getSelectedIndex() == 0)
             {

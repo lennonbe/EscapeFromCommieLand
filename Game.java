@@ -82,6 +82,11 @@ public class Game implements Observer
     //Clock formswitching seasons every x seconds
     private Clock seasonClock = new Clock(60000);
 
+    //Time increasing values for seasons
+    private double winter = 1.33;
+    private double summer = 0.75;
+
+
     /**
      * Constructor for the game. Loads the window, adds all needed 
      * objects such as sprites and rectangles and sets their initial positions.
@@ -442,7 +447,7 @@ public class Game implements Observer
                 for(int i = 0; i < farmFields[j].clockArr.length; i++)
                 {
                     int temp = farmFields[j].clockArr[i].time.getDelay();
-                    farmFields[j].clockArr[i].time.setDelay((int)(temp * 0.5));
+                    farmFields[j].clockArr[i].time.setDelay((int)(temp * summer));
                 }
     
                 farmFields[j].isWinter = false;
@@ -455,7 +460,7 @@ public class Game implements Observer
                 for(int i = 0; i < farmFields[j].clockArr.length; i++)
                 {
                     int temp = farmFields[j].clockArr[i].time.getDelay();
-                    farmFields[j].clockArr[i].time.setDelay((int)(temp * 2));
+                    farmFields[j].clockArr[i].time.setDelay((int)(temp * winter));
                 }
                 
                 farmFields[j].isWinter = true;
