@@ -17,7 +17,7 @@ public class BuyCycle
     protected int hempIncrementVal = 13, chilliIncrementVal = 2, cauliflowerIncrementVal = 53, carrotIncrementVal = 5;
     protected int hempCost = 5, chilliCost = 1, cauliflowerCost = 13, carrotCost = 2;
 
-    //Time increasing values for upgrades
+    //Time increasing values for upgrades (lower the number the less time per cycle which leads to fast growth)
     private double upgrade2 = 0.75;
     private double upgrade3 = 0.65;
 

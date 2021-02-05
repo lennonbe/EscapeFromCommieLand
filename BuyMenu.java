@@ -51,11 +51,11 @@ public class BuyMenu extends RectangleShape
             
             temp += (vegIconsSize.x + gap);
 
-            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
         }
 
         temp = (int)this.getPosition().x + 20;
-        
+
         for(int i = 0; i < upgradeIcons.length; i++) 
         {
             upgradeIcons[i] = new RectangleShape(upgradeIconsSize);
@@ -65,7 +65,7 @@ public class BuyMenu extends RectangleShape
             
             temp += (upgradeIconsSize.x + gap);
 
-            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + i + ".png", upgradeIcons[i], upgradeTextures[i]);
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + i + ".png", upgradeIcons[i], upgradeTextures[i]);
         }
 
     }

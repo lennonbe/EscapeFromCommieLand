@@ -52,7 +52,7 @@ public class Fields extends RectangleShape implements Observer
     {
         super(size);
         resourceMenu = input;
-        this.loadPathToRectangle("BoringGame", "DirtWet.png");
+        this.loadPathToRectangle("BoringGame/AllResources", "DirtWet.png");
 
         for(int i = 0; i < 4; i++)
         {

@@ -89,7 +89,7 @@ public class ResourceMenu extends RectangleShape
 
             counterText[i].setPosition(iconXPosition + iconWidth, 20);
 
-            Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
         }
     }
 
@@ -205,24 +205,24 @@ public class ResourceMenu extends RectangleShape
             {
                 if(selectedIndex == index)
                 {
-                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);   
+                    Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);   
                     selectedIndex = -1;  
                     System.out.println("Selected = " + selectedIndex);           
                 }
                 else
                 {
-                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
-                    System.out.println("hello general kenobi");
+                    Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
+                    //System.out.println("hello general kenobi");
                     selectedIndex = index;
                     System.out.println("Selected = " + selectedIndex);
-                    Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
+                    Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
                 }
             }
-            else //i.e there are no selected icon
+            else //i.e there is no selected icon
             {
                 selectedIndex = index;
                 System.out.println("Selected = " + selectedIndex);
-                Loader.loadPathToRectangle("BoringGame/Sprites/FruitVeg/Temp_seeds", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
+                Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
             }
         }
 
