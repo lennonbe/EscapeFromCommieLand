@@ -190,31 +190,35 @@ public class BuyCycle
         Fields temp = fieldArray[1].selectedField;
         if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[12] && resourceMenu.getIndexVal(resourceMenu.selectedIndex) > 0)
         {
-            if(resourceMenu.getSelectedIndex() == 0)
+            //Checks if there is anything already growing on the field selected, and if so doesnt allow for selection
+            if(temp.growing == false)
             {
-                SoundEffect.CROPPLANT.play();
-                temp.setVegType(0);
-            }
-            else if(resourceMenu.getSelectedIndex() == 1)
-            {
-                SoundEffect.CROPPLANT.play();
-                temp.setVegType(1);
-            }
-            else if(resourceMenu.getSelectedIndex() == 2)
-            {
-                SoundEffect.CROPPLANT.play();
-                temp.setVegType(2);
-            }
-            else if(resourceMenu.getSelectedIndex() == 3)
-            {
-                SoundEffect.CROPPLANT.play();
-                temp.setVegType(3);
-            }
-
-            //Unselects the curretnly selected to grow field
-            if(fieldArray[1].getSelectedField().growing)
-            {
-                fieldArray[1].selectedField = null;
+                if(resourceMenu.getSelectedIndex() == 0)
+                {
+                    SoundEffect.CROPPLANT.play();
+                    temp.setVegType(0);
+                }
+                else if(resourceMenu.getSelectedIndex() == 1)
+                {
+                    SoundEffect.CROPPLANT.play();
+                    temp.setVegType(1);
+                }
+                else if(resourceMenu.getSelectedIndex() == 2)
+                {
+                    SoundEffect.CROPPLANT.play();
+                    temp.setVegType(2);
+                }
+                else if(resourceMenu.getSelectedIndex() == 3)
+                {
+                    SoundEffect.CROPPLANT.play();
+                    temp.setVegType(3);
+                }
+    
+                //Unselects the curretnly selected to grow field
+                if(fieldArray[1].getSelectedField().growing)
+                {
+                    fieldArray[1].selectedField = null;
+                }
             }
         }
     }
