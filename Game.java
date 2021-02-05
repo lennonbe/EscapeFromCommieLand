@@ -141,6 +141,12 @@ public class Game implements Observer
             {
                 farmFields[i][j] = new Fields(fieldSize, resourceMenu);
                 farmFields[i][j].setPosition(positionX, positionY);
+                
+                if(i == 0 || i == 4 || j == 0 || j == 4)
+                {
+                    farmFields[i][j].loadPathToRectangle("BoringGame/AllResources/PurchaseTiles", "Purchase1.png");
+                }
+
                 positionY += fieldSizeInt;
             }
             
