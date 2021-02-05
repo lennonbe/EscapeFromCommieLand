@@ -38,6 +38,12 @@ public class Fields extends RectangleShape implements Observer
     protected int growthStatus = -1;
     protected ResourceMenu resourceMenu;
 
+    //The following values are in regard to the different vegetables growth types
+    private int chilliGrowthCycleTime = 1000;
+    private int carrotGrowthCycleTime = 2000;
+    private int hempGrowthCycleTime = 2500;
+    private int cauliflowerGrowthCycleTime = 5000;
+
     /**
      * Constructor for Fields.
      * @param size the size of the field
@@ -52,19 +58,19 @@ public class Fields extends RectangleShape implements Observer
         {
             if(i == 0)
             {
-                clockArr[i] = new Clock(250);
+                clockArr[i] = new Clock(chilliGrowthCycleTime);
             }
             else if(i == 1)
             {
-                clockArr[i] = new Clock(1000);
+                clockArr[i] = new Clock(carrotGrowthCycleTime);
             }
             else if(i == 2)
             {
-                clockArr[i] = new Clock(2500);
+                clockArr[i] = new Clock(hempGrowthCycleTime);
             }
             else if(i == 3)
             {
-                clockArr[i] = new Clock(5000);
+                clockArr[i] = new Clock(cauliflowerGrowthCycleTime);
             }
         }
     }

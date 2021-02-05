@@ -14,7 +14,8 @@ public class BuyCycle
     protected RenderWindow window;
     protected Game game;
     protected boolean upgrade1Bought = false, upgrade2Bought = false, upgrade3Bought = false;
-    protected int hempIncrementVal = 15, chilliIncrementVal = 10, cauliflowerIncrementVal = 5, carrotIncrementVal = 2;
+    protected int hempIncrementVal = 13, chilliIncrementVal = 2, cauliflowerIncrementVal = 53, carrotIncrementVal = 5;
+    protected int hempCost = 5, chilliCost = 1, cauliflowerCost = 13, carrotCost = 2;
 
     //Time increasing values for upgrades
     private double upgrade2 = 0.75;
@@ -45,25 +46,25 @@ public class BuyCycle
             {
                 //SoundEffect.PURCHASEITEM.play();
                 returnValue = 0;
-                decrementValue = 1;
+                decrementValue = chilliCost;
             }
             else if(mouseX >= buyMenu.vegIcons[1].getPosition().x && mouseX <= buyMenu.vegIcons[1].getPosition().x + buyMenu.vegIcons[1].getSize().x && mouseY >= buyMenu.vegIcons[1].getPosition().y && mouseY <= buyMenu.vegIcons[1].getPosition().y + buyMenu.vegIcons[1].getSize().y)
             {
                 //SoundEffect.PURCHASEITEM.play();
                 returnValue = 1;
-                decrementValue = 2;
+                decrementValue = carrotCost;
             }
             else if(mouseX >= buyMenu.vegIcons[2].getPosition().x && mouseX <= buyMenu.vegIcons[2].getPosition().x + buyMenu.vegIcons[2].getSize().x && mouseY >= buyMenu.vegIcons[2].getPosition().y && mouseY <= buyMenu.vegIcons[2].getPosition().y + buyMenu.vegIcons[2].getSize().y)
             {
                 //SoundEffect.PURCHASEITEM.play();
                 returnValue = 2;
-                decrementValue = 5;
+                decrementValue = hempCost;
             }
             else if(mouseX >= buyMenu.vegIcons[3].getPosition().x && mouseX <= buyMenu.vegIcons[3].getPosition().x + buyMenu.vegIcons[3].getSize().x && mouseY >= buyMenu.vegIcons[3].getPosition().y && mouseY <= buyMenu.vegIcons[3].getPosition().y + buyMenu.vegIcons[3].getSize().y)
             {
                 //SoundEffect.PURCHASEITEM.play();
                 returnValue = 3;
-                decrementValue = 7;
+                decrementValue = cauliflowerCost;
             }
     
             if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
@@ -73,6 +74,7 @@ public class BuyCycle
                     resourceMenu.increment(returnValue);
                     resourceMenu.decrement(4, decrementValue);
                     SoundEffect.PURCHASEITEM.play();
+                    decrementValue = 0;
                 }
             }
         }
