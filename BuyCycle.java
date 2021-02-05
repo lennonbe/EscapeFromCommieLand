@@ -226,7 +226,7 @@ public class BuyCycle
      */
     public void collectVeg()
     {
-        if(buyMenu.menuOpen == false)
+        if(buyMenu.menuOpen == false /*&& resourceMenu.getSelectedIndex() == -1*/)
         {
             for(int i = 0; i < fieldArray.length; i++)
             {
@@ -239,7 +239,7 @@ public class BuyCycle
                     else
                     {
                         //Algorithm for collecting veg from a specific field
-                        if(fieldArray[i].getVegType() != "" && checkProximityToField(fieldArray[i]))//TODO: ADD IN LINE REGARDING CHECKING FOR PROXIMITY TO FIELD
+                        if(fieldArray[i].getVegType() != "" && checkProximityToField(fieldArray[i]) && resourceMenu.getSelectedIndex() == -1)//TODO: ADD IN LINE REGARDING CHECKING FOR PROXIMITY TO FIELD
                         {
                             if(fieldArray[i].getVegType() == "Hemp")
                             {
