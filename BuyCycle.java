@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BuyCycle 
 {
-    protected Fields[] fieldArray;
+    protected Fields[][] fieldMatrix;
     protected ResourceMenu resourceMenu;
     protected BuyMenu buyMenu; 
     protected RenderWindow window;
@@ -21,9 +21,9 @@ public class BuyCycle
     private double upgrade2 = 0.75;
     private double upgrade3 = 0.65;
 
-    public BuyCycle(Fields[] array, ResourceMenu resMenu, BuyMenu buyMenuInput, RenderWindow windowInput, Game gameInput)
+    public BuyCycle(Fields[][] array, ResourceMenu resMenu, BuyMenu buyMenuInput, RenderWindow windowInput, Game gameInput)
     {
-        fieldArray = array;
+        fieldMatrix = array;
         resourceMenu = resMenu;
         buyMenu = buyMenuInput;
         window = windowInput;
@@ -126,12 +126,15 @@ public class BuyCycle
                     upgrade2Bought = true;
 
                     //TODO: Increase speed of growth with this upgrade
-                    for(int i = 0; i < fieldArray.length; i++)
+                    for(int i = 0; i < 5; i++)
                     {
-                        for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                        for(int z = 0; z < 5; z++)
                         {
-                            int temp = fieldArray[i].clockArr[j].time.getInitialDelay();
-                            fieldArray[i].clockArr[j].time.setDelay((int)(temp * upgrade2));
+                            for(int j = 0; j < fieldMatrix[i][z].clockArr.length; j++)
+                            {
+                                int temp = fieldMatrix[i][z].clockArr[j].time.getInitialDelay();
+                                fieldMatrix[i][z].clockArr[j].time.setDelay((int)(temp * upgrade2));
+                            }
                         }
                     }
                 }
@@ -151,12 +154,15 @@ public class BuyCycle
                     upgrade3Bought = true;
 
                     //TODO: Increase both speed and profit with this upgrade
-                    for(int i = 0; i < fieldArray.length; i++)
+                    for(int i = 0; i < 5; i++)
                     {
-                        for(int j = 0; j < fieldArray[i].clockArr.length; j++)
+                        for(int z = 0; z < 5; z++)
                         {
-                            int temp = fieldArray[i].clockArr[j].time.getInitialDelay();
-                            fieldArray[i].clockArr[j].time.setDelay((int)(temp * upgrade3));
+                            for(int j = 0; j < fieldMatrix[i][z].clockArr.length; j++)
+                            {
+                                int temp = fieldMatrix[i][z].clockArr[j].time.getInitialDelay();
+                                fieldMatrix[i][z].clockArr[j].time.setDelay((int)(temp * upgrade3));
+                            }
                         }
                     }
     
@@ -187,8 +193,8 @@ public class BuyCycle
      */
     public void selectVegToGrowOnField()
     {
-        Fields temp = fieldArray[1].selectedField;
-        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[12] && resourceMenu.getIndexVal(resourceMenu.selectedIndex) > 0)
+        Fields temp = fieldMatrix[0][0].selectedField;
+        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.selectedIndex) > 0)
         {
             //Checks if there is anything already growing on the field selected, and if so doesnt allow for selection
             if(temp.growing == false && temp.readyToCollect == false)
@@ -215,7 +221,7 @@ public class BuyCycle
                 //Unselects the currently selected to grow field
                 if(temp.growing)
                 {
-                    fieldArray[1].selectedField = null;
+                    fieldMatrix[0][0].selectedField = null;
                 }
             }
         }
@@ -228,49 +234,52 @@ public class BuyCycle
     {
         if(buyMenu.menuOpen == false /*&& resourceMenu.getSelectedIndex() == -1*/)
         {
-            for(int i = 0; i < fieldArray.length; i++)
+            for(int i = 0; i < 5; i++)
             {
-                if(fieldArray[i].isClicked(window) && i != 12) // cause field 12 is behind the shop TODO: Remove field12 safely
+                for(int z = 0; z < 5; z++)
                 {
-                    if(fieldArray[i].readyToCollect == false)
+                    if(fieldMatrix[i][z].isClicked(window) && fieldMatrix[i][z] != fieldMatrix[2][2]) // cause field 12 is behind the shop TODO: Remove field12 safely
                     {
-                        pause();
-                    }
-                    else
-                    {
-                        //Algorithm for collecting veg from a specific field
-                        if(fieldArray[i].getVegType() != "" && checkProximityToField(fieldArray[i]) && resourceMenu.getSelectedIndex() == -1)//TODO: ADD IN LINE REGARDING CHECKING FOR PROXIMITY TO FIELD
+                        if(fieldMatrix[i][z].readyToCollect == false)
                         {
-                            if(fieldArray[i].getVegType() == "Hemp")
-                            {
-                                SoundEffect.CROPHARVEST.play();
-                                resourceMenu.increment(4, hempIncrementVal);
-                            }
-                            else if(fieldArray[i].getVegType() == "Chilli")
-                            {
-                                SoundEffect.CROPHARVEST.play();
-                                resourceMenu.increment(4, chilliIncrementVal);
-                            }
-                            else if(fieldArray[i].getVegType() == "Cauliflower")
-                            {
-                                SoundEffect.CROPHARVEST.play();
-                                resourceMenu.increment(4, cauliflowerIncrementVal);
-                            }
-                            else if(fieldArray[i].getVegType() == "Carrot")
-                            {
-                                SoundEffect.CROPHARVEST.play();
-                                resourceMenu.increment(4, carrotIncrementVal);
-                            }
-
-                            fieldArray[i].setVegType("");
-                            fieldArray[i].selectedField = null;
-                            fieldArray[i].readyToCollect = false;
-                            fieldArray[i].growing = false;
-                            
-                            fieldArray[i].loadPathToRectangle("BoringGame", "DirtWet.png");
                             pause();
                         }
-
+                        else
+                        {
+                            //Algorithm for collecting veg from a specific field
+                            if(fieldMatrix[i][z].getVegType() != "" && checkProximityToField(fieldMatrix[i][z]) && resourceMenu.getSelectedIndex() == -1)//TODO: ADD IN LINE REGARDING CHECKING FOR PROXIMITY TO FIELD
+                            {
+                                if(fieldMatrix[i][z].getVegType() == "Hemp")
+                                {
+                                    SoundEffect.CROPHARVEST.play();
+                                    resourceMenu.increment(4, hempIncrementVal);
+                                }
+                                else if(fieldMatrix[i][z].getVegType() == "Chilli")
+                                {
+                                    SoundEffect.CROPHARVEST.play();
+                                    resourceMenu.increment(4, chilliIncrementVal);
+                                }
+                                else if(fieldMatrix[i][z].getVegType() == "Cauliflower")
+                                {
+                                    SoundEffect.CROPHARVEST.play();
+                                    resourceMenu.increment(4, cauliflowerIncrementVal);
+                                }
+                                else if(fieldMatrix[i][z].getVegType() == "Carrot")
+                                {
+                                    SoundEffect.CROPHARVEST.play();
+                                    resourceMenu.increment(4, carrotIncrementVal);
+                                }
+    
+                                fieldMatrix[i][z].setVegType("");
+                                fieldMatrix[i][z].selectedField = null;
+                                fieldMatrix[i][z].readyToCollect = false;
+                                fieldMatrix[i][z].growing = false;
+                                
+                                fieldMatrix[i][z].loadPathToRectangle("BoringGame", "DirtWet.png");
+                                pause();
+                            }
+    
+                        }
                     }
                 }
             }

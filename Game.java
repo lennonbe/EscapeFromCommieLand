@@ -66,7 +66,9 @@ public class Game implements Observer
     private Shop shop = new Shop(fieldSize);
 
     //The Fields object array needed to draw all the fields around the shop
-    protected Fields [] farmFields = new Fields[25];
+    //protected Fields [] farmFields = new Fields[25];
+
+    protected Fields [][] farmFields = new Fields[5][5];
 
     //Variables for keeping track of the menu status
     //private boolean menuOpen = false;
@@ -110,7 +112,7 @@ public class Game implements Observer
 
         Loader.loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
 
-        int x = 0;
+        /*int x = 0;
         int y = 0;
         for(int i = 0; i < farmFields.length; i++) 
         {
@@ -127,6 +129,22 @@ public class Game implements Observer
             {
                 x++;
             }
+        }*/
+
+        //protected Fields [][] fieldMatrix = new Fields[5][5];
+
+        int positionX = width/2 + (fieldSizeInt*(-2)) - fieldSizeInt/2;
+        for(int i = 0; i < 5; i++)
+        {
+            int positionY = height/2 + ((fieldSizeInt)*(-2)) - fieldSizeInt/2;
+            for(int j = 0; j < 5; j++)
+            {
+                farmFields[i][j] = new Fields(fieldSize, resourceMenu);
+                farmFields[i][j].setPosition(positionX, positionY);
+                positionY += fieldSizeInt;
+            }
+            
+            positionX += fieldSizeInt;
         }
 
         buyCycle = new BuyCycle(farmFields, resourceMenu, menu, window, this);
@@ -301,9 +319,12 @@ public class Game implements Observer
     public void drawObjects()
     {
         //Draws the fields
-        for(int i = 0; i < farmFields.length; i++)
+        for(int i = 0; i < 5; i++)
         {
-            window.draw(farmFields[i]);
+            for(int j = 0; j < 5; j++)
+            {
+                window.draw(farmFields[i][j]);
+            }
         }
         
         window.draw(shop);
@@ -388,9 +409,9 @@ public class Game implements Observer
             buyCycle.selectVegToGrowOnField();
             this.drawObjects();
 
-            if(farmFields[0].selectedField == farmFields[12]) // TODO: Handle issue regarding field 12, ideally remove it from the class totally
+            if(farmFields[0][0].selectedField == farmFields[2][2]) // TODO: Handle issue regarding field 12, ideally remove it from the class totally
             {
-                farmFields[0].selectedField = null;
+                farmFields[0][0].selectedField = null;
             }
             
             //Handle events
@@ -409,9 +430,9 @@ public class Game implements Observer
                     buyCycle.buyUpgrade(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                 }
 
-                if(resourceMenu.getSelectedIndex() != -1 && farmFields[1].getSelectedField() != null)
+                if(resourceMenu.getSelectedIndex() != -1 && farmFields[0][0].getSelectedField() != null)
                 {
-                    farmFields[1].getSelectedField().setGrowing(true);
+                    farmFields[0][0].getSelectedField().setGrowing(true);
                 }
             }
 
@@ -440,34 +461,40 @@ public class Game implements Observer
      */
     public void update(Observable clock, Object o)
     {
-        if(farmFields[1].isWinter == true)
+        if(farmFields[0][0].isWinter == true)
         {
-            for(int j = 0; j < farmFields.length; j++)
+            for(int j = 0; j < 5; j++)
             {
-                for(int i = 0; i < farmFields[j].clockArr.length; i++)
+                for(int z = 0; z < 5; z++)
                 {
-                    int temp = farmFields[j].clockArr[i].time.getDelay();
-                    farmFields[j].clockArr[i].time.setDelay((int)(temp * summer));
+                    for(int i = 0; i < farmFields[j][z].clockArr.length; i++)
+                    {
+                        int temp = farmFields[j][z].clockArr[i].time.getDelay();
+                        farmFields[j][z].clockArr[i].time.setDelay((int)(temp * summer));
+                    }
+        
+                    farmFields[j][z].isWinter = false;
                 }
-    
-                farmFields[j].isWinter = false;
             }
         }
         else
         {
-            for(int j = 0; j < farmFields.length; j++)
+            for(int j = 0; j < 5; j++)
             {
-                for(int i = 0; i < farmFields[j].clockArr.length; i++)
+                for(int z = 0; z < 5; z++)
                 {
-                    int temp = farmFields[j].clockArr[i].time.getDelay();
-                    farmFields[j].clockArr[i].time.setDelay((int)(temp * winter));
+                    for(int i = 0; i < farmFields[j][z].clockArr.length; i++)
+                    {
+                        int temp = farmFields[j][z].clockArr[i].time.getDelay();
+                        farmFields[j][z].clockArr[i].time.setDelay((int)(temp * summer));
+                    }
+        
+                    farmFields[j][z].isWinter = true;
                 }
-                
-                farmFields[j].isWinter = true;
             }
         }
         
         SoundEffect.FAILPRISON.play();
-        System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[1].isWinter);
+        System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[0][0].isWinter);
     }
 }

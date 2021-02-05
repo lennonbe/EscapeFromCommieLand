@@ -142,7 +142,7 @@ public class Fields extends RectangleShape implements Observer
     {
         if(this.growing == true)
         {
-            this.loadPathToRectangle("BoringGame/Sprites/FruitVeg/" + this.vegType, this.vegType + growthStatus + ".png");
+            this.loadPathToRectangle("BoringGame/AllResources/FruitVeg/" + this.vegType, this.vegType + growthStatus + ".png");
     
             if(growthStatus < 7)
             {
