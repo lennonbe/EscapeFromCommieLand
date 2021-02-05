@@ -191,31 +191,29 @@ public class BuyCycle
         if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[12] && resourceMenu.getIndexVal(resourceMenu.selectedIndex) > 0)
         {
             //Checks if there is anything already growing on the field selected, and if so doesnt allow for selection
-            if(temp.growing == false)
+            if(temp.growing == false && temp.readyToCollect == false)
             {
                 if(resourceMenu.getSelectedIndex() == 0)
                 {
-                    SoundEffect.CROPPLANT.play();
                     temp.setVegType(0);
                 }
                 else if(resourceMenu.getSelectedIndex() == 1)
                 {
-                    SoundEffect.CROPPLANT.play();
                     temp.setVegType(1);
                 }
                 else if(resourceMenu.getSelectedIndex() == 2)
                 {
-                    SoundEffect.CROPPLANT.play();
                     temp.setVegType(2);
                 }
                 else if(resourceMenu.getSelectedIndex() == 3)
                 {
-                    SoundEffect.CROPPLANT.play();
                     temp.setVegType(3);
                 }
-    
-                //Unselects the curretnly selected to grow field
-                if(fieldArray[1].getSelectedField().growing)
+                
+                SoundEffect.CROPPLANT.play();
+
+                //Unselects the currently selected to grow field
+                if(temp.growing)
                 {
                     fieldArray[1].selectedField = null;
                 }
@@ -267,6 +265,7 @@ public class BuyCycle
                             fieldArray[i].setVegType("");
                             fieldArray[i].selectedField = null;
                             fieldArray[i].readyToCollect = false;
+                            fieldArray[i].growing = false;
                             
                             fieldArray[i].loadPathToRectangle("BoringGame", "DirtWet.png");
                             pause();

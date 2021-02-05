@@ -38,7 +38,7 @@ public class Fields extends RectangleShape implements Observer
     protected int growthStatus = -1;
     protected ResourceMenu resourceMenu;
 
-    //The following values are in regard to the different vegetables growth types
+    //The following values are in regard to the different vegetables growth types. This time is the cycle time and is multiplied by 7 to get a total time of growth.
     private int chilliGrowthCycleTime = 1000;
     private int carrotGrowthCycleTime = 2000;
     private int hempGrowthCycleTime = 2500;
