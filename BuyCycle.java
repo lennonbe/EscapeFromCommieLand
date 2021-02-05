@@ -275,7 +275,7 @@ public class BuyCycle
                                 fieldMatrix[i][z].readyToCollect = false;
                                 fieldMatrix[i][z].growing = false;
                                 
-                                fieldMatrix[i][z].loadPathToRectangle("BoringGame", "DirtWet.png");
+                                fieldMatrix[i][z].loadPathToRectangle("BoringGame/AllResources", "WetDirt.png");
                                 pause();
                             }
     

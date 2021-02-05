@@ -34,6 +34,7 @@ public class Fields extends RectangleShape implements Observer
     protected Clock [] clockArr = new Clock[4];
     protected boolean growing = false;
     protected boolean readyToCollect = false;
+    protected boolean unlocked = true;
     protected String vegType = "";
     protected int growthStatus = -1;
     protected ResourceMenu resourceMenu;
@@ -52,7 +53,7 @@ public class Fields extends RectangleShape implements Observer
     {
         super(size);
         resourceMenu = input;
-        this.loadPathToRectangle("BoringGame/AllResources", "DirtWet.png");
+        this.loadPathToRectangle("BoringGame/AllResources", "WetDirt.png");
 
         for(int i = 0; i < 4; i++)
         {
