@@ -40,8 +40,8 @@ public class BuyMenu extends RectangleShape
 
         yPositionVeg = this.getPosition().y + this.getSize().y/4 - vegIconsSize.x/2;
         yPositionUpgrades = this.getPosition().y + this.getSize().y - this.getSize().y/4 - vegIconsSize.x/2;
+        
         int temp = (int)this.getPosition().x + 20;
-
         for(int i = 0; i < vegIcons.length; i++) 
         {
             vegIcons[i] = new RectangleShape(vegIconsSize);
@@ -55,7 +55,6 @@ public class BuyMenu extends RectangleShape
         }
 
         temp = (int)this.getPosition().x + 20;
-
         for(int i = 0; i < upgradeIcons.length; i++) 
         {
             upgradeIcons[i] = new RectangleShape(upgradeIconsSize);

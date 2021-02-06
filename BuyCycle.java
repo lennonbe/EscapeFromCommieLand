@@ -194,11 +194,13 @@ public class BuyCycle
     public void selectVegToGrowOnField()
     {
         Fields temp = fieldMatrix[0][0].selectedField;
-        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.selectedIndex) > 0)
+        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) > 0)
         {
+            System.out.println("testing1");
             //Checks if there is anything already growing on the field selected, and if so doesnt allow for selection
             if(temp.growing == false && temp.readyToCollect == false)
             {
+                System.out.println("testing2");
                 if(resourceMenu.getSelectedIndex() == 0)
                 {
                     temp.setVegType(0);
@@ -218,7 +220,7 @@ public class BuyCycle
                 
                 SoundEffect.CROPPLANT.play();
 
-                //Unselects the currently selected to grow field
+                //Unselects the currently selected field
                 if(temp.growing)
                 {
                     fieldMatrix[0][0].selectedField = null;

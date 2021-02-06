@@ -411,10 +411,8 @@ public class Game implements Observer
             window.clear(new Color(50,20,20));
             
             this.movement();
-            buyCycle.collectVeg();
-            buyCycle.selectVegToGrowOnField();
             this.drawObjects();
-
+            
             if(farmFields[0][0].selectedField == farmFields[2][2]) // TODO: Handle issue regarding field 12, ideally remove it from the class totally
             {
                 farmFields[0][0].selectedField = null;
@@ -428,18 +426,20 @@ public class Game implements Observer
                     //The user pressed the close button
                     window.close();
                 }
-
+                
                 if(Mouse.isButtonPressed(Mouse.Button.LEFT))
                 {
                     resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.buyUpgrade(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                    buyCycle.collectVeg();
+                    buyCycle.selectVegToGrowOnField();
                 }
 
-                if(resourceMenu.getSelectedIndex() != -1 && farmFields[0][0].getSelectedField() != null)
+                /*if(resourceMenu.getSelectedIndex() != -1 && farmFields[0][0].getSelectedField() != null)
                 {
                     farmFields[0][0].getSelectedField().setGrowing(true);
-                }
+                }*/
             }
 
             //System.out.println("Selected field is" + farmFields[0].selectedField);
