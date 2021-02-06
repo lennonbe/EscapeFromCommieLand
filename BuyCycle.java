@@ -194,7 +194,7 @@ public class BuyCycle
     public void selectVegToGrowOnField()
     {
         Fields temp = fieldMatrix[0][0].selectedField;
-        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) > 0)
+        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) > 0 && temp.unlocked == true)
         {
             System.out.println("testing1");
             //Checks if there is anything already growing on the field selected, and if so doesnt allow for selection

@@ -112,27 +112,6 @@ public class Game implements Observer
 
         Loader.loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
 
-        /*int x = 0;
-        int y = 0;
-        for(int i = 0; i < farmFields.length; i++) 
-        {
-            farmFields[i] = new Fields(fieldSize, resourceMenu);
-            farmFields[i].setPosition(width/2 + (((fieldSizeInt)*(x-2))) - fieldSizeInt/2, height/2 + ((fieldSizeInt)*(y-2)) - fieldSizeInt/2);
-
-            //Calculates the x and y position on a 2 dimentional matrix
-            if(x == 4) 
-            {
-                x = 0;
-                y++;
-            } 
-            else 
-            {
-                x++;
-            }
-        }*/
-
-        //protected Fields [][] fieldMatrix = new Fields[5][5];
-
         int positionX = width/2 + (fieldSizeInt*(-2)) - fieldSizeInt/2;
         for(int i = 0; i < 5; i++)
         {
@@ -145,6 +124,7 @@ public class Game implements Observer
                 if(i == 0 || i == 4 || j == 0 || j == 4)
                 {
                     farmFields[i][j].loadPathToRectangle("BoringGame/AllResources/PurchaseTiles", "Purchase1.png");
+                    farmFields[i][j].unlocked = false;
                 }
 
                 positionY += fieldSizeInt;

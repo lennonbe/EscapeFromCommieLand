@@ -2,6 +2,11 @@ package BoringGame;
 
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
+import java.nio.file.Path;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+import java.io.*;
 
 /**
  * Class representing the resource menu in the top left of the screen.
@@ -31,6 +36,7 @@ public class ResourceMenu extends RectangleShape
     private int[] resourceCounter;
     private Text[] counterText;
     private boolean isSelected = false;
+    private Texture resourceMenuTexture;
 
     /**
      * Initializes the resource menu attributes
@@ -42,6 +48,9 @@ public class ResourceMenu extends RectangleShape
 
         this.setPosition(0, 0);
         this.setFillColor(new Color(128,128,128));
+
+        /*resourceMenuTexture = new Texture();
+        loadPathToRectangle("BoringGame/AllResources", "TopMenu.png");*/
 
         //Loads in the font
         font = new Font();
@@ -235,5 +244,29 @@ public class ResourceMenu extends RectangleShape
     public int getSelectedIndex() 
     {
         return selectedIndex;
+    }
+
+    /**
+     * Method which allows to loadn in .PNG files into sprites
+     * @param directory the directory of the file you wish to load
+     * @param file the file you wish to load
+     * @param rectangle the rectangle you wish to have this file drawn on
+     * @param texture a needed texture for the rectangle, making it drawable
+     */
+    public void loadPathToRectangle(String directory, String file)
+    {
+        Path path = FileSystems.getDefault().getPath(directory, file);
+        
+        try {
+            BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+
+        } catch (Exception e) {}
+
+        try {
+            resourceMenuTexture.loadFromFile(path);
+        } 
+        catch (Exception e) {}
+
+        this.setTexture(resourceMenuTexture);
     }
 }
