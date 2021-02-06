@@ -17,12 +17,15 @@ public class ResourceMenu extends RectangleShape
 {
     
     //Inherit attributes of the ResoureMenu are final
-    private final static int width = 550;
+    //private final static int width = 550;
+    private final static int width = 650;
     private final static int height = 90;
     private final int numberOfIcons = 5;
     private final int iconWidth = 50;
     private final int iconHeight = 50;
-    private final int gap = 20;
+    //private final int gap = 30;
+    private final int gap = 42;
+
     
     //More attributes about the resource menu
     private Font font;
@@ -37,6 +40,7 @@ public class ResourceMenu extends RectangleShape
     private Text[] counterText;
     private boolean isSelected = false;
     private Texture resourceMenuTexture;
+    private int textYPosition = 60;
 
     /**
      * Initializes the resource menu attributes
@@ -49,8 +53,8 @@ public class ResourceMenu extends RectangleShape
         this.setPosition(0, 0);
         this.setFillColor(new Color(128,128,128));
 
-        /*resourceMenuTexture = new Texture();
-        loadPathToRectangle("BoringGame/AllResources", "TopMenu.png");*/
+        resourceMenuTexture = new Texture();
+        loadPathToRectangle("BoringGame/AllResources", "TopMenu.png");
 
         //Loads in the font
         font = new Font();
@@ -73,9 +77,10 @@ public class ResourceMenu extends RectangleShape
          * with the 'display' (black rectangles) inbetween.
          * Then loads in the icons and sets their attributes.
          */
+        int iconXPosition = gap - 10;  
         for(int i = 0; i < numberOfIcons; i++) 
         {
-            int iconXPosition = gap + (iconWidth*2) * i; 
+            //int iconXPosition = gap + (iconWidth*2) * i;
 
             numberDisplayBackground[i] = new RectangleShape(new Vector2f(iconWidth, iconHeight));
             numberDisplayBackground[i].setPosition(iconXPosition + iconWidth, 20);
@@ -89,16 +94,37 @@ public class ResourceMenu extends RectangleShape
             
             if(i == 4)//initial money val is 5
             {
-                counterText[i] = new Text("5", font, 50);
+                counterText[i] = new Text("5", font, 15);
             }
             else
             {
-                counterText[i] = new Text("0", font, 50);
+                counterText[i] = new Text("0", font, 15);
             }
 
-            counterText[i].setPosition(iconXPosition + iconWidth, 20);
-
+            
             Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
+            
+            if(i == 0)
+            {
+                counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
+                iconXPosition += (iconWidth + gap + 2);
+            }
+            else if(i == 1)
+            {
+                counterText[i].setPosition(iconXPosition + iconWidth - 5, textYPosition);
+                iconXPosition += (iconWidth + gap + 8);
+            }
+            else if(i == 2)
+            {
+                counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
+                iconXPosition += (iconWidth + gap + 4);
+            }
+            else
+            {
+                counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
+                iconXPosition += (iconWidth + gap);
+            }
+
         }
     }
 
@@ -116,6 +142,17 @@ public class ResourceMenu extends RectangleShape
         System.arraycopy(numberDisplayBackground, 0, result, numberOfIcons, numberOfIcons);
 
         return result;
+    }
+
+    /**
+     * This function adds all the JSFML Rectangles used to draw the resource menu into one array and returns it.
+     * This is useful in the class that implements this menu, so that the rectangles can be drawn onto the screen
+     * 
+     * @return The array of rectangles that make up the menu
+     */
+    public RectangleShape[] getRectangleArray(int i) 
+    {
+        return seedIcons;
     }
 
     /**

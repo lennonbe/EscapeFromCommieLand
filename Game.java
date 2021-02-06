@@ -325,7 +325,7 @@ public class Game implements Observer
         window.draw(familyMenu.getText());
         
         //Draws the resource icons
-        for(RectangleShape i : resourceMenu.getRectangleArray()) {
+        for(RectangleShape i : resourceMenu.getRectangleArray(1)) {//simply change getRectangle Array by not giving it an int and it does milosz's version
             window.draw(i);
         }
         
