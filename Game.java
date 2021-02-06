@@ -410,6 +410,7 @@ public class Game implements Observer
                 if(Mouse.isButtonPressed(Mouse.Button.LEFT))
                 {
                     resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                    familyMenu.eventClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.buyUpgrade(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.collectVeg();

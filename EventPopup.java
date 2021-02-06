@@ -37,7 +37,9 @@ public class EventPopup extends CircleShape implements Observer{
         main.setText(text);
     }    
 
-    public void eventResponded() {
+    public void eventResponded() 
+    {
+        text.setPosition(-50, -50);
         clock.stopClock();
     }
 
