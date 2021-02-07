@@ -77,6 +77,7 @@ public class Game implements Observer
     //ResourceMenu testing::::
     private ResourceMenu resourceMenu;
     private FamilyMenu familyMenu;
+    private DistanceMarker distanceMarker;
 
     //BuyCycle class testing:
     private BuyCycle buyCycle;
@@ -106,6 +107,7 @@ public class Game implements Observer
 
         resourceMenu = new ResourceMenu(menu);
         familyMenu = new FamilyMenu();
+        distanceMarker = new DistanceMarker(window, this);
 
         //Limit the framerate
         window.setFramerateLimit(60);
@@ -296,6 +298,7 @@ public class Game implements Observer
                 }
             }
         }
+        distanceMarker.drawBounds();
     }
     
     /**
@@ -319,9 +322,14 @@ public class Game implements Observer
         window.draw(resourceMenu);
         window.draw(familyMenu);
         
+        
         try {
+            for(CircleShape c : distanceMarker.getPointers()) {
+                window.draw(c);
+            }
             window.draw(familyMenu.getPopup());
         } catch (Exception e) {}
+
         window.draw(familyMenu.getText());
         
         //Draws the resource icons
