@@ -333,6 +333,8 @@ public class Game implements Observer
         for(Text t : resourceMenu.getCounter()) {
             window.draw(t);
         }
+
+        window.draw(resourceMenu.seasonIcon);
         
         for(RectangleShape r : familyMenu.getRectangleArray()) {
             window.draw(r);
@@ -463,6 +465,7 @@ public class Game implements Observer
                     farmFields[j][z].isWinter = false;
                 }
             }
+            resourceMenu.changeSeasonIcon(2);
         }
         else
         {
@@ -479,6 +482,8 @@ public class Game implements Observer
                     farmFields[j][z].isWinter = true;
                 }
             }
+
+            resourceMenu.changeSeasonIcon(1);
         }
         
         SoundEffect.FAILPRISON.play();

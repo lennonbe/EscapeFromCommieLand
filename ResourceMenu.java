@@ -41,6 +41,8 @@ public class ResourceMenu extends RectangleShape
     private boolean isSelected = false;
     private Texture resourceMenuTexture;
     private int textYPosition = 60;
+    private Texture seasonIconTexture = new Texture();
+    protected RectangleShape seasonIcon;
 
     /**
      * Initializes the resource menu attributes
@@ -56,16 +58,20 @@ public class ResourceMenu extends RectangleShape
         resourceMenuTexture = new Texture();
         loadPathToRectangle("BoringGame/AllResources", "TopMenu.png");
 
+        seasonIcon = new RectangleShape(new Vector2f(105, 62));
+        seasonIcon.setPosition(527, 14);
+        Loader.loadPathToRectangle("BoringGame/AllResources", "Season2.png", seasonIcon, seasonIconTexture);
+
         //Loads in the font
         font = new Font();
         Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
-
+        
         //Sets the size of each icon
         seedIconSize = new Vector2f(50, 50);
-
+        
         //Initially no resource is selected, therefore index set to an invalid value
         selectedIndex = -1;
-
+        
         //Initializes the arrays for the menu 
         seedIcons = new RectangleShape[numberOfIcons];
         seedIconsTexture = new Texture[numberOfIcons];
@@ -81,7 +87,7 @@ public class ResourceMenu extends RectangleShape
         for(int i = 0; i < numberOfIcons; i++) 
         {
             //int iconXPosition = gap + (iconWidth*2) * i;
-
+            
             numberDisplayBackground[i] = new RectangleShape(new Vector2f(iconWidth, iconHeight));
             numberDisplayBackground[i].setPosition(iconXPosition + iconWidth, 20);
             numberDisplayBackground[i].setFillColor(new Color(0, 0, 0));
@@ -100,7 +106,7 @@ public class ResourceMenu extends RectangleShape
             {
                 counterText[i] = new Text("0", font, 15);
             }
-
+            
             
             Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
             
@@ -124,10 +130,23 @@ public class ResourceMenu extends RectangleShape
                 counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
                 iconXPosition += (iconWidth + gap);
             }
-
+            
         }
+
     }
 
+    public void changeSeasonIcon(int i)
+    {
+        if(i == 1)
+        {
+            Loader.loadPathToRectangle("BoringGame/AllResources", "Season1.png", seasonIcon, seasonIconTexture);
+        }
+        else if(i == 2)
+        {
+            Loader.loadPathToRectangle("BoringGame/AllResources", "Season2.png", seasonIcon, seasonIconTexture);
+        }
+    }
+    
     /**
      * This function adds all the JSFML Rectangles used to draw the resource menu into one array and returns it.
      * This is useful in the class that implements this menu, so that the rectangles can be drawn onto the screen
