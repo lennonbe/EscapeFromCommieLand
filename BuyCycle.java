@@ -229,6 +229,18 @@ public class BuyCycle
         }
     }
 
+    public void unlockField()
+    {
+        Fields temp = fieldMatrix[0][0].selectedField;
+        if(temp != null && temp != fieldMatrix[2][2] && temp.unlocked == false && resourceMenu.getIndexVal(4) >= 10) // cause field 12 is behind the shop TODO: Remove field12 safely
+        {
+            temp.unlocked = true;
+            temp.loadPathToRectangle("BoringGame/AllResources", "WetDirt.png");
+            fieldMatrix[0][0].selectedField = null;
+            resourceMenu.decrement(4, 10);
+        }             
+    }
+
     /**
      * Detects the clicks on the specific fields for collection.
      */

@@ -417,6 +417,7 @@ public class Game implements Observer
                     buyCycle.buyUpgrade(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.collectVeg();
                     buyCycle.selectVegToGrowOnField();
+                    buyCycle.unlockField();
                 }
 
                 /*if(resourceMenu.getSelectedIndex() != -1 && farmFields[0][0].getSelectedField() != null)
