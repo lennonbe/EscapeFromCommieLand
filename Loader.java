@@ -28,6 +28,24 @@ public abstract class Loader {
         rectangle.setTexture(texture);
     }
 
+    public static void loadPathToCircle(String directory, String file, CircleShape circle, Texture texture) {
+        Path path = FileSystems.getDefault().getPath(directory, file);
+        
+        try {
+            BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            System.out.println("Error while loading the buffer");
+        }
+
+        try {
+            texture.loadFromFile(path);
+        } catch (Exception e) {
+            System.out.println("Error while loading the texture");
+        }
+
+        circle.setTexture(texture);
+    }
+
     /**
      * Function used to load font from files
      * @param font Font variable in which the font will be stored

@@ -345,8 +345,6 @@ public class Game implements Observer
             }
             window.draw(familyMenu.getPopup());
         } catch (Exception e) {}
-
-        window.draw(familyMenu.getText());
         
         //Draws the resource icons
         for(RectangleShape i : resourceMenu.getRectangleArray(1)) 

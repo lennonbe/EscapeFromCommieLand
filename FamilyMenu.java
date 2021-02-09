@@ -83,14 +83,6 @@ public class FamilyMenu extends RectangleShape implements Observer{
         return popup;
     }
 
-    public Text getText() {
-        return text;
-    }
-
-    public void setText(Text text) {
-        this.text = text; 
-    }
-
     /**
      * This function is called when the mouse is clicked.
      * If an event is active, check if the user has clicked on the event popup,
