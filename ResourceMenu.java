@@ -44,6 +44,9 @@ public class ResourceMenu extends RectangleShape
     private Texture seasonIconTexture = new Texture();
     protected RectangleShape seasonIcon;
 
+    //Attributes regarding the veg and it being or not locked
+    protected boolean carrotLocked = true, hempLocked = true, cauliflowerLocked = true;
+
     /**
      * Initializes the resource menu attributes
      */
@@ -98,7 +101,7 @@ public class ResourceMenu extends RectangleShape
             seedIcons[i].setPosition(new Vector2f(iconXPosition, 20));
             seedIcons[i].setSize(seedIconSize);
             
-            if(i == 4)//initial money val is 5
+            if(i == 4)//initial coin no. value is 5
             {
                 counterText[i] = new Text("5", font, 15);
             }
