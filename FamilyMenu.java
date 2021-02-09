@@ -1,9 +1,7 @@
 package BoringGame;
 
 import org.jsfml.system.Vector2f;
-
 import BoringGame.EventPopup;
-
 import org.jsfml.graphics.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,8 +14,8 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private final static Vector2f iconSize = new Vector2f(50, 50);
     private final static int width = (int) iconSize.x * numberOfIcons;
     private final static int height = (int) iconSize.y + 40;
-    private final Clock clock = new Clock(1000);
-    private final double chanceOfEvent = 0.1;  //0.5 for testing --- change this later 
+    private final Clock clock = new Clock(120 * 1000);
+    private final double chanceOfEvent = 0.2;
     private final int menuXPosition = 0;
     private final int menuYPosition = 864 - height;
     private final int iconWidth = 50;
@@ -86,12 +84,13 @@ public class FamilyMenu extends RectangleShape implements Observer{
     /**
      * This function is called when the mouse is clicked.
      * If an event is active, check if the user has clicked on the event popup,
-     * If yes, remove it.
+     * If yes, remove it and return true.
+     * Otherwise, return false
      * 
      * @param mouseX x coordinate of the mouse when it was pressed
      * @param mouseY y coordinate of the mouse when it was pressed
      */
-    public void eventClicked(float mouseX, float mouseY) {
+    public boolean eventClicked(float mouseX, float mouseY) {
         //Checks for active popup
         if(popup != null) {
             float xCircle = popup.getPosition().x + popup.getRadius();
@@ -105,8 +104,10 @@ public class FamilyMenu extends RectangleShape implements Observer{
             if(totalDistance <= popup.getRadius()) {
                 popup.eventResponded();
                 popup = null;
+                return true;
             }
         }
+        return false;
     }
 
     /**
@@ -128,8 +129,12 @@ public class FamilyMenu extends RectangleShape implements Observer{
     }
 
     public void killPerson(int index) {
-        RectangleShape person = familyIcons[index];
-        deadDot[index].setPosition(person.getPosition().x, person.getPosition().y);
-        popup = null;
+        //If the player doesn't respont to the event, there's a 50% chance that a family member will die,
+        //Otherwise do nothing
+        if(Math.random() > 0.5) {
+            RectangleShape person = familyIcons[index];
+            deadDot[index].setPosition(person.getPosition().x, person.getPosition().y);
+            popup = null;
+        }
     }
 }

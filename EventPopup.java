@@ -31,7 +31,6 @@ public class EventPopup extends CircleShape implements Observer{
     }    
 
     public void eventResponded() {
-        this.setPosition(-50, -50);
         clock.stopClock();
     }
 
@@ -40,8 +39,6 @@ public class EventPopup extends CircleShape implements Observer{
             timeLeft--;
             Loader.loadPathToCircle("BoringGame/Sprites/Countdown", "Countdown" + timeLeft + ".png", this, timerTexture);
         } else {
-            //Moves the text out of bounds
-            this.setPosition(-50, -50);
             clock.stopClock();
             main.killPerson(index);
         }

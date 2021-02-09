@@ -151,7 +151,7 @@ public class Game implements Observer
             positionX += fieldSizeInt;
         }
         
-        buyCycle = new BuyCycle(farmFields, resourceMenu, menu, window, this);
+        buyCycle = new BuyCycle(farmFields, resourceMenu, menu, familyMenu, window, this);
         
         shop.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
         
@@ -452,9 +452,9 @@ public class Game implements Observer
                 if(Mouse.isButtonPressed(Mouse.Button.LEFT))
                 {
                     resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                    familyMenu.eventClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.buyUpgrade(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
+                    buyCycle.eventClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
                     buyCycle.collectVeg();
                     buyCycle.selectVegToGrowOnField();
                     buyCycle.unlockField();

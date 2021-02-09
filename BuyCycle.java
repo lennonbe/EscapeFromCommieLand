@@ -11,6 +11,7 @@ public class BuyCycle
     protected Fields[][] fieldMatrix;
     protected ResourceMenu resourceMenu;
     protected BuyMenu buyMenu; 
+    protected FamilyMenu familyMenu;
     protected RenderWindow window;
     protected Game game;
     protected boolean upgrade1Bought = false, upgrade2Bought = false, upgrade3Bought = false;
@@ -21,10 +22,10 @@ public class BuyCycle
     private double upgrade2 = 0.75;
     private double upgrade3 = 0.65;
 
-    public BuyCycle(Fields[][] array, ResourceMenu resMenu, BuyMenu buyMenuInput, RenderWindow windowInput, Game gameInput)
-    {
+    public BuyCycle(Fields[][] array, ResourceMenu resMenu, BuyMenu buyMenuInput, FamilyMenu familyMenuInput, RenderWindow windowInput, Game gameInput) {
         fieldMatrix = array;
         resourceMenu = resMenu;
+        familyMenu = familyMenuInput;
         buyMenu = buyMenuInput;
         window = windowInput;
         game = gameInput;
@@ -337,6 +338,12 @@ public class BuyCycle
                     }
                 }
             }
+        }
+    }
+
+    public void eventClicked(float mouseX, float mouseY) {
+        if(resourceMenu.getIndexVal(4) >= 10 && familyMenu.eventClicked(mouseX, mouseY)) {
+            resourceMenu.decrement(4, 10);
         }
     }
 
