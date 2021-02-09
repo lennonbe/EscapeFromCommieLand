@@ -334,6 +334,8 @@ public class Game implements Observer
             window.draw(t);
         }
 
+       
+        
         window.draw(resourceMenu.seasonIcon);
         
         for(RectangleShape r : familyMenu.getRectangleArray()) {
@@ -363,7 +365,7 @@ public class Game implements Observer
             {
                 window.draw(menu.getVegArray()[i]);
             }
-
+            
             for(int i = 0; i < 3; i++)
             {
                 window.draw(menu.getUpgradeArray()[i]);
@@ -376,6 +378,11 @@ public class Game implements Observer
                 SoundEffect.OPENINVENTORY.play();
                 menu.menuOpen = false;
                 pause();
+            }
+            
+            for(int i = 0; i < menu.counterText.length; i++)
+            {
+                window.draw(menu.counterText[i]);
             }
         }
         
@@ -407,6 +414,7 @@ public class Game implements Observer
                 {
                     //The user pressed the close button
                     window.close();
+                    System.exit(0);
                 }
                 
                 if(Mouse.isButtonPressed(Mouse.Button.LEFT))

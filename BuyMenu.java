@@ -1,8 +1,14 @@
 package BoringGame;
 
 import org.jsfml.window.*;
+//import org.w3c.dom.Text;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
+import java.nio.file.Path;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
+import java.io.*;
 
 public class BuyMenu extends RectangleShape
 {
@@ -16,11 +22,15 @@ public class BuyMenu extends RectangleShape
     private Texture [] vegTextures = new Texture[4];
     protected RectangleShape [] upgradeIcons = new RectangleShape[3];
     private Texture [] upgradeTextures = new Texture[3];
+    protected Text[] counterText;
     private RectangleShape exitButton  = new RectangleShape();
     private Texture menuTexture;
     private float yPositionVeg, yPositionUpgrades;
     protected boolean menuOpen = false;
 
+    private final int numberOfIcons = 7;
+    private Font font = new Font();
+    
     /**
      * Constructor for BuyMenu class.
      * @param size the size of the menu
@@ -31,13 +41,13 @@ public class BuyMenu extends RectangleShape
         
         super(size);
         exitButton.setSize(new Vector2f(exitButtonSize,exitButtonSize)); 
-
+        
         this.setPosition(window.getSize().x/2 - size.x/2, window.getSize().y/2 - size.y/2);
         exitButton.setPosition(this.getPosition().x + this.getSize().x - exitButtonSize, this.getPosition().y);
-
+        
         this.setFillColor(new Color(128,128,128));
         exitButton.setFillColor(new Color(255,0,0));
-
+        
         yPositionVeg = this.getPosition().y + this.getSize().y/4 - vegIconsSize.x/2;
         yPositionUpgrades = this.getPosition().y + this.getSize().y - this.getSize().y/4 - vegIconsSize.x/2;
         
@@ -46,27 +56,99 @@ public class BuyMenu extends RectangleShape
         {
             vegIcons[i] = new RectangleShape(vegIconsSize);
             vegTextures[i] = new Texture();
-
+            
             vegIcons[i].setPosition(new Vector2f(temp, yPositionVeg));
             
             temp += (vegIconsSize.x + gap);
-
+            
             Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
+            
         }
-
+        
         temp = (int)this.getPosition().x + 20;
         for(int i = 0; i < upgradeIcons.length; i++) 
         {
             upgradeIcons[i] = new RectangleShape(upgradeIconsSize);
             upgradeTextures[i] = new Texture();
-
+            
             upgradeIcons[i].setPosition(new Vector2f(temp, yPositionUpgrades));
             
             temp += (upgradeIconsSize.x + gap);
-
+            
             Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + i + ".png", upgradeIcons[i], upgradeTextures[i]);
         }
+        
+        Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
+        counterText = new Text[7];
+        for(int i = 0; i < counterText.length; i++)
+        {        
+            int j = i - 4;    
+            if(i == 0)
+            {
+                counterText[i] = new Text("1", font, 15);
+                counterText[i].setPosition(new Vector2f((float)(vegIcons[i].getPosition().x + (int)vegIcons[i].getSize().x - 10), (float)(vegIcons[i].getPosition().y + (int)vegIcons[i].getSize().y - 10)));
+            }
+            else if(i == 1)
+            {
+                counterText[i] = new Text("5", font, 15);
+                counterText[i].setPosition(new Vector2f((float)(vegIcons[i].getPosition().x + (int)vegIcons[i].getSize().x - 10), (float)(vegIcons[i].getPosition().y + (int)vegIcons[i].getSize().y - 10)));
+            }
+            else if(i == 2)
+            {
+                counterText[i] = new Text("10", font, 15);   
+                counterText[i].setPosition(new Vector2f((float)(vegIcons[i].getPosition().x + (int)vegIcons[i].getSize().x - 10), (float)(vegIcons[i].getPosition().y + (int)vegIcons[i].getSize().y - 10)));     
+            }
+            else if(i == 3)
+            {
+                counterText[i] = new Text("20", font, 15);
+                counterText[i].setPosition(new Vector2f((float)(vegIcons[i].getPosition().x + (int)vegIcons[i].getSize().x - 10), (float)(vegIcons[i].getPosition().y + (int)vegIcons[i].getSize().y - 10)));
+            }
+            else if(i == 4)
+            {
+                counterText[i] = new Text("5", font, 15);
+                counterText[i].setPosition(new Vector2f((float)((int)upgradeIcons[j].getPosition().x + (int)upgradeIcons[j].getSize().x - 10), (float)((int)upgradeIcons[j].getPosition().y + (int)upgradeIcons[j].getSize().y - 10)));
+            }
+            else if(i == 5)
+            {
+                counterText[i] = new Text("10", font, 15);
+                counterText[i].setPosition(new Vector2f((float)((int)upgradeIcons[j].getPosition().x + (int)upgradeIcons[j].getSize().x - 10), (float)((int)upgradeIcons[j].getPosition().y + (int)upgradeIcons[j].getSize().y - 10)));
+            }
+            else if(i == 6)
+            {
+                counterText[i] = new Text("15", font, 15);
+                counterText[i].setPosition(new Vector2f((float)((int)upgradeIcons[j].getPosition().x + (int)upgradeIcons[j].getSize().x - 10), (float)((int)upgradeIcons[j].getPosition().y + (int)upgradeIcons[j].getSize().y - 10)));
+            }
+        }
 
+    }
+
+    public void unlock(int i)
+    {
+        
+        if(i == 1)
+        {
+            counterText[i].setString("2");
+        }
+        else if(i == 2)
+        {
+            counterText[i].setString("5");
+        }
+        else if(i == 3)
+        {
+            counterText[i].setString("13");
+        }
+        else if(i == 4)
+        {
+            counterText[i].setString("");
+        }
+        else if(i == 5)
+        {
+            counterText[i].setString("");
+        }
+        else if(i == 6)
+        {
+            counterText[i].setString("");
+        }
     }
 
     /**

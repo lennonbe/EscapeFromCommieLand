@@ -39,38 +39,73 @@ public class BuyCycle
     {
         int returnValue = -1;
         int decrementValue = 0;
-
+        
         if(buyMenu.menuOpen == true)
         {
             if(mouseX >= buyMenu.vegIcons[0].getPosition().x && mouseX <= buyMenu.vegIcons[0].getPosition().x + buyMenu.vegIcons[0].getSize().x && mouseY >= buyMenu.vegIcons[0].getPosition().y && mouseY <= buyMenu.vegIcons[0].getPosition().y + buyMenu.vegIcons[0].getSize().y)
             {
-                //SoundEffect.PURCHASEITEM.play();
                 returnValue = 0;
                 decrementValue = chilliCost;
             }
             else if(mouseX >= buyMenu.vegIcons[1].getPosition().x && mouseX <= buyMenu.vegIcons[1].getPosition().x + buyMenu.vegIcons[1].getSize().x && mouseY >= buyMenu.vegIcons[1].getPosition().y && mouseY <= buyMenu.vegIcons[1].getPosition().y + buyMenu.vegIcons[1].getSize().y)
             {
-                //SoundEffect.PURCHASEITEM.play();
-                returnValue = 1;
-                decrementValue = carrotCost;
+                if(resourceMenu.carrotLocked == true)
+                {
+                    returnValue = 1;
+                    decrementValue = 5;
+                }
+                else
+                {
+                    returnValue = 1;
+                    decrementValue = carrotCost;
+                }
             }
             else if(mouseX >= buyMenu.vegIcons[2].getPosition().x && mouseX <= buyMenu.vegIcons[2].getPosition().x + buyMenu.vegIcons[2].getSize().x && mouseY >= buyMenu.vegIcons[2].getPosition().y && mouseY <= buyMenu.vegIcons[2].getPosition().y + buyMenu.vegIcons[2].getSize().y)
             {
-                //SoundEffect.PURCHASEITEM.play();
-                returnValue = 2;
-                decrementValue = hempCost;
+                if(resourceMenu.carrotLocked == false && resourceMenu.hempLocked == true)
+                {
+                    returnValue = 2;
+                    decrementValue = 10;
+                }
+                else if(resourceMenu.carrotLocked == false && resourceMenu.hempLocked == false)
+                {
+                    returnValue = 2;
+                    decrementValue = hempCost;                    
+                }
             }
             else if(mouseX >= buyMenu.vegIcons[3].getPosition().x && mouseX <= buyMenu.vegIcons[3].getPosition().x + buyMenu.vegIcons[3].getSize().x && mouseY >= buyMenu.vegIcons[3].getPosition().y && mouseY <= buyMenu.vegIcons[3].getPosition().y + buyMenu.vegIcons[3].getSize().y)
             {
-                //SoundEffect.PURCHASEITEM.play();
-                returnValue = 3;
-                decrementValue = cauliflowerCost;
+                if(resourceMenu.carrotLocked == false && resourceMenu.hempLocked == false && resourceMenu.cauliflowerLocked == true)
+                {
+                    returnValue = 3;
+                    decrementValue = 20;
+                }
+                else if(resourceMenu.carrotLocked == false && resourceMenu.hempLocked == false && resourceMenu.cauliflowerLocked == false)
+                {
+                    returnValue = 3;
+                    decrementValue = cauliflowerCost;                
+                }
             }
-    
+            
+            System.out.println(decrementValue);
             if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
             {
                 if(resourceMenu.getIndexVal(4) >= decrementValue)
                 {
+                    if(returnValue == 1)
+                    {
+                        resourceMenu.carrotLocked = false;   
+                    }
+                    else if(returnValue == 2)
+                    {
+                        resourceMenu.hempLocked = false;                        
+                    }
+                    else if(returnValue == 3)
+                    {
+                        resourceMenu.cauliflowerLocked = false;
+                    }
+                    
+                    buyMenu.unlock(returnValue);                     
                     resourceMenu.increment(returnValue);
                     resourceMenu.decrement(4, decrementValue);
                     SoundEffect.PURCHASEITEM.play();
@@ -179,6 +214,7 @@ public class BuyCycle
                 if(resourceMenu.getIndexVal(4) >= decrementValue)
                 {
                     //resourceMenu.increment(returnValue);
+                    buyMenu.unlock(returnValue + 4);
                     resourceMenu.decrement(4, decrementValue);
                     SoundEffect.PURCHASEITEM.play();
                 }
@@ -229,6 +265,9 @@ public class BuyCycle
         }
     }
 
+    /**
+     * Allows for user to purchase fields which are currently locked.
+     */
     public void unlockField()
     {
         Fields temp = fieldMatrix[0][0].selectedField;
@@ -238,6 +277,7 @@ public class BuyCycle
             temp.loadPathToRectangle("BoringGame/AllResources", "WetDirt.png");
             fieldMatrix[0][0].selectedField = null;
             resourceMenu.decrement(4, 10);
+            SoundEffect.PURCHASEITEM.play();
         }             
     }
 
