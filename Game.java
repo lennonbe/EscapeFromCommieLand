@@ -5,6 +5,7 @@ import org.jsfml.window.event.*;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
 import org.jsfml.system.Vector2i;
+//import org.jsfml.system.Clock;
 import java.nio.file.Path;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -88,6 +89,13 @@ public class Game implements Observer
     private double winter = 1.33;
     private double summer = 0.75;
 
+    //Text for timer
+    private Text elapsedTime = new Text();
+    private Font font = new Font();
+    private long startTime;
+    private long currentTime;
+    private long displayTime = 0;
+
 
     /**
      * Constructor for the game. Loads the window, adds all needed 
@@ -107,11 +115,19 @@ public class Game implements Observer
         resourceMenu = new ResourceMenu(menu);
         familyMenu = new FamilyMenu();
 
+        //Coding the elapsedTime clock
+        Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
+        elapsedTime.setFont(font);
+        startTime = System.currentTimeMillis();
+        elapsedTime.setString("00:00");
+        elapsedTime.setPosition(new Vector2f(680, 20));
+
+        
         //Limit the framerate
         window.setFramerateLimit(60);
-
+        
         Loader.loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
-
+        
         int positionX = width/2 + (fieldSizeInt*(-2)) - fieldSizeInt/2;
         for(int i = 0; i < 5; i++)
         {
@@ -126,24 +142,24 @@ public class Game implements Observer
                     farmFields[i][j].loadPathToRectangle("BoringGame/AllResources/PurchaseTiles", "Purchase1.png");
                     farmFields[i][j].unlocked = false;
                 }
-
+                
                 positionY += fieldSizeInt;
             }
             
             positionX += fieldSizeInt;
         }
-
+        
         buyCycle = new BuyCycle(farmFields, resourceMenu, menu, window, this);
-
+        
         shop.setPosition(width/2 - fieldSizeInt/2, height/2 - fieldSizeInt/2);
-
+        
         backround.setPosition(0, 0);
         backround.setSize(windowSize);
         SoundEffect.init();
         SoundEffect.volume = SoundEffect.Volume.LOW;  // un-mute
         SoundEffect.BGM2.loopPlay();  //testing the audio play for 1 time
     }
-
+    
     /**
      * Calculates the movement of the character.
      * Ensures the farmer doesn't collide with the shop,
@@ -200,7 +216,7 @@ public class Game implements Observer
             {
                 farmer.setSprite("BoringGame/AllResources/Man/Animations", "Left-R.png");
             }
-
+            
             if(farmer.getGlobalBounds().left <= leftBorder)
             {
                 farmer.move(0,0);
@@ -236,7 +252,7 @@ public class Game implements Observer
             {
                 farmer.setSprite("BoringGame/AllResources/Man/Animations", "Forward-R.png");
             }
-
+            
             if(farmer.getGlobalBounds().top + farmer.getGlobalBounds().height >= bottomBorder)
             {
                 farmer.move(0,0);
@@ -275,7 +291,7 @@ public class Game implements Observer
             {
                 farmer.setSprite("BoringGame/AllResources/Man/Animations", "Back-R.png");
             }
-
+            
             if(farmer.getGlobalBounds().top <= topBorder)
             {
                 farmer.move(0,0);
@@ -325,17 +341,19 @@ public class Game implements Observer
         window.draw(familyMenu.getText());
         
         //Draws the resource icons
-        for(RectangleShape i : resourceMenu.getRectangleArray(1)) {//simply change getRectangle Array by not giving it an int and it does milosz's version
+        for(RectangleShape i : resourceMenu.getRectangleArray(1)) 
+        {
+            //simply change getRectangle Array by not giving it an int and it does milosz's version
             window.draw(i);
         }
-        
+    
         //Draws the counters for each resource
-        for(Text t : resourceMenu.getCounter()) {
+        for(Text t : resourceMenu.getCounter()) 
+        {
             window.draw(t);
         }
-
-       
-        
+    
+    
         window.draw(resourceMenu.seasonIcon);
         
         for(RectangleShape r : familyMenu.getRectangleArray()) {
@@ -386,9 +404,10 @@ public class Game implements Observer
             }
         }
         
+        window.draw(elapsedTime);
         window.display();
     }
-    
+
     /**
      * Method which contains the while loop and calls all the other methods responsible for running the game (i.e movement, drawObjects, etc...)
      */
@@ -399,6 +418,13 @@ public class Game implements Observer
             //Fill the window
             window.clear(new Color(50,20,20));
             
+            currentTime = System.currentTimeMillis();
+            long totalSeconds = (currentTime - startTime)/1000;
+            long currentSecond = totalSeconds % 60;
+            long totalMinutes =  totalSeconds/60;
+            String str = totalMinutes + ":" + currentSecond;
+            elapsedTime.setString(totalMinutes + "m" + currentSecond + "s");
+
             this.movement();
             this.drawObjects();
             
