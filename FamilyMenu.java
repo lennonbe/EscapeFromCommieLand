@@ -22,7 +22,7 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private final int iconHeight = 50;
     private final int gap = 20;
     
-    private CircleShape[] deadDot; //DELETE THIS LATER, THIS IS JUST A TEMPORARY THING TO SHOW A FAMILY MEMBER IS DEAD 
+    private CircleShape[] deadDot;
     private Texture[] familyIconsTexture;
     private RectangleShape[] familyIcons;
     private EventPopup popup;

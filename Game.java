@@ -55,6 +55,7 @@ public class Game implements Observer
 
     //The window which will display the game
     private RenderWindow window = new RenderWindow();
+    private MainMenu startingMenu;
     
     //The texture and RectangleShape objects needed to draw a field on a rectangle
     private Texture backroundTexture = new Texture();
@@ -107,6 +108,8 @@ public class Game implements Observer
         //Create the window
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
         window.setSize(new Vector2i(width, height));
+
+        startingMenu = new MainMenu(width, height);
        
         seasonClock.addObserver(this);
 
@@ -120,7 +123,6 @@ public class Game implements Observer
         //Coding the elapsedTime clock
         Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
         elapsedTime.setFont(font);
-        startTime = System.currentTimeMillis();
         elapsedTime.setString("00:00");
         elapsedTime.setPosition(new Vector2f(680, 20));
 
@@ -323,97 +325,109 @@ public class Game implements Observer
      */
     public void drawObjects()
     {
-        //Draws the fields
-        for(int i = 0; i < 5; i++)
-        {
-            for(int j = 0; j < 5; j++)
+        if(!startingMenu.getIsOpen()) {
+
+            //Draws the fields
+            for(int i = 0; i < 5; i++)
             {
-                window.draw(farmFields[i][j]);
+                for(int j = 0; j < 5; j++)
+                {
+                    window.draw(farmFields[i][j]);
+                }
             }
-        }
+            
+            window.draw(shop);
+            window.draw(farmer);
+            window.draw(backround);
+            window.draw(resourceMenu);
+            window.draw(familyMenu);
+            
+            
+            try {
+                for(CircleShape c : distanceMarker.getPointers()) {
+                    window.draw(c);
+                }
+                window.draw(familyMenu.getPopup());
+            } catch (Exception e) {}
+            
+            //Draws the resource icons
+            for(RectangleShape i : resourceMenu.getRectangleArray(1)) 
+            {
+                //simply change getRectangle Array by not giving it an int and it does milosz's version
+                window.draw(i);
+            }
         
-        window.draw(shop);
-        window.draw(farmer);
-        window.draw(backround);
-        window.draw(resourceMenu);
-        window.draw(familyMenu);
+            //Draws the counters for each resource
+            for(Text t : resourceMenu.getCounter()) 
+            {
+                window.draw(t);
+            }
         
         
-        try {
-            for(CircleShape c : distanceMarker.getPointers()) {
+            window.draw(resourceMenu.seasonIcon);
+            
+            for(RectangleShape r : familyMenu.getRectangleArray()) {
+                window.draw(r);
+            }
+            
+            for(CircleShape c : familyMenu.getCircleShapeArray()) {
                 window.draw(c);
             }
-            window.draw(familyMenu.getPopup());
-        } catch (Exception e) {}
-        
-        //Draws the resource icons
-        for(RectangleShape i : resourceMenu.getRectangleArray(1)) 
-        {
-            //simply change getRectangle Array by not giving it an int and it does milosz's version
-            window.draw(i);
-        }
-    
-        //Draws the counters for each resource
-        for(Text t : resourceMenu.getCounter()) 
-        {
-            window.draw(t);
-        }
-    
-    
-        window.draw(resourceMenu.seasonIcon);
-        
-        for(RectangleShape r : familyMenu.getRectangleArray()) {
-            window.draw(r);
-        }
-        
-        for(CircleShape c : familyMenu.getCircleShapeArray()) {
-            window.draw(c);
-        }
-        
-        /*
-        Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
-        Right now doesnt do much but still a good starting point. 
-        */
-        if(shop.isClicked(window) == true && menu.menuOpen == false)
-        {
-            SoundEffect.OPENINVENTORY.play();
-            menu.menuOpen = true;
-            pause();
-        }
-        
-        if(menu.menuOpen == true)
-        {
-            window.draw(menu);
             
-            for(int i = 0; i < 4; i++)
-            {
-                window.draw(menu.getVegArray()[i]);
-            }
-            
-            for(int i = 0; i < 3; i++)
-            {
-                window.draw(menu.getUpgradeArray()[i]);
-            }
-            
-            window.draw(menu.getExitButton());
-            
-            if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
+            /*
+            Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
+            Right now doesnt do much but still a good starting point. 
+            */
+            if(shop.isClicked(window) == true && menu.menuOpen == false)
             {
                 SoundEffect.OPENINVENTORY.play();
-                menu.menuOpen = false;
+                menu.menuOpen = true;
                 pause();
             }
             
-            for(int i = 0; i < menu.counterText.length; i++)
+            if(menu.menuOpen == true)
             {
-                window.draw(menu.counterText[i]);
+                window.draw(menu);
+                
+                for(int i = 0; i < 4; i++)
+                {
+                    window.draw(menu.getVegArray()[i]);
+                }
+                
+                for(int i = 0; i < 3; i++)
+                {
+                    window.draw(menu.getUpgradeArray()[i]);
+                }
+                
+                window.draw(menu.getExitButton());
+                
+                if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
+                {
+                    SoundEffect.OPENINVENTORY.play();
+                    menu.menuOpen = false;
+                    pause();
+                }
+                
+                for(int i = 0; i < menu.counterText.length; i++)
+                {
+                    window.draw(menu.counterText[i]);
+                }
             }
+            
+            window.draw(elapsedTime);
+        } else {
+            window.draw(startingMenu);
+
+            for(RectangleShape r : startingMenu.getButtons())
+                window.draw(r);
+
+            for(Text t : startingMenu.getButtonText()) 
+                window.draw(t);
         }
         
-        window.draw(elapsedTime);
         window.display();
     }
-
+    
     /**
      * Method which contains the while loop and calls all the other methods responsible for running the game (i.e movement, drawObjects, etc...)
      */
@@ -424,12 +438,15 @@ public class Game implements Observer
             //Fill the window
             window.clear(new Color(50,20,20));
             
-            currentTime = System.currentTimeMillis();
-            long totalSeconds = (currentTime - startTime)/1000;
-            long currentSecond = totalSeconds % 60;
-            long totalMinutes =  totalSeconds/60;
-            String str = totalMinutes + ":" + currentSecond;
-            elapsedTime.setString(totalMinutes + "m" + currentSecond + "s");
+            if(!startingMenu.getIsOpen()) {
+                startTime = startingMenu.getStartTime();
+                currentTime = System.currentTimeMillis();
+                long totalSeconds = (currentTime - startTime)/1000;
+                long currentSecond = totalSeconds % 60;
+                long totalMinutes =  totalSeconds/60;
+                String str = totalMinutes + ":" + currentSecond;
+                elapsedTime.setString(totalMinutes + "m" + currentSecond + "s");
+            }
 
             this.movement();
             this.drawObjects();
@@ -449,15 +466,21 @@ public class Game implements Observer
                     System.exit(0);
                 }
                 
-                if(Mouse.isButtonPressed(Mouse.Button.LEFT))
-                {
-                    resourceMenu.selectIcon(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                    buyCycle.buyVeg(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                    buyCycle.buyUpgrade(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                    buyCycle.eventClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y);
-                    buyCycle.collectVeg();
-                    buyCycle.selectVegToGrowOnField();
-                    buyCycle.unlockField();
+                if(Mouse.isButtonPressed(Mouse.Button.LEFT)) {
+                    float mouseX = Mouse.getPosition(window).x;
+                    float mouseY = Mouse.getPosition(window).y;
+
+                    if(!startingMenu.getIsOpen()) {
+                        resourceMenu.selectIcon(mouseX, mouseY);
+                        buyCycle.buyVeg(mouseX, mouseY);
+                        buyCycle.buyUpgrade(mouseX, mouseY);
+                        buyCycle.eventClicked(mouseX, mouseY);
+                        buyCycle.collectVeg();
+                        buyCycle.selectVegToGrowOnField();
+                        buyCycle.unlockField();
+                    } else {
+                        startingMenu.isClicked(mouseX, mouseY);
+                    }
                 }
 
                 /*if(resourceMenu.getSelectedIndex() != -1 && farmFields[0][0].getSelectedField() != null)
