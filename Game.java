@@ -126,7 +126,6 @@ public class Game implements Observer
         elapsedTime.setString("00:00");
         elapsedTime.setPosition(new Vector2f(680, 20));
 
-        
         //Limit the framerate
         window.setFramerateLimit(60);
         
