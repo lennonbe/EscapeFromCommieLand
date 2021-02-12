@@ -209,19 +209,37 @@ public class BuyCycle
                 }
 
             }
-            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == true && upgrade4Bought == false && mouseX >= buyMenu.upgradeIcons[3].getPosition().x && mouseX <= buyMenu.upgradeIcons[3].getPosition().x + buyMenu.upgradeIcons[3].getSize().x && mouseY >= buyMenu.upgradeIcons[3].getPosition().y && mouseY <= buyMenu.upgradeIcons[3].getPosition().y + buyMenu.upgradeIcons[3].getSize().y)
+            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == true && mouseX >= buyMenu.upgradeIcons[3].getPosition().x && mouseX <= buyMenu.upgradeIcons[3].getPosition().x + buyMenu.upgradeIcons[3].getSize().x && mouseY >= buyMenu.upgradeIcons[3].getPosition().y && mouseY <= buyMenu.upgradeIcons[3].getPosition().y + buyMenu.upgradeIcons[3].getSize().y)
             {
                 //Tractor upgrade
                 //SoundEffect.PURCHASEITEM.play();
-                returnValue = 3;
-                decrementValue = 20;
                 
-                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                if(upgrade4Bought == false)
                 {
-                    System.out.println("test3");
-                    upgrade4Bought = true;
+                    returnValue = 3;
+                    decrementValue = 20;
 
-                    resourceMenu.autoIncrement = true;
+                    if(resourceMenu.getIndexVal(4) >= decrementValue)
+                    {
+                        System.out.println("test3");
+                        upgrade4Bought = true;
+    
+                        resourceMenu.autoIncrement = true;
+                    }
+                }
+                else
+                {
+                    returnValue = 3;
+                    decrementValue = 10;
+
+                    if(resourceMenu.getIndexVal(4) >= decrementValue)
+                    {
+                        System.out.println("test3.1");
+                        upgrade4Bought = true;
+    
+                        resourceMenu.autoIncrement = true;
+                        resourceMenu.autoIncrementVal++;
+                    }
                 }
 
             }

@@ -156,7 +156,7 @@ public class BuyMenu extends RectangleShape
         }
         else if(i == 7)
         {
-            counterText[i].setString("");
+            counterText[i].setString("10");
         }
     }
 

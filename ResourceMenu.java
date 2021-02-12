@@ -57,6 +57,7 @@ public class ResourceMenu extends RectangleShape implements Observer
     //Clock for passive income every 30 seconds
     private Clock passiveIncomeClock = new Clock(5000);
     protected boolean autoIncrement = false;
+    protected int autoIncrementVal = 1;
 
     /**
      * Initializes the resource menu attributes
@@ -345,7 +346,7 @@ public class ResourceMenu extends RectangleShape implements Observer
     {
         if(autoIncrement == true)
         {
-            this.increment(4, 1);
+            this.increment(4, autoIncrementVal);
             System.out.println("AUTOMATIC INCREMENT HAS OCCURED");
         }
         
