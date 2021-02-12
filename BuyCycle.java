@@ -14,7 +14,7 @@ public class BuyCycle
     protected FamilyMenu familyMenu;
     protected RenderWindow window;
     protected Game game;
-    protected boolean upgrade1Bought = false, upgrade2Bought = false, upgrade3Bought = false;
+    protected boolean upgrade1Bought = false, upgrade2Bought = false, upgrade3Bought = false, upgrade4Bought = false;
     protected int hempIncrementVal = 13, chilliIncrementVal = 2, cauliflowerIncrementVal = 53, carrotIncrementVal = 5;
     protected int hempCost = 5, chilliCost = 1, cauliflowerCost = 13, carrotCost = 2;
 
@@ -206,6 +206,22 @@ public class BuyCycle
                     chilliIncrementVal += 2;
                     hempIncrementVal += 2;
                     cauliflowerIncrementVal += 2;
+                }
+
+            }
+            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == true && upgrade4Bought == false && mouseX >= buyMenu.upgradeIcons[3].getPosition().x && mouseX <= buyMenu.upgradeIcons[3].getPosition().x + buyMenu.upgradeIcons[3].getSize().x && mouseY >= buyMenu.upgradeIcons[3].getPosition().y && mouseY <= buyMenu.upgradeIcons[3].getPosition().y + buyMenu.upgradeIcons[3].getSize().y)
+            {
+                //Tractor upgrade
+                //SoundEffect.PURCHASEITEM.play();
+                returnValue = 3;
+                decrementValue = 20;
+                
+                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                {
+                    System.out.println("test3");
+                    upgrade4Bought = true;
+
+                    resourceMenu.autoIncrement = true;
                 }
 
             }

@@ -20,8 +20,8 @@ public class BuyMenu extends RectangleShape
     private float xCauliflower, xTomato, xSweetCorn, xCarrot, yCauliflower, yTomato, ySweetCorn, yCarrot;
     protected RectangleShape [] vegIcons = new RectangleShape[4];
     private Texture [] vegTextures = new Texture[4];
-    protected RectangleShape [] upgradeIcons = new RectangleShape[3];
-    private Texture [] upgradeTextures = new Texture[3];
+    protected RectangleShape [] upgradeIcons = new RectangleShape[4];
+    private Texture [] upgradeTextures = new Texture[4];
     protected Text[] counterText;
     private RectangleShape exitButton  = new RectangleShape();
     private Texture menuTexture;
@@ -79,7 +79,7 @@ public class BuyMenu extends RectangleShape
         }
         
         Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
-        counterText = new Text[7];
+        counterText = new Text[8];
         for(int i = 0; i < counterText.length; i++)
         {        
             int j = i - 4;    
@@ -118,6 +118,11 @@ public class BuyMenu extends RectangleShape
                 counterText[i] = new Text("15", font, 15);
                 counterText[i].setPosition(new Vector2f((float)((int)upgradeIcons[j].getPosition().x + (int)upgradeIcons[j].getSize().x - 10), (float)((int)upgradeIcons[j].getPosition().y + (int)upgradeIcons[j].getSize().y - 10)));
             }
+            else if(i == 7)
+            {
+                counterText[i] = new Text("20", font, 15);
+                counterText[i].setPosition(new Vector2f((float)((int)upgradeIcons[j].getPosition().x + (int)upgradeIcons[j].getSize().x - 10), (float)((int)upgradeIcons[j].getPosition().y + (int)upgradeIcons[j].getSize().y - 10)));
+            }
         }
 
     }
@@ -146,6 +151,10 @@ public class BuyMenu extends RectangleShape
             counterText[i].setString("");
         }
         else if(i == 6)
+        {
+            counterText[i].setString("");
+        }
+        else if(i == 7)
         {
             counterText[i].setString("");
         }

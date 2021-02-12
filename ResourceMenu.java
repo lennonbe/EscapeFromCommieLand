@@ -8,12 +8,19 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
 
+
+import java.util.Observable;
+import java.util.Observer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 /**
  * Class representing the resource menu in the top left of the screen.
  * This class implements the functionality for selecting resources,
  * and shows changes in the resources when new ones are aquired or lost.
  */
-public class ResourceMenu extends RectangleShape 
+public class ResourceMenu extends RectangleShape implements Observer
 {
     
     //Inherit attributes of the ResoureMenu are final
@@ -47,6 +54,10 @@ public class ResourceMenu extends RectangleShape
     //Attributes regarding the veg and it being or not locked
     protected boolean carrotLocked = true, hempLocked = true, cauliflowerLocked = true;
 
+    //Clock for passive income every 30 seconds
+    private Clock passiveIncomeClock = new Clock(5000);
+    protected boolean autoIncrement = false;
+
     /**
      * Initializes the resource menu attributes
      */
@@ -54,6 +65,7 @@ public class ResourceMenu extends RectangleShape
     {
         //Sets up this rectangle, so that it can be drawn with the right parameter
         super(new Vector2f(width, height));
+        passiveIncomeClock.addObserver(this);
 
         this.setPosition(0, 0);
         this.setFillColor(new Color(128,128,128));
@@ -327,5 +339,15 @@ public class ResourceMenu extends RectangleShape
         catch (Exception e) {}
 
         this.setTexture(resourceMenuTexture);
+    }
+
+    public void update(Observable clock, Object o)
+    {
+        if(autoIncrement == true)
+        {
+            this.increment(4, 1);
+            System.out.println("AUTOMATIC INCREMENT HAS OCCURED");
+        }
+        
     }
 }

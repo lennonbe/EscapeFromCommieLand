@@ -389,12 +389,12 @@ public class Game implements Observer
             {
                 window.draw(menu);
                 
-                for(int i = 0; i < 4; i++)
+                for(int i = 0; i < menu.getVegArray().length; i++)
                 {
                     window.draw(menu.getVegArray()[i]);
                 }
                 
-                for(int i = 0; i < 3; i++)
+                for(int i = 0; i < menu.getUpgradeArray().length; i++)
                 {
                     window.draw(menu.getUpgradeArray()[i]);
                 }
