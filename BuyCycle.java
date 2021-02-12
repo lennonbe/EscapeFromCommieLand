@@ -15,6 +15,7 @@ public class BuyCycle
     protected RenderWindow window;
     protected Game game;
     protected boolean upgrade1Bought = false, upgrade2Bought = false, upgrade3Bought = false, upgrade4Bought = false;
+    protected boolean carrotUnlocked = false, hempUnlocked = false, cauliflowerUnlocked = false;
     protected int hempIncrementVal = 13, chilliIncrementVal = 2, cauliflowerIncrementVal = 53, carrotIncrementVal = 5;
     protected int hempCost = 5, chilliCost = 1, cauliflowerCost = 13, carrotCost = 2;
 
@@ -22,7 +23,8 @@ public class BuyCycle
     private double upgrade2 = 0.75;
     private double upgrade3 = 0.65;
 
-    public BuyCycle(Fields[][] array, ResourceMenu resMenu, BuyMenu buyMenuInput, FamilyMenu familyMenuInput, RenderWindow windowInput, Game gameInput) {
+    public BuyCycle(Fields[][] array, ResourceMenu resMenu, BuyMenu buyMenuInput, FamilyMenu familyMenuInput, RenderWindow windowInput, Game gameInput) 
+    {
         fieldMatrix = array;
         resourceMenu = resMenu;
         familyMenu = familyMenuInput;
@@ -106,7 +108,7 @@ public class BuyCycle
                         resourceMenu.cauliflowerLocked = false;
                     }
                     
-                    buyMenu.unlock(returnValue);                     
+                    this.unlock(returnValue);                     
                     resourceMenu.increment(returnValue);
                     resourceMenu.decrement(4, decrementValue);
                     SoundEffect.PURCHASEITEM.play();
@@ -149,7 +151,7 @@ public class BuyCycle
                 }
 
             }
-            else if(upgrade1Bought == true && upgrade2Bought == false && mouseX >= buyMenu.upgradeIcons[1].getPosition().x && mouseX <= buyMenu.upgradeIcons[1].getPosition().x + buyMenu.upgradeIcons[1].getSize().x && mouseY >= buyMenu.upgradeIcons[1].getPosition().y && mouseY <= buyMenu.upgradeIcons[1].getPosition().y + buyMenu.upgradeIcons[1].getSize().y)
+            else if(upgrade1Bought == true && upgrade2Bought == false && carrotUnlocked == true && mouseX >= buyMenu.upgradeIcons[1].getPosition().x && mouseX <= buyMenu.upgradeIcons[1].getPosition().x + buyMenu.upgradeIcons[1].getSize().x && mouseY >= buyMenu.upgradeIcons[1].getPosition().y && mouseY <= buyMenu.upgradeIcons[1].getPosition().y + buyMenu.upgradeIcons[1].getSize().y)
             {
                 //Watering system upgrade
                 //SoundEffect.PURCHASEITEM.play();
@@ -177,7 +179,7 @@ public class BuyCycle
 
 
             }
-            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == false && mouseX >= buyMenu.upgradeIcons[2].getPosition().x && mouseX <= buyMenu.upgradeIcons[2].getPosition().x + buyMenu.upgradeIcons[2].getSize().x && mouseY >= buyMenu.upgradeIcons[2].getPosition().y && mouseY <= buyMenu.upgradeIcons[2].getPosition().y + buyMenu.upgradeIcons[2].getSize().y)
+            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == false && hempUnlocked == true && carrotUnlocked == true && mouseX >= buyMenu.upgradeIcons[2].getPosition().x && mouseX <= buyMenu.upgradeIcons[2].getPosition().x + buyMenu.upgradeIcons[2].getSize().x && mouseY >= buyMenu.upgradeIcons[2].getPosition().y && mouseY <= buyMenu.upgradeIcons[2].getPosition().y + buyMenu.upgradeIcons[2].getSize().y)
             {
                 //Tractor upgrade
                 //SoundEffect.PURCHASEITEM.play();
@@ -209,7 +211,7 @@ public class BuyCycle
                 }
 
             }
-            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == true && mouseX >= buyMenu.upgradeIcons[3].getPosition().x && mouseX <= buyMenu.upgradeIcons[3].getPosition().x + buyMenu.upgradeIcons[3].getSize().x && mouseY >= buyMenu.upgradeIcons[3].getPosition().y && mouseY <= buyMenu.upgradeIcons[3].getPosition().y + buyMenu.upgradeIcons[3].getSize().y)
+            else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == true && hempUnlocked == true && carrotUnlocked == true && cauliflowerUnlocked == true && mouseX >= buyMenu.upgradeIcons[3].getPosition().x && mouseX <= buyMenu.upgradeIcons[3].getPosition().x + buyMenu.upgradeIcons[3].getSize().x && mouseY >= buyMenu.upgradeIcons[3].getPosition().y && mouseY <= buyMenu.upgradeIcons[3].getPosition().y + buyMenu.upgradeIcons[3].getSize().y)
             {
                 //Tractor upgrade
                 //SoundEffect.PURCHASEITEM.play();
@@ -249,7 +251,7 @@ public class BuyCycle
                 if(resourceMenu.getIndexVal(4) >= decrementValue)
                 {
                     //resourceMenu.increment(returnValue);
-                    buyMenu.unlock(returnValue + 4);
+                    this.unlock(returnValue + 4);
                     resourceMenu.decrement(4, decrementValue);
                     SoundEffect.PURCHASEITEM.play();
                 }
@@ -421,4 +423,41 @@ public class BuyCycle
 
         return returnVal;
     }
+
+    public void unlock(int i)
+    {
+        
+        if(i == 1)
+        {
+            buyMenu.counterText[i].setString("2");
+            carrotUnlocked = true;
+        }
+        else if(i == 2 && carrotUnlocked == true)
+        {
+            buyMenu.counterText[i].setString("5");
+            hempUnlocked = true;
+        }
+        else if(i == 3 && hempUnlocked == true)
+        {
+            buyMenu.counterText[i].setString("13");
+            cauliflowerUnlocked = true;
+        }
+        else if(i == 4)
+        {
+            buyMenu.counterText[i].setString("");
+        }
+        else if(i == 5)
+        {
+            buyMenu.counterText[i].setString("");
+        }
+        else if(i == 6)
+        {
+            buyMenu.counterText[i].setString("");
+        }
+        else if(i == 7)
+        {
+            buyMenu.counterText[i].setString("10");
+        }
+    }
+
 }

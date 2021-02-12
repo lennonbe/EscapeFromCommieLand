@@ -127,7 +127,7 @@ public class BuyMenu extends RectangleShape
 
     }
 
-    public void unlock(int i)
+    /*public void unlock(int i)
     {
         
         if(i == 1)
@@ -158,7 +158,7 @@ public class BuyMenu extends RectangleShape
         {
             counterText[i].setString("10");
         }
-    }
+    }*/
 
     /**
      * Detects if the exitButton is clicked
