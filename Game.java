@@ -67,6 +67,16 @@ public class Game implements Observer
     //The texture and RectangleShape objects needed to draw a house/shop on a rectangle
     private Shop shop = new Shop(fieldSize);
 
+    //New passport buying button
+    private PassportBuy passport;
+    protected int passportValue = 1500;
+
+    //Boolean to set if the game is finished
+    private boolean victory = false;
+
+    //EndSlide for when game is beaten
+    private EndSlide endSlide;
+
     //The Fields object array needed to draw all the fields around the shop
     //protected Fields [] farmFields = new Fields[25];
 
@@ -99,6 +109,7 @@ public class Game implements Observer
     private long displayTime = 0;
 
 
+
     /**
      * Constructor for the game. Loads the window, adds all needed 
      * objects such as sprites and rectangles and sets their initial positions.
@@ -110,6 +121,7 @@ public class Game implements Observer
         window.setSize(new Vector2i(width, height));
 
         startingMenu = new MainMenu(width, height);
+        endSlide = new EndSlide(width, height);
        
         seasonClock.addObserver(this);
 
@@ -119,6 +131,7 @@ public class Game implements Observer
         resourceMenu = new ResourceMenu(menu);
         familyMenu = new FamilyMenu();
         distanceMarker = new DistanceMarker(window, this);
+        passport = new PassportBuy(new Vector2f(100,100), width - 100, height - 100);
 
         //Coding the elapsedTime clock
         Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
@@ -412,9 +425,21 @@ public class Game implements Observer
                     window.draw(menu.counterText[i]);
                 }
             }
-            
+
+            window.draw(passport);
             window.draw(elapsedTime);
-        } else {
+
+            if(victory == true)
+            {
+                window.draw(endSlide);
+                window.draw(endSlide.exit);
+                window.draw(endSlide.exitText);
+                window.draw(endSlide.youWin);
+            }
+
+        } 
+        else 
+        {
             window.draw(startingMenu);
 
             for(RectangleShape r : startingMenu.getButtons())
@@ -480,12 +505,21 @@ public class Game implements Observer
                     } else {
                         startingMenu.isClicked(mouseX, mouseY);
                     }
-                }
+                    
+                    if(passport.isClicked(window) && resourceMenu.getIndexVal(4) >= passportValue)
+                    {
+                        resourceMenu.decrement(4, passportValue);
+                        victory = true;
+                    }
 
-                /*if(resourceMenu.getSelectedIndex() != -1 && farmFields[0][0].getSelectedField() != null)
-                {
-                    farmFields[0][0].getSelectedField().setGrowing(true);
-                }*/
+                    if(victory == true)
+                    {
+                        if(endSlide.isClicked(mouseX, mouseY))
+                        {
+                            System.exit(0);
+                        }
+                    }
+                }
             }
 
             //System.out.println("Selected field is" + farmFields[0].selectedField);

@@ -111,6 +111,15 @@ public class MainMenu extends RectangleShape {
     public Boolean getIsOpen() {
         return isOpen;
     }
+    
+    /**
+     * Void method to set IsOpen variable
+     * @param bool boolean value we wish to set isOpen to
+     */
+    public void setIsOpen(boolean bool)
+    {
+        isOpen = bool;
+    }
 
     /**
      * Returns all the rectangles that make up the menu
