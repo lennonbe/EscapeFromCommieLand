@@ -13,9 +13,9 @@ import java.io.*;
 public class BuyMenu extends RectangleShape
 {
     private float exitButtonSize = 15;
-    private Vector2f vegIconsSize = new Vector2f(50, 50);
-    private Vector2f upgradeIconsSize = new Vector2f(50, 50);
-    private float gap = 20;
+    private Vector2f vegIconsSize = new Vector2f(40, 40);
+    private Vector2f upgradeIconsSize = new Vector2f(40, 40);
+    private float gap = 24;
     private float xLocation, yLocation;
     private float xCauliflower, xTomato, xSweetCorn, xCarrot, yCauliflower, yTomato, ySweetCorn, yCarrot;
     protected RectangleShape [] vegIcons = new RectangleShape[4];
@@ -24,7 +24,7 @@ public class BuyMenu extends RectangleShape
     private Texture [] upgradeTextures = new Texture[4];
     protected Text[] counterText;
     private RectangleShape exitButton  = new RectangleShape();
-    private Texture menuTexture;
+    private Texture menuTexture = new Texture();
     private float yPositionVeg, yPositionUpgrades;
     protected boolean menuOpen = false;
 
@@ -41,6 +41,7 @@ public class BuyMenu extends RectangleShape
         
         super(size);
         exitButton.setSize(new Vector2f(exitButtonSize,exitButtonSize)); 
+        Loader.loadPathToRectangle("BoringGame/AllResources", "PurchaseMenu.png", this, menuTexture);
         
         this.setPosition(window.getSize().x/2 - size.x/2, window.getSize().y/2 - size.y/2);
         exitButton.setPosition(this.getPosition().x + this.getSize().x - exitButtonSize, this.getPosition().y);
@@ -48,10 +49,10 @@ public class BuyMenu extends RectangleShape
         this.setFillColor(new Color(128,128,128));
         exitButton.setFillColor(new Color(255,0,0));
         
-        yPositionVeg = this.getPosition().y + this.getSize().y/4 - vegIconsSize.x/2;
-        yPositionUpgrades = this.getPosition().y + this.getSize().y - this.getSize().y/4 - vegIconsSize.x/2;
+        yPositionVeg = this.getPosition().y + this.getSize().y/4 - vegIconsSize.x/2 + 45;
+        yPositionUpgrades = this.getPosition().y + this.getSize().y - this.getSize().y/4 - vegIconsSize.x/2 - 5;
         
-        int temp = (int)this.getPosition().x + 20;
+        int temp = (int)this.getPosition().x + 32;
         for(int i = 0; i < vegIcons.length; i++) 
         {
             vegIcons[i] = new RectangleShape(vegIconsSize);
@@ -65,7 +66,7 @@ public class BuyMenu extends RectangleShape
             
         }
         
-        temp = (int)this.getPosition().x + 20;
+        temp = (int)this.getPosition().x + 32;
         for(int i = 0; i < upgradeIcons.length; i++) 
         {
             upgradeIcons[i] = new RectangleShape(upgradeIconsSize);
@@ -126,39 +127,6 @@ public class BuyMenu extends RectangleShape
         }
 
     }
-
-    /*public void unlock(int i)
-    {
-        
-        if(i == 1)
-        {
-            counterText[i].setString("2");
-        }
-        else if(i == 2)
-        {
-            counterText[i].setString("5");
-        }
-        else if(i == 3)
-        {
-            counterText[i].setString("13");
-        }
-        else if(i == 4)
-        {
-            counterText[i].setString("");
-        }
-        else if(i == 5)
-        {
-            counterText[i].setString("");
-        }
-        else if(i == 6)
-        {
-            counterText[i].setString("");
-        }
-        else if(i == 7)
-        {
-            counterText[i].setString("10");
-        }
-    }*/
 
     /**
      * Detects if the exitButton is clicked
