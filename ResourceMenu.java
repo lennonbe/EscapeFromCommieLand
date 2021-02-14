@@ -126,7 +126,14 @@ public class ResourceMenu extends RectangleShape implements Observer
             }
             
             
-            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);
+            if(i == 0  || i == 4)
+            {
+                Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);                
+            }
+            else
+            {
+                Loader.loadPathToRectangle("BoringGame/AllResources/SilhouetteVeg", "resource" + i + "_sil.png", seedIcons[i], seedIconsTexture[i]);
+            }
             
             if(i == 0)
             {
