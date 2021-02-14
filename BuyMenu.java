@@ -1,6 +1,9 @@
 package BoringGame;
 
 import org.jsfml.window.*;
+
+import BoringGame.Loader;
+
 //import org.w3c.dom.Text;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Vector2f;
@@ -24,6 +27,7 @@ public class BuyMenu extends RectangleShape
     protected Texture [] upgradeTextures = new Texture[4];
     protected Text[] counterText;
     private RectangleShape exitButton  = new RectangleShape();
+    private Texture exitButtonTexture  = new Texture();
     private Texture menuTexture = new Texture();
     private float yPositionVeg, yPositionUpgrades;
     protected boolean menuOpen = false;
@@ -48,6 +52,7 @@ public class BuyMenu extends RectangleShape
         
         this.setFillColor(new Color(128,128,128));
         exitButton.setFillColor(new Color(255,0,0));
+        Loader.loadPathToRectangle("BoringGame/AllResources", "ExitButton.png", exitButton, exitButtonTexture);
         
         yPositionVeg = this.getPosition().y + this.getSize().y/4 - vegIconsSize.x/2 + 45;
         yPositionUpgrades = this.getPosition().y + this.getSize().y - this.getSize().y/4 - vegIconsSize.x/2 - 5;
