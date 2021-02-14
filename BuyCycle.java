@@ -428,16 +428,19 @@ public class BuyCycle
         {
             buyMenu.counterText[i].setString("2");
             carrotUnlocked = true;
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", buyMenu.vegIcons[i], buyMenu.vegTextures[i]);
         }
         else if(i == 2 && carrotUnlocked == true)
         {
             buyMenu.counterText[i].setString("5");
             hempUnlocked = true;
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", buyMenu.vegIcons[i], buyMenu.vegTextures[i]);
         }
         else if(i == 3 && hempUnlocked == true)
         {
             buyMenu.counterText[i].setString("13");
             cauliflowerUnlocked = true;
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", buyMenu.vegIcons[i], buyMenu.vegTextures[i]);
         }
         else if(i == 4)
         {

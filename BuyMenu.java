@@ -22,7 +22,7 @@ public class BuyMenu extends RectangleShape
     private float xLocation, yLocation;
     private float xCauliflower, xTomato, xSweetCorn, xCarrot, yCauliflower, yTomato, ySweetCorn, yCarrot;
     protected RectangleShape [] vegIcons = new RectangleShape[4];
-    private Texture [] vegTextures = new Texture[4];
+    protected Texture [] vegTextures = new Texture[4];
     protected RectangleShape [] upgradeIcons = new RectangleShape[4];
     protected Texture [] upgradeTextures = new Texture[4];
     protected Text[] counterText;
@@ -67,7 +67,14 @@ public class BuyMenu extends RectangleShape
             
             temp += (vegIconsSize.x + gap);
             
-            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
+            if(i == 0)
+            {
+                Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", vegIcons[i], vegTextures[i]);
+            }
+            else
+            {
+                Loader.loadPathToRectangle("BoringGame/AllResources/SilhouetteVeg", "resource" + i + "_sil.png", vegIcons[i], vegTextures[i]);
+            }
             
         }
         
