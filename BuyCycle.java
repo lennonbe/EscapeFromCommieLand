@@ -134,8 +134,7 @@ public class BuyCycle
         {
             if(upgrade1Bought == false && mouseX >= buyMenu.upgradeIcons[0].getPosition().x && mouseX <= buyMenu.upgradeIcons[0].getPosition().x + buyMenu.upgradeIcons[0].getSize().x && mouseY >= buyMenu.upgradeIcons[0].getPosition().y && mouseY <= buyMenu.upgradeIcons[0].getPosition().y + buyMenu.upgradeIcons[0].getSize().y)
             {
-                //Scarecrow upgrade
-                //SoundEffect.PURCHASEITEM.play();
+                //Upgrade no.1, makes plants one coin more profitable
                 returnValue = 0;
                 decrementValue = 5;
                 
@@ -153,8 +152,8 @@ public class BuyCycle
             }
             else if(upgrade1Bought == true && upgrade2Bought == false && carrotUnlocked == true && mouseX >= buyMenu.upgradeIcons[1].getPosition().x && mouseX <= buyMenu.upgradeIcons[1].getPosition().x + buyMenu.upgradeIcons[1].getSize().x && mouseY >= buyMenu.upgradeIcons[1].getPosition().y && mouseY <= buyMenu.upgradeIcons[1].getPosition().y + buyMenu.upgradeIcons[1].getSize().y)
             {
-                //Watering system upgrade
-                //SoundEffect.PURCHASEITEM.play();
+                
+                //Upgrade no 2, decreases the growth time of each plant making growing these more efficient
                 returnValue = 1;
                 decrementValue = 10;
                 
@@ -163,7 +162,6 @@ public class BuyCycle
                     System.out.println("test2");
                     upgrade2Bought = true;
 
-                    //TODO: Increase speed of growth with this upgrade
                     for(int i = 0; i < 5; i++)
                     {
                         for(int z = 0; z < 5; z++)
@@ -181,8 +179,8 @@ public class BuyCycle
             }
             else if(upgrade1Bought == true && upgrade2Bought == true && upgrade3Bought == false && hempUnlocked == true && carrotUnlocked == true && mouseX >= buyMenu.upgradeIcons[2].getPosition().x && mouseX <= buyMenu.upgradeIcons[2].getPosition().x + buyMenu.upgradeIcons[2].getSize().x && mouseY >= buyMenu.upgradeIcons[2].getPosition().y && mouseY <= buyMenu.upgradeIcons[2].getPosition().y + buyMenu.upgradeIcons[2].getSize().y)
             {
-                //Tractor upgrade
-                //SoundEffect.PURCHASEITEM.play();
+                
+                //Upgrade no 3, increses the profit and decreases the growth time, making the plants more profitable and growing said plants more time efficient
                 returnValue = 2;
                 decrementValue = 15;
                 
@@ -191,7 +189,6 @@ public class BuyCycle
                     System.out.println("test3");
                     upgrade3Bought = true;
 
-                    //TODO: Increase both speed and profit with this upgrade
                     for(int i = 0; i < 5; i++)
                     {
                         for(int z = 0; z < 5; z++)
@@ -445,18 +442,22 @@ public class BuyCycle
         else if(i == 4)
         {
             buyMenu.counterText[i].setString("");
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + (i - 4) + ".png", buyMenu.upgradeIcons[i - 4], buyMenu.upgradeTextures[i - 4]);
         }
         else if(i == 5)
         {
             buyMenu.counterText[i].setString("");
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + (i - 4) + ".png", buyMenu.upgradeIcons[i - 4], buyMenu.upgradeTextures[i - 4]);
         }
         else if(i == 6)
         {
             buyMenu.counterText[i].setString("");
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + (i - 4) + ".png", buyMenu.upgradeIcons[i - 4], buyMenu.upgradeTextures[i - 4]);
         }
         else if(i == 7)
         {
             buyMenu.counterText[i].setString("10");
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + (i - 4) + ".png", buyMenu.upgradeIcons[i - 4], buyMenu.upgradeTextures[i - 4]);
         }
     }
 

@@ -13,6 +13,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.lang.model.util.ElementScanner6;
 import javax.swing.Timer;
 
 /**
@@ -40,8 +42,8 @@ public class ResourceMenu extends RectangleShape implements Observer
     private Vector2f seedIconSize;
     private RectangleShape resuourceMenuRectange;
     private Texture resuourceMenuTexture;
-    private RectangleShape[] seedIcons;
-    private Texture[] seedIconsTexture;
+    protected RectangleShape[] seedIcons;
+    protected Texture[] seedIconsTexture;
     private RectangleShape[] numberDisplayBackground;
     private int[] resourceCounter;
     private Text[] counterText;
@@ -72,7 +74,7 @@ public class ResourceMenu extends RectangleShape implements Observer
         this.setFillColor(new Color(128,128,128));
 
         resourceMenuTexture = new Texture();
-        loadPathToRectangle("BoringGame/AllResources", "TopMenu.png");
+        loadPathToRectangle("BoringGame/AllResources", "TopMenu2.png");
 
         seasonIcon = new RectangleShape(new Vector2f(105, 62));
         seasonIcon.setPosition(527, 14);
@@ -273,7 +275,23 @@ public class ResourceMenu extends RectangleShape implements Observer
             
             if(mouseX > iconXPosition && mouseX < iconXPosition + iconWidth && mouseY > iconYPosition && mouseY < iconYPosition + iconHeight) 
             {
-                index = i;
+                if(i == 1 && carrotLocked == true)
+                {
+                    index = -1;
+                }
+                else if(i == 2 && hempLocked == true)
+                {
+                    index = -1;
+                }
+                else if(i == 3 && cauliflowerLocked == true)
+                {
+                    index = -1;
+                }
+                else
+                {
+                    index = i;
+                }
+
                 System.out.println("Index = " + i);
             }
         }

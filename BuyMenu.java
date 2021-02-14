@@ -21,7 +21,7 @@ public class BuyMenu extends RectangleShape
     protected RectangleShape [] vegIcons = new RectangleShape[4];
     private Texture [] vegTextures = new Texture[4];
     protected RectangleShape [] upgradeIcons = new RectangleShape[4];
-    private Texture [] upgradeTextures = new Texture[4];
+    protected Texture [] upgradeTextures = new Texture[4];
     protected Text[] counterText;
     private RectangleShape exitButton  = new RectangleShape();
     private Texture menuTexture = new Texture();
@@ -76,7 +76,7 @@ public class BuyMenu extends RectangleShape
             
             temp += (upgradeIconsSize.x + gap);
             
-            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + i + ".png", upgradeIcons[i], upgradeTextures[i]);
+            Loader.loadPathToRectangle("BoringGame/AllResources/Silhouette", "upgrade" + i + "_sil.png", upgradeIcons[i], upgradeTextures[i]);
         }
         
         Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
