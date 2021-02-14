@@ -138,7 +138,7 @@ public class BuyCycle
                 returnValue = 0;
                 decrementValue = 5;
                 
-                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                if(resourceMenu.getIndexVal(4) > decrementValue)
                 {
                     System.out.println("test1");
                     upgrade1Bought = true;
@@ -157,7 +157,7 @@ public class BuyCycle
                 returnValue = 1;
                 decrementValue = 10;
                 
-                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                if(resourceMenu.getIndexVal(4) > decrementValue)
                 {
                     System.out.println("test2");
                     upgrade2Bought = true;
@@ -184,7 +184,7 @@ public class BuyCycle
                 returnValue = 2;
                 decrementValue = 15;
                 
-                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                if(resourceMenu.getIndexVal(4) > decrementValue)
                 {
                     System.out.println("test3");
                     upgrade3Bought = true;
@@ -218,7 +218,7 @@ public class BuyCycle
                     returnValue = 3;
                     decrementValue = 20;
 
-                    if(resourceMenu.getIndexVal(4) >= decrementValue)
+                    if(resourceMenu.getIndexVal(4) > decrementValue)
                     {
                         System.out.println("test3");
                         upgrade4Bought = true;
@@ -231,7 +231,7 @@ public class BuyCycle
                     returnValue = 3;
                     decrementValue = 10;
 
-                    if(resourceMenu.getIndexVal(4) >= decrementValue)
+                    if(resourceMenu.getIndexVal(4) > decrementValue)
                     {
                         System.out.println("test3.1");
                         upgrade4Bought = true;
@@ -245,7 +245,7 @@ public class BuyCycle
     
             if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
             {
-                if(resourceMenu.getIndexVal(4) >= decrementValue)
+                if(resourceMenu.getIndexVal(4) > decrementValue)
                 {
                     //resourceMenu.increment(returnValue);
                     this.unlock(returnValue + 4);
@@ -305,7 +305,7 @@ public class BuyCycle
     public void unlockField()
     {
         Fields temp = fieldMatrix[0][0].selectedField;
-        if(temp != null && temp != fieldMatrix[2][2] && temp.unlocked == false && resourceMenu.getIndexVal(4) >= 10) // cause field 12 is behind the shop TODO: Remove field12 safely
+        if(temp != null && temp != fieldMatrix[2][2] && temp.unlocked == false && resourceMenu.getIndexVal(4) > 10) // cause field 12 is behind the shop TODO: Remove field12 safely
         {
             temp.unlocked = true;
             temp.loadPathToRectangle("BoringGame/AllResources", "WetDirt.png");

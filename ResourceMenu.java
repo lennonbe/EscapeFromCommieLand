@@ -118,7 +118,7 @@ public class ResourceMenu extends RectangleShape implements Observer
             
             if(i == 4)//initial coin no. value is 5
             {
-                counterText[i] = new Text("5", font, 15);
+                counterText[i] = new Text("3", font, 15);
             }
             else
             {
