@@ -52,7 +52,7 @@ public class BuyMenu extends RectangleShape
         Loader.loadPathToRectangle("BoringGame/AllResources", "PurchaseMenuV2.png", this, menuTexture);
         
         this.setPosition(window.getSize().x/2 - size.x/2, window.getSize().y/2 - size.y/2);
-        exitButton.setPosition(this.getPosition().x + this.getSize().x - exitButtonSize, this.getPosition().y);
+        exitButton.setPosition(this.getPosition().x + this.getSize().x - exitButtonSize * 2 + 2, this.getPosition().y + exitButtonSize - 4);
         
         this.setFillColor(new Color(128,128,128));
         exitButton.setFillColor(new Color(255,0,0));

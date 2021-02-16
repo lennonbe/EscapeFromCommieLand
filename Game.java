@@ -68,7 +68,6 @@ public class Game implements Observer
     private Shop shop = new Shop(fieldSize);
 
     //New passport buying button
-    private PassportBuy passport;
     protected int passportValue = 1500;
 
     //Boolean to set if the game is finished
@@ -131,7 +130,6 @@ public class Game implements Observer
         resourceMenu = new ResourceMenu(menu);
         familyMenu = new FamilyMenu();
         distanceMarker = new DistanceMarker(window, this);
-        passport = new PassportBuy(new Vector2f(100,100), width - 100, height - 100);
 
         //Coding the elapsedTime clock
         Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
@@ -429,7 +427,6 @@ public class Game implements Observer
                 window.draw(menu.passportText);
             }
 
-            window.draw(passport);
             window.draw(elapsedTime);
 
             if(victory == true)
@@ -493,11 +490,13 @@ public class Game implements Observer
                     System.exit(0);
                 }
                 
-                if(Mouse.isButtonPressed(Mouse.Button.LEFT)) {
+                if(Mouse.isButtonPressed(Mouse.Button.LEFT)) 
+                {
                     float mouseX = Mouse.getPosition(window).x;
                     float mouseY = Mouse.getPosition(window).y;
 
-                    if(!startingMenu.getIsOpen()) {
+                    if(!startingMenu.getIsOpen()) 
+                    {
                         resourceMenu.selectIcon(mouseX, mouseY);
                         buyCycle.buyVeg(mouseX, mouseY);
                         buyCycle.buyUpgrade(mouseX, mouseY);
@@ -505,11 +504,13 @@ public class Game implements Observer
                         buyCycle.collectVeg();
                         buyCycle.selectVegToGrowOnField();
                         buyCycle.unlockField();
-                    } else {
+                    } 
+                    else 
+                    {
                         startingMenu.isClicked(mouseX, mouseY);
                     }
                     
-                    if(passport.isClicked(window) && resourceMenu.getIndexVal(4) >= passportValue)
+                    if(menu.passport.isClicked(window) && resourceMenu.getIndexVal(4) >= passportValue)
                     {
                         resourceMenu.decrement(4, passportValue);
                         victory = true;

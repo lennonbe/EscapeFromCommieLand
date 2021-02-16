@@ -466,5 +466,4 @@ public class BuyCycle
             Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Upgrades", "upgrade" + (i - 4) + ".png", buyMenu.upgradeIcons[i - 4], buyMenu.upgradeTextures[i - 4]);
         }
     }
-
 }
