@@ -424,6 +424,9 @@ public class Game implements Observer
                 {
                     window.draw(menu.counterText[i]);
                 }
+
+                window.draw(menu.passport);
+                window.draw(menu.passportText);
             }
 
             window.draw(passport);
