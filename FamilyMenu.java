@@ -3,6 +3,7 @@ package BoringGame;
 import org.jsfml.system.Vector2f;
 import BoringGame.EventPopup;
 import org.jsfml.graphics.*;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.lang.Math;
@@ -22,10 +23,12 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private final int iconHeight = 50;
     private final int gap = 20;
     
+    private ArrayList<Integer> deadIndex = new ArrayList<>();
     private CircleShape[] deadDot;
     private Texture[] familyIconsTexture;
     private RectangleShape[] familyIcons;
     private EventPopup popup;
+    private Boolean allDead;
     private Text text;
 
     public FamilyMenu() {
@@ -40,7 +43,8 @@ public class FamilyMenu extends RectangleShape implements Observer{
         familyIcons = new RectangleShape[numberOfIcons];
 
         deadDot = new CircleShape[numberOfIcons];
-
+        allDead = false;
+        
         text = new Text();
 
         for(int i = 0; i < numberOfIcons; i++) {
@@ -124,6 +128,10 @@ public class FamilyMenu extends RectangleShape implements Observer{
             //Once an event fires, another random number decides which family member will be affected
             int personIndex = (int)(Math.random()*(numberOfIcons));
 
+            while(isDead(personIndex)) {
+                personIndex = (int)(Math.random()*(numberOfIcons));
+            }
+
             popup = new EventPopup(this, personIndex);
         }
     }
@@ -135,7 +143,25 @@ public class FamilyMenu extends RectangleShape implements Observer{
             SoundEffect.DIE.play();
             RectangleShape person = familyIcons[index];
             deadDot[index].setPosition(person.getPosition().x, person.getPosition().y);
-            popup = null;
+            deadIndex.add(index);
+
+            if(deadIndex.size() >= numberOfIcons) 
+                allDead = true;
         }
+
+        popup = null;
+    }
+
+    public Boolean isAllDead() {
+        return allDead;
+    }
+
+    private Boolean isDead(int index) {
+        for(Integer i : deadIndex) {
+            if(i == index) 
+                return true;
+        }
+
+        return false;
     }
 }

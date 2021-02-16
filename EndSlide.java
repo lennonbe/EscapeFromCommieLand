@@ -14,6 +14,7 @@ public class EndSlide extends RectangleShape {
     protected RectangleShape exit;
     protected Text exitText;
     protected Text youWin;
+    protected Text youLost;
     private Boolean isOpen;
     private Font font;
 
@@ -37,10 +38,14 @@ public class EndSlide extends RectangleShape {
         exitText = new Text("EXIT GAME", font);
         exitText.setScale(2, 2);
 
+        youLost = new Text("YOU LOST", font);
+        youLost.setScale(2, 2);
+
         youWin = new Text("YOU WIN!", font);
         exitText.setScale(2, 2);
 
         youWin.setPosition(exit.getPosition().x + exit.getSize().x/2 - 60, exit.getPosition().y - 100);
+        youLost.setPosition(exit.getPosition().x + exit.getSize().x/2 - 60, exit.getPosition().y - 100);
         exitText.setPosition(exit.getPosition().x + 50, exit.getPosition().y);
     }
 

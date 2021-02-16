@@ -438,6 +438,13 @@ public class Game implements Observer
                 window.draw(endSlide.youWin);
             }
 
+            if(familyMenu.isAllDead()) {
+                SoundEffect.BGM2.stop();
+                window.draw(endSlide);
+                window.draw(endSlide.exit);
+                window.draw(endSlide.exitText);
+                window.draw(endSlide.youLost);
+            }
         } 
         else 
         {
@@ -523,6 +530,11 @@ public class Game implements Observer
                         {
                             System.exit(0);
                         }
+                    }
+
+                    if(familyMenu.isAllDead()) {
+                        if(endSlide.isClicked(mouseX, mouseY))
+                            System.exit(0);
                     }
                 }
             }
