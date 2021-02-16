@@ -27,7 +27,7 @@ public class ResourceMenu extends RectangleShape implements Observer
     
     //Inherit attributes of the ResoureMenu are final
     //private final static int width = 550;
-    private final static int width = 650;
+    private final static int width = 768;
     private final static int height = 90;
     private final int numberOfIcons = 5;
     private final int iconWidth = 50;
@@ -74,10 +74,10 @@ public class ResourceMenu extends RectangleShape implements Observer
         this.setFillColor(new Color(128,128,128));
 
         resourceMenuTexture = new Texture();
-        loadPathToRectangle("BoringGame/AllResources", "TopMenu2.png");
+        Loader.loadPathToRectangle("BoringGame/AllResources", "TopMenuNew.png", this, resourceMenuTexture);
 
         seasonIcon = new RectangleShape(new Vector2f(105, 62));
-        seasonIcon.setPosition(527, 14);
+        seasonIcon.setPosition(495, 14);
         Loader.loadPathToRectangle("BoringGame/AllResources", "Season2.png", seasonIcon, seasonIconTexture);
 
         //Loads in the font
@@ -116,42 +116,30 @@ public class ResourceMenu extends RectangleShape implements Observer
             seedIcons[i].setPosition(new Vector2f(iconXPosition, 20));
             seedIcons[i].setSize(seedIconSize);
             
-            if(i == 4)//initial coin no. value is 5
-            {
+            if(i == 4) {//initial coin no. value is 5
                 counterText[i] = new Text("3", font, 15);
-            }
-            else
-            {
+            } else {
                 counterText[i] = new Text("0", font, 15);
             }
             
             
-            if(i == 0  || i == 4)
-            {
+            if(i == 0  || i == 4) {
                 Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", seedIcons[i], seedIconsTexture[i]);                
             }
-            else
-            {
+            else {
                 Loader.loadPathToRectangle("BoringGame/AllResources/SilhouetteVeg", "resource" + i + "_sil.png", seedIcons[i], seedIconsTexture[i]);
             }
             
-            if(i == 0)
-            {
+            if(i == 0) {
                 counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
                 iconXPosition += (iconWidth + gap + 2);
-            }
-            else if(i == 1)
-            {
+            } else if(i == 1) {
                 counterText[i].setPosition(iconXPosition + iconWidth - 5, textYPosition);
-                iconXPosition += (iconWidth + gap + 8);
-            }
-            else if(i == 2)
-            {
+                iconXPosition += (iconWidth + gap - 2);
+            } else if(i == 2) {
                 counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
-                iconXPosition += (iconWidth + gap + 4);
-            }
-            else
-            {
+                iconXPosition += (iconWidth + gap - 10);
+            } else {
                 counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
                 iconXPosition += (iconWidth + gap);
             }

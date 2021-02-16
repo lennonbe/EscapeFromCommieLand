@@ -8,7 +8,7 @@ import org.jsfml.graphics.*;
  * There are three buttons :
  *      Start game  - Starts the game
  *      How To Play - A section describing the rule and controls of the game
- *      Exit        - Exits the game 
+ *      Exit        - Exits the game
  */
 public class MainMenu extends RectangleShape {
 
