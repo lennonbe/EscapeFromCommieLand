@@ -120,7 +120,7 @@ public class FamilyMenu extends RectangleShape implements Observer{
     public void update(Observable obs, Object obj) {
 
         if(chanceOfEvent > Math.random() && popup == null) {
-            
+            SoundEffect.ALARM.play();
             //Once an event fires, another random number decides which family member will be affected
             int personIndex = (int)(Math.random()*(numberOfIcons));
 
@@ -132,6 +132,7 @@ public class FamilyMenu extends RectangleShape implements Observer{
         //If the player doesn't respont to the event, there's a 50% chance that a family member will die,
         //Otherwise do nothing
         if(Math.random() > 0.5) {
+            SoundEffect.DIE.play();
             RectangleShape person = familyIcons[index];
             deadDot[index].setPosition(person.getPosition().x, person.getPosition().y);
             popup = null;

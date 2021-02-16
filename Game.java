@@ -431,6 +431,7 @@ public class Game implements Observer
 
             if(victory == true)
             {
+                SoundEffect.WIN.play();
                 window.draw(endSlide);
                 window.draw(endSlide.exit);
                 window.draw(endSlide.exitText);

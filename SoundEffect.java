@@ -29,7 +29,10 @@ public enum SoundEffect {
    FAILGUNSHOT("AudioFile/Gun_Shot_Fail.wav"),                  // Fail Condition - Gun Shot
    FAILPRISON("AudioFile/GameFail2.wav"),                       // Fail Condition - Sent To Prison
    FAILOTHER("AudioFile/GameFail.wav"),                         // Fail Condition - Other Condition
-   WIN("AudioFile/Steam_Boat.wav");                             // Win Condition
+   WIN("AudioFile/Steam_Boat.wav"),                             // Win Condition
+   DIE("AudioFile/Die.wav"),                                    // Die
+   ALARM("AudioFile/Alarm.wav");                                // Alarm
+
 
    public static enum Volume{
       MUTE, LOW, MEDIUM, HIGH
