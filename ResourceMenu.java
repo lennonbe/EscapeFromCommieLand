@@ -238,6 +238,9 @@ public class ResourceMenu extends RectangleShape implements Observer
      */
     public int getIndexVal(int index)
     {
+        if(index < 0)
+            return -1;
+
         return Integer.parseInt(counterText[index].getString());
     }
 
@@ -366,5 +369,10 @@ public class ResourceMenu extends RectangleShape implements Observer
             System.out.println("AUTOMATIC INCREMENT HAS OCCURED");
         }
         
+    }
+
+    public void deselect() {
+        Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
+        selectedIndex = -1;
     }
 }

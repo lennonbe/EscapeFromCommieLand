@@ -264,32 +264,17 @@ public class BuyCycle
     public void selectVegToGrowOnField()
     {
         Fields temp = fieldMatrix[0][0].selectedField;
+        
         if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) > 0 && temp.unlocked == true)
         {
-            System.out.println("testing1");
+            
             //Checks if there is anything already growing on the field selected, and if so doesnt allow for selection
             if(temp.growing == false && temp.readyToCollect == false)
             {
-                System.out.println("testing2");
-                if(resourceMenu.getSelectedIndex() == 0)
-                {
-                    temp.setVegType(0);
-                }
-                else if(resourceMenu.getSelectedIndex() == 1)
-                {
-                    temp.setVegType(1);
-                }
-                else if(resourceMenu.getSelectedIndex() == 2)
-                {
-                    temp.setVegType(2);
-                }
-                else if(resourceMenu.getSelectedIndex() == 3)
-                {
-                    temp.setVegType(3);
-                }
+                temp.setVegType(resourceMenu.getSelectedIndex());
                 
                 SoundEffect.CROPPLANT.play();
-
+                
                 //Unselects the currently selected field
                 if(temp.growing)
                 {
@@ -297,8 +282,14 @@ public class BuyCycle
                 }
             }
         }
-    }
 
+        if(resourceMenu.getSelectedIndex() != -1 && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) == 0) {
+            resourceMenu.deselect();
+            
+            return;
+        }
+    }
+    
     /**
      * Allows for user to purchase fields which are currently locked.
      */
@@ -428,7 +419,7 @@ public class BuyCycle
         {
             buyMenu.counterText[i].setString("2");
             carrotUnlocked = true;
-            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", buyMenu.vegIcons[i], buyMenu.vegTextures[i]);
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + 1 + ".png", buyMenu.vegIcons[i], buyMenu.vegTextures[i]);
             Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", resourceMenu.seedIcons[i], resourceMenu.seedIconsTexture[i]);
         }
         else if(i == 2 && carrotUnlocked == true)
