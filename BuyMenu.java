@@ -162,9 +162,10 @@ public class BuyMenu extends RectangleShape
     }
 
     /**
-     * Detects if the exitButton is clicked
-     * @param window current window the menu is in
-     * @return returns boolean value if the exit is clicked
+     * allows to check if the exit button was clicked, returning true if so.
+     * @param mouseX mouse X position on window
+     * @param mouseY mouse Y position on window
+     * @return boolean (true if exit button is clicked false otherwise)
      */
     public boolean isExitClicked(float mouseX, float mouseY)
     {

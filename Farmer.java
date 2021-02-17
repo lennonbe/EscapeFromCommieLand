@@ -33,11 +33,9 @@ public class Farmer extends Sprite
     }
 
     /**
-     * Method which allows to loadn in .PNG files into sprites
-     * @param directory the directory of the file you wish to load
-     * @param file the file you wish to load
-     * @param sprite the sprite you wish to have this file drawn on
-     * @param texture a needed texture for the sprite, making it drawable
+     * Method which allows to set the farmer sprite image.
+     * @param directory directory in which the image is stored
+     * @param file file of the image
      */
     public void setSprite(String directory, String file)
     {

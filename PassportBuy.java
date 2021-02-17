@@ -21,6 +21,12 @@ public class PassportBuy extends RectangleShape
 {
     private Texture texture = new Texture();
 
+    /**
+     * Constructor for passportBuy object, an icon which allows the player to buy a passport which wins the game
+     * @param size size of the passport
+     * @param xPosition passport X position on window
+     * @param yPosition passport Y position on window
+     */
     public PassportBuy(Vector2f size, float xPosition, float yPosition)
     {
         super(size);
@@ -31,9 +37,9 @@ public class PassportBuy extends RectangleShape
     }
 
     /**
-     * Checks if a square/rectangle has been clicked.
-     * @param rectangle the rectangle in question
-     * @return a boolean which is true if its clicked and false otherwise
+     * Checks if the mouse is currently clicked or not.
+     * @param window current window we sish to check for clicks on
+     * @return boolean which represents the click (true if clicked false otherwise)
      */
     public boolean isClicked(Window window)
     {

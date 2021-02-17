@@ -23,6 +23,15 @@ public class BuyCycle
     private double upgrade2 = 0.75;
     private double upgrade3 = 0.65;
 
+    /**
+     * Constructor for buyCycle object. This allows all the different components of the game buy, plant, grow and collec cycle to interact by having them all called in one object.
+     * @param array the array of fields
+     * @param resMenu resource menu (where current resources such as seed number and money are represented)
+     * @param buyMenuInput buy menu (where player acquires seeds and upgrades)
+     * @param familyMenuInput family events menu
+     * @param windowInput current game window
+     * @param gameInput current game
+     */
     public BuyCycle(Fields[][] array, ResourceMenu resMenu, BuyMenu buyMenuInput, FamilyMenu familyMenuInput, RenderWindow windowInput, Game gameInput) 
     {
         fieldMatrix = array;
@@ -34,9 +43,10 @@ public class BuyCycle
     }
 
     /**
-     * Chooses what vegetable to buy.
-     * @param window the current game window for prespective
-     * @return the array index of the vegetables
+     * Allows user to buy vegetable based on the x and y postiion of the mouse, checking if it overlaps the vegetable icons.
+     * @param mouseX mouse X position on window
+     * @param mouseY mouse Y position on window
+     * @return int index for vegetable type 
      */
     public int buyVeg(float mouseX, float mouseY)
     {
@@ -121,9 +131,10 @@ public class BuyCycle
     }
 
     /**
-     * Chooses what upgrade to buy.
-     * @param window the current game window for prespective
-     * @return the array index of the upgrade
+     * Checks what upgrade the user wishes to buy based on mouse location and upgrade icons location.
+     * @param mouseX mouse X coordinate on window
+     * @param mouseY mouse Y coordinate on window
+     * @return returns the int which represents the index of the upgrade
      */
     public int buyUpgrade(float mouseX, float mouseY)
     {
@@ -291,7 +302,7 @@ public class BuyCycle
     }
     
     /**
-     * Allows for user to purchase fields which are currently locked.
+     * Allows for user to purchase fields which are currently locked, unlocking them as a consequence and decrementing the curretn wallet.
      */
     public void unlockField()
     {
@@ -388,9 +399,8 @@ public class BuyCycle
 
     /**
      * Checks if the farmer is close enough to the field to be capable of collecting what is growing on said field.
-     * @param field the field we want to collect from
-     * @param farmer the farmer object
-     * @return boolean giving or not authorazation to collect
+     * @param field the field we want to collect from or grow on, depending on where the method is used
+     * @return boolean giving or not authorization to collect (true allows for action false does not)
      */
     public boolean checkProximityToField(Fields field)
     {
@@ -412,6 +422,10 @@ public class BuyCycle
         return returnVal;
     }
 
+    /**
+     * Method for unlocking a seed or an upgrade when given an index such as i
+     * @param i index of item to unlock in items array
+     */
     public void unlock(int i)
     {
         
