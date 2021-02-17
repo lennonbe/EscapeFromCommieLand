@@ -263,10 +263,13 @@ public class ResourceMenu extends RectangleShape implements Observer
     {
         int index = -1;
         
-        for(int i = 0; i < seedIcons.length; i++) 
+        for(int i = 0; i < seedIcons.length; i++)
         {
-            int iconXPosition = gap + (iconWidth*2) * i; 
-            int iconYPosition = gap;
+            /*int iconXPosition = gap + (iconWidth*2) * i; 
+            int iconYPosition = gap;*/
+
+            int iconXPosition = (int)seedIcons[i].getPosition().x; 
+            int iconYPosition = (int)seedIcons[i].getPosition().y;
             
             if(mouseX > iconXPosition && mouseX < iconXPosition + iconWidth && mouseY > iconYPosition && mouseY < iconYPosition + iconHeight) 
             {
