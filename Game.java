@@ -533,6 +533,7 @@ public class Game implements Observer
                     }
 
                     if(familyMenu.isAllDead()) {
+                        SoundEffect.FAILOTHER.play();  //testing the audio play for 1 time
                         if(endSlide.isClicked(mouseX, mouseY))
                             System.exit(0);
                     }
