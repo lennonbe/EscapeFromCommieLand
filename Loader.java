@@ -8,8 +8,18 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
 
+/**
+ * Abstract class used for loading images into sprites and/or rectangles.
+ */
 public abstract class Loader {
     
+    /**
+     * Allows user to load an image innto a specific rectangle
+     * @param directory directory in which the file can be found
+     * @param file file to be used
+     * @param rectangle rectangle to add file to
+     * @param texture texture to allow drawing on that rectangle
+     */
     public static void loadPathToRectangle(String directory, String file, RectangleShape rectangle, Texture texture) {
         Path path = FileSystems.getDefault().getPath(directory, file);
         
@@ -28,6 +38,13 @@ public abstract class Loader {
         rectangle.setTexture(texture);
     }
 
+    /**
+     * Allows user to load an image innto a specific circle
+     * @param directory directory in which the file can be found
+     * @param file file to be used
+     * @param circle circle to add file to
+     * @param texture texture to allow drawing on that rectangle
+     */
     public static void loadPathToCircle(String directory, String file, CircleShape circle, Texture texture) {
         Path path = FileSystems.getDefault().getPath(directory, file);
         

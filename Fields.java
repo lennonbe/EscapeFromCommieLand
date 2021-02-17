@@ -20,7 +20,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-
+/**
+ * Class for fields used in this game. The field is one of the most important objects of this game due to the game being resource collection based.
+ */
 public class Fields extends RectangleShape implements Observer
 {
     private Texture fieldTexture = new Texture();
@@ -46,8 +48,9 @@ public class Fields extends RectangleShape implements Observer
     private int cauliflowerGrowthCycleTime = 5000;
 
     /**
-     * Constructor for Fields.
-     * @param size the size of the field
+     * Constructor method for the fields.
+     * @param size size of field
+     * @param input resource menu used as input when constructing the field.
      */
     public Fields(Vector2f size, ResourceMenu input)
     {
@@ -76,24 +79,36 @@ public class Fields extends RectangleShape implements Observer
         }
     }
 
+    /**
+     * Getter method for the veg type
+     * @return string which represents the vegType
+     */
     public String getVegType()
     {
         return vegType;
     }
     
+    /**
+     * Getter for the selected field.
+     * @return currently selected field, a static variable
+     */
     public Fields getSelectedField()
     {
         return selectedField;
     }
     
+    /**
+     * Setter method for the selectedField, setting this variable
+     * @param input value selectedField will be set to
+     */
     public void setSelectedField(Fields input)
     {
         selectedField = input;
     }
     
     /**
-     * Set the vegType based on the files.
-     * @param type type of veg
+     * Setter method for vegType.
+     * @param i index value of vegType
      */
     public void setVegType(int i)
     {
@@ -129,13 +144,17 @@ public class Fields extends RectangleShape implements Observer
         } 
     }
 
+    /**
+     * Different setter method for vegType. Directly sets the vegType as a string.
+     * @param str str which represents and will be set as vegType
+     */
     public void setVegType(String str)
     {
         vegType = str;
     }
     
     /**
-     * This is the method which will be called to update the field every growth cycle
+     * This is the method which will be called to update the field every growth cycle.
      * @param clock
      * @param o
      */
@@ -156,16 +175,13 @@ public class Fields extends RectangleShape implements Observer
                 this.growthStatus = -1;
                 clock.deleteObservers();
             }
-
         }
     }
 
     /**
-     * Method which allows to loadn in .PNG files into sprites
-     * @param directory the directory of the file you wish to load
-     * @param file the file you wish to load
-     * @param rectangle the rectangle you wish to have this file drawn on
-     * @param texture a needed texture for the rectangle, making it drawable
+     * Method used to load images to rectangles.
+     * @param directory directory where you can find the image you wish to set.
+     * @param file file regarding said image.
      */
     public void loadPathToRectangle(String directory, String file)
     {
@@ -185,9 +201,9 @@ public class Fields extends RectangleShape implements Observer
     }
 
     /**
-     * Checks if a square/rectangle has been clicked.
-     * @param rectangle the rectangle in question
-     * @return a boolean which is true if its clicked and false otherwise
+     * Checks if the mouse left button is clicked in the game window.
+     * @param window current window
+     * @return boolean representing if it is or not clicked (true if it is clicked, false otherwise)
      */
     public boolean isClicked(Window window)
     {
