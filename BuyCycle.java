@@ -265,7 +265,7 @@ public class BuyCycle
     {
         Fields temp = fieldMatrix[0][0].selectedField;
         
-        if(temp != null && resourceMenu.getSelectedIndex() != -1 && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) > 0 && temp.unlocked == true)
+        if(temp != null && resourceMenu.getSelectedIndex() != -1 && checkProximityToField(temp) && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) > 0 && temp.unlocked == true)
         {
             
             //Checks if there is anything already growing on the field selected, and if so doesnt allow for selection
@@ -419,7 +419,7 @@ public class BuyCycle
         {
             buyMenu.counterText[i].setString("2");
             carrotUnlocked = true;
-            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + 1 + ".png", buyMenu.vegIcons[i], buyMenu.vegTextures[i]);
+            Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", buyMenu.vegIcons[i], buyMenu.vegTextures[i]);
             Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + i + ".png", resourceMenu.seedIcons[i], resourceMenu.seedIconsTexture[i]);
         }
         else if(i == 2 && carrotUnlocked == true)
