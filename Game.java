@@ -178,6 +178,8 @@ public class Game implements Observer
      * Calculates the movement of the character.
      * Ensures the farmer doesn't collide with the shop,
      * and doesn't walk out of the window.
+     * 
+     * Also includes the animations of the movement, with the farmer facing different directions as he moves.
      */
     public void movement()
     {
