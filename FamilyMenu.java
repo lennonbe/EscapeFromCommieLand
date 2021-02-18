@@ -15,20 +15,18 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private final static Vector2f iconSize = new Vector2f(100, 150);
     private final static int width = (int) iconSize.x * numberOfIcons;
     private final static int height = (int) iconSize.y + 40;
-    private final Clock clock = new Clock(120 * 1000);
+    private final Clock clock = new Clock(120 * 1);
     private final double chanceOfEvent = 0.2;
     private final int menuXPosition = 0;
     private final int menuYPosition = 864 - height;
     private final int gap = 20;
     
     private ArrayList<Integer> deadIndex = new ArrayList<>();
-    private CircleShape[] deadDot;
     private Texture[] familyIconsTexture;
     private RectangleShape[] familyIcons;
     private EventPopup popup;
     private Boolean allDead;
     private Text text;
-    private float[] arrayOfXPositions = new float[numberOfIcons];
 
     public FamilyMenu() {
         super(new Vector2f(width, height));
@@ -41,7 +39,6 @@ public class FamilyMenu extends RectangleShape implements Observer{
         familyIconsTexture = new Texture[numberOfIcons];
         familyIcons = new RectangleShape[numberOfIcons];
 
-        deadDot = new CircleShape[numberOfIcons];
         allDead = false;
         
         text = new Text();
@@ -52,20 +49,11 @@ public class FamilyMenu extends RectangleShape implements Observer{
 
             familyIconsTexture[i] = new Texture();
             familyIcons[i] = new RectangleShape();
-            
-            //deadDot is a red circle that will appear on top of a persons icon if that person is dead, 
-            // This will be deleted later because it's ugly :)
-            deadDot[i] = new CircleShape(18);
-
-            //It's position is intentionally placed out of bounds, because they shouldn't be visable, unless a person dies 
-            deadDot[i].setPosition(-50, -50);
-            deadDot[i].setFillColor(new Color(255, 0, 0));
 
             familyIcons[i].setPosition(iconXPosition, iconYPosition);
             familyIcons[i].setSize(iconSize);
 
             Loader.loadPathToRectangle("BoringGame/AllResources/FamilyMembers", "FamilyMembers" + i + ".png", familyIcons[i], familyIconsTexture[i]);
-            arrayOfXPositions[i] = iconXPosition;
         }
     }
 
@@ -75,10 +63,6 @@ public class FamilyMenu extends RectangleShape implements Observer{
      */
     public RectangleShape[] getRectangleArray() {
         return familyIcons;
-    }
-
-    public CircleShape[] getCircleShapeArray() {
-        return deadDot;
     }
 
     public CircleShape getPopup() {
@@ -142,7 +126,8 @@ public class FamilyMenu extends RectangleShape implements Observer{
         if(Math.random() > 0.5) {
             SoundEffect.DIE.play();
             RectangleShape person = familyIcons[index];
-            deadDot[index].setPosition(person.getPosition().x, person.getPosition().y);
+
+            Loader.loadPathToRectangle("BoringGame/AllResources/FamilyMembers", "FamilyMembers" + index + "_dead.png", familyIcons[index], familyIconsTexture[index]);
             deadIndex.add(index);
 
             if(deadIndex.size() >= numberOfIcons) 

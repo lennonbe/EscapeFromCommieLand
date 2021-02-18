@@ -382,10 +382,6 @@ public class Game implements Observer
                 window.draw(r);
             }
             
-            for(CircleShape c : familyMenu.getCircleShapeArray()) {
-                window.draw(c);
-            }
-            
             /*
             Following code will be useful for idenfying when the player is clicking on a certain crop or on the house etc...
             Right now doesnt do much but still a good starting point. 
