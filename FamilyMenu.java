@@ -12,15 +12,13 @@ public class FamilyMenu extends RectangleShape implements Observer{
     
     //Inherit attributes of the FamilyMenu are final
     private final static int numberOfIcons = 2;
-    private final static Vector2f iconSize = new Vector2f(50, 50);
+    private final static Vector2f iconSize = new Vector2f(100, 150);
     private final static int width = (int) iconSize.x * numberOfIcons;
     private final static int height = (int) iconSize.y + 40;
     private final Clock clock = new Clock(120 * 1000);
     private final double chanceOfEvent = 0.2;
     private final int menuXPosition = 0;
     private final int menuYPosition = 864 - height;
-    private final int iconWidth = 50;
-    private final int iconHeight = 50;
     private final int gap = 20;
     
     private ArrayList<Integer> deadIndex = new ArrayList<>();
@@ -30,12 +28,13 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private EventPopup popup;
     private Boolean allDead;
     private Text text;
+    private float[] arrayOfXPositions = new float[numberOfIcons];
 
     public FamilyMenu() {
         super(new Vector2f(width, height));
 
         this.setPosition(menuXPosition, menuYPosition);
-        this.setFillColor(new Color(128,128,128));
+        this.setFillColor(new Color(128, 128, 128, 0));
 
         clock.addObserver(this);
 
@@ -48,8 +47,8 @@ public class FamilyMenu extends RectangleShape implements Observer{
         text = new Text();
 
         for(int i = 0; i < numberOfIcons; i++) {
-            int iconXPosition = (menuXPosition) + (iconWidth * i);
-            int iconYPosition = (menuYPosition + height) - (gap + iconHeight);
+            float iconXPosition = (menuXPosition) + (gap + (gap + iconSize.x) * i);
+            float iconYPosition = (menuYPosition + height) - (gap + iconSize.y);
 
             familyIconsTexture[i] = new Texture();
             familyIcons[i] = new RectangleShape();
@@ -65,7 +64,8 @@ public class FamilyMenu extends RectangleShape implements Observer{
             familyIcons[i].setPosition(iconXPosition, iconYPosition);
             familyIcons[i].setSize(iconSize);
 
-            Loader.loadPathToRectangle("BoringGame/Sprites/Family", i + ".png", familyIcons[i], familyIconsTexture[i]);
+            Loader.loadPathToRectangle("BoringGame/AllResources/FamilyMembers", "FamilyMembers" + i + ".png", familyIcons[i], familyIconsTexture[i]);
+            arrayOfXPositions[i] = iconXPosition;
         }
     }
 
