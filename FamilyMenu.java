@@ -15,7 +15,7 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private final static Vector2f iconSize = new Vector2f(100, 150);
     private final static int width = (int) iconSize.x * numberOfIcons;
     private final static int height = (int) iconSize.y + 40;
-    private final Clock clock = new Clock(120 * 1);
+    private final Clock clock = new Clock(120 * 1000);
     private final double chanceOfEvent = 0.2;
     private final int menuXPosition = 0;
     private final int menuYPosition = 864 - height;
