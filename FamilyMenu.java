@@ -12,7 +12,7 @@ public class FamilyMenu extends RectangleShape implements Observer{
     
     //Inherit attributes of the FamilyMenu are final
     private final static int numberOfIcons = 2;
-    private final static Vector2f iconSize = new Vector2f(100, 150);
+    private final static Vector2f iconSize = new Vector2f(80, 110);
     private final static int width = (int) iconSize.x * numberOfIcons;
     private final static int height = (int) iconSize.y + 40;
     private final Clock clock = new Clock(120 * 1000);
