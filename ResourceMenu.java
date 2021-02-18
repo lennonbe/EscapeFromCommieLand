@@ -148,6 +148,11 @@ public class ResourceMenu extends RectangleShape implements Observer
 
     }
 
+    /**
+     * The resource menu contains the icon that represents the current season.
+     * This function is used to change the seasons icon
+     * @param i
+     */
     public void changeSeasonIcon(int i)
     {
         if(i == 1)
@@ -337,6 +342,10 @@ public class ResourceMenu extends RectangleShape implements Observer
         return selectedIndex;
     }
 
+    /**
+     * This function is called by the Clock object (Every 5 seconds), once the player has bought the final upgrade.
+     * The final upgrade gives the player 1 coin per 5 seconds
+     */
     public void update(Observable clock, Object o)
     {
         if(autoIncrement == true)
@@ -347,6 +356,10 @@ public class ResourceMenu extends RectangleShape implements Observer
         
     }
 
+    /**
+     * Function used for deselecting.
+     * This is used for example when the users plans seeds untill they run out, then the current seed is deselected automatically
+     */
     public void deselect() 
     {
         Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
