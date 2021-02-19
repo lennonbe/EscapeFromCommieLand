@@ -44,7 +44,6 @@ public class ResourceMenu extends RectangleShape implements Observer
     private Texture resuourceMenuTexture;
     protected RectangleShape[] seedIcons;
     protected Texture[] seedIconsTexture;
-    private RectangleShape[] numberDisplayBackground;
     private int[] resourceCounter;
     private Text[] counterText;
     private boolean isSelected = false;
@@ -93,7 +92,6 @@ public class ResourceMenu extends RectangleShape implements Observer
         //Initializes the arrays for the menu 
         seedIcons = new RectangleShape[numberOfIcons];
         seedIconsTexture = new Texture[numberOfIcons];
-        numberDisplayBackground = new RectangleShape[numberOfIcons];
         counterText = new Text[numberOfIcons];
         
         /**
@@ -104,12 +102,6 @@ public class ResourceMenu extends RectangleShape implements Observer
         int iconXPosition = gap - 10;  
         for(int i = 0; i < numberOfIcons; i++) 
         {
-            //int iconXPosition = gap + (iconWidth*2) * i;
-            
-            numberDisplayBackground[i] = new RectangleShape(new Vector2f(iconWidth, iconHeight));
-            numberDisplayBackground[i].setPosition(iconXPosition + iconWidth, 20);
-            numberDisplayBackground[i].setFillColor(new Color(0, 0, 0));
-            
             seedIcons[i] = new RectangleShape();
             seedIconsTexture[i] = new Texture();
             
@@ -171,14 +163,8 @@ public class ResourceMenu extends RectangleShape implements Observer
      * 
      * @return The array of rectangles that make up the menu
      */
-    public RectangleShape[] getRectangleArray() 
-    {
-        RectangleShape[] result = new RectangleShape[numberOfIcons*2];
-
-        System.arraycopy(seedIcons, 0, result, 0, numberOfIcons);
-        System.arraycopy(numberDisplayBackground, 0, result, numberOfIcons, numberOfIcons);
-
-        return result;
+    public RectangleShape[] getRectangleArray() {
+        return seedIcons;
     }
 
     /**
