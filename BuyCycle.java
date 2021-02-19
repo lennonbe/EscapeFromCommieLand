@@ -409,10 +409,12 @@ public class BuyCycle
         Vector2f fieldSize = field.getSize();
         Vector2f fieldPos = field.getPosition();
 
-        //Vector2f farmerSize = farmer.getSize();
+        float farmerHeight = game.farmer.getGlobalBounds().height;
+        float farmerWidth = game.farmer.getGlobalBounds().width;
+
         Vector2f farmerPos = game.farmer.getPosition();
 
-        double distBetweenFarmerAndField = Math.sqrt((farmerPos.x - fieldPos.x) * (farmerPos.x - fieldPos.x) + (farmerPos.y - fieldPos.y) * (farmerPos.y - fieldPos.y));
+        double distBetweenFarmerAndField = Math.sqrt(((farmerPos.x + farmerWidth/2) - fieldPos.x) * ((farmerPos.x + farmerWidth/2) - fieldPos.x) + ((farmerPos.y + farmerHeight/2) - fieldPos.y) * ((farmerPos.y + farmerHeight/2) - fieldPos.y));
 
         if(distBetweenFarmerAndField <= game.fieldSizeInt)
         {
@@ -424,7 +426,7 @@ public class BuyCycle
 
     /**
      * Method for unlocking a seed or an upgrade when given an index such as i
-     * @param i index of item to unlock in items array
+     * @param i index of item to unlock in items
      */
     public void unlock(int i)
     {

@@ -21,7 +21,7 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private final int menuYPosition = 864 - height;
     private final int gap = 20;
     
-    private ArrayList<Integer> deadIndex = new ArrayList<>();
+    protected ArrayList<Integer> deadIndex = new ArrayList<>();
     private Texture[] familyIconsTexture;
     private RectangleShape[] familyIcons;
     private EventPopup popup;

@@ -76,13 +76,10 @@ public class Game implements Observer
     //EndSlide for when game is beaten
     private EndSlide endSlide;
 
-    //The Fields object array needed to draw all the fields around the shop
-    //protected Fields [] farmFields = new Fields[25];
-
+    //Fields used for growing
     protected Fields [][] farmFields = new Fields[5][5];
 
     //Variables for keeping track of the menu status
-    //private boolean menuOpen = false;
     private BuyMenu menu;
 
     //ResourceMenu testing::::
@@ -106,6 +103,10 @@ public class Game implements Observer
     private long startTime;
     private long currentTime;
     private long displayTime = 0;
+
+    private long totalSeconds;
+    private long currentSecond;
+    private long totalMinutes;
 
 
 
@@ -434,6 +435,12 @@ public class Game implements Observer
                 window.draw(endSlide.exit);
                 window.draw(endSlide.exitText);
                 window.draw(endSlide.youWin);
+                System.out.println("minutes" + totalMinutes + "Seconds" + totalSeconds);
+                System.out.println(endSlide.score);
+                //endSlide.scoreText.setString("YOU SCORED:" + (int)(((totalMinutes * 60 + currentSecond) * 10) - 400*familyMenu.deadIndex.size()));
+                //Score calculated as a decreasing value along time
+                endSlide.scoreText.setString("YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size())));
+                window.draw(endSlide.scoreText);
             }
 
             if(familyMenu.isAllDead()) {
@@ -468,12 +475,13 @@ public class Game implements Observer
             //Fill the window
             window.clear(new Color(50,20,20));
             
-            if(!startingMenu.getIsOpen()) {
+            if(!startingMenu.getIsOpen() && victory != true) 
+            {
                 startTime = startingMenu.getStartTime();
                 currentTime = System.currentTimeMillis();
-                long totalSeconds = (currentTime - startTime)/1000;
-                long currentSecond = totalSeconds % 60;
-                long totalMinutes =  totalSeconds/60;
+                totalSeconds = (currentTime - startTime)/1000;
+                currentSecond = totalSeconds % 60;
+                totalMinutes =  totalSeconds/60;
                 String str = totalMinutes + ":" + currentSecond;
                 elapsedTime.setString(totalMinutes + "m" + currentSecond + "s");
             }

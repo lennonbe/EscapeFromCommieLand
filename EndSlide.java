@@ -17,9 +17,13 @@ public class EndSlide extends RectangleShape {
     protected Text youLost;
     private Boolean isOpen;
     private Font font;
+    protected int score;
+    protected Text scoreText;
+    private int gap = 60;
 
     public EndSlide(float width, float height) {
         //Setting variables of this, which is the rectangle that is the background of the main menu
+
         super(new Vector2f(width, height));
 
         this.setPosition(0, 0);
@@ -42,11 +46,15 @@ public class EndSlide extends RectangleShape {
         youLost.setScale(2, 2);
 
         youWin = new Text("YOU WIN!", font);
-        exitText.setScale(2, 2);
+        youWin.setScale(2, 2);
 
-        youWin.setPosition(exit.getPosition().x + exit.getSize().x/2 - 60, exit.getPosition().y - 100);
-        youLost.setPosition(exit.getPosition().x + exit.getSize().x/2 - 60, exit.getPosition().y - 100);
-        exitText.setPosition(exit.getPosition().x + 50, exit.getPosition().y);
+        scoreText = new Text("YOU SCORED:" + score, font);
+        scoreText.setScale(2, 2);
+
+        scoreText.setPosition(exit.getPosition().x + exit.getSize().x/2 - scoreText.getGlobalBounds().width/2, exit.getPosition().y - gap - youWin.getGlobalBounds().height/2 - scoreText.getGlobalBounds().height/2);
+        youWin.setPosition(exit.getPosition().x + exit.getSize().x/2 - youWin.getGlobalBounds().width/2, exit.getPosition().y - gap*3 - youWin.getGlobalBounds().height/2);
+        youLost.setPosition(exit.getPosition().x + exit.getSize().x/2 - youLost.getGlobalBounds().width/2, exit.getPosition().y - gap*3 - youLost.getGlobalBounds().height/2);
+        exitText.setPosition(exit.getPosition().x + buttonSize.x/2 - exitText.getGlobalBounds().width/2, exit.getPosition().y);
     }
 
     /**
