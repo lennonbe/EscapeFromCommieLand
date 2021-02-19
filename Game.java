@@ -68,10 +68,11 @@ public class Game implements Observer
     private Shop shop = new Shop(fieldSize);
 
     //New passport buying button
-    protected int passportValue = 1500;
+    protected int passportValue = 3;
 
     //Boolean to set if the game is finished
     private boolean victory = false;
+    private boolean scoreRecorded = false;
 
     //EndSlide for when game is beaten
     private EndSlide endSlide;
@@ -433,12 +434,18 @@ public class Game implements Observer
                 window.draw(endSlide.exit);
                 window.draw(endSlide.exitText);
                 window.draw(endSlide.youWin);
-                System.out.println("minutes" + totalMinutes + "Seconds" + totalSeconds);
-                System.out.println(endSlide.score);
-                //endSlide.scoreText.setString("YOU SCORED:" + (int)(((totalMinutes * 60 + currentSecond) * 10) - 400*familyMenu.deadIndex.size()));
+                
                 //Score calculated as a decreasing value along time
-                endSlide.scoreText.setString("YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size())));
-                window.draw(endSlide.scoreText);
+                if(scoreRecorded == false)
+                {
+                    scoreRecorded = true;
+
+                    String temp = "YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
+                    endSlide.scoreText.setString(temp);
+                    window.draw(endSlide.scoreText);
+                    temp += "\n";
+                    Loader.addToFile(temp, "Scoreboard.txt");
+                }
             }
 
             if(familyMenu.isAllDead()) {
