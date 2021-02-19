@@ -1,9 +1,7 @@
 package BoringGame;
 
 import org.jsfml.graphics.*;
-
 import jdk.jshell.spi.ExecutionControl.ExecutionControlException;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.FileSystems;
@@ -12,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.*;
 
 /**
- * Abstract class used for loading images into sprites and/or rectangles.
+ * Abstract class used for file manipulation.
  */
 public abstract class Loader {
     
@@ -79,6 +77,10 @@ public abstract class Loader {
         }
     }
 
+    /**
+     * Function clears the content of the specified file.
+     * @param fileName String - Path of the file to be cleared.
+     */
     public static void clearFile(String fileName) {
         try {
             Path filePath = Path.of(fileName);
@@ -88,6 +90,11 @@ public abstract class Loader {
         }
     }
 
+    /**
+     * Function used to add to a file.
+     * @param text String - The text that is being added to the file.
+     * @param fileName String - The path to the file that is being added to.
+     */
     public static void addToFile(String text, String fileName) {
         try {
             Path filePath = Path.of(fileName);
@@ -98,6 +105,11 @@ public abstract class Loader {
         }
     }
 
+    /**
+     * Function used to read from a file.
+     * @param fileName - Name of the file that is to be read
+     * @return String - Contents of the file
+     */
     public static String readFile(String fileName) {
         try {
             Path filePath = Path.of(fileName);
