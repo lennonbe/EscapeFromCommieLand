@@ -1,6 +1,9 @@
 package BoringGame;
 
 import org.jsfml.graphics.*;
+
+import jdk.jshell.spi.ExecutionControl.ExecutionControlException;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.FileSystems;
@@ -73,6 +76,37 @@ public abstract class Loader {
             font.loadFromFile(Paths.get(filePath));
         } catch(Exception e) { 
             System.out.println("Error loading font"); 
+        }
+    }
+
+    public static void clearFile(String fileName) {
+        try {
+            Path filePath = Path.of(fileName);
+            Files.writeString(filePath, "");
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addToFile(String text, String fileName) {
+        try {
+            Path filePath = Path.of(fileName);
+            String currentString = Files.readString(filePath);
+            Files.writeString(filePath, currentString + text);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String readFile(String fileName) {
+        try {
+            Path filePath = Path.of(fileName);
+            String currentString = Files.readString(filePath);
+
+            return currentString; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 }

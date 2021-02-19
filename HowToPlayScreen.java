@@ -1,6 +1,9 @@
 package BoringGame;
 
 import org.jsfml.system.Vector2f;
+
+import BoringGame.Loader;
+
 import org.jsfml.graphics.*;
 
 /**
@@ -37,7 +40,7 @@ public class HowToPlayScreen extends RectangleShape {
         buttonText.setPosition(backButton.getPosition().x + 20, backButton.getPosition().y);
 
         //Text explaining how to play the game
-        howToText = new Text("LOREM IPSUM", font);
+        howToText = new Text(Loader.readFile("BoringGame/Instructions.txt"), font);
         howToText.setPosition(50, 50);
     }
 

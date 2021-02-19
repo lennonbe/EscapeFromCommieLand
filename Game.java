@@ -364,15 +364,13 @@ public class Game implements Observer
             } catch (Exception e) {}
             
             //Draws the resource icons
-            for(RectangleShape i : resourceMenu.getRectangleArray(1)) 
-            {
+            for(RectangleShape i : resourceMenu.getRectangleArray(1)) {
                 //simply change getRectangle Array by not giving it an int and it does milosz's version
                 window.draw(i);
             }
         
             //Draws the counters for each resource
-            for(Text t : resourceMenu.getCounter()) 
-            {
+            for(Text t : resourceMenu.getCounter()) {
                 window.draw(t);
             }
         
