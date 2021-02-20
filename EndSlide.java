@@ -21,7 +21,13 @@ public class EndSlide extends RectangleShape {
     protected Text scoreText;
     private int gap = 60;
 
-    public EndSlide(float width, float height) {
+    /**
+     * Constructor method for the EndSLide object. Creates an EndSlide object displaying score and exit button.
+     * @param width width of the EndSlide
+     * @param height height of the EndSlide
+     */
+    public EndSlide(float width, float height) 
+    {
         //Setting variables of this, which is the rectangle that is the background of the main menu
 
         super(new Vector2f(width, height));

@@ -58,8 +58,6 @@ public class Game implements Observer
     private MainMenu startingMenu;
     
     //The texture and RectangleShape objects needed to draw a field on a rectangle
-    //private Texture backroundTexture = new Texture();
-    //private RectangleShape backround = new RectangleShape();
     private BackroundTrees backround = new BackroundTrees();
 
     //The Farmer objects needed to draw a Farmer on a the Window

@@ -26,13 +26,11 @@ public class ResourceMenu extends RectangleShape implements Observer
 {
     
     //Inherit attributes of the ResoureMenu are final
-    //private final static int width = 550;
     private final static int width = 768;
     private final static int height = 90;
     private final int numberOfIcons = 5;
     private final int iconWidth = 50;
     private final int iconHeight = 50;
-    //private final int gap = 30;
     private final int gap = 42;
 
     

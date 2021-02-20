@@ -19,21 +19,32 @@ import java.util.concurrent.TimeUnit;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * BackroundTrees is the backround of the game.
+ */
 public class BackroundTrees extends RectangleShape implements Observer
 {
-    //The texture and RectangleShape objects needed to draw a field on a rectangle
+    //The texture and RectangleShape objects needed to draw the backround
     private Texture backroundTexture = new Texture();
     private int counter = 1;
     protected boolean seasonChange = false;
     protected boolean winter = false;
     protected Clock clock = new Clock(3000);
 
+    /**
+     * Constructor for this class
+     */
     public BackroundTrees()
     {
         Loader.loadPathToRectangle("BoringGame/AllResources/PlayAreaVariations", "PlayArea1.png", this, backroundTexture);
         this.clock.addObserver(this);
     }
 
+    /**
+     * Update method called every 3 seconds. Allows for the seasons to change gradually as png images.
+     * @param clock clock it will look at the time for
+     * @param o
+     */
     public void update(Observable clock, Object o)
     {
         if(seasonChange == true && winter == true)

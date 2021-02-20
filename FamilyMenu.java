@@ -8,7 +8,11 @@ import java.util.Observable;
 import java.util.Observer;
 import java.lang.Math;
 
-public class FamilyMenu extends RectangleShape implements Observer{
+/**
+ * Family menu class. Used to create and manage the farmers family and random events associated to these.
+ */
+public class FamilyMenu extends RectangleShape implements Observer
+{
     
     //Inherit attributes of the FamilyMenu are final
     private final static int numberOfIcons = 2;
@@ -28,7 +32,11 @@ public class FamilyMenu extends RectangleShape implements Observer{
     private Boolean allDead;
     private Text text;
 
-    public FamilyMenu() {
+    /**
+     * Constructor for the family menu object.
+     */
+    public FamilyMenu() 
+    {
         super(new Vector2f(width, height));
 
         this.setPosition(menuXPosition, menuYPosition);
@@ -137,10 +145,19 @@ public class FamilyMenu extends RectangleShape implements Observer{
         popup = null;
     }
 
+    /**
+     * Checks if all family members are dead.
+     * @return allDead bool
+     */
     public Boolean isAllDead() {
         return allDead;
     }
 
+    /**
+     * Checks if a member is dead.
+     * @param index index you wish to check is dead
+     * @return boolean represing if is dead (true if so, false otherwise)
+     */
     private Boolean isDead(int index) {
         for(Integer i : deadIndex) {
             if(i == index) 
