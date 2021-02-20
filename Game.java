@@ -58,8 +58,9 @@ public class Game implements Observer
     private MainMenu startingMenu;
     
     //The texture and RectangleShape objects needed to draw a field on a rectangle
-    private Texture backroundTexture = new Texture();
-    private RectangleShape backround = new RectangleShape();
+    //private Texture backroundTexture = new Texture();
+    //private RectangleShape backround = new RectangleShape();
+    private BackroundTrees backround = new BackroundTrees();
 
     //The Farmer objects needed to draw a Farmer on a the Window
     protected Farmer farmer = new Farmer();
@@ -142,7 +143,7 @@ public class Game implements Observer
         //Limit the framerate
         window.setFramerateLimit(60);
         
-        Loader.loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
+        //Loader.loadPathToRectangle("BoringGame", "PlayAreaSquare3t.png", backround, backroundTexture);
         
         int positionX = width/2 + (fieldSizeInt*(-2)) - fieldSizeInt/2;
         for(int i = 0; i < 5; i++)
@@ -556,7 +557,7 @@ public class Game implements Observer
     }
     
     /**
-     * Slows down the game by sleeping for 1/4 of a second
+     * Pauses the game for x milliseconds.
      */
     public void pause()
     {
@@ -592,6 +593,7 @@ public class Game implements Observer
                 }
             }
             resourceMenu.changeSeasonIcon(2);
+            backround.seasonChange = true;
         }
         else
         {
@@ -610,6 +612,7 @@ public class Game implements Observer
             }
 
             resourceMenu.changeSeasonIcon(1);
+            backround.seasonChange = true;
         }
         
         SoundEffect.FAILPRISON.play();

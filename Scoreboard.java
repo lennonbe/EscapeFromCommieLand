@@ -8,7 +8,7 @@ import org.jsfml.graphics.*;
  * There is one button:
  *      Exit        - Exits the game 
  */
-public class Scoreboard extends RectangleShape
+public class Scoreboard extends RectangleShape 
 {
     private final Vector2f buttonSize = new Vector2f(400, 100);
     protected RectangleShape exit;
