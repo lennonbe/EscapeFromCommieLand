@@ -7,13 +7,10 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 import java.io.*;
-
-
 import java.util.Observable;
 import java.util.Observer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.lang.model.util.ElementScanner6;
 import javax.swing.Timer;
 

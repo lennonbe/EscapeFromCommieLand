@@ -108,7 +108,7 @@ public class Game implements Observer
     private long currentSecond;
     private long totalMinutes;
 
-
+    private InitialCutscene initialScene;
 
     /**
      * Constructor for the game. Loads the window, adds all needed 
@@ -119,6 +119,8 @@ public class Game implements Observer
         //Create the window
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
         window.setSize(new Vector2i(width, height));
+
+        initialScene = new InitialCutscene(width, height);
 
         startingMenu = new MainMenu(width, height);
         endSlide = new EndSlide(width, height);
