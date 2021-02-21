@@ -68,11 +68,12 @@ public class InitialCutscene extends RectangleShape implements Observer {
     public void update(Observable c, Object o) {
         sceneNumber++;
 
-        Loader.loadPathToRectangle("BoringGame/AllResources/IntroSlides", "Slides" + sceneNumber + ".png", scene, texture);
-  
-        if(sceneNumber == 6) {
+        if(sceneNumber == 7) {
             sceneIsOver = true;    
             clock.stopClock();
+            return;
         }
+
+        Loader.loadPathToRectangle("BoringGame/AllResources/IntroSlides", "Slides" + sceneNumber + ".png", scene, texture);
     }
 }
