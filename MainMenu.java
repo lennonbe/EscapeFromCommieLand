@@ -1,6 +1,9 @@
 package BoringGame;
 
 import org.jsfml.system.Vector2f;
+
+import BoringGame.InitialCutscene;
+
 import org.jsfml.graphics.*;
 
 /**
@@ -13,6 +16,7 @@ import org.jsfml.graphics.*;
 public class MainMenu extends RectangleShape {
 
     private final Vector2f buttonSize = new Vector2f(400, 100);
+    private InitialCutscene initialScene;
     private HowToPlayScreen htps;
     private RectangleShape startGame;
     private RectangleShape exit;
@@ -32,6 +36,7 @@ public class MainMenu extends RectangleShape {
         this.setPosition(0, 0);
         this.setFillColor(new Color(0, 0, 0));
 
+        initialScene = new InitialCutscene(width, height);
         htps = new HowToPlayScreen(width, height);
 
         isOpen = true;
@@ -72,33 +77,35 @@ public class MainMenu extends RectangleShape {
      * If yes, act accordingly
      */
     public void isClicked(float mouseX, float mouseY) {
-        if(isHowToPlayOpen) {
-            htps.isClicked(mouseX, mouseY);
-            isHowToPlayOpen = htps.getIsOpen();
-        } else {
-            //Check if the start game button is clicked
-            if(mouseX > startGame.getPosition().x && mouseX < startGame.getPosition().x + buttonSize.x &&
-               mouseY > startGame.getPosition().y && mouseY < startGame.getPosition().y + buttonSize.y) 
-            {
-                //Closes this menu
-                isOpen = false;
-                startTime = System.currentTimeMillis();
-            }
-    
-            //Checks if the howToPlay button has been clicked
-            if(mouseX > howToPlay.getPosition().x && mouseX < howToPlay.getPosition().x + buttonSize.x &&
-               mouseY > howToPlay.getPosition().y && mouseY < howToPlay.getPosition().y + buttonSize.y) 
-            {
-                isHowToPlayOpen = true;
-                htps.setIsOpen(true);
-            } 
-    
-            //Checks if the exit button has been clicked
-            if(mouseX > exit.getPosition().x && mouseX < exit.getPosition().x + buttonSize.x &&
-               mouseY > exit.getPosition().y && mouseY < exit.getPosition().y + buttonSize.y) 
-            {
-                //Exits the game
-                System.exit(0);
+        if(initialScene.getSceneIsOver()) {
+            if(isHowToPlayOpen) {
+                htps.isClicked(mouseX, mouseY);
+                isHowToPlayOpen = htps.getIsOpen();
+            } else {
+                //Check if the start game button is clicked
+                if(mouseX > startGame.getPosition().x && mouseX < startGame.getPosition().x + buttonSize.x &&
+                   mouseY > startGame.getPosition().y && mouseY < startGame.getPosition().y + buttonSize.y) 
+                {
+                    //Closes this menu
+                    isOpen = false;
+                    startTime = System.currentTimeMillis();
+                }
+        
+                //Checks if the howToPlay button has been clicked
+                if(mouseX > howToPlay.getPosition().x && mouseX < howToPlay.getPosition().x + buttonSize.x &&
+                   mouseY > howToPlay.getPosition().y && mouseY < howToPlay.getPosition().y + buttonSize.y) 
+                {
+                    isHowToPlayOpen = true;
+                    htps.setIsOpen(true);
+                } 
+        
+                //Checks if the exit button has been clicked
+                if(mouseX > exit.getPosition().x && mouseX < exit.getPosition().x + buttonSize.x &&
+                   mouseY > exit.getPosition().y && mouseY < exit.getPosition().y + buttonSize.y) 
+                {
+                    //Exits the game
+                    System.exit(0);
+                }
             }
         }
     }
@@ -122,13 +129,17 @@ public class MainMenu extends RectangleShape {
     }
 
     /**
-     * Returns all the rectangles that make up the menu
+     * Returns all the rectangles that make up the menu.
+     * This function checks which screen is has to be shown currently,
+     * and returns those rectangles accordingly.
      * 
      * @return RectangleShape[] - All RectangleShape in the menu
      */
     public RectangleShape[] getButtons() {
         if(isHowToPlayOpen) {
             return new RectangleShape[] {htps, htps.getButton()};
+        } else if(!initialScene.getSceneIsOver()){
+            return initialScene.getRectangles();
         } else {
             return new RectangleShape[] {startGame, exit, howToPlay};
         }
@@ -142,6 +153,8 @@ public class MainMenu extends RectangleShape {
     public Text[] getButtonText() {
         if(isHowToPlayOpen) {
             return htps.getText();
+        } else if(!initialScene.getSceneIsOver()) {
+            return new Text[] {initialScene.getText()};
         } else {
             return new Text[] {startGameText, exitText, howToPlayText};
         }

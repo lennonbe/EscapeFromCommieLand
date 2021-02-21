@@ -1,11 +1,9 @@
 package BoringGame;
 
 import org.jsfml.system.Vector2f;
-
-import BoringGame.Loader;
-
-import java.util.Observable;
 import java.util.Observer;
+import java.util.Observable;
+import BoringGame.Loader;
 import org.jsfml.graphics.*;
 
 public class InitialCutscene extends RectangleShape implements Observer {
@@ -15,26 +13,51 @@ public class InitialCutscene extends RectangleShape implements Observer {
     private Texture texture;
     private int sceneNumber;
     private Clock clock;
+    private Font font;
+    private Text text;
+    private String[] sceneStrings;
 
     public InitialCutscene(float width, float height) {
         super(new Vector2f(width, height));
         this.setPosition(0, 0);
-        this.setFillColor(new Color(0, 0, 0));
+        this.setFillColor(new Color(128, 128, 128));
 
         sceneIsOver = false;
 
-        clock = new Clock(5 * 1000);
         texture = new Texture();
-        sceneNumber = 1;
+        sceneNumber = 0;
+        
+        scene = new RectangleShape(new Vector2f(384 * 2,432 * 2));
+        scene.setPosition(0, 0);
 
-        scene = new RectangleShape(new Vector2f(384, 432));
-        scene.setPosition(0, 300);
+        font = new Font();
+        text = new Text("", font);
+        text.setPosition(100, 630);
+        
+        clock = new Clock(5 * 1000);
+        clock.addObserver(this);
+
+        sceneStrings = new String[] {
+            "Welcome to mother Russia!",
+            "Where the days are harsh,\nmany will perish.",
+            "You must farm to protect \nyourself and your family",
+            "From desease and famin",
+            "You are their only hope",
+            "...",
+            "Good luck Comrade."
+        };
+
+        Loader.loadPathToRectangle("BoringGame/AllResources/IntroSlides", "Slides0.png", scene, texture);
+        Loader.loadPathToFont(font, "BoringGame/SovietProgram.ttf");
     }
 
     public RectangleShape[] getRectangles() {
-        RectangleShape[] result = new RectangleShape[] {this, scene};
+        return new RectangleShape[] {this, scene};
+    }
 
-        return result;
+    public Text getText() {
+        text.setString(sceneStrings[sceneNumber]);
+        return text;
     }
 
     public Boolean getSceneIsOver() {
@@ -42,10 +65,14 @@ public class InitialCutscene extends RectangleShape implements Observer {
     }
 
     //Changes the cut scene every set amout of seconds
-    public void update(Observable clock, Object o) {
-        Loader.loadPathToRectangle("BoringGame/AllResources/IntroSlides", "Slides" + sceneNumber + ".png", scene, texture);
+    public void update(Observable c, Object o) {
+        sceneNumber++;
 
-        if(sceneNumber == 7)
-            sceneIsOver = true;
+        Loader.loadPathToRectangle("BoringGame/AllResources/IntroSlides", "Slides" + sceneNumber + ".png", scene, texture);
+  
+        if(sceneNumber == 6) {
+            sceneIsOver = true;    
+            clock.stopClock();
+        }
     }
 }

@@ -108,8 +108,6 @@ public class Game implements Observer
     private long currentSecond;
     private long totalMinutes;
 
-    private InitialCutscene initialScene;
-
     /**
      * Constructor for the game. Loads the window, adds all needed 
      * objects such as sprites and rectangles and sets their initial positions.
@@ -119,8 +117,6 @@ public class Game implements Observer
         //Create the window
         window.create(new VideoMode(width, height), "Escape from CommieLand!");
         window.setSize(new Vector2i(width, height));
-
-        initialScene = new InitialCutscene(width, height);
 
         startingMenu = new MainMenu(width, height);
         endSlide = new EndSlide(width, height);
@@ -357,7 +353,6 @@ public class Game implements Observer
             window.draw(resourceMenu);
             window.draw(familyMenu);
             
-            
             try {
                 for(CircleShape c : distanceMarker.getPointers()) {
                     window.draw(c);
@@ -456,9 +451,7 @@ public class Game implements Observer
                 window.draw(endSlide.exitText);
                 window.draw(endSlide.youLost);
             }
-        } 
-        else 
-        {
+        } else {
             window.draw(startingMenu);
 
             for(RectangleShape r : startingMenu.getButtons())
