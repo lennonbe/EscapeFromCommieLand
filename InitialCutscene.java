@@ -40,9 +40,9 @@ public class InitialCutscene extends RectangleShape implements Observer {
         sceneStrings = new String[] {
             "Welcome to mother Russia!",
             "Where the days are harsh,\nmany will perish.",
-            "You must farm to protect \nyourself and your family",
+            "You must farm to protect \nyourself and your family.",
             "From desease and famin",
-            "You are their only hope",
+            "You are their only hope.",
             "...",
             "Good luck Comrade."
         };
