@@ -67,7 +67,7 @@ public class Game implements Observer
     private Shop shop = new Shop(fieldSize);
 
     //New passport buying button
-    protected int passportValue = 3;
+    protected int passportValue = 1500;
 
     //Boolean to set if the game is finished
     private boolean victory = false;
@@ -374,13 +374,15 @@ public class Game implements Observer
             }
             
             //Draws the resource icons
-            for(RectangleShape i : resourceMenu.getRectangleArray(1)) {
+            for(RectangleShape i : resourceMenu.getRectangleArray(1)) 
+            {
                 //simply change getRectangle Array by not giving it an int and it does milosz's version
                 window.draw(i);
             }
         
             //Draws the counters for each resource
-            for(Text t : resourceMenu.getCounter()) {
+            for(Text t : resourceMenu.getCounter()) 
+            {
                 window.draw(t);
             }
         
@@ -466,11 +468,7 @@ public class Game implements Observer
                         scoreRecorded = true;
                         
                         endSlide.score = (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
-                        //endSlide.scoreDigitsText.setString("" + endSlide.score);
                         endSlide.setScore();
-                        //String temp = "YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
-                        //endSlide.scoreDigitsText.setString("" + temp);
-                        //temp += "\n";
                         Loader.addToFile(endSlide.score + "\n", "Scoreboard.txt");
                     }
 
@@ -505,7 +503,8 @@ public class Game implements Observer
 
             }
 
-            if(familyMenu.isAllDead()) {
+            if(familyMenu.isAllDead()) 
+            {
                 SoundEffect.BGM2.stop();
                 window.draw(endSlide);
                 window.draw(endSlide.exit);
