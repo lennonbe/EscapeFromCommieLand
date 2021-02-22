@@ -72,7 +72,7 @@ public class Game implements Observer
     //Boolean to set if the game is finished
     private boolean victory = false;
     private boolean scoreRecorded = false;
-    private boolean scoreboardBool = false;
+    private boolean scoreboardOpen = false;
     private boolean endSlideBool = false;
 
     //EndSlide for when game is beaten
@@ -353,18 +353,25 @@ public class Game implements Observer
                 }
             }
             
+            //Drawing all the essenetial elements of the game (farmer, shop, backround, etc.)
             window.draw(shop);
             window.draw(farmer);
             window.draw(backround);
             window.draw(resourceMenu);
             window.draw(familyMenu);
             
-            try {
-                for(CircleShape c : distanceMarker.getPointers()) {
+            try 
+            {
+                for(CircleShape c : distanceMarker.getPointers()) 
+                {
                     window.draw(c);
                 }
                 window.draw(familyMenu.getPopup());
-            } catch (Exception e) {}
+            } 
+            catch (Exception e) 
+            {
+
+            }
             
             //Draws the resource icons
             for(RectangleShape i : resourceMenu.getRectangleArray(1)) {
@@ -377,10 +384,12 @@ public class Game implements Observer
                 window.draw(t);
             }
         
-        
+            //Draw the season icon
             window.draw(resourceMenu.seasonIcon);
             
-            for(RectangleShape r : familyMenu.getRectangleArray()) {
+            //Drawing the entire family menu
+            for(RectangleShape r : familyMenu.getRectangleArray()) 
+            {
                 window.draw(r);
             }
             
@@ -395,36 +404,43 @@ public class Game implements Observer
                 pause();
             }
             
+            //When the menu is open display all of the menus items e.g seeds (unlocked and blacked out), upgrades and the buy menu itself
             if(menu.menuOpen == true)
             {
                 window.draw(menu);
                 
+                //Seeds array drawing
                 for(int i = 0; i < menu.getVegArray().length; i++)
                 {
                     window.draw(menu.getVegArray()[i]);
                 }
                 
+                //Upgrades drawing
                 for(int i = 0; i < menu.getUpgradeArray().length; i++)
                 {
                     window.draw(menu.getUpgradeArray()[i]);
                 }
                 
+                //Drawing the text displaying the prices
+                for(int i = 0; i < menu.counterText.length; i++)
+                {
+                    window.draw(menu.counterText[i]);
+                }
+                
+                //Drawing the passport and its pricing
+                window.draw(menu.passport);
+                window.draw(menu.passportText);
+
+                //Exit button drawing
                 window.draw(menu.getExitButton());
                 
+                //Checking if user wishes to close the buy menu
                 if(menu.isExitClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y) == true)
                 {
                     SoundEffect.OPENINVENTORY.play();
                     menu.menuOpen = false;
                     pause();
                 }
-                
-                for(int i = 0; i < menu.counterText.length; i++)
-                {
-                    window.draw(menu.counterText[i]);
-                }
-
-                window.draw(menu.passport);
-                window.draw(menu.passportText);
             }
 
             window.draw(elapsedTime);
@@ -433,13 +449,13 @@ public class Game implements Observer
             {
                 SoundEffect.WIN.play();
                 
-                if(scoreboardBool == false)
+                if(scoreboardOpen == false)
                 {
                     if(Mouse.isButtonPressed(Mouse.Button.LEFT))
                     {
                         if(endSlide.isScoreboardClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y))
                         {
-                            scoreboardBool = true;
+                            scoreboardOpen = true;
                         }
                     }
 
@@ -470,7 +486,7 @@ public class Game implements Observer
                     {
                         if(scoreboard.isBackClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y))
                         {
-                            scoreboardBool = false;
+                            scoreboardOpen = false;
                         }
                     }
 
@@ -490,7 +506,9 @@ public class Game implements Observer
                 window.draw(endSlide.exitText);
                 window.draw(endSlide.youLost);
             }
-        } else {
+        } 
+        else 
+        {
             window.draw(startingMenu);
 
             for(RectangleShape r : startingMenu.getButtons())
@@ -570,11 +588,11 @@ public class Game implements Observer
 
                     if(victory == true)
                     {
-                        if(endSlide.isExitClicked(mouseX, mouseY) && scoreboardBool == false)
+                        if(endSlide.isExitClicked(mouseX, mouseY) && scoreboardOpen == false)
                         {
                             System.exit(0);
                         }
-                        else if(scoreboard.isExitClicked(mouseX, mouseY) && scoreboardBool == true)
+                        else if(scoreboard.isExitClicked(mouseX, mouseY) && scoreboardOpen == true)
                         {
                             System.exit(0);
                         }
@@ -590,8 +608,6 @@ public class Game implements Observer
                     }
                 }
             }
-
-            //System.out.println("Selected field is" + farmFields[0].selectedField);
         }
     }
     
