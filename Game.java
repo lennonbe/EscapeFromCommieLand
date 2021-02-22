@@ -465,11 +465,11 @@ public class Game implements Observer
                     {
                         scoreRecorded = true;
                         
-                        int score = (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
-                        String temp = "YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
-                        endSlide.scoreText.setString(temp);
-                        temp += "\n";
-                        Loader.addToFile(score + "\n", "Scoreboard.txt");
+                        endSlide.score = (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
+                        //String temp = "YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
+                        //endSlide.scoreDigitsText.setString("" + temp);
+                        //temp += "\n";
+                        Loader.addToFile(endSlide.score + "\n", "Scoreboard.txt");
                     }
 
                     window.draw(endSlide);
@@ -479,6 +479,7 @@ public class Game implements Observer
                     window.draw(endSlide.scoreboard);
                     window.draw(endSlide.scoreboardText);
                     window.draw(endSlide.scoreText);
+                    window.draw(endSlide.scoreDigitsText);
                     
                 }
                 else
@@ -497,6 +498,7 @@ public class Game implements Observer
                     window.draw(scoreboard.exitText);
                     window.draw(scoreboard.back);
                     window.draw(scoreboard.backText);
+                    window.draw(scoreboard.top3Scores);
                 }
 
             }

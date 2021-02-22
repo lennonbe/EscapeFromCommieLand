@@ -12,7 +12,7 @@ public class EndSlide extends RectangleShape {
 
     private final Vector2f buttonSize = new Vector2f(400, 100);
     protected RectangleShape exit, scoreboard;
-    protected Text exitText, scoreboardText;
+    protected Text exitText, scoreboardText,scoreDigitsText;
     protected Text youWin;
     protected Text youLost;
     private Boolean isOpen;
@@ -54,7 +54,7 @@ public class EndSlide extends RectangleShape {
         scoreboard.setPosition(width/2 - buttonSize.x/2, exit.getPosition().y + buttonSize.y * 2);
         scoreboard.setFillColor(new Color(128, 128, 128));
 
-        scoreboardText = new Text("Scoreboard", font);
+        scoreboardText = new Text("SCOREBOARD", font);
         scoreboardText.setScale(2, 2);
 
 
@@ -64,12 +64,16 @@ public class EndSlide extends RectangleShape {
         youWin = new Text("YOU WIN!", font);
         youWin.setScale(2, 2);
 
-        scoreText = new Text("YOU SCORED:" + score, font);
+        scoreText = new Text("YOU SCORED:", font);
         scoreText.setScale(2, 2);
 
-        scoreText.setPosition(exit.getPosition().x + exit.getSize().x/2 - scoreText.getGlobalBounds().width/2, exit.getPosition().y - gap - youWin.getGlobalBounds().height/2 - scoreText.getGlobalBounds().height/2);
-        youWin.setPosition(exit.getPosition().x + exit.getSize().x/2 - youWin.getGlobalBounds().width/2, exit.getPosition().y - gap*3 - youWin.getGlobalBounds().height/2);
-        youLost.setPosition(exit.getPosition().x + exit.getSize().x/2 - youLost.getGlobalBounds().width/2, exit.getPosition().y - gap*3 - youLost.getGlobalBounds().height/2);
+        scoreDigitsText = new Text("" + score, font);
+        scoreDigitsText.setScale(2, 2);
+
+        youWin.setPosition(width/2 - youWin.getGlobalBounds().width/2, 0 + buttonSize.y);
+        youLost.setPosition(width/2 - youLost.getGlobalBounds().width/2, 0 + buttonSize.y);
+        scoreText.setPosition(width/2 - scoreText.getGlobalBounds().width/2, youWin.getPosition().y + youWin.getGlobalBounds().height + buttonSize.y/2);
+        scoreDigitsText.setPosition(width/2 - scoreDigitsText.getGlobalBounds().width/2, scoreText.getPosition().y + scoreText.getGlobalBounds().height + buttonSize.y/2);
 
         exitText.setPosition(exit.getPosition().x + buttonSize.x/2 - exitText.getGlobalBounds().width/2, exit.getPosition().y);
         scoreboardText.setPosition(scoreboard.getPosition().x + buttonSize.x/2 - scoreboardText.getGlobalBounds().width/2, scoreboard.getPosition().y);

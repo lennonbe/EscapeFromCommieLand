@@ -23,8 +23,8 @@ public class Scoreboard extends RectangleShape
     protected Boolean isOpen, backToEndSlide = false;
     private Font font;
     protected int playerScore;
-    private String top5String = "";
-    protected Text top5Score;
+    private String top3String = "TOP 3: \n";
+    protected Text top3Scores;
     private int gap = 60;
 
     public Scoreboard(float width, float height) 
@@ -58,9 +58,6 @@ public class Scoreboard extends RectangleShape
         backText.setScale(2, 2);
         backText.setPosition(back.getPosition().x + buttonSize.x/2 - backText.getGlobalBounds().width/2, back.getPosition().y);
 
-        //Initializing top 5 score
-        //top5Score = Loader.readFile("Scoreboard.txt");
-
         try 
         {
             TreeSet<Integer> numbers=new TreeSet<>();
@@ -78,22 +75,41 @@ public class Scoreboard extends RectangleShape
             }
             
             br.close();
-            Iterator<Integer> it=numbers.iterator();
-    
+
+            Integer[] treeToArray = new Integer[numbers.size()]; 
+            treeToArray = numbers.toArray(treeToArray);
+
+            Integer[] treeToArrayReversed = new Integer[treeToArray.length];
             int count = 0;
-            while(it.hasNext() && count < 5)
+            for(int i = treeToArray.length - 1; i >= 0; i--)
             {
-                top5String += it.next() + "\n";
+                treeToArrayReversed[count] = treeToArray[i];
                 count++;
             }
+            
+            count = 0;
+            int size = treeToArray.length;
+            while(count < size)
+            {
+                if(count < 3)
+                {
+                    top3String += treeToArrayReversed[count] + "\n";
+                }
+                count++;
+            }
+            
     
-            System.out.println(top5String);            
+            System.out.println(top3String);            
         } 
         catch (Exception e) 
         {
             e.printStackTrace();
         }
 
+        //Initializing back button text
+        top3Scores = new Text(top3String, font);
+        top3Scores.setScale(2, 2);
+        top3Scores.setPosition(width/2 - top3Scores.getGlobalBounds().width/2, exit.getPosition().y - top3Scores.getGlobalBounds().height/2 - buttonSize.y * 2);
     }
     
     /**
