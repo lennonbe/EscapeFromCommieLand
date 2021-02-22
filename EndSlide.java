@@ -11,11 +11,12 @@ import org.jsfml.graphics.*;
 public class EndSlide extends RectangleShape {
 
     private final Vector2f buttonSize = new Vector2f(400, 100);
-    protected RectangleShape exit;
-    protected Text exitText;
+    protected RectangleShape exit, scoreboard;
+    protected Text exitText, scoreboardText;
     protected Text youWin;
     protected Text youLost;
     private Boolean isOpen;
+    protected boolean scoreboardDisplay = false;
     private Font font;
     protected int score;
     protected Text scoreText;
@@ -48,6 +49,15 @@ public class EndSlide extends RectangleShape {
         exitText = new Text("EXIT GAME", font);
         exitText.setScale(2, 2);
 
+        //Initializing the scoreboard button
+        scoreboard = new RectangleShape(buttonSize);
+        scoreboard.setPosition(width/2 - buttonSize.x/2, exit.getPosition().y + buttonSize.y/2 + buttonSize.y*2);
+        scoreboard.setFillColor(new Color(128, 128, 128));
+
+        scoreboardText = new Text("Scoreboard", font);
+        scoreboardText.setScale(2, 2);
+
+
         youLost = new Text("YOU LOST", font);
         youLost.setScale(2, 2);
 
@@ -60,22 +70,43 @@ public class EndSlide extends RectangleShape {
         scoreText.setPosition(exit.getPosition().x + exit.getSize().x/2 - scoreText.getGlobalBounds().width/2, exit.getPosition().y - gap - youWin.getGlobalBounds().height/2 - scoreText.getGlobalBounds().height/2);
         youWin.setPosition(exit.getPosition().x + exit.getSize().x/2 - youWin.getGlobalBounds().width/2, exit.getPosition().y - gap*3 - youWin.getGlobalBounds().height/2);
         youLost.setPosition(exit.getPosition().x + exit.getSize().x/2 - youLost.getGlobalBounds().width/2, exit.getPosition().y - gap*3 - youLost.getGlobalBounds().height/2);
+
         exitText.setPosition(exit.getPosition().x + buttonSize.x/2 - exitText.getGlobalBounds().width/2, exit.getPosition().y);
+        scoreboardText.setPosition(scoreboard.getPosition().x + buttonSize.x/2 - scoreboardText.getGlobalBounds().width/2, scoreboard.getPosition().y);
     }
 
     /**
-     * This function checks if any of the buttons have been pressed,
+     * This function checks if exit button have been pressed,
      * If yes, act accordingly
      */
-    public boolean isClicked(float mouseX, float mouseY) 
+    public boolean isExitClicked(float mouseX, float mouseY) 
     {
         //Checks if the exit button has been clicked
-        if(mouseX > exit.getPosition().x && mouseX < exit.getPosition().x + buttonSize.x &&
-            mouseY > exit.getPosition().y && mouseY < exit.getPosition().y + buttonSize.y) 
+        if(mouseX > exit.getPosition().x && mouseX < exit.getPosition().x + buttonSize.x && mouseY > exit.getPosition().y && mouseY < exit.getPosition().y + buttonSize.y) 
         {
             return true;
         }
+        else
+        {
+            return false;
+        }
+    }
 
-        return false;
+    /**
+     * This function checks if scorevoard button has been pressed,
+     * If yes, act accordingly
+     */
+    public boolean isScoreboardClicked(float mouseX, float mouseY) 
+    {
+        //Checks if the exit button has been clicked
+        if(mouseX > scoreboard.getPosition().x && mouseX < scoreboard.getPosition().x + buttonSize.x && mouseY > scoreboard.getPosition().y && mouseY < scoreboard.getPosition().y + buttonSize.y) 
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }

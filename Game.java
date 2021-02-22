@@ -72,9 +72,14 @@ public class Game implements Observer
     //Boolean to set if the game is finished
     private boolean victory = false;
     private boolean scoreRecorded = false;
+    private boolean scoreboardBool = false;
+    private boolean endSlideBool = false;
 
     //EndSlide for when game is beaten
     private EndSlide endSlide;
+
+    //Scoreboard slide
+    private Scoreboard scoreboard;
 
     //Fields used for growing
     protected Fields [][] farmFields = new Fields[5][5];
@@ -120,6 +125,7 @@ public class Game implements Observer
 
         startingMenu = new MainMenu(width, height);
         endSlide = new EndSlide(width, height);
+        scoreboard = new Scoreboard(width, height);
        
         seasonClock.addObserver(this);
 
@@ -426,22 +432,55 @@ public class Game implements Observer
             if(victory == true)
             {
                 SoundEffect.WIN.play();
-                window.draw(endSlide);
-                window.draw(endSlide.exit);
-                window.draw(endSlide.exitText);
-                window.draw(endSlide.youWin);
                 
-                //Score calculated as a decreasing value along time
-                if(scoreRecorded == false)
+                if(scoreboardBool == false)
                 {
-                    scoreRecorded = true;
+                    if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+                    {
+                        if(endSlide.isScoreboardClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y))
+                        {
+                            scoreboardBool = true;
+                        }
+                    }
 
-                    String temp = "YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
-                    endSlide.scoreText.setString(temp);
+                    //Score calculated as a decreasing value along time
+                    if(scoreRecorded == false)
+                    {
+                        scoreRecorded = true;
+                        
+                        int score = (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
+                        String temp = "YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
+                        endSlide.scoreText.setString(temp);
+                        temp += "\n";
+                        Loader.addToFile(score + "\n", "Scoreboard.txt");
+                    }
+
+                    window.draw(endSlide);
+                    window.draw(endSlide.exit);
+                    window.draw(endSlide.exitText);
+                    window.draw(endSlide.youWin);
+                    window.draw(endSlide.scoreboard);
+                    window.draw(endSlide.scoreboardText);
                     window.draw(endSlide.scoreText);
-                    temp += "\n";
-                    Loader.addToFile(temp, "Scoreboard.txt");
+                    
                 }
+                else
+                {
+                    if(Mouse.isButtonPressed(Mouse.Button.LEFT))
+                    {
+                        if(scoreboard.isBackClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y))
+                        {
+                            scoreboardBool = false;
+                        }
+                    }
+
+                    window.draw(scoreboard);
+                    window.draw(scoreboard.exit);
+                    window.draw(scoreboard.exitText);
+                    window.draw(scoreboard.back);
+                    window.draw(scoreboard.backText);
+                }
+
             }
 
             if(familyMenu.isAllDead()) {
@@ -531,16 +570,23 @@ public class Game implements Observer
 
                     if(victory == true)
                     {
-                        if(endSlide.isClicked(mouseX, mouseY))
+                        if(endSlide.isExitClicked(mouseX, mouseY) && scoreboardBool == false)
+                        {
+                            System.exit(0);
+                        }
+                        else if(scoreboard.isExitClicked(mouseX, mouseY) && scoreboardBool == true)
                         {
                             System.exit(0);
                         }
                     }
 
-                    if(familyMenu.isAllDead()) {
+                    if(familyMenu.isAllDead()) 
+                    {
                         SoundEffect.FAILOTHER.play();  //testing the audio play for 1 time
-                        if(endSlide.isClicked(mouseX, mouseY))
+                        /*if(endSlide.isExitClicked(mouseX, mouseY))
+                        {
                             System.exit(0);
+                        }*/
                     }
                 }
             }
