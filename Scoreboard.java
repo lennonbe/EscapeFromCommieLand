@@ -40,7 +40,7 @@ public class Scoreboard extends RectangleShape
 
         //Initializing the exit button
         exit = new RectangleShape(buttonSize);
-        exit.setPosition(width/2 - buttonSize.x/2, height - buttonSize.y * 3);
+        exit.setPosition(width/2 - buttonSize.x/2, height - buttonSize.y * 4);
         exit.setFillColor(new Color(128, 128, 128));
 
         //Initializing the exit button text
@@ -50,7 +50,7 @@ public class Scoreboard extends RectangleShape
 
         //Initializing the exit button
         back = new RectangleShape(buttonSize);
-        back.setPosition(width/2 - buttonSize.x/2, exit.getPosition().y - buttonSize.y * 2);
+        back.setPosition(width/2 - buttonSize.x/2, exit.getPosition().y + buttonSize.y * 2);
         back.setFillColor(new Color(128, 128, 128));
 
         //Initializing back button text

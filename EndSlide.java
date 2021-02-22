@@ -40,7 +40,7 @@ public class EndSlide extends RectangleShape {
 
         //Initializing the exit button
         exit = new RectangleShape(buttonSize);
-        exit.setPosition(width/2 - buttonSize.x/2, height/2 - buttonSize.y/2);
+        exit.setPosition(width/2 - buttonSize.x/2, height - buttonSize.y * 4);
         exit.setFillColor(new Color(128, 128, 128));
 
         font = new Font();
@@ -51,7 +51,7 @@ public class EndSlide extends RectangleShape {
 
         //Initializing the scoreboard button
         scoreboard = new RectangleShape(buttonSize);
-        scoreboard.setPosition(width/2 - buttonSize.x/2, exit.getPosition().y + buttonSize.y/2 + buttonSize.y*2);
+        scoreboard.setPosition(width/2 - buttonSize.x/2, exit.getPosition().y + buttonSize.y * 2);
         scoreboard.setFillColor(new Color(128, 128, 128));
 
         scoreboardText = new Text("Scoreboard", font);

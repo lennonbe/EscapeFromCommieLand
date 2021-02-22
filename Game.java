@@ -456,6 +456,7 @@ public class Game implements Observer
                         if(endSlide.isScoreboardClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y))
                         {
                             scoreboardOpen = true;
+                            pause();
                         }
                     }
 
@@ -487,6 +488,7 @@ public class Game implements Observer
                         if(scoreboard.isBackClicked(Mouse.getPosition(window).x, Mouse.getPosition(window).y))
                         {
                             scoreboardOpen = false;
+                            pause();
                         }
                     }
 
