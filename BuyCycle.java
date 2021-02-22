@@ -272,8 +272,7 @@ public class BuyCycle
     /**
      * Sets the field that is currently selected to grow if a seed type is also currently selected.
      */
-    public void selectVegToGrowOnField()
-    {
+    public void selectVegToGrowOnField() {
         Fields temp = fieldMatrix[0][0].selectedField;
         
         if(temp != null && resourceMenu.getSelectedIndex() != -1 && checkProximityToField(temp) && temp != game.farmFields[2][2] && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) > 0 && temp.unlocked == true)
@@ -296,8 +295,6 @@ public class BuyCycle
 
         if(resourceMenu.getSelectedIndex() != -1 && resourceMenu.getIndexVal(resourceMenu.getSelectedIndex()) == 0) {
             resourceMenu.deselect();
-            
-            return;
         }
     }
     
@@ -322,7 +319,7 @@ public class BuyCycle
      */
     public void collectVeg()
     {
-        if(buyMenu.menuOpen == false /*&& resourceMenu.getSelectedIndex() == -1*/)
+        if(buyMenu.menuOpen == false)
         {
             for(int i = 0; i < 5; i++)
             {
@@ -337,7 +334,7 @@ public class BuyCycle
                         else
                         {
                             //Algorithm for collecting veg from a specific field
-                            if(fieldMatrix[i][z].getVegType() != "" && checkProximityToField(fieldMatrix[i][z]) && resourceMenu.getSelectedIndex() == -1)//TODO: ADD IN LINE REGARDING CHECKING FOR PROXIMITY TO FIELD
+                            if(fieldMatrix[i][z].getVegType() != "" && checkProximityToField(fieldMatrix[i][z]))//TODO: ADD IN LINE REGARDING CHECKING FOR PROXIMITY TO FIELD
                             {
                                 if(fieldMatrix[i][z].getVegType() == "Hemp")
                                 {
