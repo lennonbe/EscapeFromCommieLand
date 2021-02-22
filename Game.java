@@ -466,6 +466,8 @@ public class Game implements Observer
                         scoreRecorded = true;
                         
                         endSlide.score = (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
+                        //endSlide.scoreDigitsText.setString("" + endSlide.score);
+                        endSlide.setScore();
                         //String temp = "YOU SCORED:" + (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
                         //endSlide.scoreDigitsText.setString("" + temp);
                         //temp += "\n";

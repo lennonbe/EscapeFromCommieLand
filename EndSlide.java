@@ -21,6 +21,7 @@ public class EndSlide extends RectangleShape {
     protected int score;
     protected Text scoreText;
     private int gap = 60;
+    private float slideWidth, slideHeight;
 
     /**
      * Constructor method for the EndSLide object. Creates an EndSlide object displaying score and exit button.
@@ -30,8 +31,11 @@ public class EndSlide extends RectangleShape {
     public EndSlide(float width, float height) 
     {
         //Setting variables of this, which is the rectangle that is the background of the main menu
-
+        
         super(new Vector2f(width, height));
+        
+        slideWidth = width;
+        slideHeight = height;
 
         this.setPosition(0, 0);
         this.setFillColor(new Color(0, 0, 0));
@@ -77,6 +81,12 @@ public class EndSlide extends RectangleShape {
 
         exitText.setPosition(exit.getPosition().x + buttonSize.x/2 - exitText.getGlobalBounds().width/2, exit.getPosition().y);
         scoreboardText.setPosition(scoreboard.getPosition().x + buttonSize.x/2 - scoreboardText.getGlobalBounds().width/2, scoreboard.getPosition().y);
+    }
+
+    public void setScore()
+    {
+        scoreDigitsText.setString("" + score);
+        scoreDigitsText.setPosition(slideWidth/2 - scoreDigitsText.getGlobalBounds().width/2, scoreText.getPosition().y + scoreText.getGlobalBounds().height + buttonSize.y/2);
     }
 
     /**
