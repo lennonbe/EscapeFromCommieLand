@@ -29,7 +29,7 @@ public class Farmer extends Sprite
         this.setPosition(200, 200);
         this.setScale(scale);
         this.scale(scale);
-        this.setSprite("BoringGame", "Man_Neutral.png");
+        this.setSprite("BoringGame/AllResources", "Man_Neutral.png");
     }
 
     /**

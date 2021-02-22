@@ -137,7 +137,7 @@ public class Game implements Observer
         distanceMarker = new DistanceMarker(window, this);
 
         //Coding the elapsedTime clock
-        Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/Russian.ttf");
         elapsedTime.setFont(font);
         elapsedTime.setString("00:00");
         elapsedTime.setPosition(new Vector2f(660, 25));

@@ -36,7 +36,7 @@ public class Scoreboard extends RectangleShape
 
         //isOpen = true;
         font = new Font();
-        Loader.loadPathToFont(font, "BoringGame/pixelated.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/pixelated.ttf");
 
         //Initializing the exit button
         exit = new RectangleShape(buttonSize);

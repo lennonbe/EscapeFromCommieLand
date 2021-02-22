@@ -28,12 +28,14 @@ public abstract class Loader {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
         } catch (Exception e) {
             System.out.println("Error while loading the buffer");
+            e.printStackTrace();
         }
 
         try {
             texture.loadFromFile(path);
         } catch (Exception e) {
             System.out.println("Error while loading the texture");
+            e.printStackTrace();
         }
 
         rectangle.setTexture(texture);
@@ -53,12 +55,14 @@ public abstract class Loader {
             BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
         } catch (Exception e) {
             System.out.println("Error while loading the buffer");
+            e.printStackTrace();
         }
 
         try {
             texture.loadFromFile(path);
         } catch (Exception e) {
             System.out.println("Error while loading the texture");
+            e.printStackTrace();
         }
 
         circle.setTexture(texture);
@@ -74,6 +78,7 @@ public abstract class Loader {
             font.loadFromFile(Paths.get(filePath));
         } catch(Exception e) { 
             System.out.println("Error loading font"); 
+            e.printStackTrace();
         }
     }
 

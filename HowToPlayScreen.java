@@ -34,13 +34,13 @@ public class HowToPlayScreen extends RectangleShape {
         backButton.setFillColor(new Color(128, 128, 128));
 
         font = new Font();
-        Loader.loadPathToFont(font, "BoringGame/pixelated.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/pixelated.ttf");
 
         buttonText = new Text("BACK", font);
         buttonText.setPosition(backButton.getPosition().x + 20, backButton.getPosition().y);
 
         //Text explaining how to play the game
-        howToText = new Text(Loader.readFile("BoringGame/Instructions.txt"), font);
+        howToText = new Text(Loader.readFile("BoringGame/AllResources/Instructions.txt"), font);
         howToText.setPosition(50, 50);
     }
 

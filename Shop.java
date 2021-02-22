@@ -27,7 +27,7 @@ public class Shop extends RectangleShape
     {
         super(size);
 
-        Loader.loadPathToRectangle("BoringGame", "NewShop.png", this, fieldTexture);
+        Loader.loadPathToRectangle("BoringGame/AllResources", "NewShop.png", this, fieldTexture);
     }
 
     /**

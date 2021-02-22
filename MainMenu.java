@@ -56,7 +56,7 @@ public class MainMenu extends RectangleShape {
         exit.setFillColor(new Color(128, 128, 128));
 
         font = new Font();
-        Loader.loadPathToFont(font, "BoringGame/pixelated.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/pixelated.ttf");
 
         startGameText = new Text("START GAME", font);
         startGameText.setScale(2, 2);

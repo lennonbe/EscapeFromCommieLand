@@ -109,7 +109,7 @@ public class BuyMenu extends RectangleShape
             Loader.loadPathToRectangle("BoringGame/AllResources/Silhouette", "upgrade" + i + "_sil.png", upgradeIcons[i], upgradeTextures[i]);
         }
         
-        Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/Russian.ttf");
         counterText = new Text[8];
         for(int i = 0; i < counterText.length; i++)
         {        

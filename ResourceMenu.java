@@ -76,7 +76,7 @@ public class ResourceMenu extends RectangleShape implements Observer
 
         //Loads in the font
         font = new Font();
-        Loader.loadPathToFont(font, "BoringGame/Russian.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/Russian.ttf");
         
         //Sets the size of each icon
         seedIconSize = new Vector2f(50, 50);

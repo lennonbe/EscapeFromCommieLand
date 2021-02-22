@@ -48,7 +48,7 @@ public class InitialCutscene extends RectangleShape implements Observer {
         };
 
         Loader.loadPathToRectangle("BoringGame/AllResources/IntroSlides", "Slides0.png", scene, texture);
-        Loader.loadPathToFont(font, "BoringGame/SovietProgram.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/SovietProgram.ttf");
     }
 
     public RectangleShape[] getRectangles() {

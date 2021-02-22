@@ -48,7 +48,7 @@ public class EndSlide extends RectangleShape {
         exit.setFillColor(new Color(128, 128, 128));
 
         font = new Font();
-        Loader.loadPathToFont(font, "BoringGame/pixelated.ttf");
+        Loader.loadPathToFont(font, "BoringGame/AllResources/pixelated.ttf");
 
         exitText = new Text("EXIT GAME", font);
         exitText.setScale(2, 2);
