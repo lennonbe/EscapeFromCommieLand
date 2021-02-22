@@ -90,13 +90,12 @@ public class Game implements Observer
     //ResourceMenu testing::::
     private ResourceMenu resourceMenu;
     private FamilyMenu familyMenu;
-    private DistanceMarker distanceMarker;
 
     //BuyCycle class testing:
     private BuyCycle buyCycle;
 
     //Clock formswitching seasons every x seconds
-    private Clock seasonClock = new Clock(60000);
+    private Clock seasonClock = new Clock(100000);
 
     //Time increasing values for seasons
     private double winter = 1.33;
@@ -134,7 +133,6 @@ public class Game implements Observer
 
         resourceMenu = new ResourceMenu(menu);
         familyMenu = new FamilyMenu();
-        distanceMarker = new DistanceMarker(window, this);
 
         //Coding the elapsedTime clock
         Loader.loadPathToFont(font, "BoringGame/AllResources/Russian.ttf");
@@ -333,7 +331,6 @@ public class Game implements Observer
                 }
             }
         }
-        distanceMarker.drawBounds();
     }
     
     /**
@@ -360,18 +357,9 @@ public class Game implements Observer
             window.draw(resourceMenu);
             window.draw(familyMenu);
             
-            try 
-            {
-                for(CircleShape c : distanceMarker.getPointers()) 
-                {
-                    window.draw(c);
-                }
+            try {
                 window.draw(familyMenu.getPopup());
-            } 
-            catch (Exception e) 
-            {
-
-            }
+            } catch (Exception e) {}
             
             //Draws the resource icons
             for(RectangleShape i : resourceMenu.getRectangleArray(1)) 

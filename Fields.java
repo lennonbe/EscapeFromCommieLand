@@ -42,10 +42,10 @@ public class Fields extends RectangleShape implements Observer
     protected ResourceMenu resourceMenu;
 
     //The following values are in regard to the different vegetables growth types. This time is the cycle time and is multiplied by 7 to get a total time of growth.
-    private int chilliGrowthCycleTime = 1000;
-    private int carrotGrowthCycleTime = 2000;
-    private int hempGrowthCycleTime = 2500;
-    private int cauliflowerGrowthCycleTime = 5000;
+    private int chilliGrowthCycleTime = 2000;
+    private int carrotGrowthCycleTime = 4000;
+    private int hempGrowthCycleTime = 5000;
+    private int cauliflowerGrowthCycleTime = 10000;
 
     /**
      * Constructor method for the fields.
@@ -58,25 +58,11 @@ public class Fields extends RectangleShape implements Observer
         resourceMenu = input;
         this.loadPathToRectangle("BoringGame/AllResources", "WetDirt.png");
 
-        for(int i = 0; i < 4; i++)
-        {
-            if(i == 0)
-            {
-                clockArr[i] = new Clock(chilliGrowthCycleTime);
-            }
-            else if(i == 1)
-            {
-                clockArr[i] = new Clock(carrotGrowthCycleTime);
-            }
-            else if(i == 2)
-            {
-                clockArr[i] = new Clock(hempGrowthCycleTime);
-            }
-            else if(i == 3)
-            {
-                clockArr[i] = new Clock(cauliflowerGrowthCycleTime);
-            }
-        }
+        clockArr[0] = new Clock(chilliGrowthCycleTime);
+        clockArr[1] = new Clock(carrotGrowthCycleTime);
+        clockArr[2] = new Clock(hempGrowthCycleTime);
+        clockArr[3] = new Clock(cauliflowerGrowthCycleTime);
+            
     }
 
     /**
