@@ -3,6 +3,7 @@ package BoringGame;
 import org.jsfml.system.Vector2f;
 
 import BoringGame.InitialCutscene;
+import BoringGame.Loader;
 
 import org.jsfml.graphics.*;
 
@@ -23,6 +24,7 @@ public class MainMenu extends RectangleShape {
     private RectangleShape howToPlay;
     private Boolean isHowToPlayOpen;
     private Boolean isOpen;
+    private Texture texture;
     private Text startGameText;
     private Text exitText;
     private Text howToPlayText;
@@ -34,7 +36,9 @@ public class MainMenu extends RectangleShape {
         super(new Vector2f(width, height));
 
         this.setPosition(0, 0);
-        this.setFillColor(new Color(0, 0, 0));
+
+        texture = new Texture();
+        Loader.loadPathToRectangle("BoringGame/AllResources/MainMenu", "MainMenu.png", this, texture);
 
         initialScene = new InitialCutscene(width, height);
         htps = new HowToPlayScreen(width, height);
@@ -107,6 +111,8 @@ public class MainMenu extends RectangleShape {
                     System.exit(0);
                 }
             }
+        } else {
+            initialScene.isClicked(mouseX, mouseY);
         }
     }
 
@@ -154,7 +160,7 @@ public class MainMenu extends RectangleShape {
         if(isHowToPlayOpen) {
             return htps.getText();
         } else if(!initialScene.getSceneIsOver()) {
-            return new Text[] {initialScene.getText()};
+            return initialScene.getText();
         } else {
             return new Text[] {startGameText, exitText, howToPlayText};
         }

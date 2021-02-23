@@ -11,8 +11,7 @@ import java.lang.Math;
 /**
  * Family menu class. Used to create and manage the farmers family and random events associated to these.
  */
-public class FamilyMenu extends RectangleShape implements Observer
-{
+public class FamilyMenu extends RectangleShape implements Observer {
     
     //Inherit attributes of the FamilyMenu are final
     private final static int numberOfIcons = 2;
