@@ -22,6 +22,9 @@ public class MainMenu extends RectangleShape {
     private RectangleShape startGame;
     private RectangleShape exit;
     private RectangleShape howToPlay;
+    private Texture startTexture;
+    private Texture tutorialTexture;
+    private Texture exitTexture;
     private Boolean isHowToPlayOpen;
     private Boolean isOpen;
     private Texture texture;
@@ -49,15 +52,15 @@ public class MainMenu extends RectangleShape {
         //Initializing the buttons
         startGame = new RectangleShape(buttonSize);
         startGame.setPosition(width/2 - buttonSize.x/2, height/2 - buttonSize.y/2 - 200);
-        startGame.setFillColor(new Color(128, 128, 128));
+        startTexture = new Texture();
 
         howToPlay = new RectangleShape(buttonSize);
         howToPlay.setPosition(width/2 - buttonSize.x/2, height/2 - buttonSize.y/2);
-        howToPlay.setFillColor(new Color(128, 128, 128));
+        tutorialTexture = new Texture();
 
         exit = new RectangleShape(buttonSize);
         exit.setPosition(width/2 - buttonSize.x/2, height/2 - buttonSize.y/2 + 200);
-        exit.setFillColor(new Color(128, 128, 128));
+        exitTexture = new Texture();
 
         font = new Font();
         Loader.loadPathToFont(font, "BoringGame/AllResources/pixelated.ttf");
@@ -71,9 +74,13 @@ public class MainMenu extends RectangleShape {
         exitText = new Text("EXIT GAME", font);
         exitText.setScale(2, 2);
 
-        startGameText.setPosition(startGame.getPosition().x + 50, startGame.getPosition().y);
-        howToPlayText.setPosition(howToPlay.getPosition().x + 50, howToPlay.getPosition().y);
-        exitText.setPosition(exit.getPosition().x + 50, exit.getPosition().y);
+        startGameText.setPosition(startGame.getPosition().x + 50, startGame.getPosition().y + 10);
+        howToPlayText.setPosition(howToPlay.getPosition().x + 50, howToPlay.getPosition().y + 10);
+        exitText.setPosition(exit.getPosition().x + 50, exit.getPosition().y + 10);
+
+        Loader.loadPathToRectangle("BoringGame/AllResources/MainMenu", "MainMenuButton.png", startGame, startTexture);
+        Loader.loadPathToRectangle("BoringGame/AllResources/MainMenu", "MainMenuButton.png", howToPlay, tutorialTexture);
+        Loader.loadPathToRectangle("BoringGame/AllResources/MainMenu", "MainMenuButton.png", exit, exitTexture);
     }
 
     /**

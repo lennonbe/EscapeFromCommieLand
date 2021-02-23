@@ -58,7 +58,7 @@ public class InitialCutscene extends RectangleShape implements Observer {
 
         Loader.loadPathToRectangle("BoringGame/AllResources/IntroSlides", "Slides0.png", this, sceneTexture);
         Loader.loadPathToRectangle("BoringGame/AllResources/MainMenu", "MainMenuButton.png", skipButton, buttonTexture);
-        Loader.loadPathToFont(sceneFont, "BoringGame/AllResources/SovietProgram.ttf");
+        Loader.loadPathToFont(sceneFont, "BoringGame/AllResources/Chernobyl.otf");
         Loader.loadPathToFont(skipFont, "BoringGame/AllResources/pixelated.ttf");
 
         skipText.setString("SKIP");
