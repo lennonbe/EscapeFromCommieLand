@@ -418,6 +418,12 @@ public class Game implements Observer
                 }
                 
                 //Drawing the passport and its pricing
+                if(familyMenu.deadIndex.size() > 0)
+                {
+                    passportValue = 1500 - familyMenu.deadIndex.size()*500;
+                    menu.passportText.setString("" + passportValue);
+                }
+
                 window.draw(menu.passport);
                 window.draw(menu.passportText);
 
@@ -594,10 +600,10 @@ public class Game implements Observer
                     if(familyMenu.isAllDead()) 
                     {
                         SoundEffect.FAILOTHER.play();  //testing the audio play for 1 time
-                        /*if(endSlide.isExitClicked(mouseX, mouseY))
+                        if(endSlide.isExitClicked(mouseX, mouseY))
                         {
                             System.exit(0);
-                        }*/
+                        }
                     }
                 }
             }
