@@ -254,8 +254,6 @@ public class ResourceMenu extends RectangleShape implements Observer
         
         for(int i = 0; i < seedIcons.length; i++)
         {
-            /*int iconXPosition = gap + (iconWidth*2) * i; 
-            int iconYPosition = gap;*/
 
             int iconXPosition = (int)seedIcons[i].getPosition().x; 
             int iconYPosition = (int)seedIcons[i].getPosition().y;
@@ -278,8 +276,6 @@ public class ResourceMenu extends RectangleShape implements Observer
                 {
                     index = i;
                 }
-
-                System.out.println("Index = " + i);
             }
         }
         
@@ -293,21 +289,17 @@ public class ResourceMenu extends RectangleShape implements Observer
                 {
                     Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);   
                     selectedIndex = -1;  
-                    System.out.println("Selected = " + selectedIndex);           
                 }
                 else
                 {
                     Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + selectedIndex + ".png", seedIcons[selectedIndex], seedIconsTexture[selectedIndex]);
-                    //System.out.println("hello general kenobi");
                     selectedIndex = index;
-                    System.out.println("Selected = " + selectedIndex);
                     Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
                 }
             }
             else //i.e there is no selected icon
             {
                 selectedIndex = index;
-                System.out.println("Selected = " + selectedIndex);
                 Loader.loadPathToRectangle("BoringGame/AllResources/Closeup Vegetables", "resource" + index + "_selected.png", seedIcons[index], seedIconsTexture[index]);
             }
         }
@@ -332,7 +324,6 @@ public class ResourceMenu extends RectangleShape implements Observer
         if(autoIncrement == true)
         {
             this.increment(4, autoIncrementVal);
-            System.out.println("AUTOMATIC INCREMENT HAS OCCURED");
         }
         
     }

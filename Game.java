@@ -672,7 +672,6 @@ public class Game implements Observer
                 backround.seasonChange = true;
             }
             SoundEffect.FAILPRISON.play();
-            System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[0][0].isWinter);
         }
         
     }
