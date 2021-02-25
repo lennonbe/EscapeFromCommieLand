@@ -67,7 +67,7 @@ public class Game implements Observer
     private Shop shop = new Shop(fieldSize);
 
     //New passport buying button
-    protected int passportValue = 1500;
+    protected int passportValue = 1;
 
     //Boolean to set if the game is finished
     private boolean victory = false;
@@ -461,7 +461,8 @@ public class Game implements Observer
                     {
                         scoreRecorded = true;
                         
-                        endSlide.score = (int)((9400 - (totalMinutes * 60 + currentSecond) * 10) - (400*familyMenu.deadIndex.size()));
+                        //Linear mapping using the following equation for score assignement:
+                        endSlide.score = (int) (400 + 10000 * 100/((totalMinutes * 60 + currentSecond)) - (400*familyMenu.deadIndex.size()));
                         endSlide.setScore();
                         Loader.addToFile(endSlide.score + "\n", "Scoreboard.txt");
                     }
@@ -631,45 +632,48 @@ public class Game implements Observer
      */
     public void update(Observable clock, Object o)
     {
-        if(farmFields[0][0].isWinter == true)
+        if(victory != true && familyMenu.isAllDead() != true)
         {
-            for(int j = 0; j < 5; j++)
+            if(farmFields[0][0].isWinter == true)
             {
-                for(int z = 0; z < 5; z++)
+                for(int j = 0; j < 5; j++)
                 {
-                    for(int i = 0; i < farmFields[j][z].clockArr.length; i++)
+                    for(int z = 0; z < 5; z++)
                     {
-                        int temp = farmFields[j][z].clockArr[i].time.getDelay();
-                        farmFields[j][z].clockArr[i].time.setDelay((int)(temp * summer));
+                        for(int i = 0; i < farmFields[j][z].clockArr.length; i++)
+                        {
+                            int temp = farmFields[j][z].clockArr[i].time.getDelay();
+                            farmFields[j][z].clockArr[i].time.setDelay((int)(temp * summer));
+                        }
+            
+                        farmFields[j][z].isWinter = false;
                     }
-        
-                    farmFields[j][z].isWinter = false;
                 }
+                resourceMenu.changeSeasonIcon(2);
+                backround.seasonChange = true;
             }
-            resourceMenu.changeSeasonIcon(2);
-            backround.seasonChange = true;
-        }
-        else
-        {
-            for(int j = 0; j < 5; j++)
+            else
             {
-                for(int z = 0; z < 5; z++)
+                for(int j = 0; j < 5; j++)
                 {
-                    for(int i = 0; i < farmFields[j][z].clockArr.length; i++)
+                    for(int z = 0; z < 5; z++)
                     {
-                        int temp = farmFields[j][z].clockArr[i].time.getDelay();
-                        farmFields[j][z].clockArr[i].time.setDelay((int)(temp * summer));
+                        for(int i = 0; i < farmFields[j][z].clockArr.length; i++)
+                        {
+                            int temp = farmFields[j][z].clockArr[i].time.getDelay();
+                            farmFields[j][z].clockArr[i].time.setDelay((int)(temp * summer));
+                        }
+            
+                        farmFields[j][z].isWinter = true;
                     }
-        
-                    farmFields[j][z].isWinter = true;
                 }
+    
+                resourceMenu.changeSeasonIcon(1);
+                backround.seasonChange = true;
             }
-
-            resourceMenu.changeSeasonIcon(1);
-            backround.seasonChange = true;
+            SoundEffect.FAILPRISON.play();
+            System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[0][0].isWinter);
         }
         
-        SoundEffect.FAILPRISON.play();
-        System.out.println("SEASON HAS CHANGED, WINTER IS " + farmFields[0][0].isWinter);
     }
 }
