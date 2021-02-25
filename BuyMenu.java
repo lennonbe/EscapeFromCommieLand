@@ -156,9 +156,10 @@ public class BuyMenu extends RectangleShape
             }
         }
 
+        textSize = 8;
         passport = new PassportBuy(passportSize, (int)this.getPosition().x + 32, yPositionVeg - 65);
         passportText = new Text("1500", font, textSize);
-        passportText.setPosition(new Vector2f((float)((int)passport.getPosition().x + (int)passport.getSize().x - 10), (float)((int)passport.getPosition().y + (int)passport.getSize().y - 10)));
+        passportText.setPosition(new Vector2f((float)((int)passport.getPosition().x + (int)passport.getSize().x - 8), (float)((int)passport.getPosition().y + (int)passport.getSize().y - 5)));
     }
 
     /**

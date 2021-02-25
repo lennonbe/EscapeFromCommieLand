@@ -118,17 +118,17 @@ public class ResourceMenu extends RectangleShape implements Observer
             }
             
             if(i == 0) {
-                counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
-                iconXPosition += (iconWidth + gap + 2);
+                counterText[i].setPosition(iconXPosition + iconWidth - 15, textYPosition);
+                iconXPosition += (iconWidth + gap );
             } else if(i == 1) {
-                counterText[i].setPosition(iconXPosition + iconWidth - 5, textYPosition);
-                iconXPosition += (iconWidth + gap - 2);
+                counterText[i].setPosition(iconXPosition + iconWidth - 15, textYPosition);
+                iconXPosition += (iconWidth + gap - 4);
             } else if(i == 2) {
-                counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
-                iconXPosition += (iconWidth + gap - 10);
+                counterText[i].setPosition(iconXPosition + iconWidth - 15, textYPosition);
+                iconXPosition += (iconWidth + gap - 1);
             } else {
-                counterText[i].setPosition(iconXPosition + iconWidth - 10, textYPosition);
-                iconXPosition += (iconWidth + gap);
+                counterText[i].setPosition(iconXPosition + iconWidth - 15, textYPosition);
+                iconXPosition += (iconWidth + gap*1.2);
             }
             
         }
