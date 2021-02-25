@@ -150,7 +150,8 @@ public class MainMenu extends RectangleShape {
      */
     public RectangleShape[] getButtons() {
         if(isHowToPlayOpen) {
-            return new RectangleShape[] {htps, htps.getButton()};
+            return htps.getButtons();
+            // System.arraycopy(htps.getButton(), 0, result, 0, length);
         } else if(!initialScene.getSceneIsOver()){
             return initialScene.getRectangles();
         } else {
