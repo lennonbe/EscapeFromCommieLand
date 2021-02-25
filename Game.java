@@ -67,7 +67,7 @@ public class Game implements Observer
     private Shop shop = new Shop(fieldSize);
 
     //New passport buying button
-    protected int passportValue = 1;
+    protected int passportValue = 1500;
 
     //Boolean to set if the game is finished
     private boolean victory = false;
