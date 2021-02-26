@@ -100,7 +100,6 @@ public class BuyCycle
                 }
             }
             
-            System.out.println(decrementValue);
             if(returnValue != -1 && buyMenu.menuOpen == true && decrementValue != 0)
             {
                 if(resourceMenu.getIndexVal(4) >= decrementValue)
@@ -151,7 +150,6 @@ public class BuyCycle
                 
                 if(resourceMenu.getIndexVal(4) > decrementValue)
                 {
-                    System.out.println("test1");
                     upgrade1Bought = true;
 
                     carrotIncrementVal++;
@@ -170,7 +168,6 @@ public class BuyCycle
                 
                 if(resourceMenu.getIndexVal(4) > decrementValue)
                 {
-                    System.out.println("test2");
                     upgrade2Bought = true;
 
                     for(int i = 0; i < 5; i++)
@@ -197,7 +194,6 @@ public class BuyCycle
                 
                 if(resourceMenu.getIndexVal(4) > decrementValue)
                 {
-                    System.out.println("test3");
                     upgrade3Bought = true;
 
                     for(int i = 0; i < 5; i++)
@@ -231,7 +227,6 @@ public class BuyCycle
 
                     if(resourceMenu.getIndexVal(4) > decrementValue)
                     {
-                        System.out.println("test3");
                         upgrade4Bought = true;
     
                         resourceMenu.autoIncrement = true;
@@ -244,7 +239,6 @@ public class BuyCycle
 
                     if(resourceMenu.getIndexVal(4) > decrementValue)
                     {
-                        System.out.println("test3.1");
                         upgrade4Bought = true;
     
                         resourceMenu.autoIncrement = true;

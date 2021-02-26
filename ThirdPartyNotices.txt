@@ -1,0 +1,636 @@
+Resources are from those following websites
+for more details please check ThirdPartyNotices.doc
+
+https://www.aigei.com/
+
+GameFail.wav(option 1 Fail Condition)
+Gun_Shot_Fail(Fail Condition 2)
+Open_Store.wav(Check Balance/Open shop)
+Open_Inventory.wav(Inventory check)
+Crop_Plant(Plant the crop)
+Crop_Harvest(Harvest the crop)
+
+Copyright Notice
+Aigei.com provides works uploading, downloading and dissemination according to user instructions, and has always attached great importance to the protection of network copyright and other intellectual property rights as well as user rights and interests.
+As a network service provider, Aigei.com does not have sufficient monitoring capabilities for illegal reprinting and piracy. Therefore, users are encouraged to conduct comprehensive supervision of the works on the website. When the copyright owner raises an allegation of infringement or presents a copyright statement, Aige Gaiwang will verify and review complaints and reports at the first time, and take relevant statutory obligations such as delisting and deleting infringing works in accordance with relevant laws and regulations and relevant rules of this website, and impose corresponding penalties on users involved in infringement.
+Please send a notice to the mailbox set up by Aigei.com to accept copyright complaints and infringement notices. You can also join the official QQ group to contact the website staff for handling.
+
+Copyright reporting channel
+Email: aigei_support@163.com Official QQ group: 493253738 (Working hours: Monday to Friday, 9:30-18:00)
+
+CC agreement
+CC0 protocol
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For details of the agreement, please refer to "CC0 1.0"
+
+CC public domain logo 1.0 (PDM 1.0)
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For details of the agreement, please refer to "PDM 1.0"
+
+ 
+CC Signing Agreement (CC BY)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+CC Signature-No Deduction Agreement (CC BY-ND)
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+?
+The revised works cannot be distributed.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-ND 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+ 
+CC Signature-Same Way Sharing Agreement (CC BY-SA)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+?
+The distribution cannot be based on the same license agreement as the original license agreement.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-SA 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+CC Signature-Non-Commercial Agreement (CC BY-NC)
+?
+Can learn, communicate and use.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-NC 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+ 
+CC Signature-Non-Commercial-Same Way Sharing Agreement (CC BY-NC-SA)
+?
+Can learn, communicate and use.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+The distribution cannot be based on the same license agreement as the original license agreement.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-NC-SA 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+CC Signature-Non-Commercial-No Deduction Agreement (CC BY-NC-ND)
+?
+Can learn, communicate and use.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+The revised works cannot be distributed.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-NC-ND 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+ 
+CC non-commercial sampling uses enhanced version 1.0 (NC-Sampling+ 1.0)
+?
+Can learn, communicate and use.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+It is not necessary to not express the original work license agreement when distributing.
+
+For details of the agreement, please refer to "NonCommercial-Sampling+ 1.0"
+
+CC sampling uses enhanced version 1.0 (Sampling+ 1.0)
+?
+It can be used for commercial use and sampling.
+
+?
+It is not allowed to be unsigned.
+
+?
+It is not necessary to not express the original work license agreement when distributing.
+
+Please refer to "Sampling+ 1.0" for details of the agreement
+
+More agreements
+GNU General Public License (GPL)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not necessary to not publish the copyright and disclaimer when using it.
+
+?
+It is not necessary to not declare the modification and not mark the modification date when modifying.
+
+?
+Software developed based on the agreement must not be open source.
+
+For details of the agreement, please refer to "GPL 3.0"
+
+For more versions, please refer to "GPL 2.0"
+
+GNU Lesser General Public License (LGPL)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not necessary to not publish the copyright and disclaimer when using it.
+
+?
+It is not necessary to not declare the modification and not mark the modification date when modifying.
+
+?
+The software developed based on the protocol can be closed source code under connection and call, otherwise it must be open source.
+For complete information please refer to
+
+For details of the agreement, please refer to "LGPL 3.0"
+
+For more versions, please refer to "LGPL 2.1"
+
+ 
+NASA image usage guide
+?
+Can learn, communicate and use.
+
+?
+The use of factual materials is not regarded as an infringement of personal rights; the use of identifiable persons for commercial purposes will involve infringement of privacy rights.
+?
+You can edit and modify copyrighted materials, and require the approval of the copyright owner.
+
+?
+You can download and modify the image and material, and you need to declare the modification.
+
+?
+No misleading use of materials, no copyright or other rights are allowed.
+
+For complete information, please refer to "NASA Image Usage Guide"
+
+Pixabay agreement
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For complete information, please refer to "pixabay"
+
+ 
+Videvo Royalty Free Agreement
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For complete information, please refer to "Royalty Free"
+
+OPENGAMEART General Public License Agreement
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+For complete information, please refer to "OGA-BY 3.0"
+
+Unknown copyright
+Aigeai strives to provide complete copyright information of works, but due to many reasons, it may be impossible to determine the correct source of a small number of works. The copyright of the unknown copyright works belongs to the original author. If the user needs to use it, he should contact the original author to obtain authorization. If disputes arise due to unauthorized use, Aigei.com will not bear any responsibility.
+
+Portrait rights reminder
+The portraits or cartoon images appearing in the website's work templates are for reference display only and cannot be used for commercial use. If used without authorization, the consequences will be borne by the user.
+
+https://wav-sounds.com/wp-content/uploads/2017/09/Vehicle-01.wav
+
+Steam_boat .wav(Player bought fake passport and escaped)
+
+Disclaimer
+
+All sounds on Wav Sounds retain their original copyright as owned by their respective owners. All sound files are for educational, research, criticism or review for movie purchase purposes. Wav Sounds also holds no liability from misuse of these wav sound files.
+https://sc.chinaz.com/yinxiao/
+
+Heavy_Rain_Bad_Weather.wav (Bad weather condition 1)
+GameFail2.wav(backup option for fail)
+Unlock_New_Land_Option_1.wav(Unlock new land option 1)
+
+Webmaster's Home-China Webmaster Website (CHINAZ.com) Copyright Statement
+
+1. The copyrights of all content marked as the home of the webmaster/China webmaster/chinaz.com are owned by this site. If you need to quote or reprint, you only need to indicate the source and the original link, if it involves a large area To reprint, please write to us and get authorization.
+
+2. The article information, software resources, source code and other content provided by this site are provided by the author, recommended by netizens, and compiled from the Internet (part of the newspaper/plain media content is reproduced from the network cooperative media), which is for learning reference only, such as Infringement of your copyright, please contact us , this site will be corrected within three working days.
+
+3. If your website or organization uses all the resources obtained from this site for commercial use, please contact the copyright owner for other resources except for the source of the information on this site, which needs to be negotiated with this site.
+
+4. The webmaster’s home does not guarantee the accuracy, safety and completeness of the resources. Please confirm it yourself during the reading, downloading and use process. This website is not responsible for any form of damage caused by the above resources to you or your website. Loss or injury
+
+5. Without the permission of the webmaster’s home, you may not steal links or steal the resources of this site; you must not copy or imitate this website, and you must not create a mirror image on a server that is not owned by the webmaster’s home www.chinaz.com. The webmaster’s home is right All content, technical methods and services developed by it itself or jointly developed with others own all intellectual property rights, and no one may infringe or destroy it, or use it without authorization.
+
+6. The essence of the Internet is freedom and sharing. We sincerely hope that every valuable positive energy can be spread freely on the Internet and can provide power for every website.
+https://www.ear0.com/
+
+BGM_option2.wav
+Item_Upgrade.wav
+
+?All audio resources in the sound cloud library of Erling Network follow the Creative Commons license agreement (hereinafter referred to as the CC agreement), and the specific CC agreement terms are clearly specified by platform users when uploading sound works (CC0, CC-BY, CC-BY-NC) Type three agreements), when users download and use audio works uploaded by others for any purpose, they should follow the CC agreement authorization terms adopted by the audio. For detailed CC protocol introduction, please refer to "CC Knowledge Sharing" .
+
+
+
+?Earling.com is an open site. All audio and other content of the website are uploaded by netizens. If there is content on this site that infringes your copyright or interests, please notify us, and we will delete the infringing content in the shortest possible time.
+
+
+
+?The unique graphics, logos, page styles, layout methods, programs, or other unauthorized content in Erling.com cannot be copied or reproduced arbitrarily. The use of authorized resources on this site shall comply with the provisions of the Copyright Law and other relevant laws, and shall not infringe the legal rights of this site and related rights holders. In addition, when using any content on this website for other purposes, unless there are special regulations and statements, authorization from the copyright owner is required.
+
+
+
+?The reprinted or quoted content must be marked with the words "reproduced from (or source) Erling.com", and the website website www.ear0.com should be marked. This website is not liable for civil disputes, administrative handling or other losses caused by improper reprinting or quoting of the contents of this site.
+
+
+
+? This platform reserves the right to pursue legal responsibilities for those who do not comply with this statement or other illegal or malicious use of the contents of this platform.
+
+https://www.liangchan.net/liangchan/11435.html
+
+Alarm.wav
+
+https://www.aigei.com/item/shou_ren_nan_si.html
+
+Die.wav
+
+Copyright Notice
+Aigei.com provides works uploading, downloading and dissemination according to user instructions, and has always attached great importance to the protection of network copyright and other intellectual property rights as well as user rights and interests.
+As a network service provider, Aigei.com does not have sufficient monitoring capabilities for illegal reprinting and piracy. Therefore, users are encouraged to conduct comprehensive supervision of the works on the website. When the copyright owner raises an allegation of infringement or presents a copyright statement, Aige Gaiwang will verify and review complaints and reports at the first time, and take relevant statutory obligations such as delisting and deleting infringing works in accordance with relevant laws and regulations and relevant rules of this website, and impose corresponding penalties on users involved in infringement.
+Please send a notice to the mailbox set up by Aigei.com to accept copyright complaints and infringement notices. You can also join the official QQ group to contact the website staff for handling.
+
+Copyright reporting channel
+Email: aigei_support@163.com Official QQ group: 493253738 (Working hours: Monday to Friday, 9:30-18:00)
+
+CC agreement
+CC0 protocol
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For details of the agreement, please refer to "CC0 1.0"
+
+CC public domain logo 1.0 (PDM 1.0)
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For details of the agreement, please refer to "PDM 1.0"
+
+ 
+CC Signing Agreement (CC BY)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+CC Signature-No Deduction Agreement (CC BY-ND)
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+?
+The revised works cannot be distributed.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-ND 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+ 
+CC Signature-Same Way Sharing Agreement (CC BY-SA)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+?
+The distribution cannot be based on the same license agreement as the original license agreement.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-SA 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+CC Signature-Non-Commercial Agreement (CC BY-NC)
+?
+Can learn, communicate and use.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-NC 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+ 
+CC Signature-Non-Commercial-Same Way Sharing Agreement (CC BY-NC-SA)
+?
+Can learn, communicate and use.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+The distribution cannot be based on the same license agreement as the original license agreement.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-NC-SA 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+CC Signature-Non-Commercial-No Deduction Agreement (CC BY-NC-ND)
+?
+Can learn, communicate and use.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+The revised works cannot be distributed.
+
+?
+There can be no additional restrictions.
+
+For details of the agreement, please refer to "CC BY-NC-ND 4.0"
+
+For more versions, please refer to "3.0" , "2.5" , "2.0" , "1.0"
+
+ 
+CC non-commercial sampling uses enhanced version 1.0 (NC-Sampling+ 1.0)
+?
+Can learn, communicate and use.
+
+?
+Not commercially available.
+
+?
+It is not allowed to be unsigned.
+
+?
+It is not necessary to not express the original work license agreement when distributing.
+
+For details of the agreement, please refer to "NonCommercial-Sampling+ 1.0"
+
+CC sampling uses enhanced version 1.0 (Sampling+ 1.0)
+?
+It can be used for commercial use and sampling.
+
+?
+It is not allowed to be unsigned.
+
+?
+It is not necessary to not express the original work license agreement when distributing.
+
+Please refer to "Sampling+ 1.0" for details of the agreement
+
+More agreements
+GNU General Public License (GPL)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not necessary to not publish the copyright and disclaimer when using it.
+
+?
+It is not necessary to not declare the modification and not mark the modification date when modifying.
+
+?
+Software developed based on the agreement must not be open source.
+
+For details of the agreement, please refer to "GPL 3.0"
+
+For more versions, please refer to "GPL 2.0"
+
+GNU Lesser General Public License (LGPL)
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not necessary to not publish the copyright and disclaimer when using it.
+
+?
+It is not necessary to not declare the modification and not mark the modification date when modifying.
+
+?
+The software developed based on the protocol can be closed source code under connection and call, otherwise it must be open source.
+For complete information please refer to
+
+For details of the agreement, please refer to "LGPL 3.0"
+
+For more versions, please refer to "LGPL 2.1"
+
+ 
+NASA image usage guide
+?
+Can learn, communicate and use.
+
+?
+The use of factual materials is not regarded as an infringement of personal rights; the use of identifiable persons for commercial purposes will involve infringement of privacy rights.
+?
+You can edit and modify copyrighted materials, and require the approval of the copyright owner.
+
+?
+You can download and modify the image and material, and you need to declare the modification.
+
+?
+No misleading use of materials, no copyright or other rights are allowed.
+
+For complete information, please refer to "NASA Image Usage Guide"
+
+Pixabay agreement
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For complete information, please refer to "pixabay"
+
+ 
+Videvo Royalty Free Agreement
+?
+It can be used for commercial use, learning and communication.
+
+?
+No signature is required when used.
+
+?
+You can download and modify this material arbitrarily.
+
+For complete information, please refer to "Royalty Free"
+
+OPENGAMEART General Public License Agreement
+?
+It can be used for commercial use, learning and communication.
+
+?
+You can download and modify this material arbitrarily.
+
+?
+It is not allowed to be unsigned.
+
+For complete information, please refer to "OGA-BY 3.0"
+
+Unknown copyright
+Aigeai strives to provide complete copyright information of works, but due to many reasons, it may be impossible to determine the correct source of a small number of works. The copyright of the unknown copyright works belongs to the original author. If the user needs to use it, he should contact the original author to obtain authorization. If disputes arise due to unauthorized use, Aigei.com will not bear any responsibility.
+
+Portrait rights reminder
+The portraits or cartoon images appearing in the website's work templates are for reference display only and cannot be used for commercial use. If used without authorization, the consequences will be borne by the user.

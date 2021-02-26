@@ -67,7 +67,6 @@ public class Scoreboard extends RectangleShape
     
             while((line=br.readLine())!=null)
             {
-                //System.out.println(line);
                 if(line != "" && line != "\n")
                 {
                     numbers.add(Integer.parseInt(line));
@@ -96,10 +95,7 @@ public class Scoreboard extends RectangleShape
                     top3String += treeToArrayReversed[count] + "\n";
                 }
                 count++;
-            }
-            
-    
-            System.out.println(top3String);            
+            }     
         } 
         catch (Exception e) 
         {
