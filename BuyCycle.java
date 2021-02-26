@@ -374,7 +374,7 @@ public class BuyCycle
     }
 
     public void eventClicked(float mouseX, float mouseY) {
-        if(resourceMenu.getIndexVal(4) >= 10 && familyMenu.eventClicked(mouseX, mouseY)) {
+        if(resourceMenu.getIndexVal(4) > 10 && familyMenu.eventClicked(mouseX, mouseY)) {
             resourceMenu.decrement(4, 10);
         }
     }
