@@ -1,5 +1,19 @@
-Resources are from those following websites
-for more details please check ThirdPartyNotices.doc
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+Do Not Translate or Localize
+
+This project incorporates components from the projects listed below:
+
+Font References:
+
+(All these fonts are 100% free to use as said on the links and have no mention of a license.
+THe website mentions that if any product is under a license, this is linked above the download button, none of these assets have a license and are free to use. If no license is to be found above the download button, we should search for a license on the author website, however none of these authors had a license referenced/available on their website. For more information see the following FAQ https://www.dafont.com/faq.php#copyright)
+
+1)Chernobyl.otf - https://www.dafont.com/search.php?q=Chernobyl
+2)Pixelated.ttf - https://www.dafont.com/pixelated.font
+3)Russian.ttf - https://www.dafont.com/russian.font
+
+
+Audio References:
 
 https://www.aigei.com/
 
@@ -315,9 +329,9 @@ Webmaster's Home-China Webmaster Website (CHINAZ.com) Copyright Statement
 
 3. If your website or organization uses all the resources obtained from this site for commercial use, please contact the copyright owner for other resources except for the source of the information on this site, which needs to be negotiated with this site.
 
-4. The webmaster’s home does not guarantee the accuracy, safety and completeness of the resources. Please confirm it yourself during the reading, downloading and use process. This website is not responsible for any form of damage caused by the above resources to you or your website. Loss or injury
+4. The webmaster\92s home does not guarantee the accuracy, safety and completeness of the resources. Please confirm it yourself during the reading, downloading and use process. This website is not responsible for any form of damage caused by the above resources to you or your website. Loss or injury
 
-5. Without the permission of the webmaster’s home, you may not steal links or steal the resources of this site; you must not copy or imitate this website, and you must not create a mirror image on a server that is not owned by the webmaster’s home www.chinaz.com. The webmaster’s home is right All content, technical methods and services developed by it itself or jointly developed with others own all intellectual property rights, and no one may infringe or destroy it, or use it without authorization.
+5. Without the permission of the webmaster\92s home, you may not steal links or steal the resources of this site; you must not copy or imitate this website, and you must not create a mirror image on a server that is not owned by the webmaster\92s home www.chinaz.com. The webmaster\92s home is right All content, technical methods and services developed by it itself or jointly developed with others own all intellectual property rights, and no one may infringe or destroy it, or use it without authorization.
 
 6. The essence of the Internet is freedom and sharing. We sincerely hope that every valuable positive energy can be spread freely on the Internet and can provide power for every website.
 https://www.ear0.com/
@@ -634,3 +648,5 @@ Aigeai strives to provide complete copyright information of works, but due to ma
 
 Portrait rights reminder
 The portraits or cartoon images appearing in the website's work templates are for reference display only and cannot be used for commercial use. If used without authorization, the consequences will be borne by the user.
+
+
